@@ -67,29 +67,29 @@ export const ModalCarousel: FC<Props> = ({
           <Icon iconType="chevronLeftIcon" cursor={true} onClick={slideLeft} />
           <div className="d-flex">
             {currentIndex === 0 ? (
-              <Icon iconType="dotFilled" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dotFilled" />
             ) : (
-              <Icon iconType="dot" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dot" />
             )}
             {currentIndex === 1 ? (
-              <Icon iconType="dotFilled" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dotFilled" />
             ) : (
-              <Icon iconType="dot" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dot" />
             )}
             {currentIndex === 2 ? (
-              <Icon iconType="dotFilled" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dotFilled" />
             ) : (
-              <Icon iconType="dot" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dot" />
             )}
             {currentIndex === 3 ? (
-              <Icon iconType="dotFilled" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dotFilled" />
             ) : (
-              <Icon iconType="dot" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dot" />
             )}
             {currentIndex === 4 ? (
-              <Icon iconType="dotFilled" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dotFilled" />
             ) : (
-              <Icon iconType="dot" cursor={true} onClick={slideLeft} />
+              <Icon iconType="dot" />
             )}
           </div>
           <Icon
