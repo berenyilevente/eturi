@@ -1,0 +1,15 @@
+$scope: layouts-clothes-description-layout;
+//just an example class, tbd
+.#{$scope} {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content min-content;
+  gap: 0px 0px;
+  padding: 30px;
+
+  &-line {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}

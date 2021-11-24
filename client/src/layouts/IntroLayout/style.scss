@@ -1,0 +1,28 @@
+$scope: layouts-intro-layout;
+.#{$scope} {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: ".";
+  position: relative;
+
+  &-introImage {
+    background-image: url(../../public/siteImages/mainGardrobe.jpg);
+    min-height: 400px;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.8;
+  }
+
+  &-introCard {
+    width: clamp(200px, 350px, 400px);
+    position: absolute;
+    left: 15%;
+    top: 10%;
+  }
+}

@@ -1,0 +1,12 @@
+$scope: layouts-clothes-image-upload-layout;
+.#{$scope} {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content;
+  gap: 0px 0px;
+  padding: 30px;
+  &-example {
+    //define css styles here
+  }
+}

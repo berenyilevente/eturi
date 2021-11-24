@@ -1,0 +1,52 @@
+$scope: components-card;
+.#{$scope} {
+  &-borderRadius {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  &-shadow {
+    box-shadow: var(--boxShadow);
+  }
+  &-backgroundColor {
+    &-white {
+      background-color: var(--white);
+    }
+    &-blue {
+      background-color: var(--darkBlue);
+    }
+    &-dark {
+      background-color: var(--dark);
+    }
+    &-lightBlue {
+      background-color: var(--lightBlue);
+    }
+  }
+  &-paddingSize {
+    &-paddingExtraSmall {
+      padding: 20px;
+    }
+    &-paddingSmall {
+      padding: 24px;
+    }
+    &-paddingMedium {
+      padding: 32px;
+    }
+    &-paddingLarge {
+      padding: 64px;
+    }
+  }
+  &-marginSize {
+    &-marginExtraSmall {
+      margin: 20px;
+    }
+    &-marginSmall {
+      margin: 24px;
+    }
+    &-marginMedium {
+      margin: 32px;
+    }
+    &-marginLarge {
+      margin: 64px;
+    }
+  }
+}

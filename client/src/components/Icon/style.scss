@@ -1,0 +1,125 @@
+$scope: components-icon;
+.#{$scope} {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+
+  &-background {
+    &-darkBlue {
+      background-color: var(--darkBlue);
+    }
+    &-green {
+      background-color: var(--green);
+    }
+    &-dark {
+      background-color: var(--dark);
+    }
+    &-transparent {
+      background: transparent;
+    }
+    &-white {
+      background-color: var(--white);
+    }
+  }
+
+  &-cursor {
+    cursor: pointer;
+  }
+
+  &-colors {
+    &-white {
+      color: var(--white);
+    }
+    &-dark {
+      color: var(--dark);
+    }
+    &-red {
+      color: var(--red);
+    }
+    &-darkBlue {
+      color: var(--darkBlue);
+    }
+    &-black {
+      color: var(--black);
+    }
+    &-brown {
+      color: var(--brown);
+    }
+    &-white {
+      color: var(--lightColor);
+    }
+    &-grey {
+      color: var(--grey);
+    }
+    &-beige {
+      color: var(--beige);
+    }
+    &-pink {
+      color: var(--pink);
+    }
+    &-purple {
+      color: var(--purple);
+    }
+    &-yellow {
+      color: var(--yellow);
+    }
+    &-blue {
+      color: var(--blue);
+    }
+    &-green {
+      color: var(--green);
+    }
+    &-orange {
+      color: var(--orange);
+    }
+    &-silver {
+      color: var(--silver);
+    }
+    &-gold {
+      color: var(--gold);
+    }
+    &-khaki {
+      color: var(--khaki);
+    }
+    &-turquoise {
+      color: var(--turquoise);
+    }
+    &-cream {
+      color: var(--cream);
+    }
+    &-apricot {
+      color: var(--apricot);
+    }
+    &-darkGreen {
+      color: var(--darkGreen);
+    }
+    &-lightBlue {
+      color: var(--lightBlue);
+    }
+  }
+
+  &-padding {
+    padding: 3.5px;
+  }
+
+  &-border {
+    border-width: 1.25px;
+    border-style: solid;
+    border-radius: 50%;
+
+    &-white {
+      border-color: var(--white);
+    }
+    &-darkBlue {
+      border-color: var(--darkBlue);
+    }
+    &-green {
+      border-color: var(--green);
+    }
+    &-dark {
+      border-color: var(--dark);
+    }
+  }
+}

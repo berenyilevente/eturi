@@ -1,0 +1,1 @@
+export { IntroCardLayout as default } from '../../layouts/IntroCardLayout/IntroCardLayout.view'

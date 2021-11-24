@@ -1,0 +1,106 @@
+$scope: components-text;
+//just an example class, tbd
+.#{$scope} {
+  font-family: var(--font-family-lato);
+  text-overflow: fade;
+
+  &-uppercase {
+    text-transform: uppercase;
+  }
+  &-lowercase {
+    text-transform: lowercase;
+  }
+  &-capitalize {
+    text-transform: capitalize;
+  }
+  &-underline {
+    text-decoration: underline;
+  }
+  &-bold {
+    font-weight: var(--font-weight-bold);
+  }
+
+  &-required:after {
+    content: " *";
+    color: var(--red);
+  }
+
+  &-colours {
+    &-dark {
+      color: var(--dark) !important;
+    }
+    &-white {
+      color: var(--white) !important;
+    }
+    &-darkBlue {
+      color: var(--darkBlue) !important;
+    }
+    &-lightBlue {
+      color: var(--lightBlue) !important;
+    }
+    &-red {
+      color: var(--red) !important;
+    }
+    &-lightGrey {
+      color: var(--lightGrey) !important;
+    }
+  }
+
+  //Dark text
+  &-text-extra-small-dark {
+    color: var(--dark);
+    font-size: var(--font-size-10);
+  }
+  &-text-small-dark {
+    color: var(--dark);
+    font-size: var(--font-size-14);
+  }
+  &-text-medium-dark {
+    color: var(--dark);
+    font-size: var(--font-size-16);
+  }
+  &-text-normal-dark {
+    color: var(--dark);
+    font-size: var(--font-size-18);
+  }
+  &-text-large-dark {
+    color: var(--dark);
+    font-size: var(--font-size-30);
+  }
+  &-text-extra-large-dark {
+    color: var(--dark);
+    font-size: var(--font-size-36);
+  }
+
+  //Light text
+  &-text-extra-small-white {
+    color: var(--white);
+    font-size: var(--font-size-10);
+  }
+  &-text-small-white {
+    color: var(--white);
+    font-size: var(--font-size-14);
+  }
+  &-text-medium-white {
+    color: var(--white);
+    font-size: var(--font-size-16);
+  }
+  &-text-normal-white {
+    color: var(--white);
+    font-size: var(--font-size-18);
+  }
+  &-text-large-white {
+    color: var(--white);
+    font-size: var(--font-size-30);
+  }
+  &-text-extra-large-white {
+    color: var(--white);
+    font-size: var(--font-size-36);
+  }
+
+  //Error text
+  &-errorText {
+    color: var(--red);
+    font-size: var(--font-size-14);
+  }
+}

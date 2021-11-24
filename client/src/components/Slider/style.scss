@@ -1,0 +1,28 @@
+/*For custom styles visit https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/*/
+
+$scope: components-slider;
+.#{$scope} {
+  &-slider {
+    width: 100%;
+  }
+  &-secondarySlider {
+    width: 100%;
+  }
+
+  &-values {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-colors {
+    &-white {
+      color: var(--white);
+    }
+    &-dark {
+      color: var(--dark);
+    }
+    &-darkBlue {
+      color: var(--darkBlue);
+    }
+  }
+}

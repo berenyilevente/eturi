@@ -1,0 +1,33 @@
+$scope: components-tooltip;
+//just an example class, tbd
+.#{$scope} {
+  //define css styles here
+  &-backgroundColor {
+    &-white {
+      background-color: var(--white);
+    }
+    &-blue {
+      background-color: var(--darkBlue);
+    }
+    &-dark {
+      background-color: var(--dark);
+    }
+    &-lightBlue {
+      background-color: var(--lightBlue);
+    }
+  }
+  &-textColor {
+    &-white {
+      background-color: var(--white);
+    }
+    &-blue {
+      background-color: var(--darkBlue);
+    }
+    &-dark {
+      background-color: var(--dark);
+    }
+    &-lightBlue {
+      background-color: var(--lightBlue);
+    }
+  }
+}

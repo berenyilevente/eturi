@@ -1,0 +1,67 @@
+$scope: components-button;
+.#{$scope} {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+
+  &-rounded {
+    border-radius: 6px !important;
+  }
+
+  &-outline {
+    background-color: transparent !important;
+  }
+
+  &-borderNone {
+    border: none;
+  }
+
+  &-cursor {
+    cursor: default !important;
+  }
+  &-buttonSizes {
+    &-small {
+      font-size: var(--font-size-10);
+      padding: 2px 14px;
+    }
+    &-medium {
+      font-size: var(--font-size-14);
+      padding: 4px 16px;
+    }
+    &-normal {
+      font-size: var(--font-size-18);
+      padding: 4px 18px;
+    }
+    &-large {
+      font-size: var(--font-size-22);
+      padding: 6px 22px;
+    }
+  }
+
+  &-textColor {
+    &-dark {
+      color: var(--dark) !important;
+    }
+    &-white {
+      color: var(--white) !important;
+    }
+  }
+
+  &-color {
+    &-darkBlue {
+      background-color: var(--darkBlue);
+      color: var(--white);
+      border-color: var(--darkBlue) !important;
+    }
+    &-lightBlue {
+      background-color: var(--lightBlue);
+      color: var(--lightColor);
+      border-color: var(--lightBlue) !important;
+    }
+    &-red {
+      background-color: var(--red);
+      color: var(--white);
+      border-color: var(--red) !important;
+    }
+  }
+}

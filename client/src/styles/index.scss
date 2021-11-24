@@ -1,0 +1,127 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
+//Color variables
+$lightBlue: #70a3c4;
+$darkBlue: #1f6ab0;
+$lightColor: #f5f6f8;
+$white: #ffffff;
+$red: #ff011f;
+$dark: #141414;
+$orange: #f5ae16;
+$green: #25a136;
+$shadowColor: #00000014;
+$lightGrey: #747373;
+$lighter: #ccc;
+
+$black: #000000;
+$brown: #633c00;
+$grey: #6f828a;
+$beige: #f5f5dc;
+$pink: #ffc0cb;
+$purple: #660099;
+$yellow: #ffff00;
+$blue: #0000ff;
+$orange: #ff681f;
+$silver: #c0c0c0;
+$gold: #ffd700;
+$khaki: #f0e68c;
+$turquoise: #30d5c8;
+$cream: #fffdd0;
+$apricot: #eb9373;
+$darkGreen: #002900;
+$boxShadow: 0px 3px 10px rgba(0, 0, 0, 0.12);
+
+:root {
+  //Colors
+  --lightBlue: #{$lightBlue};
+  --darkBlue: #{$darkBlue};
+  --white: #{$white};
+  --red: #{$red};
+  --dark: #{$dark};
+  --orange: #{$orange};
+  --green: #{$green};
+  --shadowColor: #{$shadowColor};
+  --lightColor: #{$lightColor};
+  --boxShadow: #{$boxShadow};
+  --lightGrey: #{$lightGrey};
+  --lighter: #{$lighter};
+
+  --black: #{$black};
+  --brown: #{$brown};
+  --grey: #{$grey};
+  --beige: #{$beige};
+  --pink: #{$pink};
+  --purple: #{$purple};
+  --yellow: #{$yellow};
+  --blue: #{$blue};
+  --green: #{$green};
+  --orange: #{$orange};
+  --silver: #{$silver};
+  --gold: #{$gold};
+  --khaki: #{$khaki};
+  --turquoise: #{$turquoise};
+  --cream: #{$cream};
+  --apricot: #{$apricot};
+  --darkGreen: #{$darkGreen};
+
+  //Font styles
+  --font-family-lato: Lato;
+  --font-style-normal: normal;
+  --font-weight-normal: normal;
+  --font-weight-300: 300;
+  --font-weight-800: 800;
+  --font-weight-bold: bold;
+  --font-weight-medium: medium;
+
+  //Font sizes
+  --font-size-10: 10px;
+  --font-size-12: 12px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-22: 22px;
+  --font-size-26: 26px;
+  --font-size-30: 30px;
+  --font-size-36: 36px;
+
+  //Font spacing
+  --character-spacing-0: 0px;
+  --character-spacing--1-44: -1.44px;
+  --line-spacing-11: 11px;
+  --line-spacing-18: 18px;
+  --line-spacing-24: 24px;
+  --line-spacing-27: 27px;
+  --line-spacing-41-849998474121094: 41.849998474121094px;
+  --line-spacing-27-200000762939453: 27.200000762939453px;
+  --line-spacing-18-600000381469727: 18.600000381469727px;
+  --line-spacing-30-399999618530273: 30.399999618530273px;
+  --line-spacing-27-549999237060547: 27.549999237060547px;
+
+  //Scrollbar
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: none !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--lightGrey) !important;
+  }
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./fonts/Lato-Regular.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("./fonts/Lato-Bold.ttf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}

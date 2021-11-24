@@ -1,0 +1,12 @@
+$scope: components-image-slider;
+.#{$scope} {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  user-select: none;
+  &-imageContainer {
+    width: 300px;
+    height: 400px;
+    object-fit: contain;
+  }
+}

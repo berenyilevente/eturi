@@ -1,0 +1,125 @@
+{
+  "header":{
+    "home": "Home",
+    "sell": "Sell",
+    "search": "Search",
+    "about": "About",
+    "profile": "Profile"
+  },
+  "intro": {
+    "introHeader": "Ready to declutter your wardrobe?",
+    "introButton": "Sell your clothes now!",
+    "introHelperText": "Find out how it works..."
+  },
+  "footer":{
+    "home": "Home",
+    "contract": "T&C",
+    "privacy": "Privacy",
+    "imprint": "Imprint",
+    "changeLanguage": "Translate to"
+
+  },
+  "sellClothes":{
+    "title": "Sell your unused clothes",
+    "uploadPicture": "Upload your photos",
+    "uploadPictureTips": "Tips",
+    "clothesName": "Name",
+    "clothesNamePlaceholder": "e.g. white sweater",
+    "description": "Description",
+    "descriptionPlaceholder": "e.g. worn once, size",
+    "category": "Category",
+    "categoryPlaceholder": "Choose category",
+    "brand": "Brand",
+    "brandPlaceholder": "Specify the brand ",
+    "condition": "Condition",
+    "conditionPlaceholder": "Specify the condition",
+    "price": "Price",
+    "pricePlaceholder": "00.000 HUF",
+    "cancel": "Cancel",
+    "add": "Add",
+    "menCategory": "Men",
+    "womenCategory": "Women",
+    "childrenCategory": "Children",    
+    "size": "Size",
+    "sizePlaceholder": "Choose size",
+    "colour": "Colour",
+    "colourPlaceholder": "Choose colour",
+    "sizeTable": "Size table",
+    "pictureTips": "Tips"
+  },
+  "brands":{
+    "nike": "Nike",
+    "puma": "Puma",
+    "zara": "Zara",
+    "adidas": "adidas",
+    "levis": "Levi's",
+    "HandM": "H&M",
+    "ralphLauren": "Ralph Lauren",
+    "tommyHilfiger": "Tommy Hilfiger",
+    "lacoste": "Lacoste",
+    "calvinKlein": "Calvin Klein",
+    "guess": "GUESS",
+    "michaelKors": "Michael Kors",
+    "noBrand": "No brand"
+  }, 
+  "condition": {
+    "newWithLabel": "New, with label",
+    "newWithLabelDescription": "Brand new, unused product, with label or original packaging.",
+    "newClothes": "New",
+    "newDescription": "Brand new, unused product, without label or original packaging",
+    "veryGood": "Very good",
+    "veryGoodDescription": "Rarely used piece, with possible flaws, but otherwise in excellent condition. Any imperfections should be apparent from the description or photo.",
+    "good": "Good",
+    "goodDescription": "Used product, with possible faults and signs of use as shown in the description and photos.",
+    "satisfactory": "Satisfactory",
+    "satisfactoryDescription": "A frequently used item with defects and signs of use, which are pointed out in the description as well as in the photos."
+  },
+  "size":{
+    "XS": "XS / 34 / 6",
+    "S": "S / 36 / 8",
+    "M": "M / 38 / 10",
+    "L": "L / 40 / 12",
+    "XL": "XL / 42 / 14",
+    "XXL": "XXL / 44 / 16",
+    "other": "Other"
+  },
+  "colour":{
+    "black": "Black",
+    "brown": "Brown",
+    "grey": "Grey",
+    "beige": "Beige",
+    "pink": "Pink",
+    "purple": "Purple",
+    "red": "Red",
+    "yellow": "Yellow",
+    "blue": "Blue",
+    "green": "Green",
+    "orange": "Orange",
+    "white": "White",
+    "silver": "Silver",
+    "gold": "Gold",
+    "multiColour": "Multi colour",
+    "khaki": "Khaki",
+    "turquoise": "Turquoise",
+    "cream": "Cream",
+    "apricot": "Apricot",
+    "lightBlue": "Light blue",
+    "darkGreen": "Dark green"
+  },
+  "tips":{
+    "titles":{
+      "lighting": "Natural lighting",
+      "background": "Neutral background",
+      "noFlash": "No flash photography",
+      "many": "Preferably many pictures",
+      "yourPhotos": "Own pictures only"
+    },
+    "content":{
+      "lightingContent": "Take photos in a bright environment. Daylight is best.",
+      "backgroundContent": "To make your article really stand out, place it against a neat, neutral background.",
+      "noFlashContent": "Artificial light can distort the colours, so it is better not to use flash.",
+      "manyContent": "Take several pictures from different perspectives. Pay attention to details: labels, tags, signs of use, defects, etc.",
+      "yourPhotosContent": "Only use your own pictures. Copyrighted images are not allowed."
+    }
+  }
+}

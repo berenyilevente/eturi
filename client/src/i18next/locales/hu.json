@@ -1,0 +1,124 @@
+{
+  "header": {
+    "home": "Főoldal",
+    "sell": "Hírdetek",
+    "search": "Keresek",
+    "about": "Rólunk",
+    "profile": "Profil"
+  },
+  "intro": {
+    "introHeader": "Készen állsz rendezni a szekrényedet?",
+    "introButton": "Hírdess most!",
+    "introHelperText": "Tudd meg hogyan működik..."
+  },
+  "footer":{
+    "home": "Főoldal",
+    "contract": "ÁSZF",
+    "privacy": "Adatvédelem",
+    "imprint": "Impresszum",
+    "changeLanguage": "Fordítás"
+  },
+  "sellClothes":{
+    "title": "Hírdesd meg a már nem használt ruháidat",
+    "uploadPicture": "Töltsd fel a képeidet",
+    "uploadPictureTips": "Tippek",
+    "clothesName": "Ruha neve",
+    "clothesNamePlaceholder": "pl. fehér pulcsi",
+    "description": "Leírás",
+    "descriptionPlaceholder": "pl. egyszer hordva, méret",
+    "category": "Kategória",
+    "categoryPlaceholder": "Válassz katgóriát",
+    "brand": "Márka",
+    "brandPlaceholder": "Add meg a ruha márkáját",
+    "condition": "Állapot",
+    "conditionPlaceholder": "Válaszd ki a ruha állapotát",
+    "price": "Ár",
+    "pricePlaceholder": "00.000 Ft",
+    "cancel": "Mégsem",
+    "add": "Hozzáadás",
+    "menCategory": "Férfi",
+    "womenCategory": "Női",
+    "childrenCategory": "Gyerek",  
+    "size": "Méret",
+    "sizePlaceholder": "Méret kiválasztása",    
+    "colour": "Szín",
+    "colourPlaceholder": "Szín kiválasztása",
+    "sizeTable": "Mérettáblázat",
+    "pictureTips": "Tippek"
+    },
+  "brands":{
+    "nike": "Nike",
+    "puma": "Puma",
+    "zara": "Zara",
+    "adidas": "adidas",
+    "levis": "Levi's",
+    "HandM": "H&M",
+    "ralphLauren": "Ralph Lauren",
+    "tommyHilfiger": "Tommy Hilfiger",
+    "lacoste": "Lacoste",
+    "calvinKlein": "Calvin Klein",
+    "guess": "GUESS",
+    "michaelKors": "Michael Kors",
+    "noBrand": "Nincs megadott márka"
+  },
+  "condition": {
+    "newWithLabel": "Új, címkével",
+    "newWithLabelDescription": "Vadonatúj, nem használt termék, címkével vagy eredeti csomagolással.",
+    "newClothes": "Új",
+    "newDescription": "Vadonatúj, nem használt termék, címke vagy eredeti csomagolás nélkül",
+    "veryGood": "Nagyon jó",
+    "veryGoodDescription": "Ritkán használt darab, esetleges hibákkal, de egyébként kiváló állapotban. Minden hiányosságnak látszódjon kell a leírásból vagy a fotóból.",
+    "good": "Jó",
+    "goodDescription": "Használt termék, esetleges hibákkal és használati nyomokkal, amelyek a leírásban és a fotókon láthatóak.",
+    "satisfactory": "Megfelelő",
+    "satisfactoryDescription": "Gyakran használt darab, hibákkal és használati nyomokkal, amelyekre a leírás és a fotók is rámutatnak."
+  },
+  "size":{
+    "XS": "XS / 34 / 6",
+    "S": "S / 36 / 8",
+    "M": "M / 38 / 10",
+    "L": "L / 40 / 12",
+    "XL": "XL / 42 / 14",
+    "XXL": "XXL / 44 / 16",
+    "other": "Más"
+  },
+  "colour":{
+    "black": "Fekete",
+    "brown": "Barna",
+    "grey": "Szürke",
+    "beige": "Bézs",
+    "pink": "Pink",
+    "purple": "Lila",
+    "red": "Piros",
+    "yellow": "Sárga",
+    "blue": "Kék",
+    "green": "Zöld",
+    "orange": "Narancs",
+    "white": "Fehér",
+    "silver": "Ezüst",
+    "gold": "Arany",
+    "multiColour": "Színes",
+    "khaki": "Khaki",
+    "turquoise": "Türkíz",
+    "cream": "Krém",
+    "apricot": "Barack",
+    "lightBlue": "Világoskék",
+    "darkGreen": "Sötétzöld"
+  },
+  "tips":{
+    "titles":{
+      "lighting": "Természetes fény",
+      "background": "Semleges háttér",
+      "noFlash": "Vaku nélkül",
+      "many": "Lehetőleg sok képet",
+      "yourPhotos": "Csak saját képet"
+    },
+    "content":{
+      "lightingContent": "Fotózz világos környezetben. A nappali fény a legjobb.",
+      "backgroundContent": "Ahhoz, hogy a ruha igazán kiemelkedjen, helyezd egy tiszta, semleges háttér elé.",
+      "noFlashContent": "A mesterséges fény torzíthatja a színeket, ezért jobb, ha nem használsz vakut.",
+      "manyContent": "Készíts több képet különböző nézőpontokból. Figyelj a részletekre: címkékre, feliratokra, használati nyomokra, hibákra stb.",
+      "yourPhotosContent": "Csak saját fényképeket használj. Szerzői jogvédelem alatt álló képek nem engedélyezettek."
+    }
+  }
+}

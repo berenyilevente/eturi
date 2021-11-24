@@ -1,0 +1,22 @@
+$scope: layouts-footer-layout;
+.#{$scope} {
+  display: grid;
+  grid-template-columns: 4fr 2fr 0.5fr 0.1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+
+  &-navigation {
+    display: flex;
+    justify-content: space-around;
+    width: 25vw;
+  }
+  &-social {
+    display: flex;
+    justify-content: space-around;
+    width: 15vw;
+  }
+  &-language {
+    display: flex;
+    justify-content: end;
+  }
+}

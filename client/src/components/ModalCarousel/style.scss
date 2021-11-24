@@ -1,0 +1,16 @@
+$scope: components-modal-carousel;
+.#{$scope} {
+  &-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    user-select: none;
+    margin-bottom: 15vh;
+  }
+  &-navigation {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    margin-top: 1vh;
+  }
+}
