@@ -14,10 +14,10 @@ export const addClothes = async (req, res) => {
   //with post requests you have acces to the req.body
   const postClothes = req.body;
 
-  const newClothes = new ClothesItem(postClothes);
+  const newClothes = new AddClothes(postClothes);
   try {
     await newClothes.save();
-    res.send(201).json(newClothes);
+    res.status(201).json(newClothes);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }

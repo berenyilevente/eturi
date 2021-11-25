@@ -6,14 +6,15 @@ export interface IClothesState {
 }
 
 export interface IClothesResponseData {
-  selectedFile?: String;
-  name?: String;
-  description?: String;
-  category: String;
-  brand: String;
-  size: String;
-  condition: String;
-  colour: String;
+  selectedFile?: string;
+  name?: string;
+  description?: string;
+  category: string;
+  brand: string;
+  size: string;
+  condition: string;
+  colour: string;
   price?: Number;
   createdAt?: Date;
 }
+[];

@@ -307,12 +307,14 @@ const useAddClothesScreen = () => {
     <Text textType="text-medium-dark">{yourPhotosContentText}</Text>,
   ];
 
-  const [categoryContent, setCategoryContent] = useState<string>("");
-  const [brandContent, setBrandContent] = useState<string>("");
-  const [sizeContent, setSizeContent] = useState<string>("");
-  const [conditionContent, setConditionContent] = useState<string>("");
-  const [colourContent, setColourContent] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
+  const [categoryContent, setCategoryContent] = useState<string>(categoryText);
+  const [brandContent, setBrandContent] = useState<string>(brandText);
+  const [sizeContent, setSizeContent] = useState<string>(sizeText);
+  const [conditionContent, setConditionContent] = useState<string>(
+    conditionText
+  );
+  const [colourContent, setColourContent] = useState<string>(colourText);
+  const [price, setPrice] = useState<string>();
 
   const { visible, setVisible, ref } = useOutsideClickHandler(false);
 
@@ -326,6 +328,17 @@ const useAddClothesScreen = () => {
 
   const dispatch = useDispatch();
 
+  const onSubmit = useCallback(() => {
+    dispatch(
+      addClothes({
+        category: categoryContent,
+        brand: brandContent,
+        size: sizeContent,
+        condition: conditionContent,
+        colour: colourContent,
+      })
+    );
+  }, [dispatch, addClothes]);
   return {
     titleText,
     uploadPictureText,
@@ -375,6 +388,7 @@ const useAddClothesScreen = () => {
     carouselImages,
     price,
     setPrice,
+    onSubmit,
     dispatch,
   };
 };
@@ -429,6 +443,7 @@ const AddClothesScreen: FC = () => {
     carouselImages,
     price,
     setPrice,
+    onSubmit,
     dispatch,
   } = useAddClothesScreen();
 

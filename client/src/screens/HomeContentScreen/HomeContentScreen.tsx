@@ -22,6 +22,6 @@ const useHomeContentScreen = () => {
 const HomeContentScreen: FC = () => {
   const { clothes } = useHomeContentScreen();
 
-  return <></>;
+  return <>{clothes.map((item) => item.brand)}</>;
 };
 export default HomeContentScreen;
