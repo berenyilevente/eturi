@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import AddClothesScreen from "../../screens/AddClothesScreen/AddClothesScreen";
 import SearchScreen from "../../screens/SearchScreen/SearchScreen";
 import AboutScreen from "../../screens/AboutScreen/AboutScreen";
+import HomeContentScreen from "../../screens/HomeContentScreen/HomeContentScreen";
 import pageURLS from "../../resources/constants/pageURLS";
 
 const MainSiteContentScreen = () => {
@@ -19,6 +20,7 @@ const MainSiteContentScreen = () => {
       }
       siteContent={
         <Switch>
+          <Route exact path={pageURLS.HOME} component={HomeContentScreen} />
           <Route exact path={pageURLS.SELL} component={AddClothesScreen} />
           <Route exact path={pageURLS.SEARCH} component={SearchScreen} />
           <Route exact path={pageURLS.ABOUT} component={AboutScreen} />

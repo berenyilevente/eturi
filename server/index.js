@@ -7,15 +7,15 @@ import postRoutes from "./routes/clothes.js";
 
 const app = express();
 
-//use express middlewear to connect posts to our application
-//first parameter: set up the starting path for all the routes inside posts.js
-//every route inside the post route will start with post
-app.use("/clothes", postRoutes);
-
 //set up bodyParser so it can properly send the requests
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
+//use express middlewear to connect posts to our application
+//first parameter: set up the starting path for all the routes inside posts.js
+//every route inside the post route will start with post
+app.use("/clothes", postRoutes);
 
 //ToDo store connection string in environmental variable
 const CONNECTION_URL =

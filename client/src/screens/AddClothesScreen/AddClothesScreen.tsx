@@ -23,6 +23,8 @@ import image2Source from "../../public/templateImages/tipsMock2.png";
 import image3Source from "../../public/templateImages/tipsMock3.png";
 import image4Source from "../../public/templateImages/tipsMock4.png";
 import image5Source from "../../public/templateImages/tipsMock5.png";
+import { useDispatch } from "react-redux";
+import { addClothes } from "../../redux/clothes/clothes.actions";
 
 interface IDropdownValues {
   id: number;
@@ -305,14 +307,12 @@ const useAddClothesScreen = () => {
     <Text textType="text-medium-dark">{yourPhotosContentText}</Text>,
   ];
 
-  const [categoryContent, setCategoryContent] = useState<string>(categoryText);
-  const [brandContent, setBrandContent] = useState<string>(brandText);
-  const [sizeContent, setSizeContent] = useState<string>(sizeText);
-  const [conditionContent, setConditionContent] = useState<string>(
-    conditionText
-  );
-  const [colourContent, setColourContent] = useState<string>(colourText);
-  const [price, setPrice] = useState<string>();
+  const [categoryContent, setCategoryContent] = useState<string>("");
+  const [brandContent, setBrandContent] = useState<string>("");
+  const [sizeContent, setSizeContent] = useState<string>("");
+  const [conditionContent, setConditionContent] = useState<string>("");
+  const [colourContent, setColourContent] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
 
   const { visible, setVisible, ref } = useOutsideClickHandler(false);
 
@@ -323,6 +323,8 @@ const useAddClothesScreen = () => {
   const openTipsModal = useCallback(() => {
     setVisible(true);
   }, [setVisible]);
+
+  const dispatch = useDispatch();
 
   return {
     titleText,
@@ -373,6 +375,7 @@ const useAddClothesScreen = () => {
     carouselImages,
     price,
     setPrice,
+    dispatch,
   };
 };
 
@@ -426,6 +429,7 @@ const AddClothesScreen: FC = () => {
     carouselImages,
     price,
     setPrice,
+    dispatch,
   } = useAddClothesScreen();
 
   return (
@@ -576,7 +580,17 @@ const AddClothesScreen: FC = () => {
               colorStyle="darkBlue"
               rounded
               buttonSize="normal"
-              onClick={() => console.log(price)}
+              onClick={() => {
+                dispatch(
+                  addClothes({
+                    category: categoryContent,
+                    brand: brandContent,
+                    size: sizeContent,
+                    condition: conditionContent,
+                    colour: colourContent,
+                  })
+                );
+              }}
             >
               {addText}
             </Button>
