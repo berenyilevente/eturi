@@ -1,7 +1,6 @@
 import "../../components/Card/style.scss";
 import { FC } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
-import { Text } from "../../components/Text/Text.view";
 
 const scope = CreateScopeCSS("components-card");
 const background = scope.and("backgroundColor");

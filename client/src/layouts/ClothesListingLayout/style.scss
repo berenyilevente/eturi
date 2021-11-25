@@ -1,0 +1,9 @@
+$scope: layouts-clothes-listing-layout;
+//just an example class, tbd
+.#{$scope} {
+  &-imageContainer img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+}

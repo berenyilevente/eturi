@@ -10,7 +10,7 @@ import {
 import { IClothesState } from "./clothes.interfaces";
 
 const defaultClothesState: IClothesState = {
-  isLoading: false,
+  isLoading: undefined,
   errorMessage: null,
   clothes: [],
   clothesAdded: [],

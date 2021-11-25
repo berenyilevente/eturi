@@ -19,5 +19,5 @@ export const useOutsideClickHandler = (initialValue: boolean) => {
     };
   }, [ref]);
 
-  return { visible, setVisible, ref };
+  return { visible, setVisible, ref, handleClickOutside };
 };

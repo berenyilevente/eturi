@@ -1,6 +1,6 @@
 import "../../components/ModalCarousel/style.scss";
 import { FC, ReactNode, useState } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 import Modal from "../../components/Modal";
 import { Icon } from "../../components/Icon/Icon.view";
 
@@ -26,10 +26,9 @@ export const ModalCarousel: FC<Props> = ({
   carouselWidth,
   closeCarousel,
   carouselImages,
-  source,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [indexCounter, setIndexCounter] = useState(0);
+  const [, setIndexCounter] = useState(0);
 
   const slideLeft = () => {
     const nextIndex = currentIndex - 1;

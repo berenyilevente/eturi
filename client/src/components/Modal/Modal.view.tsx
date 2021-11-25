@@ -1,11 +1,9 @@
 import "../../components/Modal/style.scss";
-import { Children, FC, RefObject, useCallback, useState } from "react";
+import { FC, RefObject } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
-import { Button } from "../../components/Button/Button.view";
 import { Card } from "../../components/Card/Card.view";
 import { Text } from "../../components/Text/Text.view";
 import { Icon } from "../../components/Icon/Icon.view";
-import { useOutsideClickHandler } from "../../hooks/useOutsideClickHandler";
 
 const scope = CreateScopeCSS("components-modal");
 const modalHeaderClass = scope.and("modalHeader");

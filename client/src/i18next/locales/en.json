@@ -121,5 +121,8 @@
       "manyContent": "Take several pictures from different perspectives. Pay attention to details: labels, tags, signs of use, defects, etc.",
       "yourPhotosContent": "Only use your own pictures. Copyrighted images are not allowed."
     }
+  },
+  "currency":{
+    "huf": "HUF"
   }
 }

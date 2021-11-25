@@ -1,12 +1,13 @@
 export interface IClothesState {
-  isLoading: boolean;
+  isLoading?: boolean;
   errorMessage: string | null;
   clothes: IClothesResponseData[];
   clothesAdded: IClothesResponseData[];
 }
 
 export interface IClothesResponseData {
-  selectedFile?: string;
+  id?: number;
+  selectedFile: string;
   name?: string;
   description?: string;
   category: string;
@@ -14,7 +15,7 @@ export interface IClothesResponseData {
   size: string;
   condition: string;
   colour: string;
-  price?: Number;
+  price?: string;
   createdAt?: Date;
 }
 [];

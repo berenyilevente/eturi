@@ -120,5 +120,8 @@
       "manyContent": "Készíts több képet különböző nézőpontokból. Figyelj a részletekre: címkékre, feliratokra, használati nyomokra, hibákra stb.",
       "yourPhotosContent": "Csak saját fényképeket használj. Szerzői jogvédelem alatt álló képek nem engedélyezettek."
     }
+  },
+  "currency":{
+    "huf": "Ft"
   }
 }

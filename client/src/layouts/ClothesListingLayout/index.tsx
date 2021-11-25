@@ -1,0 +1,1 @@
+export { ClothesListingLayout as default } from '../../layouts/ClothesListingLayout/ClothesListingLayout.view'

@@ -1,9 +1,8 @@
 import "../ClothesPriceLayout/style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../../components/utils";
+import { CreateScopeCSS } from "../../../components/utils";
 
 const scope = CreateScopeCSS("layouts-clothes-price-layout");
-const example = scope.and("example");
 
 interface Props {
   price: ReactNode;

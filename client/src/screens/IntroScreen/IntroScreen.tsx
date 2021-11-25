@@ -67,10 +67,15 @@ const IntroScreen = () => {
                 <Link
                   textType="text-small-dark"
                   onClick={() => goToAboutScreen()}
+                  color="lightBlue"
                 >
                   {introHelperText}
                 </Link>
-                <Icon iconType="chevronRightIcon" className="pt-2 p-1"></Icon>
+                <Icon
+                  iconType="chevronRightIcon"
+                  className="pt-2 p-1"
+                  colorStyle="lightBlue"
+                ></Icon>
               </>
             }
           />

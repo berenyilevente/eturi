@@ -1,6 +1,6 @@
 import "../../components/Tooltip/style.scss";
 import { FC } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 import ReactTooltip from "react-tooltip";
 
 const scope = CreateScopeCSS("components-tooltip");

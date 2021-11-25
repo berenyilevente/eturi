@@ -36,11 +36,8 @@ export const DropdownMenu: FC<Props> = ({
   content,
   items,
   multiselect = false,
-  addValueToDropdown,
   hasDescriptionRow,
   onSelectItem,
-  hasIcon,
-  maxSelection,
 }) => {
   const [selection, setSelection] = useState<{ id?: number; value?: string }[]>(
     [{}]
@@ -65,7 +62,7 @@ export const DropdownMenu: FC<Props> = ({
       }
       onSelectItem(item);
     },
-    [selection, setSelection, onSelectItem]
+    [selection, setSelection, onSelectItem, multiselect, setVisible]
   );
 
   const isItemInSelection = useCallback(

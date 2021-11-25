@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import "../../layouts/MainLayout/style.scss";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("layouts-main-layout");
 const headerClass = scope.and("header");

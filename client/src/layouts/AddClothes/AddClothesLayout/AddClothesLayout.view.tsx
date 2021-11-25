@@ -1,6 +1,6 @@
 import "./style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../../components/utils";
+import { CreateScopeCSS } from "../../../components/utils";
 
 const scope = CreateScopeCSS("layouts-add-clothes-layout");
 const uploadAreaClass = scope.and("uploadArea");

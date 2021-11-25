@@ -61,7 +61,6 @@ const MainHeaderScreen = () => {
     goToSearchScreen,
     goToHomeScreen,
     goToAboutScreen,
-    goToProfileScreen,
   } = useMainHeaderScreen();
   return (
     <Card backgroundColorStyle="white" rounded>
@@ -76,10 +75,18 @@ const MainHeaderScreen = () => {
         }
         navItems={
           <>
-            <Link textType="text-normal-dark" onClick={() => goToHomeScreen()}>
+            <Link
+              textType="text-normal-dark"
+              onClick={() => goToHomeScreen()}
+              className="p-2"
+            >
               {homeText}
             </Link>
-            <Link textType="text-normal-dark" onClick={() => goToSellScreen()}>
+            <Link
+              textType="text-normal-dark"
+              onClick={() => goToSellScreen()}
+              className="p-2"
+            >
               {sellClothesText}
             </Link>
             <Link
@@ -88,7 +95,11 @@ const MainHeaderScreen = () => {
             >
               {searchText}
             </Link>
-            <Link textType="text-normal-dark" onClick={() => goToAboutScreen()}>
+            <Link
+              textType="text-normal-dark"
+              onClick={() => goToAboutScreen()}
+              className="p-2"
+            >
               {aboutText}
             </Link>
             <Tooltip

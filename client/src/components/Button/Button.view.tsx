@@ -1,5 +1,5 @@
 import "../../components/Button/style.scss";
-import { Children, FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("components-button");

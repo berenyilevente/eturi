@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { Card } from "../../components/Card/Card.view";
 import { Text } from "../../components/Text/Text.view";
 import { useTranslation } from "react-i18next";
@@ -6,6 +6,7 @@ import { AddClothesLayout } from "../../layouts/AddClothes/AddClothesLayout/AddC
 import { Button } from "../../components/Button/Button.view";
 import { Input } from "../../components/Input/Input.view";
 import { TextArea } from "../../components/TextArea/TextArea.view";
+import { ImageUploader } from "../../components/ImageUploader/ImageUploader.view";
 import { DropdownMenu } from "../../components/DropdownMenu";
 import { ClothesDetailsLayout } from "../../layouts/AddClothes/ClothesDetailsLayout/ClothesDetailsLayout.view";
 import { ClothesDescriptionLayout } from "../../layouts/AddClothes/ClothesDescriptionLayout/ClothesDescriptionLayout.view";
@@ -34,7 +35,6 @@ interface IDropdownValues {
 
 const useAddClothesScreen = () => {
   const { t } = useTranslation();
-  const { v4: uuidv4 } = require("uuid");
   const history = useHistory();
 
   const titleText = t("sellClothes.title");
@@ -292,11 +292,11 @@ const useAddClothesScreen = () => {
   ];
 
   const carouselImages = [
-    <img src={image1Source} className="w-100" />,
-    <img src={image2Source} className="w-100" />,
-    <img src={image3Source} className="w-100" />,
-    <img src={image4Source} className="w-100" />,
-    <img src={image5Source} className="w-100" />,
+    <img src={image1Source} alt="" className="w-100" />,
+    <img src={image2Source} alt="" className="w-100" />,
+    <img src={image3Source} alt="" className="w-100" />,
+    <img src={image4Source} alt="" className="w-100" />,
+    <img src={image5Source} alt="" className="w-100" />,
   ];
 
   const carouselContent = [
@@ -307,6 +307,7 @@ const useAddClothesScreen = () => {
     <Text textType="text-medium-dark">{yourPhotosContentText}</Text>,
   ];
 
+  const [imageData, setImageData] = useState<any>();
   const [categoryContent, setCategoryContent] = useState<string>(categoryText);
   const [brandContent, setBrandContent] = useState<string>(brandText);
   const [sizeContent, setSizeContent] = useState<string>(sizeText);
@@ -314,9 +315,9 @@ const useAddClothesScreen = () => {
     conditionText
   );
   const [colourContent, setColourContent] = useState<string>(colourText);
-  const [price, setPrice] = useState<string>();
-
-  const { visible, setVisible, ref } = useOutsideClickHandler(false);
+  const [nameContent, setNameContent] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+  const { visible, setVisible } = useOutsideClickHandler(false);
 
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
     history,
@@ -328,31 +329,16 @@ const useAddClothesScreen = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback(() => {
-    dispatch(
-      addClothes({
-        category: categoryContent,
-        brand: brandContent,
-        size: sizeContent,
-        condition: conditionContent,
-        colour: colourContent,
-      })
-    );
-  }, [dispatch, addClothes]);
   return {
     titleText,
     uploadPictureText,
-    uploadPictureTipsText,
     clothesNameText,
     clothesNamePlaceholderText,
     descriptionText,
     descriptionPlaceholderText,
     categoryText,
-    categoryPlaceholderText,
     brandText,
-    brandPlaceholderText,
     conditionText,
-    conditionPlaceholderText,
     priceText,
     pricePlaceholderText,
     cancelText,
@@ -362,11 +348,8 @@ const useAddClothesScreen = () => {
     conditions,
     sizes,
     sizeText,
-    sizePlaceholderText,
     colourText,
-    colourPlaceholderText,
     goToHomeScreen,
-    sizeTableText,
     colours,
     pictureTipsText,
     openTipsModal,
@@ -382,14 +365,16 @@ const useAddClothesScreen = () => {
     setColourContent,
     visible,
     setVisible,
-    ref,
     carouselTitles,
     carouselContent,
     carouselImages,
     price,
     setPrice,
-    onSubmit,
     dispatch,
+    imageData,
+    setImageData,
+    nameContent,
+    setNameContent,
   };
 };
 
@@ -397,17 +382,13 @@ const AddClothesScreen: FC = () => {
   const {
     titleText,
     uploadPictureText,
-    uploadPictureTipsText,
     clothesNameText,
     clothesNamePlaceholderText,
     descriptionText,
     descriptionPlaceholderText,
     categoryText,
-    categoryPlaceholderText,
     brandText,
-    brandPlaceholderText,
     conditionText,
-    conditionPlaceholderText,
     priceText,
     pricePlaceholderText,
     cancelText,
@@ -417,11 +398,8 @@ const AddClothesScreen: FC = () => {
     conditions,
     sizes,
     sizeText,
-    sizePlaceholderText,
     colourText,
-    colourPlaceholderText,
     goToHomeScreen,
-    sizeTableText,
     colours,
     pictureTipsText,
     openTipsModal,
@@ -437,14 +415,16 @@ const AddClothesScreen: FC = () => {
     setColourContent,
     visible,
     setVisible,
-    ref,
     carouselTitles,
     carouselContent,
     carouselImages,
     price,
     setPrice,
-    onSubmit,
     dispatch,
+    imageData,
+    setImageData,
+    nameContent,
+    setNameContent,
   } = useAddClothesScreen();
 
   return (
@@ -468,7 +448,13 @@ const AddClothesScreen: FC = () => {
                   </Link>
                 </>
               }
-              imageUploadArea={<div>{"Image upload area"}</div>}
+              imageUploadArea={
+                <ImageUploader
+                  onImage={(image) => {
+                    setImageData(image);
+                  }}
+                />
+              }
             />
           </Card>
         }
@@ -478,9 +464,10 @@ const AddClothesScreen: FC = () => {
               name={<Text textType="text-normal-dark">{clothesNameText}</Text>}
               nameInput={
                 <Input
+                  inputValue={nameContent}
                   placeholderText={clothesNamePlaceholderText}
-                  onChange={() => {}}
-                ></Input>
+                  onChange={setNameContent}
+                />
               }
               line={<DividerLine />}
               description={
@@ -596,13 +583,16 @@ const AddClothesScreen: FC = () => {
               rounded
               buttonSize="normal"
               onClick={() => {
+                console.log(price);
                 dispatch(
                   addClothes({
+                    selectedFile: imageData,
                     category: categoryContent,
                     brand: brandContent,
                     size: sizeContent,
                     condition: conditionContent,
                     colour: colourContent,
+                    price: price,
                   })
                 );
               }}

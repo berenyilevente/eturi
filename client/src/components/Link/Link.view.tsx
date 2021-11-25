@@ -1,6 +1,6 @@
 import "../../components/Link/style.scss";
 import { FC } from "react";
-import { CreateScopeCSS } from "../../components/utils";
+import { cn, CreateScopeCSS } from "../../components/utils";
 import { Text } from "../../components/Text/Text.view";
 
 const scope = CreateScopeCSS("components-link");
@@ -27,6 +27,7 @@ interface Props {
   onMouseOver?(): void;
   textType: TextTypes;
   color?: Colors;
+  className?: string;
 }
 
 export const Link: FC<Props> = ({
@@ -35,8 +36,13 @@ export const Link: FC<Props> = ({
   onMouseOver,
   textType,
   color,
+  className,
 }) => (
-  <span className={scope} onClick={onClick} onMouseOver={onMouseOver}>
+  <span
+    className={cn(scope, className)}
+    onClick={onClick}
+    onMouseOver={onMouseOver}
+  >
     <Text textType={textType} color={color}>
       {" "}
       {children}

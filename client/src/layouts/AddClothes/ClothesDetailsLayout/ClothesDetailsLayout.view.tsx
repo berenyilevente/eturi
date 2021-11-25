@@ -1,6 +1,6 @@
 import "../ClothesDetailsLayout/style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../../components/utils";
+import { CreateScopeCSS } from "../../../components/utils";
 
 const scope = CreateScopeCSS("layouts-clothes-details-layout");
 const lineClass = scope.and("line");

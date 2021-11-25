@@ -1,10 +1,8 @@
 import "../../components/TextArea/style.scss";
 import { FC } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
-import { Text } from "../../components/Text/Text.view";
+import { CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("components-text-area");
-const example = scope.and("example");
 
 interface Props {
   rows?: number;

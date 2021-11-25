@@ -1,0 +1,25 @@
+$scope: components-loading-spinner;
+.#{$scope} {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+
+  &-loadingSpinner {
+    border: 6px solid transparent;
+    border-top: 6px solid var(--darkBlue);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 0.8s linear infinite;
+    left: 100vw;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

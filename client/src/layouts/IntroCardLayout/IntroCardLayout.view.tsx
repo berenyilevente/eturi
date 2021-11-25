@@ -1,6 +1,6 @@
 import "../../layouts/IntroCardLayout/style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("layouts-intro-card-layout");
 const linkClass = scope.and("link");

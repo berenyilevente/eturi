@@ -1,0 +1,1 @@
+export { HomeContentLayout as default } from '../../layouts/HomeContentLayout/HomeContentLayout.view'

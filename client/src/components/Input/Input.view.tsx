@@ -1,8 +1,6 @@
 import "../../components/Input/style.scss";
 import { FC, KeyboardEventHandler, useCallback, useState } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
-import { Text } from "../../components/Text/Text.view";
-import { Icon } from "../../components/Icon/Icon.view";
 
 const scope = CreateScopeCSS("components-input");
 const inputAreaClass = scope.and("inputArea");
@@ -23,11 +21,9 @@ export const Input: FC<Props> = ({
   inputType,
   onChange,
   onEnterKeyPressed,
-  validInput,
   inputValue,
-  errorTextValue,
 }) => {
-  const [inputText, setInputText] = useState<string>("");
+  const [, setInputText] = useState<string>("");
 
   const onChangeInputText = useCallback(
     (e) => {
