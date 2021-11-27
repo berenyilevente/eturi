@@ -1,9 +1,10 @@
 import "../../components/ImageUploader/style.scss";
-import { FC, useCallback, useState } from "react";
+import { FC, ReactNode, useCallback, useState } from "react";
 import { CreateScopeCSS } from "../../components/utils";
 import Text from "../../components/Text";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon";
+import ImageSlider from "../ImageSlider";
 
 const scope = CreateScopeCSS("components-image-uploader");
 const imageAreaClass = scope.and("imageInputArea");
@@ -12,7 +13,6 @@ const imageInputLabelClass = scope.and("imageInputLabel");
 
 interface Props {
   onImage(data: any): void;
-  baseImage?: any;
 }
 
 export const ImageUploader: FC<Props> = ({ onImage }) => {
@@ -20,15 +20,18 @@ export const ImageUploader: FC<Props> = ({ onImage }) => {
 
   const uploadLabelText = t("images.uploadImageLabel");
 
-  const [baseImageContent, setBaseImageContent] = useState<any>();
+  //ToDo: fix any for base64
+  const [baseImageContent, setBaseImageContent] = useState<any>([]);
+  const [hasData, setHasData] = useState<boolean>(false);
 
   const onUploadImage = useCallback(
     async (image) => {
-      //console.log(image.target.files);
       const file = image.target.files[0];
       const base64 = await convertToBase64(file);
-      setBaseImageContent(base64);
+      let concatFiles = baseImageContent.concat(base64);
+      setBaseImageContent(concatFiles);
       onImage(base64);
+      setHasData(true);
     },
     [onImage]
   );
@@ -51,13 +54,23 @@ export const ImageUploader: FC<Props> = ({ onImage }) => {
   return (
     <div className={scope}>
       <div className={imageAreaClass}>
-       {baseImageContent && <img src={baseImageContent} alt="" />}
+        {hasData && (
+          <ImageSlider
+            imageData={baseImageContent.map((item: string) => (
+              <img src={item} alt="" />
+            ))}
+          />
+        )}
         <label className={imageInputLabelClass}>
           <Icon iconType="plusIcon" colorStyle="darkBlue" />
           <Text textType="text-medium-dark" color="darkBlue">
             {uploadLabelText}
           </Text>
-          <input type="file" onChange={(image) => onUploadImage(image)} />
+          <input
+            type="file"
+            multiple
+            onChange={(image) => onUploadImage(image)}
+          />
         </label>
       </div>
     </div>

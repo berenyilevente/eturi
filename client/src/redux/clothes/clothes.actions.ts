@@ -3,6 +3,9 @@ import {
   ADD_CLOTHES_FAILURE,
   ADD_CLOTHES_REQUEST,
   ADD_CLOTHES_SUCCESS,
+  GET_CLOTHES_BY_ID_FAILURE,
+  GET_CLOTHES_BY_ID_REQUEST,
+  GET_CLOTHES_BY_ID_SUCCESS,
   GET_CLOTHES_FAILURE,
   GET_CLOTHES_REQUEST,
   GET_CLOTHES_SUCCESS,
@@ -33,6 +36,25 @@ export const getClothes = () => async (dispatch: Dispatch) => {
   }
 };
 
+export const getClothesById = (id: string) => async (dispatch: Dispatch) => {
+  dispatch({
+    type: GET_CLOTHES_BY_ID_REQUEST,
+  });
+  try {
+    //in the response we always have the data object
+    const res = await api.getClothesById(id);
+    dispatch({
+      type: GET_CLOTHES_BY_ID_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_CLOTHES_BY_ID_FAILURE,
+      error,
+    });
+  }
+};
+
 export const addClothes = (clothes: IClothesResponseData) => async (
   dispatch: Dispatch
 ) => {
@@ -58,7 +80,7 @@ export const setTriggerReload = (reload: ITriggerReload) => (
 ) => dispatch({ type: SET_TRIGGER_RELOAD, payload: reload });
 
 export const updateClothes = (
-  id: number,
+  id: string,
   clothes: IClothesResponseData
 ) => async (dispatch: Dispatch) => {
   dispatch({

@@ -1,6 +1,6 @@
-import "@/styles/index.scss";
-import { CreateTemplate, meta } from "@/storybook/utils";
-import { ImageSlider as component } from "@/components/ImageSlider/ImageSlider.view";
+import "../../styles/index.scss";
+import { CreateTemplate, meta } from "../../storybook/utils";
+import { ImageSlider as component } from "../../components/ImageSlider/ImageSlider.view";
 
 import image1Source from "@/public/templateImages/image1.jpeg";
 import image2Source from "@/public/templateImages/image2.jpeg";
@@ -45,8 +45,8 @@ ImageSlider.args = {
   imageData: [
     <img src={image1.src} className={imageContainerClass} />,
     <img src={image2.src} className={imageContainerClass} />,
-    <img src={image3.src}className={imageContainerClass}  />,
-    <img src={image4.src}className={imageContainerClass}  />,
+    <img src={image3.src} className={imageContainerClass} />,
+    <img src={image4.src} className={imageContainerClass} />,
     <img src={image5.src} className={imageContainerClass} />,
   ],
 };

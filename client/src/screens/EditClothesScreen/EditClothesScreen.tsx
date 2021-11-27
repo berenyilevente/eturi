@@ -41,7 +41,7 @@ const EditClothesScreen: FC = () => {
               }
               detailsArea={
                 <Card backgroundColorStyle="white" shadow rounded>
-                  <Text textType="text-large-dark">{item.brand}</Text>{" "}
+                  <Text textType="text-large-dark">{item.brand}</Text>
                 </Card>
               }
             />

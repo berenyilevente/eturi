@@ -7,7 +7,7 @@ const scope = CreateScopeCSS("components-image-slider");
 const imageContainerClass = scope.and("imageContainer");
 
 interface Props {
-  imageData: File[] | ReactNode[];
+  imageData: ReactNode[];
 }
 
 export const ImageSlider: FC<Props> = ({ imageData }) => {

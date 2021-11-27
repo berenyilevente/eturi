@@ -1,1 +1,1 @@
-export { ImageSlider as default } from '@/components/ImageSlider/ImageSlider.view';
+export { ImageSlider as default } from "../../components/ImageSlider/ImageSlider.view";

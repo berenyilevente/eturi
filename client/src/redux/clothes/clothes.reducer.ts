@@ -3,6 +3,9 @@ import {
   ADD_CLOTHES_REQUEST,
   ADD_CLOTHES_SUCCESS,
   ClothesActionTypes,
+  GET_CLOTHES_BY_ID_FAILURE,
+  GET_CLOTHES_BY_ID_REQUEST,
+  GET_CLOTHES_BY_ID_SUCCESS,
   GET_CLOTHES_FAILURE,
   GET_CLOTHES_REQUEST,
   GET_CLOTHES_SUCCESS,
@@ -41,6 +44,25 @@ export default (
         clothes: action.payload,
       };
     case GET_CLOTHES_FAILURE:
+      return {
+        ...state,
+        isClothesLoading: false,
+        errorMessage: action.error.message,
+      };
+    case GET_CLOTHES_BY_ID_REQUEST:
+      return {
+        ...state,
+        isClothesLoading: true,
+        errorMessage: null,
+      };
+    case GET_CLOTHES_BY_ID_SUCCESS:
+      return {
+        ...state,
+        isClothesLoading: false,
+        errorMessage: null,
+        clothes: action.payload,
+      };
+    case GET_CLOTHES_BY_ID_FAILURE:
       return {
         ...state,
         isClothesLoading: false,

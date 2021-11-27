@@ -5,6 +5,10 @@ export const GET_CLOTHES_REQUEST = "GET_CLOTHES_REQUEST";
 export const GET_CLOTHES_SUCCESS = "GET_CLOTHES_SUCCESS";
 export const GET_CLOTHES_FAILURE = "GET_CLOTHES_FAILURE";
 
+export const GET_CLOTHES_BY_ID_REQUEST = "GET_CLOTHES_BY_ID_REQUEST";
+export const GET_CLOTHES_BY_ID_SUCCESS = "GET_CLOTHES_BY_ID_SUCCESS";
+export const GET_CLOTHES_BY_ID_FAILURE = "GET_CLOTHES_BY_ID_FAILURE";
+
 export const ADD_CLOTHES_REQUEST = "ADD_CLOTHES_REQUEST";
 export const ADD_CLOTHES_SUCCESS = "ADD_CLOTHES_SUCCESS";
 export const ADD_CLOTHES_FAILURE = "ADD_CLOTHES_FAILURE";
@@ -26,6 +30,19 @@ export interface IGetClothesSuccessAction {
 }
 export interface IGetClothesFailureAction {
   type: typeof GET_CLOTHES_FAILURE;
+  error: AxiosError;
+}
+
+//Get clothes by id
+export interface IGetClothesByIdRequestAction {
+  type: typeof GET_CLOTHES_BY_ID_REQUEST;
+}
+export interface IGetClothesByIdSuccessAction {
+  type: typeof GET_CLOTHES_BY_ID_SUCCESS;
+  payload: IClothesResponseData[];
+}
+export interface IGetClothesByIdFailureAction {
+  type: typeof GET_CLOTHES_BY_ID_FAILURE;
   error: AxiosError;
 }
 
@@ -65,6 +82,9 @@ export type ClothesActionTypes =
   | IGetClothesRequestAction
   | IGetClothesSuccessAction
   | IGetClothesFailureAction
+  | IGetClothesByIdRequestAction
+  | IGetClothesByIdSuccessAction
+  | IGetClothesByIdFailureAction
   | IAddClothesRequestAction
   | IAddClothesSuccessAction
   | IAddClothesFailureAction
