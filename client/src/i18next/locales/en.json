@@ -60,6 +60,7 @@
     "calvinKlein": "Calvin Klein",
     "guess": "GUESS",
     "michaelKors": "Michael Kors",
+    "converse": "CONVERSE",
     "noBrand": "No brand"
   }, 
   "condition": {
@@ -124,5 +125,8 @@
   },
   "currency":{
     "huf": "HUF"
+  },
+  "images":{
+    "uploadImageLabel": "Add photos"
   }
 }

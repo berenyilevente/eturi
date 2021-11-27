@@ -1,5 +1,5 @@
 import "../../components/TextArea/style.scss";
-import { FC } from "react";
+import { FC, useCallback, useState } from "react";
 import { CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("components-text-area");
@@ -9,6 +9,7 @@ interface Props {
   columns?: number;
   placeholderText: string;
   content?: string;
+  onChange(value: string): void;
 }
 
 export const TextArea: FC<Props> = ({
@@ -16,13 +17,27 @@ export const TextArea: FC<Props> = ({
   columns,
   placeholderText,
   content,
-}) => (
-  <textarea
-    rows={rows}
-    cols={columns}
-    placeholder={placeholderText}
-    className={scope}
-  >
-    {content}
-  </textarea>
-);
+  onChange,
+}) => {
+  const [, setTextAreaText] = useState<string>("");
+
+  const onChangeTextAreaText = useCallback(
+    (e) => {
+      onChange(e);
+      let currentValue: string = e.target.value;
+      if (onChange) onChange(currentValue);
+      setTextAreaText(currentValue);
+    },
+    [setTextAreaText, onChange]
+  );
+  return (
+    <textarea
+      rows={rows}
+      cols={columns}
+      placeholder={placeholderText}
+      className={scope}
+      onChange={onChangeTextAreaText}
+      value={content}
+    />
+  );
+};

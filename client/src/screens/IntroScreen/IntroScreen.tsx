@@ -58,6 +58,7 @@ const IntroScreen = () => {
                 buttonSize="large"
                 rounded
                 onClick={() => goToSellScreen()}
+                border="borderNone"
               >
                 {introButtonText}
               </Button>

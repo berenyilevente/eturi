@@ -1,9 +1,8 @@
 $scope: components-button;
 .#{$scope} {
   display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-
+  align-items: center !important;
+  justify-content: space-around !important;
   &-rounded {
     border-radius: 6px !important;
   }
@@ -12,8 +11,31 @@ $scope: components-button;
     background-color: transparent !important;
   }
 
-  &-borderNone {
-    border: none;
+  &-border {
+    &-borderNone {
+      border: none;
+    }
+    &-borderDotted {
+      border-width: 1px;
+      border-style: dotted;
+      border-color: currentColor;
+    }
+    &-borderSolid {
+      border-width: 1px;
+      border-style: dotted;
+      border-color: currentColor;
+    }
+  }
+
+  &-buttonSpinner {
+    border: 2px solid transparent;
+    border-top: 2px solid var(--lightColor);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: 4px;
+    animation: spin 1.2s linear;
+    animation-iteration-count: 1;
   }
 
   &-cursor {
@@ -44,6 +66,9 @@ $scope: components-button;
     }
     &-white {
       color: var(--white) !important;
+    }
+    &-currentColor {
+      color: currentColor;
     }
   }
 

@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { IClothesResponseData } from "./clothes.interfaces";
+import { IClothesResponseData, ITriggerReload } from "./clothes.interfaces";
 
 export const GET_CLOTHES_REQUEST = "GET_CLOTHES_REQUEST";
 export const GET_CLOTHES_SUCCESS = "GET_CLOTHES_SUCCESS";
@@ -8,6 +8,13 @@ export const GET_CLOTHES_FAILURE = "GET_CLOTHES_FAILURE";
 export const ADD_CLOTHES_REQUEST = "ADD_CLOTHES_REQUEST";
 export const ADD_CLOTHES_SUCCESS = "ADD_CLOTHES_SUCCESS";
 export const ADD_CLOTHES_FAILURE = "ADD_CLOTHES_FAILURE";
+
+export const UPDATE_CLOTHES_REQUEST = "UPDATE_CLOTHES_REQUEST";
+export const UPDATE_CLOTHES_SUCCESS = "UPDATE_CLOTHES_SUCCESS";
+export const UPDATE_CLOTHES_FAILURE = "UPDATE_CLOTHES_FAILURE";
+
+export const SET_TRIGGER_RELOAD = "SET_TRIGGER_RELOAD";
+export const RESET_TRIGGER_RELOAD = "RESET_TRIGGER_RELOAD";
 
 //Get clothes types
 export interface IGetClothesRequestAction {
@@ -35,10 +42,33 @@ export interface IAddClothesFailureAction {
   error: AxiosError;
 }
 
+//Update clothes types
+export interface IUpdateClothesRequestAction {
+  type: typeof UPDATE_CLOTHES_REQUEST;
+}
+export interface IUpdateClothesSuccessAction {
+  type: typeof UPDATE_CLOTHES_SUCCESS;
+  payload: IClothesResponseData[];
+}
+export interface IUpdateClothesFailureAction {
+  type: typeof UPDATE_CLOTHES_FAILURE;
+  error: AxiosError;
+}
+
+//Trigger reload
+export interface ISetTriggerReload {
+  type: typeof SET_TRIGGER_RELOAD;
+  payload: ITriggerReload;
+}
+
 export type ClothesActionTypes =
   | IGetClothesRequestAction
   | IGetClothesSuccessAction
   | IGetClothesFailureAction
   | IAddClothesRequestAction
   | IAddClothesSuccessAction
-  | IAddClothesFailureAction;
+  | IAddClothesFailureAction
+  | ISetTriggerReload
+  | IUpdateClothesRequestAction
+  | IUpdateClothesSuccessAction
+  | IUpdateClothesFailureAction;

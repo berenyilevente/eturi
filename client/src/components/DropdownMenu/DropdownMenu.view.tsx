@@ -31,6 +31,7 @@ interface Props {
   onSelectItem(item: IDropdownItem): void;
   hasIcon?: boolean;
   maxSelection?: number;
+  placeholder?: string;
 }
 export const DropdownMenu: FC<Props> = ({
   content,
@@ -38,6 +39,7 @@ export const DropdownMenu: FC<Props> = ({
   multiselect = false,
   hasDescriptionRow,
   onSelectItem,
+  placeholder,
 }) => {
   const [selection, setSelection] = useState<{ id?: number; value?: string }[]>(
     [{}]
@@ -80,7 +82,7 @@ export const DropdownMenu: FC<Props> = ({
   return (
     <div className={scope} ref={ref}>
       <div tabIndex={0} className={dropdownHeader} onClick={onDropdownClick}>
-        <div className={dropdownHeaderTitle}>{content}</div>
+        <div className={dropdownHeaderTitle}>{placeholder || content}</div>
         <div>
           {visible ? (
             <Icon iconType="xIcon" />

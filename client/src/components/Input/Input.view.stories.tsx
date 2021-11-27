@@ -13,5 +13,4 @@ export const Input = Template.bind({});
 Input.args = {
   placeholderText: "Please input something",
   errorTextValue: "provide a valid input",
-  validInput: false,
 };

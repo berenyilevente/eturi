@@ -12,7 +12,7 @@ interface Props {
   inputType?: "text" | "number";
   onEnterKeyPressed?: KeyboardEventHandler<HTMLInputElement>;
   onChange(value: string): void;
-  validInput?: boolean;
+  required?: boolean;
   errorTextValue?: string;
 }
 
@@ -22,6 +22,7 @@ export const Input: FC<Props> = ({
   onChange,
   onEnterKeyPressed,
   inputValue,
+  required,
 }) => {
   const [, setInputText] = useState<string>("");
 
@@ -54,7 +55,8 @@ export const Input: FC<Props> = ({
           value={inputValue}
           onChange={onChangeInputText}
           onKeyPress={onKeyPress}
-        ></input>
+          required={required}
+        />
       </div>
     </div>
   );

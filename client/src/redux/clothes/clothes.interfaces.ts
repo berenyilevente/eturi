@@ -1,21 +1,27 @@
 export interface IClothesState {
-  isLoading?: boolean;
+  isClothesLoading?: boolean;
   errorMessage: string | null;
   clothes: IClothesResponseData[];
   clothesAdded: IClothesResponseData[];
+  clothesUpdated: IClothesResponseData[];
+  triggerReload?: boolean;
 }
 
 export interface IClothesResponseData {
-  id?: number;
+  _id?: string;
   selectedFile: string;
-  name?: string;
-  description?: string;
+  name: string;
+  description: string;
   category: string;
   brand: string;
   size: string;
   condition: string;
   colour: string;
-  price?: string;
+  price: string;
   createdAt?: Date;
 }
 [];
+
+export interface ITriggerReload {
+  triggerReload: boolean;
+}

@@ -1,8 +1,39 @@
 $scope: components-image-uploader;
-//just an example class, tbd
-.#{$scope}{
-  //define css styles here
-  &-example {
-    //define css styles here
+.#{$scope} {
+  &-imageInputArea {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 6px 12px;
+    height: 30vh;
+    outline: none;
+    background-color: transparent;
+    border: 1px dotted var(--lighter);
+    width: 100%;
+  }
+  &-imageInputLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--darkBlue);
+    padding: 6px 12px;
+    cursor: pointer;
+    height: 18%;
+    outline: none;
+    background-color: transparent;
+    width: min-content;
+    white-space: nowrap;
+    padding: 15px;
+    border-radius: 6px;
+  }
+
+  &-imageInputArea img {
+    width: 200px;
+    height: 220px;
+    object-fit: contain;
+  }
+  input[type="file"] {
+    display: none;
   }
 }

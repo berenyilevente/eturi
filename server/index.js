@@ -18,8 +18,8 @@ app.use(cors());
 app.use("/clothes", postRoutes);
 
 //ToDo store connection string in environmental variable
-const CONNECTION_URL =
-  "mongodb+srv://berenyi_levente:westend6@cluster0.1ilkc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+//const CONNECTION_URL = ("mongodb+srv://berenyi_levente:westend6@cluster0.1ilkc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+const CONNECTION_URL = "mongodb://localhost:27017/eturi";
 
 const PORT = process.env.PORT || 5000;
 

@@ -24,8 +24,12 @@ import image2Source from "../../public/templateImages/tipsMock2.png";
 import image3Source from "../../public/templateImages/tipsMock3.png";
 import image4Source from "../../public/templateImages/tipsMock4.png";
 import image5Source from "../../public/templateImages/tipsMock5.png";
-import { useDispatch } from "react-redux";
-import { addClothes } from "../../redux/clothes/clothes.actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addClothes,
+  setTriggerReload,
+} from "../../redux/clothes/clothes.actions";
+import { AppState } from "@/redux/store";
 
 interface IDropdownValues {
   id: number;
@@ -79,6 +83,7 @@ const useAddClothesScreen = () => {
   const calvinKlein = t("brands.calvinKlein");
   const michaelKors = t("brands.michaelKors");
   const guess = t("brands.guess");
+  const converse = t("brands.converse");
   const noBrand = t("brands.noBrand");
 
   //sizes
@@ -156,7 +161,8 @@ const useAddClothesScreen = () => {
     { id: 10, value: calvinKlein },
     { id: 11, value: michaelKors },
     { id: 12, value: guess },
-    { id: 13, value: noBrand },
+    { id: 13, value: converse },
+    { id: 14, value: noBrand },
   ];
   const sizes = [
     { id: 1, value: extraSmall },
@@ -311,11 +317,10 @@ const useAddClothesScreen = () => {
   const [categoryContent, setCategoryContent] = useState<string>(categoryText);
   const [brandContent, setBrandContent] = useState<string>(brandText);
   const [sizeContent, setSizeContent] = useState<string>(sizeText);
-  const [conditionContent, setConditionContent] = useState<string>(
-    conditionText
-  );
+  const [conditionContent, setConditionContent] = useState<string>("");
   const [colourContent, setColourContent] = useState<string>(colourText);
   const [nameContent, setNameContent] = useState<string>("");
+  const [descriptionContent, setDescriptionContent] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const { visible, setVisible } = useOutsideClickHandler(false);
 
@@ -323,11 +328,21 @@ const useAddClothesScreen = () => {
     history,
   ]);
 
+  const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
+
   const openTipsModal = useCallback(() => {
     setVisible(true);
   }, [setVisible]);
 
   const dispatch = useDispatch();
+
+  const triggerReload = useCallback(() => {
+    dispatch(setTriggerReload({ triggerReload: true }));
+  }, [dispatch]);
+
+  const isDataValid = () => {
+    let isValid = true;
+  };
 
   return {
     titleText,
@@ -375,6 +390,10 @@ const useAddClothesScreen = () => {
     setImageData,
     nameContent,
     setNameContent,
+    descriptionContent,
+    setDescriptionContent,
+    triggerReload,
+    isClothesLoading,
   };
 };
 
@@ -425,6 +444,10 @@ const AddClothesScreen: FC = () => {
     setImageData,
     nameContent,
     setNameContent,
+    descriptionContent,
+    setDescriptionContent,
+    triggerReload,
+    isClothesLoading,
   } = useAddClothesScreen();
 
   return (
@@ -476,6 +499,8 @@ const AddClothesScreen: FC = () => {
               descriptionTextArea={
                 <TextArea
                   placeholderText={descriptionPlaceholderText}
+                  content={descriptionContent}
+                  onChange={setDescriptionContent}
                 ></TextArea>
               }
             />
@@ -528,6 +553,7 @@ const AddClothesScreen: FC = () => {
               conditionDropdown={
                 <DropdownMenu
                   items={conditions}
+                  placeholder={conditionText}
                   hasDescriptionRow
                   content={conditionContent}
                   addValueToDropdown={true}
@@ -562,6 +588,7 @@ const AddClothesScreen: FC = () => {
                   inputType="number"
                   inputValue={price}
                   onChange={setPrice}
+                  required={true}
                 />
               }
             />
@@ -575,6 +602,7 @@ const AddClothesScreen: FC = () => {
               buttonTextColor="dark"
               buttonSize="medium"
               onClick={goToHomeScreen}
+              border="borderNone"
             >
               {cancelText}
             </Button>
@@ -582,11 +610,15 @@ const AddClothesScreen: FC = () => {
               colorStyle="darkBlue"
               rounded
               buttonSize="normal"
+              border="borderNone"
               onClick={() => {
-                console.log(price);
+                triggerReload();
+                goToHomeScreen();
                 dispatch(
                   addClothes({
                     selectedFile: imageData,
+                    name: nameContent,
+                    description: descriptionContent,
                     category: categoryContent,
                     brand: brandContent,
                     size: sizeContent,

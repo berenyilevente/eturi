@@ -1,43 +1,67 @@
-import { getClothes } from "../../redux/clothes/clothes.actions";
+import {
+  getClothes,
+  setTriggerReload,
+} from "../../redux/clothes/clothes.actions";
 import { AppState } from "../../redux/store";
-import { FC, useEffect } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { HomeContentLayout } from "../../layouts/HomeContentLayout/HomeContentLayout.view";
 import { ClothesListingLayout } from "../../layouts/ClothesListingLayout/ClothesListingLayout.view";
 import Card from "../../components/Card";
 import { Text } from "../../components/Text/Text.view";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { useHistory } from "react-router";
+import pageURLS from "../../resources/constants/pageURLS";
 
 const useHomeContentScreen = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { triggerReload } = useSelector((state: AppState) => state.clothes);
+
+  useEffect(() => {
+    console.log(triggerReload);
+    triggerReload && dispatch(getClothes());
+    dispatch(setTriggerReload({ triggerReload: false }));
+  }, [dispatch]);
 
   const currencyText = t("currency.huf");
 
-  useEffect(() => {
-    dispatch(getClothes());
-  }, [dispatch]);
-
-  const { clothes, isLoading } = useSelector(
+  const { clothes, isClothesLoading } = useSelector(
     (state: AppState) => state.clothes
   );
-  return { clothes, isLoading, currencyText };
+
+  const goToEditScreen = useCallback(
+    (id) => history.push(pageURLS.EDIT_CLOTHES + id),
+    [history]
+  );
+
+  return { clothes, isClothesLoading, currencyText, goToEditScreen };
 };
 
 const HomeContentScreen: FC = () => {
-  const { clothes, isLoading, currencyText } = useHomeContentScreen();
+  const {
+    clothes,
+    isClothesLoading,
+    currencyText,
+    goToEditScreen,
+  } = useHomeContentScreen();
 
   return (
-    <LoadingSpinner isLoading={isLoading}>
+    <LoadingSpinner isLoading={isClothesLoading}>
       <HomeContentLayout
         contentCard={clothes.map((item) => {
           return (
-            <Card backgroundColorStyle="white" shadow rounded>
+            <Card backgroundColorStyle="white" shadow rounded key={item._id}>
               <ClothesListingLayout
                 image={
-                  <img key={item.id} alt="homeImges" src={item.selectedFile} />
+                  <img
+                    alt="homeImages"
+                    src={item.selectedFile}
+                    onClick={() => goToEditScreen(item._id)}
+                  />
                 }
                 price={
                   <Text textType="text-normal-dark">

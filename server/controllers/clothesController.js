@@ -22,3 +22,15 @@ export const addClothes = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+export const updateClothes = async (req, res) => {
+  const { id: _id } = req.params;
+  const clothes = req.body;
+  if (!mongoose.Types.Object.isValid(_id))
+    return res.status(404).send("No clothes with that id");
+
+  const updatedClothes = await AddClothes.findByIdAndUpdate(_id, clothes, {
+    new: true,
+  });
+  res.json(updatedClothes);
+};

@@ -59,6 +59,7 @@
     "calvinKlein": "Calvin Klein",
     "guess": "GUESS",
     "michaelKors": "Michael Kors",
+    "converse": "CONVERSE",
     "noBrand": "Nincs megadott márka"
   },
   "condition": {
@@ -123,5 +124,8 @@
   },
   "currency":{
     "huf": "Ft"
+  },
+  "images":{
+    "uploadImageLabel": "Fényképek hozzáadása"
   }
 }
