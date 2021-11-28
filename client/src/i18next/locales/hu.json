@@ -18,7 +18,7 @@
     "imprint": "Impresszum",
     "changeLanguage": "Fordítás"
   },
-  "sellClothes":{
+  "clothes":{
     "title": "Hírdesd meg a már nem használt ruháidat",
     "uploadPicture": "Töltsd fel a képeidet",
     "uploadPictureTips": "Tippek",
@@ -34,7 +34,6 @@
     "conditionPlaceholder": "Válaszd ki a ruha állapotát",
     "price": "Ár",
     "pricePlaceholder": "00.000 Ft",
-    "cancel": "Mégsem",
     "add": "Hozzáadás",
     "menCategory": "Férfi",
     "womenCategory": "Női",
@@ -127,5 +126,11 @@
   },
   "images":{
     "uploadImageLabel": "Fényképek hozzáadása"
+  },
+  "general":{
+    "cancel": "Mégsem",
+    "confirm": "Megerősítés",
+    "edit": "Szerkesztés",
+    "noData": "Nincs megadott adat"
   }
 }

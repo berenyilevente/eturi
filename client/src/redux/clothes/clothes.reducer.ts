@@ -20,8 +20,9 @@ const defaultClothesState: IClothesState = {
   isClothesLoading: undefined,
   errorMessage: null,
   clothes: [],
+  showClothes: [],
   clothesAdded: [],
-  clothesUpdated: [],
+  clothesUpdated: null,
   triggerReload: true,
 };
 
@@ -60,7 +61,7 @@ export default (
         ...state,
         isClothesLoading: false,
         errorMessage: null,
-        clothes: action.payload,
+        showClothes: action.payload,
       };
     case GET_CLOTHES_BY_ID_FAILURE:
       return {
@@ -98,7 +99,9 @@ export default (
         ...state,
         isClothesLoading: false,
         errorMessage: null,
-        clothesUpdated: action.payload,
+        clothesUpdated: state.clothes.map((item) =>
+          item._id === action.payload._id ? action.payload : item
+        ),
       };
     case UPDATE_CLOTHES_FAILURE:
       return {

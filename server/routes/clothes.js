@@ -10,7 +10,7 @@ const router = express.Router();
 
 //specify in a callback what should happen, when someone visits localhost:5000/
 router.get("/", getClothes);
-router.get("/:id", getClothesById);
+router.get("/", getClothesById);
 router.post("/", addClothes);
 router.patch("/:id", updateClothes);
 

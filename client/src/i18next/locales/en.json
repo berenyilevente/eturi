@@ -19,7 +19,7 @@
     "changeLanguage": "Translate to"
 
   },
-  "sellClothes":{
+  "clothes":{
     "title": "Sell your unused clothes",
     "uploadPicture": "Upload your photos",
     "uploadPictureTips": "Tips",
@@ -35,7 +35,6 @@
     "conditionPlaceholder": "Specify the condition",
     "price": "Price",
     "pricePlaceholder": "00.000 HUF",
-    "cancel": "Cancel",
     "add": "Add",
     "menCategory": "Men",
     "womenCategory": "Women",
@@ -128,5 +127,12 @@
   },
   "images":{
     "uploadImageLabel": "Add photos"
+  },
+  "general":{
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "noData": "No data"
+
   }
 }

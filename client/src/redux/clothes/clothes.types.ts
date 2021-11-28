@@ -1,5 +1,9 @@
 import { AxiosError } from "axios";
-import { IClothesResponseData, ITriggerReload } from "./clothes.interfaces";
+import {
+  IClothesResponseData,
+  ITriggerReload,
+  IUpdateClothesResponseData,
+} from "./clothes.interfaces";
 
 export const GET_CLOTHES_REQUEST = "GET_CLOTHES_REQUEST";
 export const GET_CLOTHES_SUCCESS = "GET_CLOTHES_SUCCESS";
@@ -65,7 +69,7 @@ export interface IUpdateClothesRequestAction {
 }
 export interface IUpdateClothesSuccessAction {
   type: typeof UPDATE_CLOTHES_SUCCESS;
-  payload: IClothesResponseData[];
+  payload: IUpdateClothesResponseData;
 }
 export interface IUpdateClothesFailureAction {
   type: typeof UPDATE_CLOTHES_FAILURE;

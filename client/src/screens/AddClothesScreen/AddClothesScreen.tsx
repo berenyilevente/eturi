@@ -41,34 +41,34 @@ const useAddClothesScreen = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
-  const titleText = t("sellClothes.title");
-  const uploadPictureText = t("sellClothes.uploadPicture");
-  const uploadPictureTipsText = t("sellClothes.uploadPictureTips");
-  const clothesNameText = t("sellClothes.clothesName");
-  const clothesNamePlaceholderText = t("sellClothes.clothesNamePlaceholder");
-  const descriptionText = t("sellClothes.description");
-  const descriptionPlaceholderText = t("sellClothes.descriptionPlaceholder");
-  const categoryText = t("sellClothes.category");
-  const categoryPlaceholderText = t("sellClothes.categoryPlaceholder");
-  const brandText = t("sellClothes.brand");
-  const brandPlaceholderText = t("sellClothes.brandPlaceholder");
-  const conditionText = t("sellClothes.condition");
-  const conditionPlaceholderText = t("sellClothes.conditionPlaceholder");
-  const priceText = t("sellClothes.price");
-  const pricePlaceholderText = t("sellClothes.pricePlaceholder");
-  const cancelText = t("sellClothes.cancel");
-  const addText = t("sellClothes.add");
-  const sizeText = t("sellClothes.size");
-  const sizePlaceholderText = t("sellClothes.sizePlaceholder");
-  const colourText = t("sellClothes.colour");
-  const colourPlaceholderText = t("sellClothes.colourPlaceholder");
-  const sizeTableText = t("sellClothes.sizeTable");
-  const pictureTipsText = t("sellClothes.pictureTips");
+  const titleText = t("clothes.title");
+  const uploadPictureText = t("clothes.uploadPicture");
+  const uploadPictureTipsText = t("clothes.uploadPictureTips");
+  const clothesNameText = t("clothes.clothesName");
+  const clothesNamePlaceholderText = t("clothes.clothesNamePlaceholder");
+  const descriptionText = t("clothes.description");
+  const descriptionPlaceholderText = t("clothes.descriptionPlaceholder");
+  const categoryText = t("clothes.category");
+  const categoryPlaceholderText = t("clothes.categoryPlaceholder");
+  const brandText = t("clothes.brand");
+  const brandPlaceholderText = t("clothes.brandPlaceholder");
+  const conditionText = t("clothes.condition");
+  const conditionPlaceholderText = t("clothes.conditionPlaceholder");
+  const priceText = t("clothes.price");
+  const pricePlaceholderText = t("clothes.pricePlaceholder");
+  const cancelText = t("general.cancel");
+  const addText = t("clothes.add");
+  const sizeText = t("clothes.size");
+  const sizePlaceholderText = t("clothes.sizePlaceholder");
+  const colourText = t("clothes.colour");
+  const colourPlaceholderText = t("clothes.colourPlaceholder");
+  const sizeTableText = t("clothes.sizeTable");
+  const pictureTipsText = t("clothes.pictureTips");
 
   //category
-  const menCategoryText = t("sellClothes.menCategory");
-  const womenCategoryText = t("sellClothes.womenCategory");
-  const childrenCategoryText = t("sellClothes.childrenCategory");
+  const menCategoryText = t("clothes.menCategory");
+  const womenCategoryText = t("clothes.womenCategory");
+  const childrenCategoryText = t("clothes.childrenCategory");
 
   //brands
   const nike = t("brands.nike");
@@ -642,7 +642,7 @@ const AddClothesScreen: FC = () => {
           carouselImages={carouselImages}
           carouselContent={carouselContent}
           carouselWidth={"narrow"}
-        ></ModalCarousel>
+        />
       }
     </>
   );

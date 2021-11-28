@@ -7,13 +7,11 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import Card from "../../components/Card";
 import ShowClothesLayout from "../../layouts/ShowClothesLayout";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
-import ShowClothesDescriptionLayout from "../../layouts/ShowClothesDescriptionLayout";
 import React from "react";
 import { Text } from "../../components/Text/Text.view";
 import { getClothesById } from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Button from "../../components/Button";
-import DividerLine from "../../components/DividerLine";
 
 const useEditClothesScreen = () => {
   const { t } = useTranslation();
@@ -34,7 +32,6 @@ const useEditClothesScreen = () => {
   const cancelText = t("general.cancel");
   const editText = t("general.edit");
   const noDataText = t("general.noData");
-  const currencyText = t("currency.huf");
 
   const showClothes = useSelector((state: AppState) =>
     currentId
@@ -67,7 +64,6 @@ const useEditClothesScreen = () => {
     noDataText,
     goToHomeScreen,
     currentId,
-    currencyText,
   };
 };
 
@@ -89,7 +85,6 @@ const EditClothesScreen: FC = () => {
     noDataText,
     goToHomeScreen,
     currentId,
-    currencyText,
   } = useEditClothesScreen();
 
   return (
@@ -97,67 +92,59 @@ const EditClothesScreen: FC = () => {
       {showClothes && (
         <ShowClothesLayout
           imageArea={
-            <Card backgroundColorStyle="white" shadow>
+            <Card backgroundColorStyle="white" shadow rounded>
               <img src={showClothes.selectedFile} />
             </Card>
           }
           detailsArea={
-            <Card backgroundColorStyle="white" shadow>
+            <Card backgroundColorStyle="white" shadow rounded>
               <ShowClothesDetailsLayout
                 brand={
                   <Text textType="text-large-dark">{showClothes.brand}</Text>
                 }
-                nameTitle={
-                  <Text textType="text-normal-dark">{clothesNameText}</Text>
-                }
+                nameTitle={clothesNameText}
                 name={
-                  <Text textType="text-normal-dark">
+                  <Text textType="text-medium-dark">
                     {showClothes.name || noDataText}
                   </Text>
                 }
-                descriptionTitle={
-                  <Text textType="text-normal-dark">{descriptionText}</Text>
-                }
+                descriptionTitle={descriptionText}
                 description={
-                  <Text textType="text-normal-dark">
+                  <Text textType="text-medium-dark">
                     {showClothes.description || noDataText}
                   </Text>
                 }
-                line1={<DividerLine />}
                 categoryTitle={
-                  <Text textType="text-normal-dark">{categoryText}</Text>
+                  <Text textType="text-medium-dark">{categoryText}</Text>
                 }
                 category={
-                  <Text textType="text-normal-dark">
+                  <Text textType="text-medium-dark">
                     {showClothes.category}
                   </Text>
                 }
-                sizeTitle={<Text textType="text-normal-dark">{sizeText}</Text>}
+                sizeTitle={<Text textType="text-medium-dark">{sizeText}</Text>}
                 size={
-                  <Text textType="text-normal-dark">{showClothes.size}</Text>
+                  <Text textType="text-medium-dark">{showClothes.size}</Text>
                 }
                 conditionTitle={
-                  <Text textType="text-normal-dark">{conditionText}</Text>
+                  <Text textType="text-medium-dark">{conditionText}</Text>
                 }
                 condition={
-                  <Text textType="text-normal-dark">
+                  <Text textType="text-medium-dark">
                     {showClothes.condition}
                   </Text>
                 }
                 colourTitle={
-                  <Text textType="text-normal-dark">{colourText}</Text>
+                  <Text textType="text-medium-dark">{colourText}</Text>
                 }
                 colour={
-                  <Text textType="text-normal-dark">{showClothes.colour}</Text>
+                  <Text textType="text-medium-dark">{showClothes.colour}</Text>
                 }
-                line2={<DividerLine />}
                 priceTitle={
-                  <Text textType="text-normal-dark">{priceText}</Text>
+                  <Text textType="text-medium-dark">{priceText}</Text>
                 }
                 price={
-                  <Text textType="text-normal-dark">
-                    {showClothes.price + " " + currencyText}
-                  </Text>
+                  <Text textType="text-medium-dark">{showClothes.price}</Text>
                 }
                 buttons={
                   <>

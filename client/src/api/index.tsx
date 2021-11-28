@@ -13,4 +13,4 @@ export const updateClothes = (
   updatedClothes: IClothesResponseData
 ) => axios.patch(`${url}/${id}`);
 
-export const getClothesById = (id: string) => axios.get(`${url}/:id${id}`);
+export const getClothesById = (id: string) => axios.get(`${url}`);

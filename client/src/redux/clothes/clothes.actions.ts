@@ -75,10 +75,6 @@ export const addClothes = (clothes: IClothesResponseData) => async (
   }
 };
 
-export const setTriggerReload = (reload: ITriggerReload) => (
-  dispatch: Dispatch
-) => dispatch({ type: SET_TRIGGER_RELOAD, payload: reload });
-
 export const updateClothes = (
   id: string,
   clothes: IClothesResponseData
@@ -100,3 +96,7 @@ export const updateClothes = (
     });
   }
 };
+
+export const setTriggerReload = (reload: ITriggerReload) => (
+  dispatch: Dispatch
+) => dispatch({ type: SET_TRIGGER_RELOAD, payload: reload });

@@ -33,12 +33,12 @@ const useHomeContentScreen = () => {
     (state: AppState) => state.clothes
   );
 
-  const goToEditScreen = useCallback(
+  const goToShowClothesScreen = useCallback(
     (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
   );
 
-  return { clothes, isClothesLoading, currencyText, goToEditScreen };
+  return { clothes, isClothesLoading, currencyText, goToShowClothesScreen };
 };
 
 const HomeContentScreen: FC = () => {
@@ -46,7 +46,7 @@ const HomeContentScreen: FC = () => {
     clothes,
     isClothesLoading,
     currencyText,
-    goToEditScreen,
+    goToShowClothesScreen,
   } = useHomeContentScreen();
 
   return (
@@ -54,13 +54,13 @@ const HomeContentScreen: FC = () => {
       <HomeContentLayout
         contentCard={clothes.map((item) => {
           return (
-            <Card backgroundColorStyle="white" shadow rounded key={item._id}>
+            <Card backgroundColorStyle="white" shadow key={item._id}>
               <ClothesListingLayout
                 image={
                   <img
                     alt="homeImages"
                     src={item.selectedFile}
-                    onClick={() => goToEditScreen(item._id)}
+                    onClick={() => goToShowClothesScreen(item._id)}
                   />
                 }
                 price={
