@@ -4,7 +4,7 @@ const URLS = {
   ABOUT: "/about",
   SEARCH: "/search",
   PROFILE: "/profile",
-  EDIT_CLOTHES: "/edit/:id",
+  GET_CLOTHES_BY_ID: "/show/:id",
 };
 
 export default URLS;

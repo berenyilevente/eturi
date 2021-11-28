@@ -1,4 +1,4 @@
-import "../../layouts/EditClothesLayout/style.scss";
+import "../../layouts/ShowClothesLayout/style.scss";
 import { FC, ReactNode } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
 
@@ -11,7 +11,7 @@ interface Props {
   detailsArea?: ReactNode;
 }
 
-export const EditClothesLayout: FC<Props> = ({ imageArea, detailsArea }) => (
+export const ShowClothesLayout: FC<Props> = ({ imageArea, detailsArea }) => (
   <div className={scope}>
     <div className={imageContainerClass}>{imageArea}</div>
     <div className={detailsContainerClass}>{detailsArea}</div>

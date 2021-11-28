@@ -7,7 +7,7 @@ import AddClothesScreen from "../../screens/AddClothesScreen/AddClothesScreen";
 import SearchScreen from "../../screens/SearchScreen/SearchScreen";
 import AboutScreen from "../../screens/AboutScreen/AboutScreen";
 import HomeContentScreen from "../../screens/HomeContentScreen/HomeContentScreen";
-import EditClothesScreen from "../../screens/EditClothesScreen/EditClothesScreen";
+import ShowCLothesScreen from "../ShowClothesScreen/ShowClothesScreen";
 import pageURLS from "../../resources/constants/pageURLS";
 
 const MainSiteContentScreen = () => {
@@ -26,7 +26,10 @@ const MainSiteContentScreen = () => {
             <Route exact path={pageURLS.SELL} component={AddClothesScreen} />
             <Route exact path={pageURLS.SEARCH} component={SearchScreen} />
             <Route exact path={pageURLS.ABOUT} component={AboutScreen} />
-            <Route path={pageURLS.EDIT_CLOTHES} component={EditClothesScreen} />
+            <Route
+              path={pageURLS.GET_CLOTHES_BY_ID}
+              component={ShowCLothesScreen}
+            />
             <Route
               exact
               path={pageURLS.PROFILE}

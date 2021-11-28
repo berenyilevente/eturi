@@ -16,7 +16,7 @@ interface Props {
   price?: ReactNode;
 }
 
-export const EditClothesDetailsLayout: FC<Props> = ({
+export const ShowClothesDetailsLayout: FC<Props> = ({
   brand,
   name,
   description,

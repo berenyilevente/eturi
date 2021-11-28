@@ -1,1 +1,0 @@
-export { EditClothesDetailsLayout as default } from '../../layouts/EditClothesDetailsLayout/EditClothesDetailsLayout.view'

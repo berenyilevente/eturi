@@ -34,7 +34,7 @@ const useHomeContentScreen = () => {
   );
 
   const goToEditScreen = useCallback(
-    (id) => history.push(pageURLS.EDIT_CLOTHES + id),
+    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
   );
 
