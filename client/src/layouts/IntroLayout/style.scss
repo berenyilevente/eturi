@@ -20,9 +20,30 @@ $scope: layouts-intro-layout;
   }
 
   &-introCard {
-    width: clamp(200px, 350px, 400px);
+    width: 350px;
     position: absolute;
-    left: 15%;
+    left: 22%;
     top: 10%;
+  }
+}
+
+@media (max-width: 600px) {
+  .#{$scope} {
+    &-introImage {
+      min-height: 350px;
+    }
+    &-introCard {
+      width: 70%;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+}
+@media (max-width: 460px) {
+  .#{$scope} {
+    &-introCard {
+      width: 90%;
+      top: 5%;
+    }
   }
 }

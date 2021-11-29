@@ -1,7 +1,7 @@
 $scope: layouts-main-layout;
 .#{$scope} {
   display: grid;
-  grid-template-columns: minmax(50px, 250px) 1fr 1fr minmax(50px, 250px);
+  grid-template-columns: minmax(20px, 0.7fr) 1fr 1fr minmax(20px, 0.7fr);
   grid-template-rows: minmax(50px, 80px) min-content 1fr minmax(50px, 100px);
   gap: 0px 0px;
   grid-template-areas:
@@ -26,6 +26,13 @@ $scope: layouts-main-layout;
 
 @media (max-width: 1200px) {
   .#{$scope} {
-    grid-template-columns: minmax(50px, 150px) 1fr 1fr minmax(50px, 150px);
+    grid-template-columns: minmax(50px, 10px) 1fr 1fr minmax(50px, 10px);
+  }
+}
+
+@media (max-width: 440px) {
+  .#{$scope} {
+    grid-template-columns: minmax(5px, 15px) 1fr 1fr minmax(5px, 15px);
+    grid-template-rows: minmax(50px, 100px) min-content 1fr minmax(50px, 100px);
   }
 }

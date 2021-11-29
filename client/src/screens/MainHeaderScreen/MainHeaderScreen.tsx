@@ -8,6 +8,7 @@ import { Tooltip } from "../../components/Tooltip/Tooltip.view";
 import { useCallback } from "react";
 import { useHistory } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
+import DividerLine from "../../components/DividerLine";
 
 const useMainHeaderScreen = () => {
   const { t } = useTranslation();
@@ -75,18 +76,10 @@ const MainHeaderScreen = () => {
         }
         navItems={
           <>
-            <Link
-              textType="text-normal-dark"
-              onClick={() => goToHomeScreen()}
-              className="p-2"
-            >
+            <Link textType="text-normal-dark" onClick={() => goToHomeScreen()}>
               {homeText}
             </Link>
-            <Link
-              textType="text-normal-dark"
-              onClick={() => goToSellScreen()}
-              className="p-2"
-            >
+            <Link textType="text-normal-dark" onClick={() => goToSellScreen()}>
               {sellClothesText}
             </Link>
             <Link
@@ -95,11 +88,7 @@ const MainHeaderScreen = () => {
             >
               {searchText}
             </Link>
-            <Link
-              textType="text-normal-dark"
-              onClick={() => goToAboutScreen()}
-              className="p-2"
-            >
+            <Link textType="text-normal-dark" onClick={() => goToAboutScreen()}>
               {aboutText}
             </Link>
             <Tooltip

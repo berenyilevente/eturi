@@ -28,6 +28,7 @@ interface Props {
   textType: TextTypes;
   color?: Colors;
   className?: string;
+  textTransform?: "capitalize" | "lowercase" | "uppercase";
 }
 
 export const Link: FC<Props> = ({
@@ -37,13 +38,14 @@ export const Link: FC<Props> = ({
   textType,
   color,
   className,
+  textTransform,
 }) => (
   <span
     className={cn(scope, className)}
     onClick={onClick}
     onMouseOver={onMouseOver}
   >
-    <Text textType={textType} color={color}>
+    <Text textType={textType} color={color} textTransform={textTransform}>
       {" "}
       {children}
     </Text>

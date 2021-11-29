@@ -72,11 +72,6 @@ const IntroScreen = () => {
                 >
                   {introHelperText}
                 </Link>
-                <Icon
-                  iconType="chevronRightIcon"
-                  className="pt-2 p-1"
-                  colorStyle="lightBlue"
-                ></Icon>
               </>
             }
           />

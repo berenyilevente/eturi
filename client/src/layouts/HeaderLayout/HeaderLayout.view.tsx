@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const HeaderLayout: FC<Props> = ({ logo, navItems }) => (
-  <div className={cn(scope, "mt-4 mb-4")}>
+  <div className={cn(scope)}>
     <div className={logoClass}>{logo}</div>
     <div className={navItemsClass}>{navItems}</div>
   </div>
