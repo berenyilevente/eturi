@@ -1,7 +1,11 @@
 import { IClothesResponseData } from "@/redux/clothes/clothes.interfaces";
 import axios from "axios";
 
-const url = "http://localhost:5000/clothes";
+//fetch data for local development
+//const url = "http://localhost:5000/clothes";
+
+//fetch data from deployed api
+const url = "https://eturi-project.herokuapp.com/clothes";
 
 //get all clothes
 export const fetchClothes = () => axios.get(url);
