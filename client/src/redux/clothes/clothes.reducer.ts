@@ -15,6 +15,7 @@ import {
   LIKE_CLOTHES_FAILURE,
   LIKE_CLOTHES_REQUEST,
   LIKE_CLOTHES_SUCCESS,
+  SET_LIKE_LOADING,
   SET_TRIGGER_RELOAD,
   UPDATE_CLOTHES_FAILURE,
   UPDATE_CLOTHES_REQUEST,
@@ -30,6 +31,7 @@ const defaultClothesState: IClothesState = {
   clothesAdded: [],
   clothesUpdated: [],
   triggerReload: true,
+  likeLoading: false,
 };
 
 export default (
@@ -140,14 +142,14 @@ export default (
     case LIKE_CLOTHES_REQUEST:
       return {
         ...state,
-        isClothesLoading: false,
+        likeLoading: true,
         errorMessage: null,
       };
     case LIKE_CLOTHES_SUCCESS:
       return {
         ...state,
-        isClothesLoading: false,
         errorMessage: null,
+        likeLoading: false,
         clothes: state.clothes.map((item) =>
           item._id === action.payload._id ? action.payload : item
         ),
@@ -155,14 +157,16 @@ export default (
     case LIKE_CLOTHES_FAILURE:
       return {
         ...state,
-        isClothesLoading: false,
+        likeLoading: false,
         errorMessage: action.error.message,
       };
+
     case SET_TRIGGER_RELOAD:
       return {
         ...state,
         triggerReload: action.payload.triggerReload,
       };
+
     default:
       return state;
   }

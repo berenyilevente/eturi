@@ -46,3 +46,13 @@ $scope: components-modal;
     }
   }
 }
+
+@media (max-width: 480px) {
+  .#{$scope} {
+    &-modalWidth {
+      &-narrow {
+        width: 50px;
+      }
+    }
+  }
+}

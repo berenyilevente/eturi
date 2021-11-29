@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.478bdde5.chunk.css",
+    "main.js": "/static/js/main.eec8810c.chunk.js",
+    "main.js.map": "/static/js/main.eec8810c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.80bcf9f8.js",
+    "runtime-main.js.map": "/static/js/runtime-main.80bcf9f8.js.map",
+    "static/js/2.0e3d239c.chunk.js": "/static/js/2.0e3d239c.chunk.js",
+    "static/js/2.0e3d239c.chunk.js.map": "/static/js/2.0e3d239c.chunk.js.map",
+    "static/js/3.96903267.chunk.js": "/static/js/3.96903267.chunk.js",
+    "static/js/3.96903267.chunk.js.map": "/static/js/3.96903267.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.478bdde5.chunk.css.map": "/static/css/main.478bdde5.chunk.css.map",
+    "static/js/2.0e3d239c.chunk.js.LICENSE.txt": "/static/js/2.0e3d239c.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/static/media/Lato-Regular.9919edff.ttf",
+    "static/media/style.scss": "/static/media/mainGardrobe.a97782f5.jpg",
+    "static/media/tipsMock1.43bbebdd.png": "/static/media/tipsMock1.43bbebdd.png",
+    "static/media/tipsMock2.730daab1.png": "/static/media/tipsMock2.730daab1.png",
+    "static/media/tipsMock3.9d316f3e.png": "/static/media/tipsMock3.9d316f3e.png",
+    "static/media/tipsMock4.83ebe4db.png": "/static/media/tipsMock4.83ebe4db.png",
+    "static/media/tipsMock5.6499a393.png": "/static/media/tipsMock5.6499a393.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.80bcf9f8.js",
+    "static/js/2.0e3d239c.chunk.js",
+    "static/css/main.478bdde5.chunk.css",
+    "static/js/main.eec8810c.chunk.js"
+  ]
+}

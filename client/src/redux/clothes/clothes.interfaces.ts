@@ -6,6 +6,7 @@ export interface IClothesState {
   clothesAdded: IClothesResponseData[];
   clothesUpdated: IUpdateClothesResponseData[];
   triggerReload?: boolean;
+  likeLoading?: boolean;
 }
 
 export interface IClothesResponseData {
@@ -58,4 +59,7 @@ export interface IDeleteClothesResponseData {
 }
 export interface ITriggerReload {
   triggerReload: boolean;
+}
+export interface ITriggerLikeLoading {
+  likeLoading: boolean;
 }

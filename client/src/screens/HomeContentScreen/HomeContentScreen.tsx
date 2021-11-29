@@ -31,7 +31,7 @@ const useHomeContentScreen = () => {
 
   const currencyText = t("currency.huf");
 
-  const { clothes, isClothesLoading } = useSelector(
+  const { clothes, isClothesLoading, likeLoading } = useSelector(
     (state: AppState) => state.clothes
   );
 
@@ -50,6 +50,7 @@ const useHomeContentScreen = () => {
     heartFill,
     setHeartFill,
     dispatch,
+    likeLoading,
   };
 };
 
@@ -62,6 +63,7 @@ const HomeContentScreen: FC = () => {
     heartFill,
     setHeartFill,
     dispatch,
+    likeLoading,
   } = useHomeContentScreen();
 
   return (
@@ -86,20 +88,30 @@ const HomeContentScreen: FC = () => {
                 size={<Text textType="text-normal-dark">{item.size}</Text>}
                 brand={<Text textType="text-normal-dark">{item.brand}</Text>}
                 heartIcon={
-                  item.isLiked ? (
-                    <Icon
-                      iconType="heartIconFilled"
-                      cursor
-                      onClick={() => dispatch(likeClothesAction(item._id!))}
+                  likeLoading ? (
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
                     />
                   ) : (
-                    <Icon
-                      iconType="heartIcon"
-                      cursor
-                      onClick={() => {
-                        dispatch(likeClothesAction(item._id!));
-                      }}
-                    />
+                    <>
+                      {item.isLiked ? (
+                        <Icon
+                          iconType="heartIconFilled"
+                          cursor
+                          onClick={() => dispatch(likeClothesAction(item._id!))}
+                        />
+                      ) : (
+                        <Icon
+                          iconType="heartIcon"
+                          cursor
+                          onClick={() => {
+                            dispatch(likeClothesAction(item._id!));
+                          }}
+                        />
+                      )}
+                    </>
                   )
                 }
               />
