@@ -42,8 +42,7 @@ $scope: layouts-intro-layout;
 @media (max-width: 460px) {
   .#{$scope} {
     &-introCard {
-      width: 90%;
-      top: 5%;
+      width: 75%;
     }
   }
 }

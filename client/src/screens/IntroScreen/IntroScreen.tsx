@@ -60,7 +60,7 @@ const IntroScreen = () => {
                 onClick={() => goToSellScreen()}
                 border="borderNone"
               >
-                {introButtonText}
+                <Text textType="text-medium-white">{introButtonText}</Text>
               </Button>
             }
             link={

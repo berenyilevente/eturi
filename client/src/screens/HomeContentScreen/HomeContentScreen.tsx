@@ -83,8 +83,8 @@ const HomeContentScreen: FC = () => {
                     {item.price + " " + currencyText}
                   </Text>
                 }
-                size={<Text textType="text-medium-dark">{item.size}</Text>}
-                brand={<Text textType="text-medium-dark">{item.brand}</Text>}
+                size={<Text textType="text-normal-dark">{item.size}</Text>}
+                brand={<Text textType="text-normal-dark">{item.brand}</Text>}
                 heartIcon={
                   item.isLiked ? (
                     <Icon

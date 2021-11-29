@@ -15,7 +15,11 @@ $scope: layouts-intro-card-layout;
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 480px) {
   .#{$scope} {
+    grid-template-rows: repeat(auto-fit, minmax(90px, 1fr));
+    &-buttonClass {
+      margin-top: 1rem;
+    }
   }
 }

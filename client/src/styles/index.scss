@@ -83,6 +83,19 @@ $boxShadow: 0px 3px 10px rgba(0, 0, 0, 0.12);
   --font-size-30: 30px;
   --font-size-36: 36px;
 
+  //Font sizes for mobile view
+  @media (max-width: 480px) {
+    --font-size-10: 10px;
+    --font-size-12: 12px;
+    --font-size-14: 14px;
+    --font-size-16: 16px;
+    --font-size-18: 18px;
+    --font-size-22: 20px;
+    --font-size-26: 22px;
+    --font-size-30: 24px;
+    --font-size-36: 26px;
+  }
+
   //Font spacing
   --character-spacing-0: 0px;
   --character-spacing--1-44: -1.44px;

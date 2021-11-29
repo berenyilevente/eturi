@@ -63,7 +63,7 @@ export const ImageUploader: FC<Props> = ({ onImage }) => {
         )}
         <label className={imageInputLabelClass}>
           <Icon iconType="plusIcon" colorStyle="darkBlue" />
-          <Text textType="text-medium-dark" color="darkBlue">
+          <Text textType="text-normal-dark" color="darkBlue">
             {uploadLabelText}
           </Text>
           <input

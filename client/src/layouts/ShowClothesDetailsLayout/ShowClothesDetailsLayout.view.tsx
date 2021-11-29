@@ -6,9 +6,8 @@ const scope = CreateScopeCSS("layouts-show-clothes-details-layout");
 const headerClass = scope.and("header");
 const buttonAreaClass = scope.and("buttonArea");
 const lineClass = scope.and("line");
-const deleteButtonClass = scope.and("deleteButton");
+const saveButtonClass = scope.and("saveButton");
 const likeIconClass = scope.and("likeIconClass");
-
 interface Props {
   brand?: ReactNode;
   likeIcon?: ReactNode;
@@ -79,7 +78,9 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
     <div className={lineClass}>{line2}</div>
     <div>{priceTitle}</div>
     <div>{price}</div>
-    <div className={deleteButtonClass}>{deleteButton}</div>
-    <div className={buttonAreaClass}>{buttons}</div>
+    <div className={buttonAreaClass}>
+      <div>{deleteButton}</div>
+      <div className={saveButtonClass}>{buttons}</div>
+    </div>
   </div>
 );

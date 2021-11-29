@@ -29,10 +29,10 @@ const FooterScreen: FC = () => {
       <FooterLayout
         navigation={
           <>
-            <Link textType="text-medium-dark">{homeText}</Link>
-            <Link textType="text-medium-dark">{contractText}</Link>
-            <Link textType="text-medium-dark">{privacyText}</Link>
-            <Link textType="text-medium-dark">{imprintText}</Link>
+            <Link textType="text-normal-dark">{homeText}</Link>
+            <Link textType="text-normal-dark">{contractText}</Link>
+            <Link textType="text-normal-dark">{privacyText}</Link>
+            <Link textType="text-normal-dark">{imprintText}</Link>
           </>
         }
         socialMedia={

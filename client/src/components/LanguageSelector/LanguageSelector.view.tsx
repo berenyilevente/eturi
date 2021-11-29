@@ -39,7 +39,7 @@ export const LanguageSelector: FC<Props> = () => {
         {language.map(({ key }) => (
           <li key={key.toString()}>
             <Link
-              textType="text-medium-dark"
+              textType="text-normal-dark"
               onClick={() => onSelectClick(key)}
             >
               {key === "HU" ? key : key}

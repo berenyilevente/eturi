@@ -55,13 +55,14 @@ $scope: components-text;
     color: var(--dark);
     font-size: var(--font-size-14);
   }
-  &-text-medium-dark {
-    color: var(--dark);
-    font-size: var(--font-size-16);
-  }
+
   &-text-normal-dark {
     color: var(--dark);
     font-size: var(--font-size-18);
+  }
+  &-text-medium-dark {
+    color: var(--dark);
+    font-size: var(--font-size-22);
   }
   &-text-large-dark {
     color: var(--dark);
@@ -81,13 +82,14 @@ $scope: components-text;
     color: var(--white);
     font-size: var(--font-size-14);
   }
-  &-text-medium-white {
-    color: var(--white);
-    font-size: var(--font-size-16);
-  }
+
   &-text-normal-white {
     color: var(--white);
     font-size: var(--font-size-18);
+  }
+  &-text-medium-white {
+    color: var(--white);
+    font-size: var(--font-size-22);
   }
   &-text-large-white {
     color: var(--white);

@@ -215,12 +215,12 @@ const EditClothesScreen: FC = () => {
       {showClothes && (
         <ShowClothesLayout
           imageArea={
-            <Card backgroundColorStyle="white" shadow rounded>
+            <Card backgroundColorStyle="white" shadow>
               <img src={showClothes.selectedFile} />
             </Card>
           }
           detailsArea={
-            <Card backgroundColorStyle="white" shadow rounded>
+            <Card backgroundColorStyle="white" shadow>
               <ShowClothesDetailsLayout
                 nameTitle={
                   <Text textType="text-normal-dark">{clothesNameText}</Text>
@@ -336,7 +336,7 @@ const EditClothesScreen: FC = () => {
                     hasIconLeft
                     iconType="trashIcon"
                   >
-                    <Text textType="text-medium-dark">{deleteText}</Text>
+                    <Text textType="text-normal-dark">{deleteText}</Text>
                   </Button>
                 }
                 buttons={

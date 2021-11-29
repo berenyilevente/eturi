@@ -9,6 +9,7 @@ $scope: layouts-show-clothes-details-layout;
   padding-left: 24px;
   padding-right: 16px;
   align-items: center;
+  white-space: nowrap;
 
   &-header {
     padding-top: 20px;
@@ -22,12 +23,14 @@ $scope: layouts-show-clothes-details-layout;
 
   &-buttonArea {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    margin: 24px;
+    grid-column: 1 / 3;
+    justify-content: space-between;
+    margin: 1rem;
   }
-  &-deleteButton {
-    margin: 24px;
+
+  &-saveButton {
+    display: flex;
+    flex-wrap: nowrap;
   }
   &-line {
     grid-column-start: 1;

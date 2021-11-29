@@ -6,6 +6,7 @@ $scope: layouts-header-layout;
   gap: 0px 0px;
   grid-auto-flow: row;
   margin-top: 24px;
+
   &-logo {
     display: flex;
     height: 100%;
@@ -18,7 +19,6 @@ $scope: layouts-header-layout;
     justify-content: space-around;
     height: 100%;
     align-items: center;
-    z-index: 2;
   }
   &-lineClass {
     grid-column: 1 / 3;
