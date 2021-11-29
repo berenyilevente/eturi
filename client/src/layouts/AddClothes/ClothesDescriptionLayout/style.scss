@@ -13,3 +13,9 @@ $scope: layouts-clothes-description-layout;
     grid-column-end: 3;
   }
 }
+
+@media (max-width: 650px) {
+  .#{$scope} {
+    grid-template-columns: 1fr 2fr;
+  }
+}

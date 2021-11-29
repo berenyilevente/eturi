@@ -11,3 +11,9 @@ $scope: layouts-clothes-price-layout;
     //define css styles here
   }
 }
+
+@media (max-width: 650px) {
+  .#{$scope} {
+    grid-template-columns: 1fr 2fr;
+  }
+}
