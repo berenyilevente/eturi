@@ -8,19 +8,26 @@ $scope: layouts-show-clothes-details-layout;
   gap: 0.5rem;
   padding-left: 24px;
   padding-right: 16px;
+  align-items: center;
 
   &-header {
     padding-top: 20px;
     padding-bottom: 20px;
-    grid-column: 1 / 3;
+  }
+
+  &-likeIconClass {
+    justify-self: end;
+    margin-right: 32px;
   }
 
   &-buttonArea {
     display: flex;
     flex-wrap: wrap;
-    justify-content: end;
+    justify-content: flex-end;
     margin: 24px;
-    grid-column: 1 / 3;
+  }
+  &-deleteButton {
+    margin: 24px;
   }
   &-line {
     grid-column-start: 1;

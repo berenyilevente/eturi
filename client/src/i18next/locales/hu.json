@@ -133,6 +133,10 @@
     "edit": "Szerkesztés",
     "noData": "Nincs megadott adat",
     "save": "Mentés",
-    "back": "Vissza"
+    "back": "Vissza",
+    "delete": "Törlés"
+  },
+  "deleteClothes":{
+    "confirmationText": "Biztosan törölni szeretnéd a ruhát?"
   }
 }

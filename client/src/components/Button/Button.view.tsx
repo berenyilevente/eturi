@@ -1,5 +1,5 @@
 import "../../components/Button/style.scss";
-import { FC, MouseEventHandler, useState } from "react";
+import { FC, MouseEventHandler } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
 import Icon from "../Icon";
 import * as iconMap from "../../components/Icon/icons";
@@ -12,7 +12,8 @@ const color = scope.and("color");
 const cursorClass = scope.and("cursor");
 const buttonSizeClass = scope.and("buttonSizes");
 const textColorClass = scope.and("textColor");
-const buttonSpinnerClass = scope.and("buttonSpinner");
+const iconAlignStart = scope.and("iconAlignStart");
+const iconAlignEnd = scope.and("iconAlignEnd");
 
 interface IButtonProps {
   buttonSize?: "small" | "medium" | "normal" | "large";
@@ -24,7 +25,8 @@ interface IButtonProps {
   colorStyle?: "darkBlue" | "lightBlue" | "red";
   buttonTextColor?: "dark" | "white" | "currentColor";
   border?: "borderNone" | "borderDotted" | "borderSolid";
-  hasIcon?: boolean;
+  hasIconLeft?: boolean;
+  hasIconRight?: boolean;
   iconType?: keyof typeof iconMap;
   isLoading?: boolean;
 }
@@ -40,24 +42,11 @@ export const Button: FC<IButtonProps> = ({
   children,
   noCursor,
   buttonTextColor,
-  hasIcon,
+  hasIconLeft,
   iconType,
+  hasIconRight,
   isLoading,
 }) => {
-  const [animationFinished, setAnimationFinished] = useState<boolean>(false);
-  const [animationClass, setAnimationClass] = useState<string>("");
-
-  const startStopAnimation = () => {
-    setAnimationClass(buttonSpinnerClass);
-  };
-
-  const onAnimationStart = () => {
-    setAnimationFinished(false);
-  };
-  const onAnimationEnd = () => {
-    setAnimationFinished(true);
-  };
-
   return (
     <button
       onClick={onClick}
@@ -73,17 +62,9 @@ export const Button: FC<IButtonProps> = ({
         buttonTextColor && textColorClass.and(buttonTextColor)
       )}
     >
-      {hasIcon && <Icon iconType={iconType!} />}
-
-      {isLoading ? (
-        <span
-          onAnimationStart={onAnimationStart}
-          onAnimationEnd={onAnimationEnd}
-          className={animationClass}
-        />
-      ) : (
-        children
-      )}
+      {hasIconLeft && <Icon iconType={iconType!} className={iconAlignStart} />}
+      {children}
+      {hasIconRight && <Icon iconType={iconType!} className={iconAlignEnd} />}
     </button>
   );
 };

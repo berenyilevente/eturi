@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
 import {
   IClothesResponseData,
+  IDeleteClothesResponseData,
+  ILikeClothesResponseData,
   ITriggerReload,
   IUpdateClothesResponseData,
 } from "./clothes.interfaces";
@@ -20,6 +22,14 @@ export const ADD_CLOTHES_FAILURE = "ADD_CLOTHES_FAILURE";
 export const UPDATE_CLOTHES_REQUEST = "UPDATE_CLOTHES_REQUEST";
 export const UPDATE_CLOTHES_SUCCESS = "UPDATE_CLOTHES_SUCCESS";
 export const UPDATE_CLOTHES_FAILURE = "UPDATE_CLOTHES_FAILURE";
+
+export const DELETE_CLOTHES_REQUEST = "DELETE_CLOTHES_REQUEST";
+export const DELETE_CLOTHES_SUCCESS = "DELETE_CLOTHES_SUCCESS";
+export const DELETE_CLOTHES_FAILURE = "DELETE_CLOTHES_FAILURE";
+
+export const LIKE_CLOTHES_REQUEST = "LIKE_CLOTHES_REQUEST";
+export const LIKE_CLOTHES_SUCCESS = "LIKE_CLOTHES_SUCCESS";
+export const LIKE_CLOTHES_FAILURE = "LIKE_CLOTHES_FAILURE";
 
 export const SET_TRIGGER_RELOAD = "SET_TRIGGER_RELOAD";
 export const RESET_TRIGGER_RELOAD = "RESET_TRIGGER_RELOAD";
@@ -76,6 +86,32 @@ export interface IUpdateClothesFailureAction {
   error: AxiosError;
 }
 
+//Delete clothes types
+export interface IDeleteClothesRequestAction {
+  type: typeof DELETE_CLOTHES_REQUEST;
+}
+export interface IDeleteClothesSuccessAction {
+  type: typeof DELETE_CLOTHES_SUCCESS;
+  payload: IDeleteClothesResponseData;
+}
+export interface IDeleteClothesFailureAction {
+  type: typeof DELETE_CLOTHES_FAILURE;
+  error: AxiosError;
+}
+
+//Like clothes types
+export interface ILikeClothesRequestAction {
+  type: typeof LIKE_CLOTHES_REQUEST;
+}
+export interface ILikeClothesSuccessAction {
+  type: typeof LIKE_CLOTHES_SUCCESS;
+  payload: ILikeClothesResponseData;
+}
+export interface ILikeClothesFailureAction {
+  type: typeof LIKE_CLOTHES_FAILURE;
+  error: AxiosError;
+}
+
 //Trigger reload
 export interface ISetTriggerReload {
   type: typeof SET_TRIGGER_RELOAD;
@@ -95,4 +131,10 @@ export type ClothesActionTypes =
   | ISetTriggerReload
   | IUpdateClothesRequestAction
   | IUpdateClothesSuccessAction
-  | IUpdateClothesFailureAction;
+  | IUpdateClothesFailureAction
+  | ILikeClothesRequestAction
+  | ILikeClothesSuccessAction
+  | ILikeClothesFailureAction
+  | IDeleteClothesRequestAction
+  | IDeleteClothesSuccessAction
+  | IDeleteClothesFailureAction;

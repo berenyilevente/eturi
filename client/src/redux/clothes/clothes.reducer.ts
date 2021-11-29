@@ -3,12 +3,18 @@ import {
   ADD_CLOTHES_REQUEST,
   ADD_CLOTHES_SUCCESS,
   ClothesActionTypes,
+  DELETE_CLOTHES_FAILURE,
+  DELETE_CLOTHES_REQUEST,
+  DELETE_CLOTHES_SUCCESS,
   GET_CLOTHES_BY_ID_FAILURE,
   GET_CLOTHES_BY_ID_REQUEST,
   GET_CLOTHES_BY_ID_SUCCESS,
   GET_CLOTHES_FAILURE,
   GET_CLOTHES_REQUEST,
   GET_CLOTHES_SUCCESS,
+  LIKE_CLOTHES_FAILURE,
+  LIKE_CLOTHES_REQUEST,
+  LIKE_CLOTHES_SUCCESS,
   SET_TRIGGER_RELOAD,
   UPDATE_CLOTHES_FAILURE,
   UPDATE_CLOTHES_REQUEST,
@@ -104,6 +110,49 @@ export default (
         ),
       };
     case UPDATE_CLOTHES_FAILURE:
+      return {
+        ...state,
+        isClothesLoading: false,
+        errorMessage: action.error.message,
+      };
+    case DELETE_CLOTHES_REQUEST:
+      return {
+        ...state,
+        isClothesLoading: true,
+        errorMessage: null,
+      };
+    case DELETE_CLOTHES_SUCCESS:
+      return {
+        ...state,
+        isClothesLoading: false,
+        errorMessage: null,
+        clothes: state.clothes.filter(
+          (clothes) => clothes._id !== action.payload._id
+        ),
+      };
+    case DELETE_CLOTHES_FAILURE:
+      return {
+        ...state,
+        isClothesLoading: false,
+        errorMessage: action.error.message,
+      };
+
+    case LIKE_CLOTHES_REQUEST:
+      return {
+        ...state,
+        isClothesLoading: false,
+        errorMessage: null,
+      };
+    case LIKE_CLOTHES_SUCCESS:
+      return {
+        ...state,
+        isClothesLoading: false,
+        errorMessage: null,
+        clothes: state.clothes.map((item) =>
+          item._id === action.payload._id ? action.payload : item
+        ),
+      };
+    case LIKE_CLOTHES_FAILURE:
       return {
         ...state,
         isClothesLoading: false,

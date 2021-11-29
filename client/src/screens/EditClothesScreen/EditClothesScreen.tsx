@@ -9,7 +9,9 @@ import ShowClothesLayout from "../../layouts/ShowClothesLayout";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
 import Text from "../../components/Text";
 import {
+  deleteClothesAction,
   getClothesById,
+  setTriggerReload,
   updateClothesAction,
 } from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -22,6 +24,7 @@ import {
 import Input from "../../components/Input";
 import DividerLine from "../../components/DividerLine";
 import TextArea from "../../components/TextArea";
+import Modal from "../../components/Modal";
 
 const useEditClothesScreen = () => {
   const { t } = useTranslation();
@@ -46,6 +49,8 @@ const useEditClothesScreen = () => {
   const pricePlaceholderText = t("clothes.pricePlaceholder");
   const currencyText = t("currency.huf");
   const saveText = t("general.save");
+  const deleteText = t("general.delete");
+  const confirmDeleteText = t("deleteClothes.confirmationText");
 
   const showClothes = useSelector((state: AppState) =>
     currentId
@@ -71,6 +76,16 @@ const useEditClothesScreen = () => {
   const [colourContent, setColourContent] = useState<string>("");
   const [descriptionContent, setDescriptionContent] = useState<string>("");
   const [price, setPrice] = useState<string>("");
+
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
+    history,
+  ]);
+
+  const triggerReload = useCallback(() => {
+    dispatch(setTriggerReload({ triggerReload: true }));
+  }, [dispatch]);
 
   const {
     category,
@@ -130,6 +145,12 @@ const useEditClothesScreen = () => {
     currencyText,
     saveText,
     dispatch,
+    triggerReload,
+    deleteText,
+    openModal,
+    setOpenModal,
+    confirmDeleteText,
+    goToHomeScreen,
   };
 };
 
@@ -181,10 +202,16 @@ const EditClothesScreen: FC = () => {
     currencyText,
     saveText,
     dispatch,
+    triggerReload,
+    deleteText,
+    openModal,
+    setOpenModal,
+    confirmDeleteText,
+    goToHomeScreen,
   } = useEditClothesScreen();
 
   return (
-    <LoadingSpinner isLoading={isClothesLoading}>
+    <>
       {showClothes && (
         <ShowClothesLayout
           imageArea={
@@ -298,6 +325,20 @@ const EditClothesScreen: FC = () => {
                     required={true}
                   />
                 }
+                deleteButton={
+                  <Button
+                    colorStyle="darkBlue"
+                    transparent
+                    buttonTextColor="dark"
+                    buttonSize="medium"
+                    border="borderNone"
+                    onClick={() => setOpenModal(true)}
+                    hasIconLeft
+                    iconType="trashIcon"
+                  >
+                    <Text textType="text-medium-dark">{deleteText}</Text>
+                  </Button>
+                }
                 buttons={
                   <>
                     <Button
@@ -316,7 +357,6 @@ const EditClothesScreen: FC = () => {
                       buttonSize="normal"
                       border="borderNone"
                       onClick={() => {
-                        console.log(brandContent);
                         dispatch(
                           updateClothesAction(showClothes._id!, {
                             name: nameContent!,
@@ -329,6 +369,7 @@ const EditClothesScreen: FC = () => {
                             price: price,
                           })
                         );
+                        triggerReload();
                         goToShowClothesScreen(showClothes._id);
                       }}
                     >
@@ -341,7 +382,41 @@ const EditClothesScreen: FC = () => {
           }
         />
       )}
-    </LoadingSpinner>
+      {
+        <Modal
+          title={confirmDeleteText}
+          showModal={openModal}
+          closeModal={() => setOpenModal(false)}
+          modalWidth="narrow"
+        >
+          <div className="d-flex justify-content-around pt-3">
+            <Button
+              colorStyle="darkBlue"
+              transparent
+              buttonTextColor="dark"
+              buttonSize="medium"
+              border="borderNone"
+              onClick={() => setOpenModal(false)}
+            >
+              {cancelText}
+            </Button>
+            <Button
+              colorStyle="darkBlue"
+              rounded
+              buttonSize="normal"
+              border="borderNone"
+              onClick={() => {
+                dispatch(deleteClothesAction(showClothes!._id!));
+                triggerReload();
+                goToHomeScreen();
+              }}
+            >
+              {deleteText}
+            </Button>
+          </div>
+        </Modal>
+      }
+    </>
   );
 };
 export default EditClothesScreen;

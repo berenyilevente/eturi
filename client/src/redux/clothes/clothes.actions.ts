@@ -3,12 +3,18 @@ import {
   ADD_CLOTHES_FAILURE,
   ADD_CLOTHES_REQUEST,
   ADD_CLOTHES_SUCCESS,
+  DELETE_CLOTHES_FAILURE,
+  DELETE_CLOTHES_REQUEST,
+  DELETE_CLOTHES_SUCCESS,
   GET_CLOTHES_BY_ID_FAILURE,
   GET_CLOTHES_BY_ID_REQUEST,
   GET_CLOTHES_BY_ID_SUCCESS,
   GET_CLOTHES_FAILURE,
   GET_CLOTHES_REQUEST,
   GET_CLOTHES_SUCCESS,
+  LIKE_CLOTHES_FAILURE,
+  LIKE_CLOTHES_REQUEST,
+  LIKE_CLOTHES_SUCCESS,
   SET_TRIGGER_RELOAD,
   UPDATE_CLOTHES_FAILURE,
   UPDATE_CLOTHES_REQUEST,
@@ -95,6 +101,45 @@ export const updateClothesAction = (
   } catch (error) {
     dispatch({
       type: UPDATE_CLOTHES_FAILURE,
+      error,
+    });
+  }
+};
+
+export const deleteClothesAction = (id: string) => async (
+  dispatch: Dispatch
+) => {
+  dispatch({
+    type: DELETE_CLOTHES_REQUEST,
+  });
+  try {
+    await api.deleteClothes(id);
+    dispatch({
+      type: DELETE_CLOTHES_SUCCESS,
+      payload: id,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_CLOTHES_FAILURE,
+      error,
+    });
+  }
+};
+
+export const likeClothesAction = (id: string) => async (dispatch: Dispatch) => {
+  dispatch({
+    type: LIKE_CLOTHES_REQUEST,
+  });
+
+  try {
+    const response = await api.likeClothes(id);
+    dispatch({
+      type: LIKE_CLOTHES_SUCCESS,
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: LIKE_CLOTHES_FAILURE,
       error,
     });
   }

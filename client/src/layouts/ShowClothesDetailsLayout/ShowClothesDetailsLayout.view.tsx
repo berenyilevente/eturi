@@ -6,10 +6,12 @@ const scope = CreateScopeCSS("layouts-show-clothes-details-layout");
 const headerClass = scope.and("header");
 const buttonAreaClass = scope.and("buttonArea");
 const lineClass = scope.and("line");
-const descriptionArea = scope.and("descriptionArea");
+const deleteButtonClass = scope.and("deleteButton");
+const likeIconClass = scope.and("likeIconClass");
 
 interface Props {
   brand?: ReactNode;
+  likeIcon?: ReactNode;
   editBrandTitle?: ReactNode;
   editBrand?: ReactNode;
   name?: ReactNode;
@@ -29,10 +31,12 @@ interface Props {
   buttons?: ReactNode;
   line1?: ReactNode;
   line2?: ReactNode;
+  deleteButton?: ReactNode;
 }
 
 export const ShowClothesDetailsLayout: FC<Props> = ({
   brand,
+  likeIcon,
   editBrandTitle,
   editBrand,
   name,
@@ -52,9 +56,11 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
   buttons,
   line1,
   line2,
+  deleteButton,
 }) => (
   <div className={scope}>
     <div className={headerClass}>{brand}</div>
+    <div className={likeIconClass}>{likeIcon}</div>
     <div>{nameTitle}</div>
     <div>{name}</div>
     <div>{descriptionTitle}</div>
@@ -73,6 +79,7 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
     <div className={lineClass}>{line2}</div>
     <div>{priceTitle}</div>
     <div>{price}</div>
+    <div className={deleteButtonClass}>{deleteButton}</div>
     <div className={buttonAreaClass}>{buttons}</div>
   </div>
 );

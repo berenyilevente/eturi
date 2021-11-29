@@ -13,6 +13,7 @@ import { getClothesById } from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Button from "../../components/Button";
 import DividerLine from "../../components/DividerLine";
+import Icon from "../../components/Icon";
 
 const useEditClothesScreen = () => {
   const { t } = useTranslation();
@@ -102,7 +103,7 @@ const ShowCLothesScreen: FC = () => {
   } = useEditClothesScreen();
 
   return (
-    <LoadingSpinner isLoading={isClothesLoading}>
+    <>
       {showClothes && (
         <ShowClothesLayout
           imageArea={
@@ -115,6 +116,9 @@ const ShowCLothesScreen: FC = () => {
               <ShowClothesDetailsLayout
                 brand={
                   <Text textType="text-large-dark">{showClothes.brand}</Text>
+                }
+                likeIcon={
+                  showClothes.isLiked && <Icon iconType="heartIconFilled" />
                 }
                 nameTitle={
                   <Text textType="text-normal-dark">{clothesNameText}</Text>
@@ -196,7 +200,7 @@ const ShowCLothesScreen: FC = () => {
           }
         />
       )}
-    </LoadingSpinner>
+    </>
   );
 };
 export default ShowCLothesScreen;

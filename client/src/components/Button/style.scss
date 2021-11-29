@@ -2,7 +2,8 @@ $scope: components-button;
 .#{$scope} {
   display: flex !important;
   align-items: center !important;
-  justify-content: space-around !important;
+  justify-content: space-between !important;
+
   &-rounded {
     border-radius: 6px !important;
   }
@@ -22,7 +23,7 @@ $scope: components-button;
     }
     &-borderSolid {
       border-width: 1px;
-      border-style: dotted;
+      border-style: solid;
       border-color: currentColor;
     }
   }
@@ -36,6 +37,13 @@ $scope: components-button;
     margin: 4px;
     animation: spin 1.2s linear;
     animation-iteration-count: 1;
+  }
+
+  &-iconAlignStart {
+    justify-content: flex-start;
+  }
+  &-iconAlignEnd {
+    justify-content: flex-end;
   }
 
   &-cursor {

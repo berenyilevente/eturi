@@ -4,6 +4,8 @@ import {
   addClothes,
   getClothesById,
   updateClothes,
+  deleteClothes,
+  likeClothes,
 } from "../controllers/clothesController.js";
 
 const router = express.Router();
@@ -13,5 +15,7 @@ router.get("/", getClothes);
 router.get("/", getClothesById);
 router.post("/", addClothes);
 router.patch("/:id", updateClothes);
+router.delete("/:id", deleteClothes);
+router.patch("/:id/likeClothes", likeClothes);
 
 export default router;

@@ -134,6 +134,10 @@
     "edit": "Edit",
     "noData": "No data",
     "save": "Save",
-    "back": "Back"
+    "back": "Back",
+    "delete": "Delete"
+  },
+  "deleteClothes":{
+    "confirmationText": "Are you sure you want to delete the following listing?"
   }
 }
