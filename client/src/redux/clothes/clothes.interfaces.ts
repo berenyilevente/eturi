@@ -4,13 +4,13 @@ export interface IClothesState {
   clothes: IClothesResponseData[];
   showClothes: IClothesResponseData[];
   clothesAdded: IClothesResponseData[];
-  clothesUpdated?: IUpdateClothesResponseData[] | null;
+  clothesUpdated: IUpdateClothesResponseData[];
   triggerReload?: boolean;
 }
 
 export interface IClothesResponseData {
   _id?: string;
-  selectedFile: string;
+  selectedFile?: string;
   name: string;
   description: string;
   category: string;
@@ -22,9 +22,10 @@ export interface IClothesResponseData {
   createdAt?: Date;
 }
 [];
+
 export interface IUpdateClothesResponseData {
   _id?: string;
-  selectedFile: string;
+  selectedFile?: string;
   name: string;
   description: string;
   category: string;

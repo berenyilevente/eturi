@@ -3,13 +3,20 @@ $scope: components-text-area;
 .#{$scope} {
   border: 0;
   width: 100%;
-  height: 150px;
   padding: 12px;
   font-size: 18px;
   outline: none;
   resize: none;
   border-bottom: 1px solid #ccc;
-  &-example {
-    //define css styles here
+  &-size {
+    &-small {
+      height: 14vh !important;
+    }
+    &-medium {
+      height: 25vh !important;
+    }
+    &-large {
+      height: 35vh !important;
+    }
   }
 }

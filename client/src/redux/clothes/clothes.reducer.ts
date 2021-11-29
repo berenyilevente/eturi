@@ -22,7 +22,7 @@ const defaultClothesState: IClothesState = {
   clothes: [],
   showClothes: [],
   clothesAdded: [],
-  clothesUpdated: null,
+  clothesUpdated: [],
   triggerReload: true,
 };
 
@@ -99,7 +99,7 @@ export default (
         ...state,
         isClothesLoading: false,
         errorMessage: null,
-        clothesUpdated: state.clothes.map((item) =>
+        clothes: state.clothes.map((item) =>
           item._id === action.payload._id ? action.payload : item
         ),
       };

@@ -10,6 +10,8 @@ const descriptionArea = scope.and("descriptionArea");
 
 interface Props {
   brand?: ReactNode;
+  editBrandTitle?: ReactNode;
+  editBrand?: ReactNode;
   name?: ReactNode;
   description?: ReactNode;
   category?: ReactNode;
@@ -31,6 +33,8 @@ interface Props {
 
 export const ShowClothesDetailsLayout: FC<Props> = ({
   brand,
+  editBrandTitle,
+  editBrand,
   name,
   description,
   category,
@@ -58,6 +62,8 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
     <div className={lineClass}>{line1}</div>
     <div>{categoryTitle}</div>
     <div>{category}</div>
+    <div>{editBrandTitle}</div>
+    <div>{editBrand}</div>
     <div>{sizeTitle}</div>
     <div>{size}</div>
     <div>{conditionTitle}</div>

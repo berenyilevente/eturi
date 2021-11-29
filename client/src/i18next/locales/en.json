@@ -132,7 +132,8 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "edit": "Edit",
-    "noData": "No data"
-
+    "noData": "No data",
+    "save": "Save",
+    "back": "Back"
   }
 }

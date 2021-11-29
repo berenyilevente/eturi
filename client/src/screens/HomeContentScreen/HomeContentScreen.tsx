@@ -22,7 +22,6 @@ const useHomeContentScreen = () => {
   const { triggerReload } = useSelector((state: AppState) => state.clothes);
 
   useEffect(() => {
-    console.log(triggerReload);
     triggerReload && dispatch(getClothes());
     dispatch(setTriggerReload({ triggerReload: false }));
   }, [dispatch]);

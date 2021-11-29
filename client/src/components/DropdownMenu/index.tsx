@@ -1,1 +1,1 @@
-export { DropdownMenu } from "../../components/DropdownMenu/DropdownMenu.view";
+export { DropdownMenu as default } from "../../components/DropdownMenu/DropdownMenu.view";

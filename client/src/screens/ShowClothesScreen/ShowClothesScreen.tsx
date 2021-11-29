@@ -7,7 +7,6 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import Card from "../../components/Card";
 import ShowClothesLayout from "../../layouts/ShowClothesLayout";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
-import ShowClothesDescriptionLayout from "../../layouts/ShowClothesDescriptionLayout";
 import React from "react";
 import { Text } from "../../components/Text/Text.view";
 import { getClothesById } from "../../redux/clothes/clothes.actions";
@@ -34,6 +33,7 @@ const useEditClothesScreen = () => {
   const cancelText = t("general.cancel");
   const editText = t("general.edit");
   const noDataText = t("general.noData");
+  const backText = t("general.back");
   const currencyText = t("currency.huf");
 
   const showClothes = useSelector((state: AppState) =>
@@ -42,6 +42,7 @@ const useEditClothesScreen = () => {
       : null
   );
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
+
   useEffect(() => {
     dispatch(getClothesById(currentId));
   }, [dispatch]);
@@ -49,6 +50,10 @@ const useEditClothesScreen = () => {
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
     history,
   ]);
+  const goToEditClothesScreen = useCallback(
+    (id) => history.push(pageURLS.EDIT_CLOTHES + id),
+    [history]
+  );
 
   return {
     showClothes,
@@ -68,10 +73,12 @@ const useEditClothesScreen = () => {
     goToHomeScreen,
     currentId,
     currencyText,
+    backText,
+    goToEditClothesScreen,
   };
 };
 
-const EditClothesScreen: FC = () => {
+const ShowCLothesScreen: FC = () => {
   const {
     showClothes,
     id,
@@ -90,6 +97,8 @@ const EditClothesScreen: FC = () => {
     goToHomeScreen,
     currentId,
     currencyText,
+    backText,
+    goToEditClothesScreen,
   } = useEditClothesScreen();
 
   return (
@@ -169,13 +178,14 @@ const EditClothesScreen: FC = () => {
                       border="borderNone"
                       onClick={goToHomeScreen}
                     >
-                      {cancelText}
+                      {backText}
                     </Button>
                     <Button
                       colorStyle="darkBlue"
                       rounded
                       buttonSize="normal"
                       border="borderNone"
+                      onClick={() => goToEditClothesScreen(showClothes._id)}
                     >
                       {editText}
                     </Button>
@@ -189,4 +199,4 @@ const EditClothesScreen: FC = () => {
     </LoadingSpinner>
   );
 };
-export default EditClothesScreen;
+export default ShowCLothesScreen;

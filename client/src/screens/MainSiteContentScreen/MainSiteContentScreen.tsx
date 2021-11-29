@@ -2,13 +2,14 @@ import MainLayout from "../../layouts/MainLayout";
 import MainHeaderScreen from "../MainHeaderScreen/MainHeaderScreen";
 import IntroScreen from "../IntroScreen/IntroScreen";
 import FooterScreen from "../FooterScreen/FooterScreen";
-import { Route, Switch, useParams } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import AddClothesScreen from "../../screens/AddClothesScreen/AddClothesScreen";
 import SearchScreen from "../../screens/SearchScreen/SearchScreen";
 import AboutScreen from "../../screens/AboutScreen/AboutScreen";
 import HomeContentScreen from "../../screens/HomeContentScreen/HomeContentScreen";
 import ShowCLothesScreen from "../ShowClothesScreen/ShowClothesScreen";
 import pageURLS from "../../resources/constants/pageURLS";
+import EditClothesScreen from "../EditClothesScreen/EditClothesScreen";
 
 const MainSiteContentScreen = () => {
   {
@@ -32,9 +33,10 @@ const MainSiteContentScreen = () => {
             />
             <Route
               exact
-              path={pageURLS.PROFILE}
-              component={MainSiteContentScreen}
+              path={pageURLS.EDIT_CLOTHES}
+              component={EditClothesScreen}
             />
+            <Route exact path={pageURLS.PROFILE} />
           </Switch>
         }
         footer={<FooterScreen />}

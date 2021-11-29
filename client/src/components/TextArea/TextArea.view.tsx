@@ -1,15 +1,18 @@
 import "../../components/TextArea/style.scss";
 import { FC, useCallback, useState } from "react";
-import { CreateScopeCSS } from "../../components/utils";
+import { cn, CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("components-text-area");
+const sizeClass = scope.and("size");
 
+//ToDo add expand textarea option
 interface Props {
   rows?: number;
   columns?: number;
   placeholderText: string;
   content?: string;
   onChange(value: string): void;
+  size: "small" | "medium" | "large";
 }
 
 export const TextArea: FC<Props> = ({
@@ -18,6 +21,7 @@ export const TextArea: FC<Props> = ({
   placeholderText,
   content,
   onChange,
+  size,
 }) => {
   const [, setTextAreaText] = useState<string>("");
 
@@ -35,7 +39,7 @@ export const TextArea: FC<Props> = ({
       rows={rows}
       cols={columns}
       placeholder={placeholderText}
-      className={scope}
+      className={cn(scope, size && sizeClass.and(size))}
       onChange={onChangeTextAreaText}
       value={content}
     />

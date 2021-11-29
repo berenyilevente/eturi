@@ -1,21 +1,30 @@
 import { AppState } from "../../redux/store";
 import pageURLS from "../../resources/constants/pageURLS";
-import { FC, useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Card from "../../components/Card";
 import ShowClothesLayout from "../../layouts/ShowClothesLayout";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
-import React from "react";
-import { Text } from "../../components/Text/Text.view";
-import { getClothesById } from "../../redux/clothes/clothes.actions";
+import Text from "../../components/Text";
+import {
+  getClothesById,
+  updateClothesAction,
+} from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Button from "../../components/Button";
+import DropdownMenu from "../../components/DropdownMenu";
+import {
+  IDropdownValues,
+  useDropdownBaseData,
+} from "../../hooks/useDropdownBaseData";
+import Input from "../../components/Input";
+import DividerLine from "../../components/DividerLine";
+import TextArea from "../../components/TextArea";
 
 const useEditClothesScreen = () => {
   const { t } = useTranslation();
-  //const queryParams = new URLSearchParams(window.location.search);
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -32,6 +41,11 @@ const useEditClothesScreen = () => {
   const cancelText = t("general.cancel");
   const editText = t("general.edit");
   const noDataText = t("general.noData");
+  const clothesNamePlaceholderText = t("clothes.clothesNamePlaceholder");
+  const descriptionPlaceholderText = t("clothes.descriptionPlaceholder");
+  const pricePlaceholderText = t("clothes.pricePlaceholder");
+  const currencyText = t("currency.huf");
+  const saveText = t("general.save");
 
   const showClothes = useSelector((state: AppState) =>
     currentId
@@ -39,13 +53,35 @@ const useEditClothesScreen = () => {
       : null
   );
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
+
   useEffect(() => {
     dispatch(getClothesById(currentId));
   }, [dispatch]);
 
-  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
-    history,
-  ]);
+  const goToShowClothesScreen = useCallback(
+    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
+    [history]
+  );
+
+  const [nameContent, setNameContent] = useState<string>();
+  const [categoryContent, setCategoryContent] = useState<string>("");
+  const [brandContent, setBrandContent] = useState<string>("");
+  const [sizeContent, setSizeContent] = useState<string>("");
+  const [conditionContent, setConditionContent] = useState<string>("");
+  const [colourContent, setColourContent] = useState<string>("");
+  const [descriptionContent, setDescriptionContent] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+
+  const {
+    category,
+    brands,
+    sizes,
+    conditions,
+    colours,
+    carouselTitles,
+    carouselImages,
+    carouselContent,
+  } = useDropdownBaseData();
 
   return {
     showClothes,
@@ -62,8 +98,38 @@ const useEditClothesScreen = () => {
     sizeText,
     colourText,
     noDataText,
-    goToHomeScreen,
+    goToShowClothesScreen,
     currentId,
+    category,
+    brands,
+    sizes,
+    conditions,
+    colours,
+    carouselTitles,
+    carouselImages,
+    carouselContent,
+    nameContent,
+    setNameContent,
+    categoryContent,
+    setCategoryContent,
+    brandContent,
+    setBrandContent,
+    sizeContent,
+    setSizeContent,
+    conditionContent,
+    setConditionContent,
+    colourContent,
+    setColourContent,
+    descriptionContent,
+    setDescriptionContent,
+    price,
+    setPrice,
+    clothesNamePlaceholderText,
+    descriptionPlaceholderText,
+    pricePlaceholderText,
+    currencyText,
+    saveText,
+    dispatch,
   };
 };
 
@@ -83,8 +149,38 @@ const EditClothesScreen: FC = () => {
     sizeText,
     colourText,
     noDataText,
-    goToHomeScreen,
+    goToShowClothesScreen,
     currentId,
+    category,
+    brands,
+    sizes,
+    conditions,
+    colours,
+    carouselTitles,
+    carouselImages,
+    carouselContent,
+    nameContent,
+    setNameContent,
+    categoryContent,
+    setCategoryContent,
+    brandContent,
+    setBrandContent,
+    sizeContent,
+    setSizeContent,
+    conditionContent,
+    setConditionContent,
+    colourContent,
+    setColourContent,
+    descriptionContent,
+    setDescriptionContent,
+    price,
+    setPrice,
+    clothesNamePlaceholderText,
+    descriptionPlaceholderText,
+    pricePlaceholderText,
+    currencyText,
+    saveText,
+    dispatch,
   } = useEditClothesScreen();
 
   return (
@@ -99,52 +195,108 @@ const EditClothesScreen: FC = () => {
           detailsArea={
             <Card backgroundColorStyle="white" shadow rounded>
               <ShowClothesDetailsLayout
-                brand={
-                  <Text textType="text-large-dark">{showClothes.brand}</Text>
+                nameTitle={
+                  <Text textType="text-normal-dark">{clothesNameText}</Text>
                 }
-                nameTitle={clothesNameText}
                 name={
-                  <Text textType="text-medium-dark">
-                    {showClothes.name || noDataText}
-                  </Text>
+                  <Input
+                    inputValue={nameContent}
+                    placeholderText={
+                      showClothes.name || clothesNamePlaceholderText
+                    }
+                    onChange={setNameContent}
+                  />
                 }
-                descriptionTitle={descriptionText}
+                descriptionTitle={
+                  <Text textType="text-normal-dark">{descriptionText}</Text>
+                }
                 description={
-                  <Text textType="text-medium-dark">
-                    {showClothes.description || noDataText}
-                  </Text>
+                  <TextArea
+                    placeholderText={descriptionPlaceholderText}
+                    content={descriptionContent}
+                    onChange={setDescriptionContent}
+                    size="small"
+                  />
                 }
+                line1={<DividerLine />}
                 categoryTitle={
-                  <Text textType="text-medium-dark">{categoryText}</Text>
+                  <Text textType="text-normal-dark">{categoryText}</Text>
                 }
                 category={
-                  <Text textType="text-medium-dark">
-                    {showClothes.category}
-                  </Text>
+                  <DropdownMenu
+                    items={category}
+                    content={categoryContent || showClothes.category}
+                    addValueToDropdown={true}
+                    onSelectItem={(item: IDropdownValues) => {
+                      setCategoryContent(item.value);
+                    }}
+                  />
                 }
-                sizeTitle={<Text textType="text-medium-dark">{sizeText}</Text>}
+                editBrandTitle={
+                  <Text textType="text-normal-dark">{brandText}</Text>
+                }
+                editBrand={
+                  <DropdownMenu
+                    items={brands}
+                    content={brandContent || showClothes.brand}
+                    addValueToDropdown={true}
+                    onSelectItem={(item: IDropdownValues) => {
+                      setBrandContent(item.value);
+                    }}
+                  />
+                }
+                sizeTitle={<Text textType="text-normal-dark">{sizeText}</Text>}
                 size={
-                  <Text textType="text-medium-dark">{showClothes.size}</Text>
+                  <DropdownMenu
+                    items={sizes}
+                    content={sizeContent || showClothes.size}
+                    addValueToDropdown={true}
+                    onSelectItem={(item: IDropdownValues) => {
+                      setSizeContent(item.value);
+                    }}
+                  />
                 }
                 conditionTitle={
-                  <Text textType="text-medium-dark">{conditionText}</Text>
+                  <Text textType="text-normal-dark">{conditionText}</Text>
                 }
                 condition={
-                  <Text textType="text-medium-dark">
-                    {showClothes.condition}
-                  </Text>
+                  <DropdownMenu
+                    items={conditions}
+                    placeholder={conditionText}
+                    hasDescriptionRow
+                    content={conditionContent}
+                    addValueToDropdown={true}
+                    onSelectItem={(item: IDropdownValues) => {
+                      setConditionContent(item.value);
+                    }}
+                  />
                 }
                 colourTitle={
-                  <Text textType="text-medium-dark">{colourText}</Text>
+                  <Text textType="text-normal-dark">{colourText}</Text>
                 }
                 colour={
-                  <Text textType="text-medium-dark">{showClothes.colour}</Text>
+                  <DropdownMenu
+                    items={colours}
+                    hasDescriptionRow
+                    content={colourContent || showClothes.colour}
+                    addValueToDropdown={true}
+                    onSelectItem={(item: IDropdownValues) => {
+                      setColourContent(item.value);
+                    }}
+                  />
                 }
+                line2={<DividerLine />}
                 priceTitle={
-                  <Text textType="text-medium-dark">{priceText}</Text>
+                  <Text textType="text-normal-dark">{priceText}</Text>
                 }
                 price={
-                  <Text textType="text-medium-dark">{showClothes.price}</Text>
+                  <Input
+                    placeholderText={showClothes.price + " " + currencyText}
+                    inputType="number"
+                    inputValue={price}
+                    onChange={setPrice}
+                    required={true}
+                  />
                 }
                 buttons={
                   <>
@@ -154,7 +306,7 @@ const EditClothesScreen: FC = () => {
                       buttonTextColor="dark"
                       buttonSize="medium"
                       border="borderNone"
-                      onClick={goToHomeScreen}
+                      onClick={() => goToShowClothesScreen(showClothes._id)}
                     >
                       {cancelText}
                     </Button>
@@ -163,8 +315,24 @@ const EditClothesScreen: FC = () => {
                       rounded
                       buttonSize="normal"
                       border="borderNone"
+                      onClick={() => {
+                        console.log(brandContent);
+                        dispatch(
+                          updateClothesAction(showClothes._id!, {
+                            name: nameContent!,
+                            description: descriptionContent,
+                            category: categoryContent,
+                            brand: brandContent,
+                            size: sizeContent,
+                            condition: conditionContent,
+                            colour: colourContent,
+                            price: price,
+                          })
+                        );
+                        goToShowClothesScreen(showClothes._id);
+                      }}
                     >
-                      {editText}
+                      {saveText}
                     </Button>
                   </>
                 }

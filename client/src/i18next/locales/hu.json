@@ -131,6 +131,8 @@
     "cancel": "Mégsem",
     "confirm": "Megerősítés",
     "edit": "Szerkesztés",
-    "noData": "Nincs megadott adat"
+    "noData": "Nincs megadott adat",
+    "save": "Mentés",
+    "back": "Vissza"
   }
 }

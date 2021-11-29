@@ -15,7 +15,11 @@ import {
   UPDATE_CLOTHES_SUCCESS,
 } from "./clothes.types";
 import * as api from "../../api";
-import { IClothesResponseData, ITriggerReload } from "./clothes.interfaces";
+import {
+  IClothesResponseData,
+  ITriggerReload,
+  IUpdateClothesResponseData,
+} from "./clothes.interfaces";
 
 export const getClothes = () => async (dispatch: Dispatch) => {
   dispatch({
@@ -75,7 +79,7 @@ export const addClothes = (clothes: IClothesResponseData) => async (
   }
 };
 
-export const updateClothes = (
+export const updateClothesAction = (
   id: string,
   clothes: IClothesResponseData
 ) => async (dispatch: Dispatch) => {
@@ -84,7 +88,6 @@ export const updateClothes = (
   });
   try {
     const response = await api.updateClothes(id, clothes);
-
     dispatch({
       type: UPDATE_CLOTHES_SUCCESS,
       payload: response.data,

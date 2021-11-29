@@ -3,6 +3,7 @@ import AddClothes from "../models/addClothes.js";
 export const getClothes = async (req, res) => {
   try {
     const addClothes = await AddClothes.find();
+
     res.status(200).json(addClothes);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -37,8 +38,6 @@ export const addClothes = async (req, res) => {
 export const updateClothes = async (req, res) => {
   const { id: _id } = req.params;
   const clothes = req.body;
-  if (!mongoose.Types.Object.isValid(_id))
-    return res.status(404).send("No clothes with that id");
 
   const updatedClothes = await AddClothes.findByIdAndUpdate(_id, clothes, {
     new: true,
