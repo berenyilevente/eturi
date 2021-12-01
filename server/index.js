@@ -20,14 +20,14 @@ app.use("/clothes", clothesRoutes);
 
 //greeting route for the deployed version
 app.get("/", (req, res) => {
-  res.send("Hello to eturi API");
+  res.send("Welcome to eturi API");
 });
 
 //will be populated immediately by heroku during deployment
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(process.env.CONNECTION_URL, {
+  .connect(process.env.CONNECTION_URL_LOCAL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

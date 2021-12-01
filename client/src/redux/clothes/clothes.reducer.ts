@@ -142,7 +142,7 @@ export default (
     case LIKE_CLOTHES_REQUEST:
       return {
         ...state,
-        likeLoading: true,
+        likeLoading: false,
         errorMessage: null,
       };
     case LIKE_CLOTHES_SUCCESS:

@@ -16,7 +16,9 @@ interface IDropdownItem {
   id: number;
   value: string;
   description?: string;
+  icon?: ReactNode;
 }
+
 interface Props {
   content?: string;
   items: {

@@ -10,6 +10,7 @@ import HomeContentScreen from "../../screens/HomeContentScreen/HomeContentScreen
 import ShowCLothesScreen from "../ShowClothesScreen/ShowClothesScreen";
 import pageURLS from "../../resources/constants/pageURLS";
 import EditClothesScreen from "../EditClothesScreen/EditClothesScreen";
+import AuthScreen from "../AuthScreen/AuthScreen";
 
 const MainSiteContentScreen = () => {
   {
@@ -37,6 +38,11 @@ const MainSiteContentScreen = () => {
               component={EditClothesScreen}
             />
             <Route exact path={pageURLS.PROFILE} />
+          </Switch>
+        }
+        authContent={
+          <Switch>
+            <Route exact path={pageURLS.AUTH} component={AuthScreen} />
           </Switch>
         }
         footer={<FooterScreen />}

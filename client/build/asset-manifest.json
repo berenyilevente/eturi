@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.478bdde5.chunk.css",
-    "main.js": "/static/js/main.eec8810c.chunk.js",
-    "main.js.map": "/static/js/main.eec8810c.chunk.js.map",
+    "main.css": "/static/css/main.7874b1d7.chunk.css",
+    "main.js": "/static/js/main.ffa02ed5.chunk.js",
+    "main.js.map": "/static/js/main.ffa02ed5.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.80bcf9f8.js",
     "runtime-main.js.map": "/static/js/runtime-main.80bcf9f8.js.map",
     "static/js/2.0e3d239c.chunk.js": "/static/js/2.0e3d239c.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.96903267.chunk.js": "/static/js/3.96903267.chunk.js",
     "static/js/3.96903267.chunk.js.map": "/static/js/3.96903267.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.478bdde5.chunk.css.map": "/static/css/main.478bdde5.chunk.css.map",
+    "static/css/main.7874b1d7.chunk.css.map": "/static/css/main.7874b1d7.chunk.css.map",
     "static/js/2.0e3d239c.chunk.js.LICENSE.txt": "/static/js/2.0e3d239c.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/static/media/Lato-Regular.9919edff.ttf",
     "static/media/style.scss": "/static/media/mainGardrobe.a97782f5.jpg",
@@ -23,7 +23,7 @@
   "entrypoints": [
     "static/js/runtime-main.80bcf9f8.js",
     "static/js/2.0e3d239c.chunk.js",
-    "static/css/main.478bdde5.chunk.css",
-    "static/js/main.eec8810c.chunk.js"
+    "static/css/main.7874b1d7.chunk.css",
+    "static/js/main.ffa02ed5.chunk.js"
   ]
 }

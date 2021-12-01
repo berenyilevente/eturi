@@ -68,7 +68,7 @@ const useEditClothesScreen = () => {
     [history]
   );
 
-  const [nameContent, setNameContent] = useState<string>();
+  const [nameContent, setNameContent] = useState<string>("");
   const [categoryContent, setCategoryContent] = useState<string>("");
   const [brandContent, setBrandContent] = useState<string>("");
   const [sizeContent, setSizeContent] = useState<string>("");

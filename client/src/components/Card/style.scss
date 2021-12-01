@@ -35,6 +35,21 @@ $scope: components-card;
       padding: 64px;
     }
   }
+  &-widthClass {
+    &-small {
+      width: 25rem;
+    }
+    &-medium {
+      width: 50rem;
+    }
+    &-large {
+      width: 75rem;
+    }
+    &-fullSize {
+      width: 100rem;
+    }
+  }
+
   &-marginSize {
     &-marginExtraSmall {
       margin: 20px;

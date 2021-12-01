@@ -8,6 +8,7 @@ const paddingSizeClass = scope.and("paddingSize");
 const marginSizeClass = scope.and("marginSize");
 const roundedClass = scope.and("borderRadius");
 const shadowClass = scope.and("shadow");
+const widthClass = scope.and("widthClass");
 
 interface Props {
   backgroundColorStyle: "white" | "blue" | "dark" | "lightBlue";
@@ -24,6 +25,7 @@ interface Props {
   shadow?: boolean;
   rounded?: boolean;
   className?: string;
+  width?: "small" | "medium" | "large" | "fullSize";
 }
 
 export const Card: FC<Props> = ({
@@ -34,6 +36,7 @@ export const Card: FC<Props> = ({
   backgroundColorStyle,
   paddingSize,
   marginSize,
+  width,
 }) => (
   <div
     className={cn(
@@ -41,6 +44,7 @@ export const Card: FC<Props> = ({
       background.and(backgroundColorStyle),
       paddingSizeClass.and(paddingSize),
       marginSizeClass.and(marginSize),
+      widthClass.and(width),
       shadow ? shadowClass : "",
       rounded ? roundedClass : "",
       className

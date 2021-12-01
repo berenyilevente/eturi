@@ -105,6 +105,7 @@ export interface IDeleteClothesFailureAction {
 //Like clothes types
 export interface ILikeClothesRequestAction {
   type: typeof LIKE_CLOTHES_REQUEST;
+  payload: ITriggerLikeLoading;
 }
 export interface ILikeClothesSuccessAction {
   type: typeof LIKE_CLOTHES_SUCCESS;

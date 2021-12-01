@@ -139,5 +139,19 @@
   },
   "deleteClothes":{
     "confirmationText": "Are you sure you want to delete the following listing?"
+  },
+  "auth":{
+    "signUpTitle": "Sign up",
+    "signUp": "Sign up",
+    "login": "Login",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email Address",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "haveAnAccount": "Already have and account?",
+    "signIn": "Sign in!",
+    "dontHaveAnAccount": "Need an account?",
+    "signUpHere": "Sign up!"
   }
 }

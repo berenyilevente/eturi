@@ -138,5 +138,19 @@
   },
   "deleteClothes":{
     "confirmationText": "Biztosan törölni szeretnéd a ruhát?"
+  },
+  "auth":{
+    "signUpTitle": "Regisztráció",
+    "signUp": "Regisztrálok",
+    "login": "Bejelentkezés",
+    "firstName": "Keresztnév",
+    "lastName": "Vezetéknév",
+    "email": "Email cím",
+    "password": "Jelszó",
+    "repeatPassword": "Jelszó megerősítése",
+    "haveAnAccount": "Már van fiókod?",
+    "signIn": "Jelentkezz be!",
+    "dontHaveAnAccount": "Még nincs fiókod?",
+    "signUpHere": "Regisztálj itt!"
   }
 }
