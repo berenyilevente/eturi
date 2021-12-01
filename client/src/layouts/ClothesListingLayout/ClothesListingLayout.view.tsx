@@ -14,6 +14,7 @@ interface Props {
   size?: ReactNode;
   brand?: ReactNode;
   heartIcon?: ReactNode;
+  line?: ReactNode;
 }
 
 export const ClothesListingLayout: FC<Props> = ({
@@ -22,6 +23,7 @@ export const ClothesListingLayout: FC<Props> = ({
   size,
   brand,
   heartIcon,
+  line,
 }) => (
   <div className={scope}>
     <div className={imageContainerClass}>{image}</div>
@@ -30,6 +32,7 @@ export const ClothesListingLayout: FC<Props> = ({
       <div className={heartIconClass}>{heartIcon}</div>
       <div className={spanAllRows}>{size}</div>
       <div className={spanAllRows}>{brand}</div>
+      <div className={spanAllRows}>{line}</div>
     </div>
   </div>
 );

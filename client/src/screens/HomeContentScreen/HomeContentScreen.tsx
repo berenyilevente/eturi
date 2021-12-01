@@ -16,6 +16,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { useHistory } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import Icon from "../../components/Icon";
+import DividerLine from "../../components/DividerLine";
 
 const useHomeContentScreen = () => {
   const { t } = useTranslation();

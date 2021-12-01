@@ -8,8 +8,9 @@ const iconClass = scope.and("icon");
 const emailClass = scope.and("email");
 const passwordClass = scope.and("password");
 const resetPasswordClass = scope.and("resetPassword");
-const signUpClass = scope.and("signUp");
+const signUpButtonClass = scope.and("signUpButton");
 const helperTextClass = scope.and("helperText");
+const googleButtonClass = scope.and("googleButton");
 
 interface Props {
   icon?: ReactNode;
@@ -21,6 +22,7 @@ interface Props {
   repeatPassword?: ReactNode;
   actionButton?: ReactNode;
   helperText?: ReactNode;
+  googleButton?: ReactNode;
 }
 
 export const AuthLayout: FC<Props> = ({
@@ -33,6 +35,7 @@ export const AuthLayout: FC<Props> = ({
   repeatPassword,
   actionButton,
   helperText,
+  googleButton,
 }) => (
   <div className={scope}>
     <div className={iconClass}>{icon}</div>
@@ -42,7 +45,8 @@ export const AuthLayout: FC<Props> = ({
     <div className={emailClass}>{email}</div>
     <div className={passwordClass}>{password}</div>
     <div className={resetPasswordClass}>{repeatPassword}</div>
-    <div className={signUpClass}>{actionButton}</div>
+    <div className={signUpButtonClass}>{actionButton}</div>
     <div className={helperTextClass}>{helperText}</div>
+    <div className={googleButtonClass}>{googleButton}</div>
   </div>
 );

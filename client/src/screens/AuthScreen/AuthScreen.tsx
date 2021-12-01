@@ -153,31 +153,30 @@ const AuthScreen: FC = () => {
             ></Input>
           }
           actionButton={
-            <>
-              <Button
-                colorStyle="darkBlue"
-                border="borderNone"
-                buttonSize="large"
-              >
-                <Text textType="text-normal-white"> {loginText}</Text>
-              </Button>
-              <GoogleLogin
-                clientId="212508933674-3ahsl2ma7cpb2ll40ulikadg2bf13qt9.apps.googleusercontent.com"
-                render={(renderProps) => (
-                  <Button
-                    colorStyle="darkBlue"
-                    border="borderNone"
-                    buttonSize="normal"
-                    onClick={renderProps.onClick}
-                  >
-                    {"Goggle sign in"}
-                  </Button>
-                )}
-                onSuccess={googleSuccess}
-                onFailure={googleFailure}
-                cookiePolicy="single_host_origin"
-              />
-            </>
+            <Button
+              colorStyle="darkBlue"
+              border="borderNone"
+              buttonSize="medium"
+            >
+              <Text textType="text-normal-white"> {loginText}</Text>
+            </Button>
+          }
+          googleButton={
+            <GoogleLogin
+              clientId="212508933674-3ahsl2ma7cpb2ll40ulikadg2bf13qt9.apps.googleusercontent.com"
+              render={(renderProps) => (
+                <Icon
+                  iconType="googleIconColor"
+                  onClick={renderProps.onClick}
+                  cursor
+                >
+                  {"google"}
+                </Icon>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
+              cookiePolicy="single_host_origin"
+            />
           }
           helperText={
             <>
