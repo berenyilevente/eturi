@@ -6,6 +6,7 @@ $scope: layouts-header-layout;
   gap: 0px 0px;
   grid-auto-flow: row;
   margin-top: 24px;
+  white-space: nowrap;
   &-logo {
     display: flex;
     height: 100%;

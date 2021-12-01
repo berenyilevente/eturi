@@ -21,8 +21,10 @@ $scope: layouts-main-layout;
     grid-area: 3 / 2 / 4/ 4;
   }
   &-authContent {
+    display: flex;
     justify-self: center;
     grid-area: 3 / 2 / 4/ 4;
+    margin-top: 12vh;
   }
   &-footer {
     grid-area: 4 / 2 / 5 / 4;

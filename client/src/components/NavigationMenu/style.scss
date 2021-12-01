@@ -29,12 +29,9 @@ $scope: components-navigation-menu;
     background-color: white;
     font-size: 16px;
     padding: 10px 26px 10px 23px;
-    border: 0;
-    border-bottom: 1px solid var(--lighter);
+    border: 1px solid var(--lighter);
     width: 100%;
     text-align: right;
-    border-left: 1px solid var(--lighter);
-    border-right: 1px solid var(--lighter);
   }
   &-buttonClass:hover {
     cursor: pointer;

@@ -1,11 +1,24 @@
+import pageURLS from "../../resources/constants/pageURLS";
 import { Dispatch } from "redux";
+import {
+  IUserAuthState,
+  IUserLoginData,
+  IUserRegistrationData,
+} from "./auth.interfaces";
 import {
   AUTH_FAILURE,
   AUTH_REQUEST,
   AUTH_SUCCESS,
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
   LOGOUT_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  USER_AUTH_STATE,
 } from "./auth.types";
 
 export const googleAuthAction = (data: { result: any; token: any }) => async (
@@ -26,6 +39,48 @@ export const googleAuthAction = (data: { result: any; token: any }) => async (
     });
   }
 };
+
+export const loginAction = (loginData: IUserLoginData, history: any) => async (
+  dispatch: Dispatch
+) => {
+  dispatch({
+    type: LOGIN_REQUEST,
+  });
+  try {
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: loginData,
+    });
+    history.push(pageURLS.HOME);
+  } catch (error) {
+    dispatch({
+      type: LOGIN_FAILURE,
+      error,
+    });
+  }
+};
+
+export const registerUserAction = (
+  signUpData: IUserRegistrationData,
+  history: any
+) => async (dispatch: Dispatch) => {
+  dispatch({
+    type: SIGNUP_REQUEST,
+  });
+  try {
+    dispatch({
+      type: SIGNUP_SUCCESS,
+      payload: signUpData,
+    });
+    history.push(pageURLS.HOME);
+  } catch (error) {
+    dispatch({
+      type: SIGNUP_FAILURE,
+      error,
+    });
+  }
+};
+
 export const logoutAction = () => async (dispatch: Dispatch) => {
   dispatch({
     type: LOGOUT_REQUEST,
@@ -41,4 +96,13 @@ export const logoutAction = () => async (dispatch: Dispatch) => {
       error,
     });
   }
+};
+
+export const setUserAuthStateAction = (isLogin?: IUserAuthState) => async (
+  dispatch: Dispatch
+) => {
+  dispatch({
+    type: USER_AUTH_STATE,
+    payload: isLogin,
+  });
 };

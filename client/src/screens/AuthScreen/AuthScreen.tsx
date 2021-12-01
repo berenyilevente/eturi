@@ -8,10 +8,16 @@ import Button from "../../components/Button";
 import Link from "../../components/Link";
 import Card from "../../components/Card";
 import { GoogleLogin } from "react-google-login";
-import { useDispatch } from "react-redux";
-import { googleAuthAction } from "../../redux/auth/auth.actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  googleAuthAction,
+  loginAction,
+  registerUserAction,
+  setUserAuthStateAction,
+} from "../../redux/auth/auth.actions";
 import { useHistory } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
+import { AppState } from "@/redux/store";
 
 const useAuthScreen = () => {
   const { t } = useTranslation();
@@ -33,18 +39,25 @@ const useAuthScreen = () => {
 
   const [isLogin, setIsLogin] = useState<boolean>(true);
 
+  const isUserLoggedIn = useSelector(
+    (state: AppState) => state.auth.isUserLoggedIn
+  );
+
   const [emailContent, setEmailContent] = useState("");
   const [emailContentLogin, setEmailContentLogin] = useState("");
   const [passwordContentLogin, setPasswordContentLogin] = useState("");
   const [passwordContent, setPasswordContent] = useState("");
   const [repeatPasswordContent, setRepeatPasswordContent] = useState("");
-
   const [lastNameContent, setLastNameContent] = useState("");
   const [firstNameContent, setFirstNameContent] = useState("");
 
-  const switchAuthMode = useCallback(() => {
-    setIsLogin((prevIsLogin) => !prevIsLogin);
-  }, [setIsLogin]);
+  const switchToLogin = useCallback(() => {
+    dispatch(setUserAuthStateAction({ isLogin: true }));
+  }, [dispatch]);
+
+  const switchToSignUp = useCallback(() => {
+    dispatch(setUserAuthStateAction({ isLogin: false }));
+  }, [dispatch]);
 
   const googleSuccess = useCallback(async (res) => {
     const result = res?.profileObj;
@@ -62,6 +75,45 @@ const useAuthScreen = () => {
     console.log("Sign in unsuccessful...");
   }, []);
 
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!isUserLoggedIn) {
+        dispatch(
+          registerUserAction(
+            {
+              firstName: firstNameContent,
+              lastName: lastNameContent,
+              email: emailContent,
+              password: passwordContent,
+              repeatPassword: repeatPasswordContent,
+            },
+            history
+          )
+        );
+      } else {
+        dispatch(
+          loginAction(
+            {
+              email: emailContentLogin,
+              password: passwordContentLogin,
+            },
+            history
+          )
+        );
+      }
+    },
+    [
+      firstNameContent,
+      lastNameContent,
+      emailContent,
+      passwordContent,
+      repeatPasswordContent,
+      emailContentLogin,
+      passwordContentLogin,
+    ]
+  );
+
   return {
     signUpText,
     loginText,
@@ -77,7 +129,7 @@ const useAuthScreen = () => {
     signUpTitleText,
     dontHaveAnAccountText,
     signUpHereText,
-    switchAuthMode,
+    switchToLogin,
     emailContent,
     setEmailContent,
     passwordContent,
@@ -94,6 +146,9 @@ const useAuthScreen = () => {
     setEmailContentLogin,
     googleSuccess,
     googleFailure,
+    onSubmit,
+    isUserLoggedIn,
+    switchToSignUp,
   };
 };
 
@@ -113,7 +168,7 @@ const AuthScreen: FC = () => {
     signUpTitleText,
     dontHaveAnAccountText,
     signUpHereText,
-    switchAuthMode,
+    switchToLogin,
     emailContent,
     setEmailContent,
     passwordContent,
@@ -130,11 +185,14 @@ const AuthScreen: FC = () => {
     setEmailContentLogin,
     googleSuccess,
     googleFailure,
+    onSubmit,
+    isUserLoggedIn,
+    switchToSignUp,
   } = useAuthScreen();
 
   return (
     <Card backgroundColorStyle="white" shadow width="small">
-      {isLogin ? (
+      {isUserLoggedIn ? (
         <AuthLayout
           icon={<Icon iconType="lockIcon" />}
           title={<Text textType="text-large-dark">{loginText}</Text>}
@@ -143,20 +201,21 @@ const AuthScreen: FC = () => {
               placeholderText={emailText}
               onChange={setEmailContentLogin}
               inputValue={emailContentLogin}
-            ></Input>
+            />
           }
           password={
             <Input
               placeholderText={passwordText}
               onChange={setPasswordContentLogin}
               inputValue={passwordContentLogin}
-            ></Input>
+            />
           }
           actionButton={
             <Button
               colorStyle="darkBlue"
               border="borderNone"
               buttonSize="medium"
+              onClick={onSubmit}
             >
               <Text textType="text-normal-white"> {loginText}</Text>
             </Button>
@@ -184,7 +243,7 @@ const AuthScreen: FC = () => {
               <Link
                 textType="text-small-dark"
                 color="darkBlue"
-                onClick={() => switchAuthMode()}
+                onClick={() => switchToSignUp()}
               >
                 {signUpHereText}
               </Link>
@@ -235,6 +294,7 @@ const AuthScreen: FC = () => {
               colorStyle="darkBlue"
               border="borderNone"
               buttonSize="large"
+              onClick={onSubmit}
             >
               <Text textType="text-normal-white"> {signUpText}</Text>
             </Button>
@@ -245,10 +305,29 @@ const AuthScreen: FC = () => {
               <Link
                 textType="text-small-dark"
                 color="darkBlue"
-                onClick={() => switchAuthMode()}
+                onClick={() => switchToLogin()}
               >
                 {signInText}
               </Link>
+            </>
+          }
+          googleButton={
+            <>
+              <GoogleLogin
+                clientId="212508933674-3ahsl2ma7cpb2ll40ulikadg2bf13qt9.apps.googleusercontent.com"
+                render={(renderProps) => (
+                  <Icon
+                    iconType="googleIconColor"
+                    onClick={renderProps.onClick}
+                    cursor
+                  >
+                    {"google"}
+                  </Icon>
+                )}
+                onSuccess={googleSuccess}
+                onFailure={googleFailure}
+                cookiePolicy="single_host_origin"
+              />
             </>
           }
         />

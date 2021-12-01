@@ -13,7 +13,10 @@ import NavigationMenu from "../../components/NavigationMenu";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from "../../redux/auth/auth.actions";
+import {
+  logoutAction,
+  setUserAuthStateAction,
+} from "../../redux/auth/auth.actions";
 import { setTriggerReload } from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { AppState } from "../../redux/store";
@@ -34,6 +37,8 @@ const useMainHeaderScreen = () => {
   const searchText = t("header.search");
   const aboutText = t("header.about");
   const profileText = t("header.profile");
+  const loginText = t("auth.login");
+  const signUpText = t("auth.signUp");
 
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
     history,
@@ -117,6 +122,9 @@ const useMainHeaderScreen = () => {
     goToAuthScreen,
     logout,
     isAuthLoading,
+    dispatch,
+    loginText,
+    signUpText,
   };
 };
 
@@ -136,6 +144,9 @@ const MainHeaderScreen = () => {
     goToAuthScreen,
     logout,
     isAuthLoading,
+    dispatch,
+    loginText,
+    signUpText,
   } = useMainHeaderScreen();
   return (
     <Card backgroundColorStyle="white" rounded>
@@ -160,14 +171,14 @@ const MainHeaderScreen = () => {
                   buttonTextColor="dark"
                   onClick={logout}
                 >
-                  {"Logout"}
+                  {loginText}
                 </Button>
                 <Button
                   buttonSize="medium"
                   colorStyle="darkBlue"
                   border="borderNone"
                 >
-                  {"Profile"}
+                  {profileText}
                 </Button>
                 <NavigationMenu menuItems={navigationMenuItems} />
               </>
@@ -179,16 +190,23 @@ const MainHeaderScreen = () => {
                   border="borderNone"
                   buttonTextColor="dark"
                   transparent
+                  onClick={() => {
+                    goToAuthScreen();
+                    dispatch(setUserAuthStateAction({ isLogin: false }));
+                  }}
                 >
-                  {"Register"}
+                  {signUpText}
                 </Button>
                 <Button
                   buttonSize="medium"
                   colorStyle="darkBlue"
                   border="borderNone"
-                  onClick={goToAuthScreen}
+                  onClick={() => {
+                    goToAuthScreen();
+                    dispatch(setUserAuthStateAction({ isLogin: true }));
+                  }}
                 >
-                  {"Login"}
+                  {loginText}
                 </Button>
                 <NavigationMenu menuItems={navigationMenuItems} />
               </>
