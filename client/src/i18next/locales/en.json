@@ -149,7 +149,7 @@
     "lastName": "Last name",
     "email": "Email Address",
     "password": "Password",
-    "repeatPassword": "Repeat password",
+    "repeatPassword": "Confirm password",
     "haveAnAccount": "Already have and account?",
     "signIn": "Sign in!",
     "dontHaveAnAccount": "Need an account?",

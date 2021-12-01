@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import clothesRoutes from "./routes/clothes.js";
+import userRoutes from "./routes/users.js";
 
 const app = express();
 dotenv.config();
@@ -17,7 +18,7 @@ app.use(cors());
 //first parameter: set up the starting path for all the routes inside posts.js
 //every route inside the post route will start with post ...
 app.use("/clothes", clothesRoutes);
-
+app.use("/user", userRoutes);
 //greeting route for the deployed version
 app.get("/", (req, res) => {
   res.send("Welcome to eturi API");

@@ -1,5 +1,6 @@
 import pageURLS from "../../resources/constants/pageURLS";
 import { Dispatch } from "redux";
+import * as api from "../../api";
 import {
   IUserAuthState,
   IUserLoginData,
@@ -47,9 +48,10 @@ export const loginAction = (loginData: IUserLoginData, history: any) => async (
     type: LOGIN_REQUEST,
   });
   try {
+    const res = await api.login(loginData);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: loginData,
+      payload: res.data,
     });
     history.push(pageURLS.HOME);
   } catch (error) {
@@ -68,9 +70,10 @@ export const registerUserAction = (
     type: SIGNUP_REQUEST,
   });
   try {
+    const res = await api.register(signUpData);
     dispatch({
       type: SIGNUP_SUCCESS,
-      payload: signUpData,
+      payload: res.data,
     });
     history.push(pageURLS.HOME);
   } catch (error) {

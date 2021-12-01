@@ -7,15 +7,15 @@ import {
   deleteClothes,
   likeClothes,
 } from "../controllers/clothesController.js";
-
+import authMiddleware from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 //specify in a callback what should happen, when someone visits localhost:5000/
 router.get("/", getClothes);
 router.get("/", getClothesById);
-router.post("/", addClothes);
-router.patch("/:id", updateClothes);
-router.delete("/:id", deleteClothes);
-router.patch("/:id/likeClothes", likeClothes);
+router.post("/", authMiddleware, addClothes);
+router.patch("/:id", authMiddleware, updateClothes);
+router.delete("/:id", authMiddleware, deleteClothes);
+router.patch("/:id/likeClothes", authMiddleware, likeClothes);
 
 export default router;

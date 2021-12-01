@@ -70,7 +70,15 @@ export default (
         errorMessage: null,
       };
     case LOGIN_SUCCESS:
-      return { ...state, isAuthLoading: false, auth: null };
+      return (
+        localStorage.setItem("profile", JSON.stringify({ ...action.payload })),
+        {
+          ...state,
+          isAuthLoading: false,
+          isUserLoggedIn: true,
+          ...action.payload,
+        }
+      );
     case LOGIN_FAILURE:
       return {
         ...state,

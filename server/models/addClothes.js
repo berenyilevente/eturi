@@ -16,6 +16,7 @@ const clothesSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  creator: String,
 });
 
 //turn the schema into a model: exporting a mongoose model on the postClothes file

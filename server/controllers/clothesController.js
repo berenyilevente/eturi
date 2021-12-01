@@ -27,7 +27,11 @@ export const addClothes = async (req, res) => {
   //with post requests you have access to the req.body
   const postClothes = req.body;
 
-  const newClothes = new AddClothes(postClothes);
+  const newClothes = new AddClothes({
+    ...postClothes,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
   try {
     await newClothes.save();
     res.status(201).json(newClothes);

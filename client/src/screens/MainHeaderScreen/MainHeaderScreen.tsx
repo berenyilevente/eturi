@@ -39,6 +39,7 @@ const useMainHeaderScreen = () => {
   const profileText = t("header.profile");
   const loginText = t("auth.login");
   const signUpText = t("auth.signUp");
+  const logoutText = t("auth.logout");
 
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
     history,
@@ -125,6 +126,7 @@ const useMainHeaderScreen = () => {
     dispatch,
     loginText,
     signUpText,
+    logoutText,
   };
 };
 
@@ -139,6 +141,7 @@ const MainHeaderScreen = () => {
     goToSearchScreen,
     goToHomeScreen,
     goToAboutScreen,
+    goToProfileScreen,
     navigationMenuItems,
     user,
     goToAuthScreen,
@@ -147,6 +150,7 @@ const MainHeaderScreen = () => {
     dispatch,
     loginText,
     signUpText,
+    logoutText,
   } = useMainHeaderScreen();
   return (
     <Card backgroundColorStyle="white" rounded>
@@ -171,12 +175,13 @@ const MainHeaderScreen = () => {
                   buttonTextColor="dark"
                   onClick={logout}
                 >
-                  {loginText}
+                  {logoutText}
                 </Button>
                 <Button
                   buttonSize="medium"
                   colorStyle="darkBlue"
                   border="borderNone"
+                  onClick={goToProfileScreen}
                 >
                   {profileText}
                 </Button>

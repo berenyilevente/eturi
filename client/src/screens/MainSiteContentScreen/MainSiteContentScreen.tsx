@@ -11,6 +11,7 @@ import ShowCLothesScreen from "../ShowClothesScreen/ShowClothesScreen";
 import pageURLS from "../../resources/constants/pageURLS";
 import EditClothesScreen from "../EditClothesScreen/EditClothesScreen";
 import AuthScreen from "../AuthScreen/AuthScreen";
+import ProfileScreen from "../ProfileScreen/ProfileScreen";
 
 const MainSiteContentScreen = () => {
   {
@@ -37,7 +38,7 @@ const MainSiteContentScreen = () => {
               path={pageURLS.EDIT_CLOTHES}
               component={EditClothesScreen}
             />
-            <Route exact path={pageURLS.PROFILE} />
+            <Route exact path={pageURLS.PROFILE} component={ProfileScreen} />
           </Switch>
         }
         authContent={

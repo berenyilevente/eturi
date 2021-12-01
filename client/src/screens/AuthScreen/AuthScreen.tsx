@@ -86,7 +86,7 @@ const useAuthScreen = () => {
               lastName: lastNameContent,
               email: emailContent,
               password: passwordContent,
-              repeatPassword: repeatPasswordContent,
+              confirmPassword: repeatPasswordContent,
             },
             history
           )

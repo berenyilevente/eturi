@@ -6,12 +6,12 @@ export interface IDefaultAuthState {
 }
 
 export interface IAuthResponseData {
-  googleId: string;
-  email: string;
-  familyName: string;
-  givenName: string;
-  imageUrl: string;
-  name: string;
+  googleId?: string;
+  email?: string;
+  familyName?: string;
+  givenName?: string;
+  imageUrl?: string;
+  name?: string;
 }
 
 export interface IUserAuthState {
@@ -28,5 +28,5 @@ export interface IUserRegistrationData {
   lastName: string;
   email: string;
   password: string;
-  repeatPassword: string;
+  confirmPassword: string;
 }
