@@ -22,6 +22,7 @@ export interface IClothesResponseData {
   price: string;
   isLiked?: boolean;
   createdAt?: Date;
+  creator?: string;
 }
 [];
 

@@ -12,7 +12,7 @@ interface Props {
   placeholderText: string;
   content?: string;
   onChange(value: string): void;
-  size: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "minContent";
 }
 
 export const TextArea: FC<Props> = ({

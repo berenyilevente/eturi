@@ -38,10 +38,9 @@ export default (
       return (
         localStorage.setItem("profile", JSON.stringify({ ...action.payload })),
         {
-          ...state,
           isAuthLoading: false,
           errorMessage: null,
-          auth: action.payload,
+          isUserLoggedIn: true,
         }
       );
     case AUTH_FAILURE:
@@ -57,7 +56,14 @@ export default (
         errorMessage: null,
       };
     case LOGOUT_SUCCESS:
-      return { ...state, isAuthLoading: false, auth: null };
+      return (
+        localStorage.clear(),
+        {
+          ...state,
+          isAuthLoading: false,
+          isUserLoggedIn: false,
+        }
+      );
     case LOGOUT_FAILURE:
       return {
         ...state,
@@ -67,13 +73,14 @@ export default (
       return {
         ...state,
         isAuthLoading: true,
+        isUserLoggedIn: false,
         errorMessage: null,
       };
     case LOGIN_SUCCESS:
       return (
         localStorage.setItem("profile", JSON.stringify({ ...action.payload })),
         {
-          ...state,
+          errorMessage: null,
           isAuthLoading: false,
           isUserLoggedIn: true,
           ...action.payload,
@@ -82,6 +89,8 @@ export default (
     case LOGIN_FAILURE:
       return {
         ...state,
+        isAuthLoading: false,
+        isUserLoggedIn: false,
         errorMessage: action.error.message,
       };
     case SIGNUP_REQUEST:
@@ -98,8 +107,6 @@ export default (
         errorMessage: action.error.message,
       };
 
-    case USER_AUTH_STATE:
-      return { errorMessage: null, isUserLoggedIn: action.payload.isLogin };
     default:
       return state;
   }

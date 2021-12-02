@@ -8,9 +8,9 @@ const socialClass = scope.and("social");
 const languageClass = scope.and("language");
 
 interface Props {
-  navigation: ReactNode;
-  socialMedia: ReactNode;
-  languageSelector: ReactNode;
+  navigation?: ReactNode;
+  socialMedia?: ReactNode;
+  languageSelector?: ReactNode;
 }
 
 export const FooterLayout: FC<Props> = ({

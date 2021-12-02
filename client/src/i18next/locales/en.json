@@ -154,5 +154,11 @@
     "signIn": "Sign in!",
     "dontHaveAnAccount": "Need an account?",
     "signUpHere": "Sign up!"
+  },
+  "profile":{
+    "title": "My wardrobe",
+    "editProfile": "Edit profile",
+    "noClothes": "No clothes found",
+    "addNow": "Start selling now!"
   }
 }

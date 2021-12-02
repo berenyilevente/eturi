@@ -211,7 +211,7 @@ const EditClothesScreen: FC = () => {
   } = useEditClothesScreen();
 
   return (
-    <>
+    <LoadingSpinner>
       {showClothes && (
         <ShowClothesLayout
           imageArea={
@@ -239,7 +239,7 @@ const EditClothesScreen: FC = () => {
                 }
                 description={
                   <TextArea
-                    placeholderText={descriptionPlaceholderText}
+                    placeholderText={showClothes.description}
                     content={descriptionContent}
                     onChange={setDescriptionContent}
                     size="small"
@@ -347,7 +347,10 @@ const EditClothesScreen: FC = () => {
                       buttonTextColor="dark"
                       buttonSize="medium"
                       border="borderNone"
-                      onClick={() => goToShowClothesScreen(showClothes._id)}
+                      onClick={() => {
+                        goToShowClothesScreen(showClothes._id);
+                        dispatch(setTriggerReload({ triggerReload: false }));
+                      }}
                     >
                       {cancelText}
                     </Button>
@@ -356,6 +359,7 @@ const EditClothesScreen: FC = () => {
                       rounded
                       buttonSize="normal"
                       border="borderNone"
+                      isLoading={isClothesLoading}
                       onClick={() => {
                         dispatch(
                           updateClothesAction(showClothes._id!, {
@@ -373,7 +377,7 @@ const EditClothesScreen: FC = () => {
                         goToShowClothesScreen(showClothes._id);
                       }}
                     >
-                      {saveText}
+                      <Text textType="text-small-white"> {saveText}</Text>
                     </Button>
                   </>
                 }
@@ -416,7 +420,7 @@ const EditClothesScreen: FC = () => {
           </div>
         </Modal>
       }
-    </>
+    </LoadingSpinner>
   );
 };
 export default EditClothesScreen;

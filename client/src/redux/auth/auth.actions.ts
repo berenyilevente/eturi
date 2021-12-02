@@ -100,12 +100,3 @@ export const logoutAction = () => async (dispatch: Dispatch) => {
     });
   }
 };
-
-export const setUserAuthStateAction = (isLogin?: IUserAuthState) => async (
-  dispatch: Dispatch
-) => {
-  dispatch({
-    type: USER_AUTH_STATE,
-    payload: isLogin,
-  });
-};

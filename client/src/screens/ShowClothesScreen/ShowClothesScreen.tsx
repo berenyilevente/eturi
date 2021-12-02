@@ -1,6 +1,6 @@
 import { AppState } from "../../redux/store";
 import pageURLS from "../../resources/constants/pageURLS";
-import { FC, useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
@@ -9,7 +9,11 @@ import ShowClothesLayout from "../../layouts/ShowClothesLayout";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
 import React from "react";
 import { Text } from "../../components/Text/Text.view";
-import { getClothesById } from "../../redux/clothes/clothes.actions";
+import {
+  getClothes,
+  getClothesById,
+  setTriggerReload,
+} from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Button from "../../components/Button";
 import DividerLine from "../../components/DividerLine";
@@ -21,6 +25,14 @@ const useEditClothesScreen = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("profile")!)
+  );
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")!));
+  }, [setUser]);
 
   const currentId = id.slice(3);
   const clothesNameText = t("clothes.clothesName");
@@ -42,10 +54,12 @@ const useEditClothesScreen = () => {
       ? state.clothes.showClothes.find((item) => item._id === currentId)
       : null
   );
-  const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
+  const { isClothesLoading, triggerReload } = useSelector(
+    (state: AppState) => state.clothes
+  );
 
   useEffect(() => {
-    dispatch(getClothesById(currentId));
+    triggerReload && dispatch(getClothesById(currentId));
   }, [dispatch]);
 
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
@@ -76,6 +90,8 @@ const useEditClothesScreen = () => {
     currencyText,
     backText,
     goToEditClothesScreen,
+    dispatch,
+    user,
   };
 };
 
@@ -100,10 +116,12 @@ const ShowCLothesScreen: FC = () => {
     currencyText,
     backText,
     goToEditClothesScreen,
+    dispatch,
+    user,
   } = useEditClothesScreen();
 
   return (
-    <>
+    <LoadingSpinner isLoading={isClothesLoading}>
       {showClothes && (
         <ShowClothesLayout
           imageArea={
@@ -180,19 +198,25 @@ const ShowCLothesScreen: FC = () => {
                       buttonTextColor="dark"
                       buttonSize="medium"
                       border="borderNone"
-                      onClick={goToHomeScreen}
+                      onClick={() => {
+                        goToHomeScreen();
+                        dispatch(setTriggerReload({ triggerReload: true }));
+                      }}
                     >
                       {backText}
                     </Button>
-                    <Button
-                      colorStyle="darkBlue"
-                      rounded
-                      buttonSize="normal"
-                      border="borderNone"
-                      onClick={() => goToEditClothesScreen(showClothes._id)}
-                    >
-                      {editText}
-                    </Button>
+                    {(user?.result?.googleId === showClothes.creator ||
+                      user?.result?._id === showClothes?.creator) && (
+                      <Button
+                        colorStyle="darkBlue"
+                        rounded
+                        buttonSize="normal"
+                        border="borderNone"
+                        onClick={() => goToEditClothesScreen(showClothes._id)}
+                      >
+                        <Text textType="text-small-white"> {editText}</Text>
+                      </Button>
+                    )}
                   </>
                 }
               />
@@ -200,7 +224,7 @@ const ShowCLothesScreen: FC = () => {
           }
         />
       )}
-    </>
+    </LoadingSpinner>
   );
 };
 export default ShowCLothesScreen;

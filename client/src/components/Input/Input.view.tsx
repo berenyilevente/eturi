@@ -1,19 +1,24 @@
 import "../../components/Input/style.scss";
 import { FC, KeyboardEventHandler, useCallback, useState } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
+import Icon from "../Icon";
+import * as iconMap from "../../components/Icon/icons";
 
 const scope = CreateScopeCSS("components-input");
 const inputAreaClass = scope.and("inputArea");
 const inputFieldClass = scope.and("inputField");
+const iconClass = scope.and("iconClass");
 
 interface Props {
   inputValue?: string;
   placeholderText: string;
-  inputType?: "text" | "number";
+  inputType?: "text" | "number" | "password";
   onEnterKeyPressed?: KeyboardEventHandler<HTMLInputElement>;
   onChange(value: string): void;
   required?: boolean;
   errorTextValue?: string;
+  hasIcon?: boolean;
+  iconType?: keyof typeof iconMap;
 }
 
 export const Input: FC<Props> = ({
@@ -23,6 +28,8 @@ export const Input: FC<Props> = ({
   onEnterKeyPressed,
   inputValue,
   required,
+  hasIcon,
+  iconType,
 }) => {
   const [, setInputText] = useState<string>("");
 
@@ -47,7 +54,7 @@ export const Input: FC<Props> = ({
 
   return (
     <div className={scope}>
-      <div className={inputAreaClass}>
+      <span className={inputAreaClass}>
         <input
           placeholder={placeholderText}
           type={inputType}
@@ -57,7 +64,8 @@ export const Input: FC<Props> = ({
           onKeyPress={onKeyPress}
           required={required}
         />
-      </div>
+        {hasIcon && <Icon iconType={iconType!} className={iconClass} />}
+      </span>
     </div>
   );
 };

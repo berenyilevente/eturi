@@ -7,6 +7,7 @@ const URLS = {
   GET_CLOTHES_BY_ID: "/show/:id",
   EDIT_CLOTHES: "/edit/:id",
   AUTH: "/auth",
+  LOGIN: "/login",
 };
 
 export default URLS;

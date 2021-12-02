@@ -1,9 +1,9 @@
-$scope: layouts-auth-layout;
+$scope: layouts-login-layout;
 //just an example class, tbd
 .#{$scope} {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(7, min-content);
+  grid-template-rows: repeat(6, min-content);
   padding: 24px;
   gap: 1rem;
   margin-top: 32px;
@@ -24,10 +24,8 @@ $scope: layouts-auth-layout;
   &-password {
     grid-column: 1 / 3;
   }
-  &-resetPassword {
-    grid-column: 1 / 3;
-  }
-  &-signUpButton {
+
+  &-loginButton {
     grid-column: 1 / 3;
     justify-self: center;
     margin-bottom: 12px;
@@ -39,22 +37,5 @@ $scope: layouts-auth-layout;
   }
   &-helperText {
     justify-self: start;
-  }
-  &-firstNameContainer {
-    grid-column: 1;
-  }
-  &-lastNameContainer {
-    grid-column: 2;
-  }
-}
-
-@media (max-width: 600px) {
-  .#{$scope} {
-    &-firstNameContainer {
-      grid-column: 1 / 3;
-    }
-    &-lastNameContainer {
-      grid-column: 1 / 3;
-    }
   }
 }

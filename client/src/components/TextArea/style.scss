@@ -8,6 +8,7 @@ $scope: components-text-area;
   outline: none;
   resize: none;
   border-bottom: 1px solid #ccc;
+
   &-size {
     &-small {
       height: 14vh !important;
@@ -17,6 +18,9 @@ $scope: components-text-area;
     }
     &-large {
       height: 35vh !important;
+    }
+    &-minContent {
+      height: min-content !important;
     }
   }
 }

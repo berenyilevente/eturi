@@ -1,0 +1,1 @@
+export { LoginLayout as default } from '../../layouts/LoginLayout/LoginLayout.view'

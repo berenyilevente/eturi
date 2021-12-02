@@ -9,11 +9,14 @@ import { Button } from "../../components/Button/Button.view";
 import { useHistory } from "react-router-dom";
 import { useCallback } from "react";
 import pageURLS from "../../resources/constants/pageURLS";
+import { useSelector } from "react-redux";
+import { AppState } from "@/redux/store";
 
 const useIntroScreen = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
+  const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
   const introTitleText = t("intro.introHeader");
   const introButtonText = t("intro.introButton");
   const introHelperText = t("intro.introHelperText");
@@ -24,12 +27,18 @@ const useIntroScreen = () => {
   const goToAboutScreen = useCallback(() => history.push(pageURLS.ABOUT), [
     history,
   ]);
+  const goToAuthScreen = useCallback(() => history.push(pageURLS.AUTH), [
+    history,
+  ]);
+
   return {
     introTitleText,
     introButtonText,
     introHelperText,
     goToSellScreen,
     goToAboutScreen,
+    goToAuthScreen,
+    isUserLoggedIn,
   };
 };
 
@@ -40,6 +49,8 @@ const IntroScreen = () => {
     introHelperText,
     goToSellScreen,
     goToAboutScreen,
+    goToAuthScreen,
+    isUserLoggedIn,
   } = useIntroScreen();
   return (
     <IntroLayout
@@ -57,7 +68,9 @@ const IntroScreen = () => {
                 colorStyle="darkBlue"
                 buttonSize="large"
                 rounded
-                onClick={() => goToSellScreen()}
+                onClick={() => {
+                  isUserLoggedIn ? goToSellScreen() : goToAuthScreen();
+                }}
                 border="borderNone"
               >
                 <Text textType="text-medium-white">{introButtonText}</Text>

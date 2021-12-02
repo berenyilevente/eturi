@@ -6,18 +6,17 @@ import Text from "../../components/Text";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Link from "../../components/Link";
-import Card from "../../components/Card";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import {
   googleAuthAction,
-  loginAction,
   registerUserAction,
-  setUserAuthStateAction,
 } from "../../redux/auth/auth.actions";
 import { useHistory } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
-import { AppState } from "@/redux/store";
+import { AppState } from "../../redux/store";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { setTriggerReload } from "../../redux/clothes/clothes.actions";
 
 const useAuthScreen = () => {
   const { t } = useTranslation();
@@ -37,27 +36,15 @@ const useAuthScreen = () => {
   const dontHaveAnAccountText = t("auth.dontHaveAnAccount");
   const signUpHereText = t("auth.signUpHere");
 
-  const [isLogin, setIsLogin] = useState<boolean>(true);
-
-  const isUserLoggedIn = useSelector(
-    (state: AppState) => state.auth.isUserLoggedIn
+  const { isAuthLoading, isUserLoggedIn } = useSelector(
+    (state: AppState) => state.auth
   );
 
   const [emailContent, setEmailContent] = useState("");
-  const [emailContentLogin, setEmailContentLogin] = useState("");
-  const [passwordContentLogin, setPasswordContentLogin] = useState("");
   const [passwordContent, setPasswordContent] = useState("");
   const [repeatPasswordContent, setRepeatPasswordContent] = useState("");
   const [lastNameContent, setLastNameContent] = useState("");
   const [firstNameContent, setFirstNameContent] = useState("");
-
-  const switchToLogin = useCallback(() => {
-    dispatch(setUserAuthStateAction({ isLogin: true }));
-  }, [dispatch]);
-
-  const switchToSignUp = useCallback(() => {
-    dispatch(setUserAuthStateAction({ isLogin: false }));
-  }, [dispatch]);
 
   const googleSuccess = useCallback(async (res) => {
     const result = res?.profileObj;
@@ -75,33 +62,23 @@ const useAuthScreen = () => {
     console.log("Sign in unsuccessful...");
   }, []);
 
-  const onSubmit = useCallback(
+  const onSubmitSignUp = useCallback(
     (e) => {
       e.preventDefault();
-      if (!isUserLoggedIn) {
-        dispatch(
-          registerUserAction(
-            {
-              firstName: firstNameContent,
-              lastName: lastNameContent,
-              email: emailContent,
-              password: passwordContent,
-              confirmPassword: repeatPasswordContent,
-            },
-            history
-          )
-        );
-      } else {
-        dispatch(
-          loginAction(
-            {
-              email: emailContentLogin,
-              password: passwordContentLogin,
-            },
-            history
-          )
-        );
-      }
+
+      dispatch(
+        registerUserAction(
+          {
+            firstName: firstNameContent,
+            lastName: lastNameContent,
+            email: emailContent,
+            password: passwordContent,
+            confirmPassword: repeatPasswordContent,
+          },
+          history
+        )
+      );
+      dispatch(setTriggerReload({ triggerReload: true }));
     },
     [
       firstNameContent,
@@ -109,11 +86,11 @@ const useAuthScreen = () => {
       emailContent,
       passwordContent,
       repeatPasswordContent,
-      emailContentLogin,
-      passwordContentLogin,
     ]
   );
-
+  const goToLoginScreen = useCallback(() => history.push(pageURLS.LOGIN), [
+    history,
+  ]);
   return {
     signUpText,
     loginText,
@@ -124,12 +101,9 @@ const useAuthScreen = () => {
     repeatPasswordText,
     haveAnAccountText,
     signInText,
-    isLogin,
-    setIsLogin,
     signUpTitleText,
     dontHaveAnAccountText,
     signUpHereText,
-    switchToLogin,
     emailContent,
     setEmailContent,
     passwordContent,
@@ -140,22 +114,18 @@ const useAuthScreen = () => {
     setFirstNameContent,
     repeatPasswordContent,
     setRepeatPasswordContent,
-    passwordContentLogin,
-    setPasswordContentLogin,
-    emailContentLogin,
-    setEmailContentLogin,
     googleSuccess,
     googleFailure,
-    onSubmit,
+    onSubmitSignUp,
     isUserLoggedIn,
-    switchToSignUp,
+    isAuthLoading,
+    goToLoginScreen,
   };
 };
 
 const AuthScreen: FC = () => {
   const {
     signUpText,
-    loginText,
     firstNameText,
     lastNameText,
     emailText,
@@ -163,12 +133,8 @@ const AuthScreen: FC = () => {
     repeatPasswordText,
     haveAnAccountText,
     signInText,
-    isLogin,
-    setIsLogin,
     signUpTitleText,
     dontHaveAnAccountText,
-    signUpHereText,
-    switchToLogin,
     emailContent,
     setEmailContent,
     passwordContent,
@@ -179,48 +145,80 @@ const AuthScreen: FC = () => {
     setFirstNameContent,
     repeatPasswordContent,
     setRepeatPasswordContent,
-    passwordContentLogin,
-    setPasswordContentLogin,
-    emailContentLogin,
-    setEmailContentLogin,
     googleSuccess,
     googleFailure,
-    onSubmit,
-    isUserLoggedIn,
-    switchToSignUp,
+    onSubmitSignUp,
+    isAuthLoading,
+    goToLoginScreen,
   } = useAuthScreen();
 
   return (
-    <Card backgroundColorStyle="white" shadow width="small">
-      {isUserLoggedIn ? (
-        <AuthLayout
-          icon={<Icon iconType="lockIcon" />}
-          title={<Text textType="text-large-dark">{loginText}</Text>}
-          email={
-            <Input
-              placeholderText={emailText}
-              onChange={setEmailContentLogin}
-              inputValue={emailContentLogin}
-            />
-          }
-          password={
-            <Input
-              placeholderText={passwordText}
-              onChange={setPasswordContentLogin}
-              inputValue={passwordContentLogin}
-            />
-          }
-          actionButton={
-            <Button
-              colorStyle="darkBlue"
-              border="borderNone"
-              buttonSize="medium"
-              onClick={onSubmit}
+    <LoadingSpinner>
+      <AuthLayout
+        icon={<Icon iconType="lockIcon" />}
+        title={<Text textType="text-large-dark">{signUpTitleText}</Text>}
+        firstNameInput={
+          <Input
+            placeholderText={firstNameText}
+            onChange={setFirstNameContent}
+            inputValue={firstNameContent}
+          ></Input>
+        }
+        lastNameInput={
+          <Input
+            placeholderText={lastNameText}
+            onChange={setLastNameContent}
+            inputValue={lastNameContent}
+          ></Input>
+        }
+        email={
+          <Input
+            placeholderText={emailText}
+            onChange={setEmailContent}
+            inputValue={emailContent}
+          ></Input>
+        }
+        password={
+          <Input
+            placeholderText={passwordText}
+            onChange={setPasswordContent}
+            inputValue={passwordContent}
+            inputType="password"
+          ></Input>
+        }
+        repeatPassword={
+          <Input
+            placeholderText={repeatPasswordText}
+            onChange={setRepeatPasswordContent}
+            inputValue={repeatPasswordContent}
+            inputType="password"
+          ></Input>
+        }
+        actionButton={
+          <Button
+            colorStyle="darkBlue"
+            border="borderNone"
+            buttonSize="large"
+            onClick={onSubmitSignUp}
+            isLoading={isAuthLoading}
+          >
+            <Text textType="text-normal-white"> {signUpText}</Text>
+          </Button>
+        }
+        helperText={
+          <>
+            <Text textType="text-small-dark">{haveAnAccountText}</Text>
+            <Link
+              textType="text-small-dark"
+              color="darkBlue"
+              onClick={() => goToLoginScreen()}
             >
-              <Text textType="text-normal-white"> {loginText}</Text>
-            </Button>
-          }
-          googleButton={
+              {signInText}
+            </Link>
+          </>
+        }
+        googleButton={
+          <>
             <GoogleLogin
               clientId="212508933674-3ahsl2ma7cpb2ll40ulikadg2bf13qt9.apps.googleusercontent.com"
               render={(renderProps) => (
@@ -236,103 +234,10 @@ const AuthScreen: FC = () => {
               onFailure={googleFailure}
               cookiePolicy="single_host_origin"
             />
-          }
-          helperText={
-            <>
-              <Text textType="text-small-dark">{dontHaveAnAccountText}</Text>
-              <Link
-                textType="text-small-dark"
-                color="darkBlue"
-                onClick={() => switchToSignUp()}
-              >
-                {signUpHereText}
-              </Link>
-            </>
-          }
-        />
-      ) : (
-        <AuthLayout
-          icon={<Icon iconType="lockIcon" />}
-          title={<Text textType="text-large-dark">{signUpTitleText}</Text>}
-          firstNameInput={
-            <Input
-              placeholderText={firstNameText}
-              onChange={setFirstNameContent}
-              inputValue={firstNameContent}
-            ></Input>
-          }
-          lastNameInput={
-            <Input
-              placeholderText={lastNameText}
-              onChange={setLastNameContent}
-              inputValue={lastNameContent}
-            ></Input>
-          }
-          email={
-            <Input
-              placeholderText={emailText}
-              onChange={setEmailContent}
-              inputValue={emailContent}
-            ></Input>
-          }
-          password={
-            <Input
-              placeholderText={passwordText}
-              onChange={setPasswordContent}
-              inputValue={passwordContent}
-            ></Input>
-          }
-          repeatPassword={
-            <Input
-              placeholderText={repeatPasswordText}
-              onChange={setRepeatPasswordContent}
-              inputValue={repeatPasswordContent}
-            ></Input>
-          }
-          actionButton={
-            <Button
-              colorStyle="darkBlue"
-              border="borderNone"
-              buttonSize="large"
-              onClick={onSubmit}
-            >
-              <Text textType="text-normal-white"> {signUpText}</Text>
-            </Button>
-          }
-          helperText={
-            <>
-              <Text textType="text-small-dark">{haveAnAccountText}</Text>
-              <Link
-                textType="text-small-dark"
-                color="darkBlue"
-                onClick={() => switchToLogin()}
-              >
-                {signInText}
-              </Link>
-            </>
-          }
-          googleButton={
-            <>
-              <GoogleLogin
-                clientId="212508933674-3ahsl2ma7cpb2ll40ulikadg2bf13qt9.apps.googleusercontent.com"
-                render={(renderProps) => (
-                  <Icon
-                    iconType="googleIconColor"
-                    onClick={renderProps.onClick}
-                    cursor
-                  >
-                    {"google"}
-                  </Icon>
-                )}
-                onSuccess={googleSuccess}
-                onFailure={googleFailure}
-                cookiePolicy="single_host_origin"
-              />
-            </>
-          }
-        />
-      )}
-    </Card>
+          </>
+        }
+      />
+    </LoadingSpinner>
   );
 };
 export default AuthScreen;

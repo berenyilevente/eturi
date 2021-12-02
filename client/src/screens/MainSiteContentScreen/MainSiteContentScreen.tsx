@@ -12,6 +12,7 @@ import pageURLS from "../../resources/constants/pageURLS";
 import EditClothesScreen from "../EditClothesScreen/EditClothesScreen";
 import AuthScreen from "../AuthScreen/AuthScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
+import LoginScreen from "../LoginScreen/LoginScreen";
 
 const MainSiteContentScreen = () => {
   {
@@ -23,9 +24,19 @@ const MainSiteContentScreen = () => {
             <Route exact path={pageURLS.HOME} component={IntroScreen} />
           </Switch>
         }
-        siteContent={
+        primaryContent={
           <Switch>
             <Route exact path={pageURLS.HOME} component={HomeContentScreen} />
+          </Switch>
+        }
+        authContent={
+          <Switch>
+            <Route exact path={pageURLS.AUTH} component={AuthScreen} />
+            <Route exact path={pageURLS.LOGIN} component={LoginScreen} />
+          </Switch>
+        }
+        secondaryContent={
+          <Switch>
             <Route exact path={pageURLS.SELL} component={AddClothesScreen} />
             <Route exact path={pageURLS.SEARCH} component={SearchScreen} />
             <Route exact path={pageURLS.ABOUT} component={AboutScreen} />
@@ -39,11 +50,6 @@ const MainSiteContentScreen = () => {
               component={EditClothesScreen}
             />
             <Route exact path={pageURLS.PROFILE} component={ProfileScreen} />
-          </Switch>
-        }
-        authContent={
-          <Switch>
-            <Route exact path={pageURLS.AUTH} component={AuthScreen} />
           </Switch>
         }
         footer={<FooterScreen />}

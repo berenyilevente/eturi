@@ -26,9 +26,8 @@ const useHomeContentScreen = () => {
   const { triggerReload } = useSelector((state: AppState) => state.clothes);
 
   useEffect(() => {
-    triggerReload && dispatch(getClothes());
-    dispatch(setTriggerReload({ triggerReload: false }));
-  }, [dispatch]);
+    dispatch(getClothes());
+  }, [dispatch, triggerReload]);
 
   const currencyText = t("currency.huf");
 
@@ -78,7 +77,10 @@ const HomeContentScreen: FC = () => {
                   <img
                     alt="homeImages"
                     src={item.selectedFile}
-                    onClick={() => goToShowClothesScreen(item._id)}
+                    onClick={() => {
+                      goToShowClothesScreen(item._id);
+                      dispatch(setTriggerReload({ triggerReload: true }));
+                    }}
                   />
                 }
                 price={

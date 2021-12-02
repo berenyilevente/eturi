@@ -8,6 +8,9 @@ const buttonAreaClass = scope.and("buttonArea");
 const lineClass = scope.and("line");
 const saveButtonClass = scope.and("saveButton");
 const likeIconClass = scope.and("likeIconClass");
+const backButtonClass = scope.and("backButton");
+const descriptionTitleClass = scope.and("descriptionTitle");
+const descriptionAreaClass = scope.and("descriptionArea");
 interface Props {
   brand?: ReactNode;
   likeIcon?: ReactNode;
@@ -31,6 +34,7 @@ interface Props {
   line1?: ReactNode;
   line2?: ReactNode;
   deleteButton?: ReactNode;
+  backButton?: ReactNode;
 }
 
 export const ShowClothesDetailsLayout: FC<Props> = ({
@@ -56,14 +60,15 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
   line1,
   line2,
   deleteButton,
+  backButton,
 }) => (
   <div className={scope}>
     <div className={headerClass}>{brand}</div>
     <div className={likeIconClass}>{likeIcon}</div>
     <div>{nameTitle}</div>
     <div>{name}</div>
-    <div>{descriptionTitle}</div>
-    <div>{description}</div>
+    <div className={descriptionTitleClass}>{descriptionTitle}</div>
+    <div className={descriptionAreaClass}>{description}</div>
     <div className={lineClass}>{line1}</div>
     <div>{categoryTitle}</div>
     <div>{category}</div>
@@ -79,6 +84,7 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
     <div>{priceTitle}</div>
     <div>{price}</div>
     <div className={buttonAreaClass}>
+      <div className={backButtonClass}>{backButton}</div>
       <div>{deleteButton}</div>
       <div className={saveButtonClass}>{buttons}</div>
     </div>

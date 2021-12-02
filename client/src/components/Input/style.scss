@@ -1,6 +1,7 @@
 $scope: components-input;
-//just an example class, tbd
 .#{$scope} {
+  position: relative;
+
   &-inputArea {
     display: flex;
     flex-wrap: nowrap;
@@ -20,5 +21,7 @@ $scope: components-input;
     outline: none;
     background-color: transparent;
     width: 100%;
+  }
+  &-iconClass {
   }
 }

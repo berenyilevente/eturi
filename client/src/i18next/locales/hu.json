@@ -143,6 +143,7 @@
     "signUpTitle": "Regisztráció",
     "signUp": "Regisztrálok",
     "login": "Bejelentkezés",
+    "logout": "Kijelentkezés",
     "firstName": "Keresztnév",
     "lastName": "Vezetéknév",
     "email": "Email cím",
@@ -152,5 +153,11 @@
     "signIn": "Jelentkezz be!",
     "dontHaveAnAccount": "Még nincs fiókod?",
     "signUpHere": "Regisztálj itt!"
+  },
+  "profile":{
+    "title": "Ruháim",
+    "editProfile": "Profil szerkesztése",
+    "noClothes": "Még nincs meghírdetve ruhád",
+    "addNow": "Töltsd fel most!"
   }
 }

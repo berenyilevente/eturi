@@ -14,6 +14,19 @@ const buttonSizeClass = scope.and("buttonSizes");
 const textColorClass = scope.and("textColor");
 const iconAlignStart = scope.and("iconAlignStart");
 const iconAlignEnd = scope.and("iconAlignEnd");
+const buttonSpinnerClass = scope.and("buttonSpinner");
+
+type ColorTypes =
+  | "white"
+  | "dark"
+  | "red"
+  | "darkBlue"
+  | "grey"
+  | "green"
+  | "orange"
+  | "khaki"
+  | "darkGreen"
+  | "lightBlue";
 
 interface IButtonProps {
   buttonSize?: "small" | "medium" | "normal" | "large";
@@ -22,12 +35,13 @@ interface IButtonProps {
   className?: string;
   transparent?: boolean;
   noCursor?: boolean;
-  colorStyle?: "darkBlue" | "lightBlue" | "red";
-  buttonTextColor?: "dark" | "white" | "currentColor";
+  colorStyle?: ColorTypes;
+  buttonTextColor?: "dark" | "white" | "currentColor" | "darkBlue";
   border?: "borderNone" | "borderDotted" | "borderSolid";
   hasIconLeft?: boolean;
   hasIconRight?: boolean;
   iconType?: keyof typeof iconMap;
+  iconColor?: ColorTypes;
   isLoading?: boolean;
 }
 
@@ -46,6 +60,7 @@ export const Button: FC<IButtonProps> = ({
   iconType,
   hasIconRight,
   isLoading,
+  iconColor,
 }) => {
   return (
     <button
@@ -62,8 +77,14 @@ export const Button: FC<IButtonProps> = ({
         buttonTextColor && textColorClass.and(buttonTextColor)
       )}
     >
-      {hasIconLeft && <Icon iconType={iconType!} className={iconAlignStart} />}
-      {children}
+      {hasIconLeft && (
+        <Icon
+          iconType={iconType!}
+          colorStyle={iconColor}
+          className={iconAlignStart}
+        />
+      )}
+      {isLoading ? <div className={buttonSpinnerClass} /> : children}
       {hasIconRight && <Icon iconType={iconType!} className={iconAlignEnd} />}
     </button>
   );

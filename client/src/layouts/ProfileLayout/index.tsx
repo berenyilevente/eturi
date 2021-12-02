@@ -1,0 +1,1 @@
+export { ProfileLayout as default } from '../../layouts/ProfileLayout/ProfileLayout.view'

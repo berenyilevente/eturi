@@ -10,8 +10,4 @@ export default meta({
 const Template = CreateTemplate(component);
 
 export const MainLayout = Template.bind({});
-MainLayout.args = {
-  header: <div>Header</div>,
-  siteContent: <div>Content</div>,
-  footer: <div>Footer</div>,
-};
+MainLayout.args = {};

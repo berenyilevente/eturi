@@ -95,11 +95,13 @@ const useAddClothesScreen = () => {
 
   const triggerReload = useCallback(() => {
     dispatch(setTriggerReload({ triggerReload: true }));
-  }, [dispatch]);
+  }, [dispatch, setTriggerReload]);
 
   const isDataValid = () => {
     let isValid = true;
   };
+
+  const user = JSON.parse(localStorage.getItem("profile")!);
 
   return {
     titleText,
@@ -152,6 +154,7 @@ const useAddClothesScreen = () => {
     triggerReload,
     isClothesLoading,
     currencyText,
+    user,
   };
 };
 
@@ -207,6 +210,7 @@ const AddClothesScreen: FC = () => {
     triggerReload,
     isClothesLoading,
     currencyText,
+    user,
   } = useAddClothesScreen();
 
   return (
@@ -381,6 +385,7 @@ const AddClothesScreen: FC = () => {
                     condition: conditionContent,
                     colour: colourContent,
                     price: price,
+                    creator: user?.result?.name,
                   })
                 );
                 triggerReload();

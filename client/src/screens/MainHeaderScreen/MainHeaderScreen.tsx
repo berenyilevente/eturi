@@ -13,10 +13,7 @@ import NavigationMenu from "../../components/NavigationMenu";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  logoutAction,
-  setUserAuthStateAction,
-} from "../../redux/auth/auth.actions";
+import { logoutAction } from "../../redux/auth/auth.actions";
 import { setTriggerReload } from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { AppState } from "../../redux/store";
@@ -41,6 +38,25 @@ const useMainHeaderScreen = () => {
   const signUpText = t("auth.signUp");
   const logoutText = t("auth.logout");
 
+  const { isAuthLoading, isUserLoggedIn } = useSelector(
+    (state: AppState) => state.auth
+  );
+  console.log(isUserLoggedIn);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("profile") || "null")
+  );
+  useEffect(() => {
+    const token = user?.token;
+    //JWT goes here later
+    setUser(JSON.parse(localStorage.getItem("profile") || "null"));
+  }, [location]);
+
+  const logout = () => {
+    dispatch(logoutAction());
+    setUser(null);
+    history.push(pageURLS.HOME);
+  };
+
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
     history,
   ]);
@@ -61,7 +77,36 @@ const useMainHeaderScreen = () => {
   const goToAuthScreen = useCallback(() => history.push(pageURLS.AUTH), [
     history,
   ]);
+  const goToLoginScreen = useCallback(() => history.push(pageURLS.LOGIN), [
+    history,
+  ]);
 
+  const navigationMenuItemsLoggedIn: INavigationMenuValues[] = [
+    {
+      id: 1,
+      icon: <Icon iconType="homeIcon" colorStyle="darkBlue" />,
+      value: <Link textType="text-small-dark">{homeText}</Link>,
+      onClick: () => goToHomeScreen(),
+    },
+    {
+      id: 2,
+      icon: <Icon iconType="personIcon" colorStyle="darkBlue" />,
+      value: <Link textType="text-small-dark">{profileText}</Link>,
+      onClick: () => goToProfileScreen(),
+    },
+    {
+      id: 3,
+      icon: <Icon iconType="informationIcon" colorStyle="darkBlue" />,
+      value: <Link textType="text-small-dark">{aboutText}</Link>,
+      onClick: () => goToAboutScreen(),
+    },
+    {
+      id: 4,
+      icon: <Icon iconType="logoutIcon" colorStyle="darkBlue" />,
+      value: <Link textType="text-small-dark">{logoutText}</Link>,
+      onClick: () => logout(),
+    },
+  ];
   const navigationMenuItems: INavigationMenuValues[] = [
     {
       id: 1,
@@ -71,41 +116,17 @@ const useMainHeaderScreen = () => {
     },
     {
       id: 2,
-      icon: <Icon iconType="plusIcon" colorStyle="darkBlue" />,
-      value: <Link textType="text-small-dark">{sellClothesText}</Link>,
-      onClick: () => goToSellScreen(),
-    },
-    {
-      id: 3,
       icon: <Icon iconType="searchIcon" colorStyle="darkBlue" />,
       value: <Link textType="text-small-dark">{searchText}</Link>,
       onClick: () => goToSearchScreen(),
     },
     {
-      id: 4,
+      id: 3,
       icon: <Icon iconType="informationIcon" colorStyle="darkBlue" />,
       value: <Link textType="text-small-dark">{aboutText}</Link>,
       onClick: () => goToAboutScreen(),
     },
   ];
-
-  const { isAuthLoading } = useSelector((state: AppState) => state.auth);
-
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("profile") || "null")
-  );
-  useEffect(() => {
-    const token = user?.token;
-    //JWT goes here later
-    setUser(JSON.parse(localStorage.getItem("profile") || "null"));
-  }, [location]);
-
-  const logout = () => {
-    dispatch(logoutAction());
-    setUser(null);
-    history.push(pageURLS.HOME);
-    console.log(user);
-  };
 
   return {
     homeText,
@@ -118,7 +139,7 @@ const useMainHeaderScreen = () => {
     goToHomeScreen,
     goToAboutScreen,
     goToProfileScreen,
-    navigationMenuItems,
+    navigationMenuItemsLoggedIn,
     user,
     goToAuthScreen,
     logout,
@@ -127,6 +148,9 @@ const useMainHeaderScreen = () => {
     loginText,
     signUpText,
     logoutText,
+    navigationMenuItems,
+    isUserLoggedIn,
+    goToLoginScreen,
   };
 };
 
@@ -142,6 +166,7 @@ const MainHeaderScreen = () => {
     goToHomeScreen,
     goToAboutScreen,
     goToProfileScreen,
+    navigationMenuItemsLoggedIn,
     navigationMenuItems,
     user,
     goToAuthScreen,
@@ -151,6 +176,8 @@ const MainHeaderScreen = () => {
     loginText,
     signUpText,
     logoutText,
+    isUserLoggedIn,
+    goToLoginScreen,
   } = useMainHeaderScreen();
   return (
     <Card backgroundColorStyle="white" rounded>
@@ -165,7 +192,7 @@ const MainHeaderScreen = () => {
         }
         navItems={
           <>
-            {user ? (
+            {isUserLoggedIn ? (
               <>
                 <Button
                   buttonSize="medium"
@@ -173,19 +200,22 @@ const MainHeaderScreen = () => {
                   border="borderNone"
                   transparent
                   buttonTextColor="dark"
-                  onClick={logout}
+                  onClick={goToSellScreen}
                 >
-                  {logoutText}
+                  {sellClothesText}
                 </Button>
                 <Button
                   buttonSize="medium"
                   colorStyle="darkBlue"
                   border="borderNone"
-                  onClick={goToProfileScreen}
+                  onClick={goToSearchScreen}
+                  hasIconLeft
+                  iconType="searchIcon"
+                  iconColor="white"
                 >
-                  {profileText}
+                  <Text textType="text-small-white">{searchText}</Text>
                 </Button>
-                <NavigationMenu menuItems={navigationMenuItems} />
+                <NavigationMenu menuItems={navigationMenuItemsLoggedIn} />
               </>
             ) : (
               <>
@@ -197,7 +227,6 @@ const MainHeaderScreen = () => {
                   transparent
                   onClick={() => {
                     goToAuthScreen();
-                    dispatch(setUserAuthStateAction({ isLogin: false }));
                   }}
                 >
                   {signUpText}
@@ -207,11 +236,10 @@ const MainHeaderScreen = () => {
                   colorStyle="darkBlue"
                   border="borderNone"
                   onClick={() => {
-                    goToAuthScreen();
-                    dispatch(setUserAuthStateAction({ isLogin: true }));
+                    goToLoginScreen();
                   }}
                 >
-                  {loginText}
+                  <Text textType="text-small-white"> {loginText}</Text>
                 </Button>
                 <NavigationMenu menuItems={navigationMenuItems} />
               </>
