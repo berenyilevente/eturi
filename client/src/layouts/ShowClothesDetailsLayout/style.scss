@@ -8,14 +8,18 @@ $scope: layouts-show-clothes-details-layout;
   padding-left: 24px;
   padding-right: 16px;
   align-items: center;
+  white-space: nowrap;
 
   &-header {
     padding-top: 20px;
     padding-bottom: 20px;
     grid-column: 1;
-    align-self: flex-start;
     grid-row: 1;
     white-space: nowrap;
+  }
+  &-editBrandClass {
+    grid-column: 2;
+    grid-row: 1;
   }
   &-likeIconClass {
     justify-self: start;
@@ -26,8 +30,9 @@ $scope: layouts-show-clothes-details-layout;
   }
 
   &-imageAreaClass {
+    margin-top: 32px;
     grid-column: 3;
-    grid-row: 1 / 11;
+    grid-row: 1 / 10;
   }
 
   &-imageAreaClass img {
@@ -43,7 +48,7 @@ $scope: layouts-show-clothes-details-layout;
   }
   &-descriptionArea {
     white-space: wrap !important;
-    max-height: 20vh !important;
+    max-height: 26vh !important;
     overflow: auto;
   }
 
@@ -52,6 +57,9 @@ $scope: layouts-show-clothes-details-layout;
     grid-column: 3;
     justify-content: space-between;
     margin: 1rem;
+  }
+  &-descriptionTitle {
+    align-self: flex-start;
   }
 
   &-backButton {
@@ -63,10 +71,38 @@ $scope: layouts-show-clothes-details-layout;
   }
   &-line {
     grid-column-start: 1;
+
     grid-column-end: 3;
     margin-right: 20px;
   }
   &-marginBottom {
     margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 800px) {
+  .#{$scope} {
+    &-header {
+      grid-column: 1 / 4;
+    }
+    &-imageAreaClass {
+      grid-column: 1 / 4;
+      grid-row: 2 / 11;
+    }
+
+    &-colSpan {
+      grid-column: 2 / 4;
+    }
+    &-line {
+      grid-column: 1 / 4;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .#{$scope} {
+    &-buttonArea {
+      grid-column: 1 / 4;
+      justify-content: center;
+    }
   }
 }

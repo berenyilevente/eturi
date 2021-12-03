@@ -238,6 +238,7 @@ const EditClothesScreen: FC = () => {
                 />
               </>
             }
+            brand={<Text textType="text-normal-dark">{showClothes.brand}</Text>}
             nameTitle={
               <Text textType="text-normal-dark">{clothesNameText}</Text>
             }
@@ -256,7 +257,7 @@ const EditClothesScreen: FC = () => {
                 placeholderText={showClothes.description}
                 content={descriptionContent}
                 onChange={setDescriptionContent}
-                size="small"
+                size="medium"
               />
             }
             line1={<DividerLine />}

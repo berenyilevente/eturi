@@ -43,7 +43,13 @@
     "colour": "Szín",
     "colourPlaceholder": "Szín kiválasztása",
     "sizeTable": "Mérettáblázat",
-    "pictureTips": "Tippek"
+    "pictureTips": "Tippek",
+    "clothesCategories":{
+      "clothes": "Ruhák",
+      "shoes": "Cipők",
+      "bags": "Táskák",
+      "accessories": "Kiegészítők"
+    }
     },
   "brands":{
     "nike": "Nike",

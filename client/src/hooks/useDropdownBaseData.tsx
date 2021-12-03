@@ -21,6 +21,11 @@ export const useDropdownBaseData = () => {
   const menCategoryText = t("clothes.menCategory");
   const womenCategoryText = t("clothes.womenCategory");
   const childrenCategoryText = t("clothes.childrenCategory");
+  //category2
+  const clothesText = t("clothesCategories.clothes");
+  const shoesText = t("clothesCategories.shoes");
+  const bagsText = t("clothesCategories.bags");
+  const accessoriesText = t("clothesCategories.accessories");
 
   //brands
   const nike = t("brands.nike");
@@ -94,11 +99,23 @@ export const useDropdownBaseData = () => {
   const manyContentText = t("tips.content.manyContent");
   const yourPhotosContentText = t("tips.content.yourPhotosContent");
 
-  const category: IDropdownValues[] = [
+  const category = [
     { id: 1, value: menCategoryText },
     { id: 2, value: womenCategoryText },
     { id: 3, value: childrenCategoryText },
   ];
+
+  const category2 = [
+    { id: 1, value: clothesText },
+    { id: 2, value: shoesText },
+    { id: 3, value: bagsText },
+    { id: 4, value: accessoriesText },
+  ];
+
+  const categories = category.map((item, index) => {
+    return [category[index], category2[index]];
+  });
+
   const brands: IDropdownValues[] = [
     { id: 1, value: nike },
     { id: 2, value: puma },
@@ -265,7 +282,7 @@ export const useDropdownBaseData = () => {
   ];
 
   return {
-    category,
+    categories,
     brands,
     sizes,
     conditions,
@@ -273,5 +290,7 @@ export const useDropdownBaseData = () => {
     carouselTitles,
     carouselImages,
     carouselContent,
+    category,
+    category2,
   };
 };

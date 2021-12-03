@@ -7,7 +7,7 @@ $scope: components-text-area;
   font-size: 18px;
   outline: none;
   resize: none;
-  border-bottom: 1px solid #ccc;
+  border: 1px dotted #ccc;
 
   &-size {
     &-small {

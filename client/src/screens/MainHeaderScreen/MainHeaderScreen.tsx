@@ -42,7 +42,6 @@ const useMainHeaderScreen = () => {
   const { isAuthLoading, isUserLoggedIn } = useSelector(
     (state: AppState) => state.auth
   );
-  console.log(isUserLoggedIn);
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile") || "null")
   );
@@ -224,18 +223,6 @@ const MainHeaderScreen = () => {
               </>
             ) : (
               <>
-                <Button
-                  buttonSize="medium"
-                  colorStyle="darkBlue"
-                  border="borderNone"
-                  buttonTextColor="dark"
-                  transparent
-                  onClick={() => {
-                    goToAuthScreen();
-                  }}
-                >
-                  {signUpText}
-                </Button>
                 <Button
                   buttonSize="medium"
                   colorStyle="darkBlue"

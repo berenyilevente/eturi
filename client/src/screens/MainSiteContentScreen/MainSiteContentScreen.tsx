@@ -2,7 +2,7 @@ import MainLayout from "../../layouts/MainLayout";
 import MainHeaderScreen from "../MainHeaderScreen/MainHeaderScreen";
 import IntroScreen from "../IntroScreen/IntroScreen";
 import FooterScreen from "../FooterScreen/FooterScreen";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import AddClothesScreen from "../../screens/AddClothesScreen/AddClothesScreen";
 import SearchScreen from "../../screens/SearchScreen/SearchScreen";
 import AboutScreen from "../../screens/AboutScreen/AboutScreen";
@@ -13,9 +13,13 @@ import EditClothesScreen from "../EditClothesScreen/EditClothesScreen";
 import AuthScreen from "../AuthScreen/AuthScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import LoginScreen from "../LoginScreen/LoginScreen";
+import { useSelector } from "react-redux";
+import { AppState } from "@/redux/store";
 
 const MainSiteContentScreen = () => {
   {
+    const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
+
     return (
       <MainLayout
         header={<MainHeaderScreen />}
@@ -31,7 +35,11 @@ const MainSiteContentScreen = () => {
         }
         authContent={
           <Switch>
-            <Route exact path={pageURLS.AUTH} component={AuthScreen} />
+            <Route
+              exact
+              path={pageURLS.AUTH}
+              component={!isUserLoggedIn ? AuthScreen : HomeContentScreen}
+            />
             <Route exact path={pageURLS.LOGIN} component={LoginScreen} />
           </Switch>
         }

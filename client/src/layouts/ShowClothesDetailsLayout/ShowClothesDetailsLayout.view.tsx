@@ -12,9 +12,12 @@ const lineClass = scope.and("line");
 const saveButtonClass = scope.and("saveButton");
 const likeIconClass = scope.and("likeIconClass");
 const backButtonClass = scope.and("backButton");
+const colSpan = scope.and("colSpan");
 const descriptionTitleClass = scope.and("descriptionTitle");
-const descriptionAreaClass = scope.and("descriptionArea");
+const descriptionContentClass = scope.and("descriptionArea");
 const marginBottom = scope.and("marginBottom");
+const editBrandClass = scope.and("editBrandClass");
+
 interface Props {
   imageArea?: ReactNode;
   brand?: ReactNode;
@@ -70,20 +73,19 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
 }) => (
   <div className={scope}>
     <div className={headerClass}>{brand}</div>
+    <div className={editBrandClass}>{editBrand}</div>
     <div className={likeIconClass}>{likeIcon}</div>
     <div className={nameTitleClass}>{nameTitle}</div>
-    <div className={nameContentClass}>{name}</div>
-    <div>{descriptionTitle}</div>
-    <div>{description}</div>
-    <div className={lineClass}>{line1}</div>
+    <div className={cn(nameContentClass, colSpan)}>{name}</div>
+    <div className={descriptionTitleClass}>{descriptionTitle}</div>
+    <div className={cn(colSpan, descriptionContentClass)}>{description}</div>
+    <div className={cn(lineClass)}>{line1}</div>
     <div>{categoryTitle}</div>
-    <div>{category}</div>
-    <div>{editBrandTitle}</div>
-    <div>{editBrand}</div>
+    <div className={colSpan}>{category}</div>
     <div>{sizeTitle}</div>
-    <div>{size}</div>
+    <div className={colSpan}>{size}</div>
     <div>{conditionTitle}</div>
-    <div>{condition}</div>
+    <div className={colSpan}>{condition}</div>
     <div>{colourTitle}</div>
     <div>{colour}</div>
     <div className={lineClass}>{line2}</div>

@@ -34,7 +34,7 @@ const useHomeContentScreen = () => {
   const { clothes, isClothesLoading, likeLoading } = useSelector(
     (state: AppState) => state.clothes
   );
-
+  const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
   const goToShowClothesScreen = useCallback(
     (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
@@ -51,6 +51,7 @@ const useHomeContentScreen = () => {
     setHeartFill,
     dispatch,
     likeLoading,
+    isUserLoggedIn,
   };
 };
 
@@ -64,6 +65,7 @@ const HomeContentScreen: FC = () => {
     setHeartFill,
     dispatch,
     likeLoading,
+    isUserLoggedIn,
   } = useHomeContentScreen();
 
   return (
@@ -99,21 +101,25 @@ const HomeContentScreen: FC = () => {
                     />
                   ) : (
                     <>
-                      {item.isLiked ? (
-                        <Icon
-                          iconType="heartIconFilled"
-                          cursor
-                          onClick={() => dispatch(likeClothesAction(item._id!))}
-                        />
-                      ) : (
-                        <Icon
-                          iconType="heartIcon"
-                          cursor
-                          onClick={() => {
-                            dispatch(likeClothesAction(item._id!));
-                          }}
-                        />
-                      )}
+                      {item.isLiked
+                        ? isUserLoggedIn && (
+                            <Icon
+                              iconType="heartIconFilled"
+                              cursor
+                              onClick={() =>
+                                dispatch(likeClothesAction(item._id!))
+                              }
+                            />
+                          )
+                        : isUserLoggedIn && (
+                            <Icon
+                              iconType="heartIcon"
+                              cursor
+                              onClick={() => {
+                                dispatch(likeClothesAction(item._id!));
+                              }}
+                            />
+                          )}
                     </>
                   )
                 }
