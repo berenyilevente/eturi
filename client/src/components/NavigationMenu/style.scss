@@ -49,6 +49,7 @@ $scope: components-navigation-menu;
 
 @media (max-width: 1200px) {
   .#{$scope} {
+    margin-left: 10px;
     &-menuItemsClass {
       right: 6vw;
     }

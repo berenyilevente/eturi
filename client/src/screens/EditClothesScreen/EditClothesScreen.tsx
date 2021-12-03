@@ -238,7 +238,7 @@ const EditClothesScreen: FC = () => {
                 />
               </>
             }
-            brand={<Text textType="text-normal-dark">{showClothes.brand}</Text>}
+            brand={<Text textType="text-normal-dark">{brandText}</Text>}
             nameTitle={
               <Text textType="text-normal-dark">{clothesNameText}</Text>
             }
@@ -273,9 +273,6 @@ const EditClothesScreen: FC = () => {
                   setCategoryContent(item.value);
                 }}
               />
-            }
-            editBrandTitle={
-              <Text textType="text-normal-dark">{brandText}</Text>
             }
             editBrand={
               <DropdownMenu

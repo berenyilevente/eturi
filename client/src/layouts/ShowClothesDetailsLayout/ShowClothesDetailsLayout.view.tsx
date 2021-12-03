@@ -22,7 +22,6 @@ interface Props {
   imageArea?: ReactNode;
   brand?: ReactNode;
   likeIcon?: ReactNode;
-  editBrandTitle?: ReactNode;
   editBrand?: ReactNode;
   name?: ReactNode;
   description?: ReactNode;
@@ -49,7 +48,6 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
   imageArea,
   brand,
   likeIcon,
-  editBrandTitle,
   editBrand,
   name,
   description,
@@ -73,7 +71,7 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
 }) => (
   <div className={scope}>
     <div className={headerClass}>{brand}</div>
-    <div className={editBrandClass}>{editBrand}</div>
+    <div className={cn(editBrandClass, colSpan)}>{editBrand}</div>
     <div className={likeIconClass}>{likeIcon}</div>
     <div className={nameTitleClass}>{nameTitle}</div>
     <div className={cn(nameContentClass, colSpan)}>{name}</div>
@@ -87,7 +85,7 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
     <div>{conditionTitle}</div>
     <div className={colSpan}>{condition}</div>
     <div>{colourTitle}</div>
-    <div>{colour}</div>
+    <div className={colSpan}>{colour}</div>
     <div className={lineClass}>{line2}</div>
     <div>{priceTitle}</div>
     <div>{price}</div>
