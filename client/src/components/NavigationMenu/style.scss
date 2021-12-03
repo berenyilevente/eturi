@@ -1,6 +1,8 @@
 $scope: components-navigation-menu;
 .#{$scope} {
   margin-left: 20px;
+  z-index: 99999;
+
   &-hamburgerMenuClass {
   }
   &-menuItemsClass {
@@ -11,7 +13,7 @@ $scope: components-navigation-menu;
     position: absolute;
     top: 45px;
     right: 22vw;
-    z-index: 999;
+    z-index: 200;
     height: min-content;
   }
   &-menuListItemClass {

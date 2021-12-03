@@ -1,12 +1,13 @@
 $scope: layouts-header-layout;
 .#{$scope} {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   margin-top: 24px;
   white-space: nowrap;
+
   &-logo {
     display: flex;
     height: 100%;
@@ -17,7 +18,7 @@ $scope: layouts-header-layout;
   &-navItems {
     display: flex;
     flex-wrap: nowrap;
-    justify-self: end;
+    justify-content: flex-start;
     height: 100%;
     align-items: center;
     z-index: 20 !important;
@@ -27,7 +28,7 @@ $scope: layouts-header-layout;
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 490px) {
   .#{$scope} {
   }
 }

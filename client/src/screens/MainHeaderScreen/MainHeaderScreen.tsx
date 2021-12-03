@@ -17,6 +17,7 @@ import { logoutAction } from "../../redux/auth/auth.actions";
 import { setTriggerReload } from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { AppState } from "../../redux/store";
+import decode from "jwt-decode";
 export interface INavigationMenuValues {
   id: number;
   value: ReactNode;
@@ -35,7 +36,7 @@ const useMainHeaderScreen = () => {
   const aboutText = t("header.about");
   const profileText = t("header.profile");
   const loginText = t("auth.login");
-  const signUpText = t("auth.signUp");
+  const signUpText = t("auth.signUpTitle");
   const logoutText = t("auth.logout");
 
   const { isAuthLoading, isUserLoggedIn } = useSelector(
@@ -47,7 +48,12 @@ const useMainHeaderScreen = () => {
   );
   useEffect(() => {
     const token = user?.token;
-    //JWT goes here later
+    //decode the token to see when it is expiring
+    if (token) {
+      const decodedToken = decode<any>(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
     setUser(JSON.parse(localStorage.getItem("profile") || "null"));
   }, [location]);
 

@@ -52,7 +52,7 @@ $scope: layouts-main-layout;
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 480px) {
   .#{$scope} {
     grid-template-columns: minmax(5px, 15px) 1fr 1fr minmax(5px, 15px);
     grid-template-rows: minmax(50px, 100px) min-content 1fr minmax(50px, 100px);
