@@ -9,7 +9,6 @@ $scope: components-image-uploader;
     height: 30vh;
     outline: none;
     background-color: transparent;
-    border: 1px dotted var(--lighter);
     width: 100%;
   }
   &-imageInputLabel {
@@ -17,7 +16,6 @@ $scope: components-image-uploader;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--darkBlue);
-    padding: 6px 12px;
     cursor: pointer;
     height: 18%;
     outline: none;
@@ -26,6 +24,9 @@ $scope: components-image-uploader;
     white-space: nowrap;
     padding: 15px;
     border-radius: 6px;
+  }
+  &-textClass {
+    padding-left: 12px;
   }
 
   &-imageInputArea img {

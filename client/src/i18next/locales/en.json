@@ -34,7 +34,7 @@
     "condition": "Condition",
     "conditionPlaceholder": "Specify the condition",
     "price": "Price",
-    "pricePlaceholder": "00.000 HUF",
+    "pricePlaceholder": "00.000",
     "add": "Add",
     "menCategory": "Men",
     "womenCategory": "Women",
@@ -126,7 +126,9 @@
     "huf": "HUF"
   },
   "images":{
-    "uploadImageLabel": "Add photos"
+    "uploadImageLabel": "Add photos",
+    "editImage": "Edit photos"
+
   },
   "general":{
     "cancel": "Cancel",

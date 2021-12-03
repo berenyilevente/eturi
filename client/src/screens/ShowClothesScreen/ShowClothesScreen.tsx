@@ -48,18 +48,17 @@ const useEditClothesScreen = () => {
   const noDataText = t("general.noData");
   const backText = t("general.back");
   const currencyText = t("currency.huf");
+  const homeText = t("header.home");
 
   const showClothes = useSelector((state: AppState) =>
     currentId
       ? state.clothes.showClothes.find((item) => item._id === currentId)
       : null
   );
-  const { isClothesLoading, triggerReload } = useSelector(
-    (state: AppState) => state.clothes
-  );
+  const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
 
   useEffect(() => {
-    triggerReload && dispatch(getClothesById(currentId));
+    dispatch(getClothesById(currentId));
   }, [dispatch]);
 
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
@@ -92,6 +91,7 @@ const useEditClothesScreen = () => {
     goToEditClothesScreen,
     dispatch,
     user,
+    homeText,
   };
 };
 
@@ -118,79 +118,65 @@ const ShowCLothesScreen: FC = () => {
     goToEditClothesScreen,
     dispatch,
     user,
+    homeText,
   } = useEditClothesScreen();
 
   return (
     <LoadingSpinner isLoading={isClothesLoading}>
       {showClothes && (
-        <ShowClothesLayout
-          imageArea={
-            <Card backgroundColorStyle="white" shadow>
-              <img src={showClothes.selectedFile} />
-            </Card>
-          }
-          detailsArea={
-            <Card backgroundColorStyle="white" shadow>
-              <ShowClothesDetailsLayout
-                brand={
-                  <Text textType="text-large-dark">{showClothes.brand}</Text>
-                }
-                likeIcon={
-                  showClothes.isLiked && <Icon iconType="heartIconFilled" />
-                }
-                nameTitle={
-                  <Text textType="text-normal-dark">{clothesNameText}</Text>
-                }
-                name={
-                  <Text textType="text-normal-dark">
-                    {showClothes.name || noDataText}
-                  </Text>
-                }
-                descriptionTitle={
-                  <Text textType="text-normal-dark">{descriptionText}</Text>
-                }
-                description={
-                  <Text textType="text-normal-dark">
-                    {showClothes.description || noDataText}
-                  </Text>
-                }
-                line1={<DividerLine />}
-                categoryTitle={
-                  <Text textType="text-normal-dark">{categoryText}</Text>
-                }
-                category={
-                  <Text textType="text-normal-dark">
-                    {showClothes.category}
-                  </Text>
-                }
-                sizeTitle={<Text textType="text-normal-dark">{sizeText}</Text>}
-                size={
-                  <Text textType="text-normal-dark">{showClothes.size}</Text>
-                }
-                conditionTitle={
-                  <Text textType="text-normal-dark">{conditionText}</Text>
-                }
-                condition={
-                  <Text textType="text-normal-dark">
-                    {showClothes.condition}
-                  </Text>
-                }
-                colourTitle={
-                  <Text textType="text-normal-dark">{colourText}</Text>
-                }
-                colour={
-                  <Text textType="text-normal-dark">{showClothes.colour}</Text>
-                }
-                line2={<DividerLine />}
-                priceTitle={
-                  <Text textType="text-normal-dark">{priceText}</Text>
-                }
-                price={
-                  <Text textType="text-normal-dark">
-                    {showClothes.price + " " + currencyText}
-                  </Text>
-                }
-                buttons={
+        <Card backgroundColorStyle="white" shadow>
+          <ShowClothesDetailsLayout
+            imageArea={<img src={showClothes.selectedFile} />}
+            brand={<Text textType="text-large-dark">{showClothes.brand}</Text>}
+            likeIcon={
+              showClothes.isLiked && <Icon iconType="heartIconFilled" />
+            }
+            nameTitle={
+              <Text textType="text-normal-dark">{clothesNameText}</Text>
+            }
+            name={
+              <Text textType="text-normal-dark">
+                {showClothes.name || noDataText}
+              </Text>
+            }
+            descriptionTitle={
+              <Text textType="text-normal-dark">{descriptionText}</Text>
+            }
+            description={
+              <Text textType="text-normal-dark">
+                {showClothes.description || noDataText}
+              </Text>
+            }
+            line1={<DividerLine />}
+            categoryTitle={
+              <Text textType="text-normal-dark">{categoryText}</Text>
+            }
+            category={
+              <Text textType="text-normal-dark">{showClothes.category}</Text>
+            }
+            sizeTitle={<Text textType="text-normal-dark">{sizeText}</Text>}
+            size={<Text textType="text-normal-dark">{showClothes.size}</Text>}
+            conditionTitle={
+              <Text textType="text-normal-dark">{conditionText}</Text>
+            }
+            condition={
+              <Text textType="text-normal-dark">{showClothes.condition}</Text>
+            }
+            colourTitle={<Text textType="text-normal-dark">{colourText}</Text>}
+            colour={
+              <Text textType="text-normal-dark">{showClothes.colour}</Text>
+            }
+            line2={<DividerLine />}
+            priceTitle={<Text textType="text-normal-dark">{priceText}</Text>}
+            price={
+              <Text textType="text-normal-dark">
+                {showClothes.price + " " + currencyText}
+              </Text>
+            }
+            buttons={
+              <>
+                {user?.result?.googleId === showClothes.creator ||
+                user?.result?._id === showClothes?.creator ? (
                   <>
                     <Button
                       colorStyle="darkBlue"
@@ -203,26 +189,40 @@ const ShowCLothesScreen: FC = () => {
                         dispatch(setTriggerReload({ triggerReload: true }));
                       }}
                     >
-                      {backText}
+                      {homeText}
                     </Button>
-                    {(user?.result?.googleId === showClothes.creator ||
-                      user?.result?._id === showClothes?.creator) && (
-                      <Button
-                        colorStyle="darkBlue"
-                        rounded
-                        buttonSize="normal"
-                        border="borderNone"
-                        onClick={() => goToEditClothesScreen(showClothes._id)}
-                      >
-                        <Text textType="text-small-white"> {editText}</Text>
-                      </Button>
-                    )}
+
+                    <Button
+                      colorStyle="darkBlue"
+                      rounded
+                      buttonSize="normal"
+                      border="borderNone"
+                      onClick={() => goToEditClothesScreen(showClothes._id)}
+                    >
+                      <Text textType="text-small-white"> {editText}</Text>
+                    </Button>
                   </>
-                }
-              />
-            </Card>
-          }
-        />
+                ) : (
+                  <Button
+                    colorStyle="darkBlue"
+                    buttonTextColor="dark"
+                    buttonSize="medium"
+                    border="borderNone"
+                    hasIconLeft
+                    iconType="arrowLeft"
+                    iconColor="white"
+                    onClick={() => {
+                      goToHomeScreen();
+                      dispatch(setTriggerReload({ triggerReload: true }));
+                    }}
+                  >
+                    <Text textType="text-small-white">{homeText}</Text>
+                  </Button>
+                )}
+              </>
+            }
+          />
+        </Card>
       )}
     </LoadingSpinner>
   );

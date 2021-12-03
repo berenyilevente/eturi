@@ -1,9 +1,11 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/userModel.js";
+import dotenv from "dotenv";
 
 export const signIn = async (req, res) => {
   const { email, password } = req.body;
+  dotenv.config();
 
   try {
     const existingUser = await UserModel.findOne({ email });
@@ -22,8 +24,8 @@ export const signIn = async (req, res) => {
     //ToDo: store secret string ("test") in an env file
     const token = jwt.sign(
       { email: existingUser.email, id: existingUser._id },
-      "test",
-      { expiresIn: "4h" }
+      process.env.SECRET,
+      { expiresIn: "1h" }
     );
     res.status(200).json({ result: existingUser, token });
   } catch (error) {

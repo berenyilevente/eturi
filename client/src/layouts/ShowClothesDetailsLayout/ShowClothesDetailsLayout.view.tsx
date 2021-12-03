@@ -3,7 +3,10 @@ import { FC, ReactNode } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("layouts-show-clothes-details-layout");
+const imageAreaClass = scope.and("imageAreaClass");
 const headerClass = scope.and("header");
+const nameTitleClass = scope.and("nameTitleClass");
+const nameContentClass = scope.and("nameContentClass");
 const buttonAreaClass = scope.and("buttonArea");
 const lineClass = scope.and("line");
 const saveButtonClass = scope.and("saveButton");
@@ -11,7 +14,9 @@ const likeIconClass = scope.and("likeIconClass");
 const backButtonClass = scope.and("backButton");
 const descriptionTitleClass = scope.and("descriptionTitle");
 const descriptionAreaClass = scope.and("descriptionArea");
+const marginBottom = scope.and("marginBottom");
 interface Props {
+  imageArea?: ReactNode;
   brand?: ReactNode;
   likeIcon?: ReactNode;
   editBrandTitle?: ReactNode;
@@ -38,6 +43,7 @@ interface Props {
 }
 
 export const ShowClothesDetailsLayout: FC<Props> = ({
+  imageArea,
   brand,
   likeIcon,
   editBrandTitle,
@@ -65,10 +71,10 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
   <div className={scope}>
     <div className={headerClass}>{brand}</div>
     <div className={likeIconClass}>{likeIcon}</div>
-    <div>{nameTitle}</div>
-    <div>{name}</div>
-    <div className={descriptionTitleClass}>{descriptionTitle}</div>
-    <div className={descriptionAreaClass}>{description}</div>
+    <div className={nameTitleClass}>{nameTitle}</div>
+    <div className={nameContentClass}>{name}</div>
+    <div>{descriptionTitle}</div>
+    <div>{description}</div>
     <div className={lineClass}>{line1}</div>
     <div>{categoryTitle}</div>
     <div>{category}</div>
@@ -83,10 +89,12 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
     <div className={lineClass}>{line2}</div>
     <div>{priceTitle}</div>
     <div>{price}</div>
+    <div className={imageAreaClass}>{imageArea}</div>
     <div className={buttonAreaClass}>
       <div className={backButtonClass}>{backButton}</div>
       <div>{deleteButton}</div>
       <div className={saveButtonClass}>{buttons}</div>
     </div>
+    <div className={marginBottom}></div>
   </div>
 );

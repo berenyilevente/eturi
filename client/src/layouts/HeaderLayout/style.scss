@@ -18,7 +18,7 @@ $scope: layouts-header-layout;
   &-navItems {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: flex-start;
+    justify-content: flex-end;
     height: 100%;
     align-items: center;
     z-index: 20 !important;

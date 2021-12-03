@@ -33,7 +33,7 @@
     "condition": "Állapot",
     "conditionPlaceholder": "Válaszd ki a ruha állapotát",
     "price": "Ár",
-    "pricePlaceholder": "00.000 Ft",
+    "pricePlaceholder": "00.000",
     "add": "Hozzáadás",
     "menCategory": "Férfi",
     "womenCategory": "Női",
@@ -125,7 +125,8 @@
     "huf": "Ft"
   },
   "images":{
-    "uploadImageLabel": "Fényképek hozzáadása"
+    "uploadImageLabel": "Fényképek feltöltése",
+    "editImage": "Fényképek szerkesztése"
   },
   "general":{
     "cancel": "Mégsem",

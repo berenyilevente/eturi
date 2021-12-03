@@ -38,7 +38,11 @@ export const CircleImage: FC<Props> = ({
   textSize,
 }) =>
   imageSource ? (
-    <img className={scope} src={imageSource} alt={alt} />
+    <img
+      className={cn(scope, size && sizeClass.and(size))}
+      src={imageSource}
+      alt={alt}
+    />
   ) : (
     <div className={cn(scope, noImageDataClass, size && sizeClass.and(size))}>
       <Text textType={textSize}>{text?.split(" ").map((i) => i[0])}</Text>

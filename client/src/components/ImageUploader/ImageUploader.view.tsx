@@ -10,15 +10,15 @@ const scope = CreateScopeCSS("components-image-uploader");
 const imageAreaClass = scope.and("imageInputArea");
 const imageContainerClass = scope.and("imageContainer");
 const imageInputLabelClass = scope.and("imageInputLabel");
+const textClass = scope.and("textClass");
 
 interface Props {
   onImage(data: any): void;
+  uploadText?: string;
 }
 
-export const ImageUploader: FC<Props> = ({ onImage }) => {
+export const ImageUploader: FC<Props> = ({ onImage, uploadText }) => {
   const { t } = useTranslation();
-
-  const uploadLabelText = t("images.uploadImageLabel");
 
   //ToDo: fix any for base64
   const [baseImageContent, setBaseImageContent] = useState<any>([]);
@@ -54,17 +54,14 @@ export const ImageUploader: FC<Props> = ({ onImage }) => {
   return (
     <div className={scope}>
       <div className={imageAreaClass}>
-        {hasData && (
-          <ImageSlider
-            imageData={baseImageContent.map((item: string) => (
-              <img src={item} alt="" />
-            ))}
-          />
-        )}
         <label className={imageInputLabelClass}>
-          <Icon iconType="plusIcon" colorStyle="darkBlue" />
-          <Text textType="text-normal-dark" color="darkBlue">
-            {uploadLabelText}
+          <Icon iconType="uploadIcon" colorStyle="darkBlue" />
+          <Text
+            textType="text-normal-dark"
+            color="darkBlue"
+            className={textClass}
+          >
+            {uploadText}
           </Text>
           <input
             type="file"

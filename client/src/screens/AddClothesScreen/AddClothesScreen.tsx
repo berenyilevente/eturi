@@ -29,6 +29,7 @@ import {
   IDropdownValues,
   useDropdownBaseData,
 } from "../../hooks/useDropdownBaseData";
+import { cn } from "@/components/utils";
 
 const useAddClothesScreen = () => {
   const { t } = useTranslation();
@@ -58,6 +59,7 @@ const useAddClothesScreen = () => {
   const sizeTableText = t("clothes.sizeTable");
   const pictureTipsText = t("clothes.pictureTips");
   const currencyText = t("currency.huf");
+  const uploadLabelText = t("images.uploadImageLabel");
 
   const [imageData, setImageData] = useState<any>();
   const [nameContent, setNameContent] = useState<string>("");
@@ -155,6 +157,7 @@ const useAddClothesScreen = () => {
     isClothesLoading,
     currencyText,
     user,
+    uploadLabelText,
   };
 };
 
@@ -211,6 +214,7 @@ const AddClothesScreen: FC = () => {
     isClothesLoading,
     currencyText,
     user,
+    uploadLabelText,
   } = useAddClothesScreen();
 
   return (
@@ -234,11 +238,15 @@ const AddClothesScreen: FC = () => {
                   </Link>
                 </>
               }
+              previewImages={
+                imageData && <img src={imageData} alt="previewImage" />
+              }
               imageUploadArea={
                 <ImageUploader
                   onImage={(image) => {
                     setImageData(image);
                   }}
+                  uploadText={uploadLabelText}
                 />
               }
             />
@@ -392,7 +400,7 @@ const AddClothesScreen: FC = () => {
                 goToHomeScreen();
               }}
             >
-              {addText}
+              <Text textType="text-normal-white"> {addText}</Text>
             </Button>
           </>
         }

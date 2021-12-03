@@ -41,6 +41,7 @@ $scope: components-button;
 
   &-iconAlignStart {
     justify-content: flex-start;
+    align-content: center;
     padding-top: 5px;
   }
   &-iconAlignEnd {

@@ -25,6 +25,7 @@ import Input from "../../components/Input";
 import DividerLine from "../../components/DividerLine";
 import TextArea from "../../components/TextArea";
 import Modal from "../../components/Modal";
+import ImageUploader from "../../components/ImageUploader";
 
 const useEditClothesScreen = () => {
   const { t } = useTranslation();
@@ -51,6 +52,7 @@ const useEditClothesScreen = () => {
   const saveText = t("general.save");
   const deleteText = t("general.delete");
   const confirmDeleteText = t("deleteClothes.confirmationText");
+  const editPhotosText = t("images.editImage");
 
   const showClothes = useSelector((state: AppState) =>
     currentId
@@ -67,6 +69,7 @@ const useEditClothesScreen = () => {
     (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
   );
+  const [imageData, setImageData] = useState<any>();
 
   const [nameContent, setNameContent] = useState<string>("");
   const [categoryContent, setCategoryContent] = useState<string>("");
@@ -151,6 +154,9 @@ const useEditClothesScreen = () => {
     setOpenModal,
     confirmDeleteText,
     goToHomeScreen,
+    imageData,
+    setImageData,
+    editPhotosText,
   };
 };
 
@@ -208,183 +214,186 @@ const EditClothesScreen: FC = () => {
     setOpenModal,
     confirmDeleteText,
     goToHomeScreen,
+    imageData,
+    setImageData,
+    editPhotosText,
   } = useEditClothesScreen();
 
   return (
     <LoadingSpinner>
       {showClothes && (
-        <ShowClothesLayout
-          imageArea={
-            <Card backgroundColorStyle="white" shadow>
-              <img src={showClothes.selectedFile} />
-            </Card>
-          }
-          detailsArea={
-            <Card backgroundColorStyle="white" shadow>
-              <ShowClothesDetailsLayout
-                nameTitle={
-                  <Text textType="text-normal-dark">{clothesNameText}</Text>
-                }
-                name={
-                  <Input
-                    inputValue={nameContent}
-                    placeholderText={
-                      showClothes.name || clothesNamePlaceholderText
-                    }
-                    onChange={setNameContent}
-                  />
-                }
-                descriptionTitle={
-                  <Text textType="text-normal-dark">{descriptionText}</Text>
-                }
-                description={
-                  <TextArea
-                    placeholderText={showClothes.description}
-                    content={descriptionContent}
-                    onChange={setDescriptionContent}
-                    size="small"
-                  />
-                }
-                line1={<DividerLine />}
-                categoryTitle={
-                  <Text textType="text-normal-dark">{categoryText}</Text>
-                }
-                category={
-                  <DropdownMenu
-                    items={category}
-                    content={categoryContent || showClothes.category}
-                    addValueToDropdown={true}
-                    onSelectItem={(item: IDropdownValues) => {
-                      setCategoryContent(item.value);
-                    }}
-                  />
-                }
-                editBrandTitle={
-                  <Text textType="text-normal-dark">{brandText}</Text>
-                }
-                editBrand={
-                  <DropdownMenu
-                    items={brands}
-                    content={brandContent || showClothes.brand}
-                    addValueToDropdown={true}
-                    onSelectItem={(item: IDropdownValues) => {
-                      setBrandContent(item.value);
-                    }}
-                  />
-                }
-                sizeTitle={<Text textType="text-normal-dark">{sizeText}</Text>}
-                size={
-                  <DropdownMenu
-                    items={sizes}
-                    content={sizeContent || showClothes.size}
-                    addValueToDropdown={true}
-                    onSelectItem={(item: IDropdownValues) => {
-                      setSizeContent(item.value);
-                    }}
-                  />
-                }
-                conditionTitle={
-                  <Text textType="text-normal-dark">{conditionText}</Text>
-                }
-                condition={
-                  <DropdownMenu
-                    items={conditions}
-                    placeholder={conditionText}
-                    hasDescriptionRow
-                    content={conditionContent}
-                    addValueToDropdown={true}
-                    onSelectItem={(item: IDropdownValues) => {
-                      setConditionContent(item.value);
-                    }}
-                  />
-                }
-                colourTitle={
-                  <Text textType="text-normal-dark">{colourText}</Text>
-                }
-                colour={
-                  <DropdownMenu
-                    items={colours}
-                    hasDescriptionRow
-                    content={colourContent || showClothes.colour}
-                    addValueToDropdown={true}
-                    onSelectItem={(item: IDropdownValues) => {
-                      setColourContent(item.value);
-                    }}
-                  />
-                }
-                line2={<DividerLine />}
-                priceTitle={
-                  <Text textType="text-normal-dark">{priceText}</Text>
-                }
-                price={
-                  <Input
-                    placeholderText={showClothes.price + " " + currencyText}
-                    inputType="number"
-                    inputValue={price}
-                    onChange={setPrice}
-                    required={true}
-                  />
-                }
-                deleteButton={
-                  <Button
-                    colorStyle="darkBlue"
-                    transparent
-                    buttonTextColor="dark"
-                    buttonSize="medium"
-                    border="borderNone"
-                    onClick={() => setOpenModal(true)}
-                    hasIconLeft
-                    iconType="trashIcon"
-                  >
-                    <Text textType="text-normal-dark">{deleteText}</Text>
-                  </Button>
-                }
-                buttons={
-                  <>
-                    <Button
-                      colorStyle="darkBlue"
-                      transparent
-                      buttonTextColor="dark"
-                      buttonSize="medium"
-                      border="borderNone"
-                      onClick={() => {
-                        goToShowClothesScreen(showClothes._id);
-                        dispatch(setTriggerReload({ triggerReload: false }));
-                      }}
-                    >
-                      {cancelText}
-                    </Button>
-                    <Button
-                      colorStyle="darkBlue"
-                      rounded
-                      buttonSize="normal"
-                      border="borderNone"
-                      isLoading={isClothesLoading}
-                      onClick={() => {
-                        dispatch(
-                          updateClothesAction(showClothes._id!, {
-                            name: nameContent!,
-                            description: descriptionContent,
-                            category: categoryContent,
-                            brand: brandContent,
-                            size: sizeContent,
-                            condition: conditionContent,
-                            colour: colourContent,
-                            price: price,
-                          })
-                        );
-                        triggerReload();
-                        goToShowClothesScreen(showClothes._id);
-                      }}
-                    >
-                      <Text textType="text-small-white"> {saveText}</Text>
-                    </Button>
-                  </>
-                }
+        <Card backgroundColorStyle="white" shadow>
+          <ShowClothesDetailsLayout
+            imageArea={
+              <>
+                <img
+                  src={imageData || showClothes.selectedFile}
+                  alt="previewImage"
+                />
+                <ImageUploader
+                  onImage={(image) => {
+                    setImageData(image);
+                  }}
+                  uploadText={editPhotosText}
+                />
+              </>
+            }
+            nameTitle={
+              <Text textType="text-normal-dark">{clothesNameText}</Text>
+            }
+            name={
+              <Input
+                inputValue={nameContent}
+                placeholderText={showClothes.name || clothesNamePlaceholderText}
+                onChange={setNameContent}
               />
-            </Card>
-          }
-        />
+            }
+            descriptionTitle={
+              <Text textType="text-normal-dark">{descriptionText}</Text>
+            }
+            description={
+              <TextArea
+                placeholderText={showClothes.description}
+                content={descriptionContent}
+                onChange={setDescriptionContent}
+                size="small"
+              />
+            }
+            line1={<DividerLine />}
+            categoryTitle={
+              <Text textType="text-normal-dark">{categoryText}</Text>
+            }
+            category={
+              <DropdownMenu
+                items={category}
+                content={categoryContent || showClothes.category}
+                addValueToDropdown={true}
+                onSelectItem={(item: IDropdownValues) => {
+                  setCategoryContent(item.value);
+                }}
+              />
+            }
+            editBrandTitle={
+              <Text textType="text-normal-dark">{brandText}</Text>
+            }
+            editBrand={
+              <DropdownMenu
+                items={brands}
+                content={brandContent || showClothes.brand}
+                addValueToDropdown={true}
+                onSelectItem={(item: IDropdownValues) => {
+                  setBrandContent(item.value);
+                }}
+              />
+            }
+            sizeTitle={<Text textType="text-normal-dark">{sizeText}</Text>}
+            size={
+              <DropdownMenu
+                items={sizes}
+                content={sizeContent || showClothes.size}
+                addValueToDropdown={true}
+                onSelectItem={(item: IDropdownValues) => {
+                  setSizeContent(item.value);
+                }}
+              />
+            }
+            conditionTitle={
+              <Text textType="text-normal-dark">{conditionText}</Text>
+            }
+            condition={
+              <DropdownMenu
+                items={conditions}
+                placeholder={conditionText}
+                hasDescriptionRow
+                content={conditionContent}
+                addValueToDropdown={true}
+                onSelectItem={(item: IDropdownValues) => {
+                  setConditionContent(item.value);
+                }}
+              />
+            }
+            colourTitle={<Text textType="text-normal-dark">{colourText}</Text>}
+            colour={
+              <DropdownMenu
+                items={colours}
+                hasDescriptionRow
+                content={colourContent || showClothes.colour}
+                addValueToDropdown={true}
+                onSelectItem={(item: IDropdownValues) => {
+                  setColourContent(item.value);
+                }}
+              />
+            }
+            line2={<DividerLine />}
+            priceTitle={<Text textType="text-normal-dark">{priceText}</Text>}
+            price={
+              <Input
+                placeholderText={showClothes.price + " " + currencyText}
+                inputType="number"
+                inputValue={price}
+                onChange={setPrice}
+                required={true}
+              />
+            }
+            deleteButton={
+              <Button
+                colorStyle="darkBlue"
+                transparent
+                buttonTextColor="dark"
+                buttonSize="medium"
+                border="borderNone"
+                onClick={() => setOpenModal(true)}
+                hasIconLeft
+                iconType="trashIcon"
+              >
+                <Text textType="text-normal-dark">{deleteText}</Text>
+              </Button>
+            }
+            buttons={
+              <>
+                <Button
+                  colorStyle="darkBlue"
+                  transparent
+                  buttonTextColor="dark"
+                  buttonSize="medium"
+                  border="borderNone"
+                  onClick={() => {
+                    goToShowClothesScreen(showClothes._id);
+                    dispatch(setTriggerReload({ triggerReload: false }));
+                  }}
+                >
+                  {cancelText}
+                </Button>
+                <Button
+                  colorStyle="darkBlue"
+                  rounded
+                  buttonSize="normal"
+                  border="borderNone"
+                  isLoading={isClothesLoading}
+                  onClick={() => {
+                    dispatch(
+                      updateClothesAction(showClothes._id!, {
+                        name: nameContent!,
+                        selectedFile: imageData,
+                        description: descriptionContent,
+                        category: categoryContent,
+                        brand: brandContent,
+                        size: sizeContent,
+                        condition: conditionContent,
+                        colour: colourContent,
+                        price: price,
+                      })
+                    );
+                    triggerReload();
+                    goToShowClothesScreen(showClothes._id);
+                  }}
+                >
+                  <Text textType="text-small-white"> {saveText}</Text>
+                </Button>
+              </>
+            }
+          />
+        </Card>
       )}
       {
         <Modal
@@ -415,7 +424,7 @@ const EditClothesScreen: FC = () => {
                 goToHomeScreen();
               }}
             >
-              {deleteText}
+              <Text textType="text-normal-white">{deleteText}</Text>
             </Button>
           </div>
         </Modal>
