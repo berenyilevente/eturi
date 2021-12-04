@@ -10,6 +10,7 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import {
   googleAuthAction,
+  loginAction,
   registerUserAction,
 } from "../../redux/auth/auth.actions";
 import { useHistory } from "react-router";
@@ -40,11 +41,27 @@ const useAuthScreen = () => {
     (state: AppState) => state.auth
   );
 
-  const [emailContent, setEmailContent] = useState("");
+  const [emailContent, setEmailContent] = useState<string>();
   const [passwordContent, setPasswordContent] = useState("");
   const [repeatPasswordContent, setRepeatPasswordContent] = useState("");
   const [lastNameContent, setLastNameContent] = useState("");
   const [firstNameContent, setFirstNameContent] = useState("");
+
+  const validationPatterns = {
+    email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    password: /^[\w]{8,20}$/,
+  };
+
+  const validateEmail = (content: string, regex: any) => {
+    let isValid = true;
+    if (regex.test(content)) {
+      isValid = true;
+    } else {
+      alert("Invalid input");
+      isValid = false;
+    }
+    return isValid;
+  };
 
   const googleSuccess = useCallback(async (res) => {
     const result = res?.profileObj;
@@ -62,32 +79,28 @@ const useAuthScreen = () => {
     console.log("Sign in unsuccessful...");
   }, []);
 
-  const onSubmitSignUp = useCallback(
-    (e) => {
-      e.preventDefault();
+  const onSubmitSignUp = useCallback(() => {
+    dispatch(
+      registerUserAction(
+        {
+          firstName: firstNameContent,
+          lastName: lastNameContent,
+          email: emailContent!,
+          password: passwordContent,
+          confirmPassword: repeatPasswordContent,
+        },
+        history
+      )
+    );
+    dispatch(setTriggerReload({ triggerReload: true }));
+  }, [
+    firstNameContent,
+    lastNameContent,
+    emailContent,
+    passwordContent,
+    repeatPasswordContent,
+  ]);
 
-      dispatch(
-        registerUserAction(
-          {
-            firstName: firstNameContent,
-            lastName: lastNameContent,
-            email: emailContent,
-            password: passwordContent,
-            confirmPassword: repeatPasswordContent,
-          },
-          history
-        )
-      );
-      dispatch(setTriggerReload({ triggerReload: true }));
-    },
-    [
-      firstNameContent,
-      lastNameContent,
-      emailContent,
-      passwordContent,
-      repeatPasswordContent,
-    ]
-  );
   const goToLoginScreen = useCallback(() => history.push(pageURLS.LOGIN), [
     history,
   ]);
@@ -120,6 +133,8 @@ const useAuthScreen = () => {
     isUserLoggedIn,
     isAuthLoading,
     goToLoginScreen,
+    validationPatterns,
+    validateEmail,
   };
 };
 
@@ -150,6 +165,8 @@ const AuthScreen: FC = () => {
     onSubmitSignUp,
     isAuthLoading,
     goToLoginScreen,
+    validationPatterns,
+    validateEmail,
   } = useAuthScreen();
 
   return (
@@ -199,7 +216,9 @@ const AuthScreen: FC = () => {
             colorStyle="darkBlue"
             border="borderNone"
             buttonSize="large"
-            onClick={onSubmitSignUp}
+            onClick={() => {
+              onSubmitSignUp();
+            }}
             isLoading={isAuthLoading}
           >
             <Text textType="text-normal-white"> {signUpText}</Text>

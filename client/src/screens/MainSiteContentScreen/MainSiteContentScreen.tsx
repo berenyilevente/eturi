@@ -25,12 +25,26 @@ const MainSiteContentScreen = () => {
         header={<MainHeaderScreen />}
         intro={
           <Switch>
-            <Route exact path={pageURLS.HOME} component={IntroScreen} />
+            <Route exact path={pageURLS.CLOTHES} component={IntroScreen} />
           </Switch>
         }
         primaryContent={
           <Switch>
-            <Route exact path={pageURLS.HOME} component={HomeContentScreen} />
+            <Route
+              exact
+              path={pageURLS.HOME}
+              component={() => <Redirect to={pageURLS.CLOTHES} />}
+            />
+            <Route
+              exact
+              path={pageURLS.CLOTHES}
+              component={HomeContentScreen}
+            />{" "}
+            <Route
+              exact
+              path={pageURLS.SEARCH_CLOTHES}
+              component={HomeContentScreen}
+            />
           </Switch>
         }
         authContent={
@@ -38,7 +52,13 @@ const MainSiteContentScreen = () => {
             <Route
               exact
               path={pageURLS.AUTH}
-              component={!isUserLoggedIn ? AuthScreen : HomeContentScreen}
+              component={() =>
+                !isUserLoggedIn ? (
+                  <AuthScreen />
+                ) : (
+                  <Redirect to={pageURLS.HOME} />
+                )
+              }
             />
             <Route exact path={pageURLS.LOGIN} component={LoginScreen} />
           </Switch>
@@ -46,8 +66,12 @@ const MainSiteContentScreen = () => {
         secondaryContent={
           <Switch>
             <Route exact path={pageURLS.SELL} component={AddClothesScreen} />
-            <Route exact path={pageURLS.SEARCH} component={SearchScreen} />
             <Route exact path={pageURLS.ABOUT} component={AboutScreen} />
+            <Route
+              exact
+              path={pageURLS.SEARCH_CLOTHES}
+              component={SearchScreen}
+            />
             <Route
               path={pageURLS.GET_CLOTHES_BY_ID}
               component={ShowCLothesScreen}

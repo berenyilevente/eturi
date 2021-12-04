@@ -21,11 +21,24 @@ export const useDropdownBaseData = () => {
   const menCategoryText = t("clothes.menCategory");
   const womenCategoryText = t("clothes.womenCategory");
   const childrenCategoryText = t("clothes.childrenCategory");
-  //category2
-  const clothesText = t("clothesCategories.clothes");
-  const shoesText = t("clothesCategories.shoes");
-  const bagsText = t("clothesCategories.bags");
-  const accessoriesText = t("clothesCategories.accessories");
+  //clothingType
+  const clothesText = t("clothes.clothesCategories.clothes");
+  const shoesText = t("clothes.clothesCategories.shoes");
+  const bagsText = t("clothes.clothesCategories.bags");
+  const accessoriesText = t("clothes.clothesCategories.accessories");
+  const jeans = t("clothes.clothesCategories.jeans");
+  const coats = t("clothes.clothesCategories.coats");
+  const topsTShirts = t("clothes.clothesCategories.topsTShirts");
+  const hoodieSweater = t("clothes.clothesCategories.hoodieSweater");
+  const shorts = t("clothes.clothesCategories.shorts");
+  const pants = t("clothes.clothesCategories.pants");
+  const underwear = t("clothes.clothesCategories.underwear");
+  const swimwear = t("clothes.clothesCategories.swimwear");
+  const sportsEquipment = t("clothes.clothesCategories.sportsEquipment");
+  const specialClothing = t("clothes.clothesCategories.specialClothing");
+  const skirts = t("clothes.clothesCategories.skirts");
+  const leggings = t("clothes.clothesCategories.leggings");
+  const other = t("clothes.clothesCategories.other");
 
   //brands
   const nike = t("brands.nike");
@@ -105,16 +118,26 @@ export const useDropdownBaseData = () => {
     { id: 3, value: childrenCategoryText },
   ];
 
-  const category2 = [
+  const clothingType = [
     { id: 1, value: clothesText },
     { id: 2, value: shoesText },
     { id: 3, value: bagsText },
-    { id: 4, value: accessoriesText },
+    { id: 4, value: jeans },
+    { id: 5, value: coats },
+    { id: 6, value: topsTShirts },
+    { id: 7, value: hoodieSweater },
+    { id: 8, value: shorts },
+    { id: 9, value: pants },
+    { id: 10, value: underwear },
+    { id: 11, value: swimwear },
+    { id: 12, value: sportsEquipment },
+    { id: 13, value: specialClothing },
+    { id: 14, value: skirts },
+    { id: 15, value: leggings },
+    { id: 16, value: other },
   ];
 
-  const categories = category.map((item, index) => {
-    return [category[index], category2[index]];
-  });
+  const categories = category.concat(clothingType);
 
   const brands: IDropdownValues[] = [
     { id: 1, value: nike },
@@ -274,11 +297,11 @@ export const useDropdownBaseData = () => {
   ];
 
   const carouselContent = [
-    <Text textType="text-medium-dark">{lightingContentText}</Text>,
-    <Text textType="text-medium-dark">{backgroundContentText}</Text>,
-    <Text textType="text-medium-dark">{noFlashContentText}</Text>,
-    <Text textType="text-medium-dark">{manyContentText}</Text>,
-    <Text textType="text-medium-dark">{yourPhotosContentText}</Text>,
+    <Text textType="text-normal-dark">{lightingContentText}</Text>,
+    <Text textType="text-normal-dark">{backgroundContentText}</Text>,
+    <Text textType="text-normal-dark">{noFlashContentText}</Text>,
+    <Text textType="text-normal-dark">{manyContentText}</Text>,
+    <Text textType="text-normal-dark">{yourPhotosContentText}</Text>,
   ];
 
   return {
@@ -291,6 +314,6 @@ export const useDropdownBaseData = () => {
     carouselImages,
     carouselContent,
     category,
-    category2,
+    clothingType,
   };
 };

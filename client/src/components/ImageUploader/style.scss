@@ -6,7 +6,7 @@ $scope: components-image-uploader;
     flex-wrap: wrap;
     align-items: center;
     padding: 6px 12px;
-    height: 30vh;
+    height: 10vh;
     outline: none;
     background-color: transparent;
     width: 100%;
@@ -22,7 +22,7 @@ $scope: components-image-uploader;
     background-color: transparent;
     width: min-content;
     white-space: nowrap;
-    padding: 15px;
+    padding: 20px;
     border-radius: 6px;
   }
   &-textClass {

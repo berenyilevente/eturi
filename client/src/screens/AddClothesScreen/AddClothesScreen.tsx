@@ -34,46 +34,97 @@ import { cn } from "@/components/utils";
 const useAddClothesScreen = () => {
   const { t } = useTranslation();
   const history = useHistory();
+  const user = JSON.parse(localStorage.getItem("profile")!);
 
   const titleText = t("clothes.title");
   const uploadPictureText = t("clothes.uploadPicture");
-  const uploadPictureTipsText = t("clothes.uploadPictureTips");
   const clothesNameText = t("clothes.clothesName");
   const clothesNamePlaceholderText = t("clothes.clothesNamePlaceholder");
   const descriptionText = t("clothes.description");
   const descriptionPlaceholderText = t("clothes.descriptionPlaceholder");
   const categoryText = t("clothes.category");
-  const categoryPlaceholderText = t("clothes.categoryPlaceholder");
   const brandText = t("clothes.brand");
-  const brandPlaceholderText = t("clothes.brandPlaceholder");
   const conditionText = t("clothes.condition");
-  const conditionPlaceholderText = t("clothes.conditionPlaceholder");
   const priceText = t("clothes.price");
   const pricePlaceholderText = t("clothes.pricePlaceholder");
   const cancelText = t("general.cancel");
   const addText = t("clothes.add");
   const sizeText = t("clothes.size");
-  const sizePlaceholderText = t("clothes.sizePlaceholder");
   const colourText = t("clothes.colour");
-  const colourPlaceholderText = t("clothes.colourPlaceholder");
-  const sizeTableText = t("clothes.sizeTable");
   const pictureTipsText = t("clothes.pictureTips");
   const currencyText = t("currency.huf");
   const uploadLabelText = t("images.uploadImageLabel");
+  const clothingTypeText = t("clothes.clothingType");
 
   const [imageData, setImageData] = useState<any>();
   const [nameContent, setNameContent] = useState<string>("");
-  const [categoryContent, setCategoryContent] = useState<string>(categoryText);
-  const [brandContent, setBrandContent] = useState<string>(brandText);
-  const [sizeContent, setSizeContent] = useState<string>(sizeText);
-  const [conditionContent, setConditionContent] = useState<string>("");
-  const [colourContent, setColourContent] = useState<string>(colourText);
-  const [descriptionContent, setDescriptionContent] = useState<string>("");
+  const [categoryContent, setCategoryContent] = useState<string>();
+  const [clothesTypeContent, setClothesTypeContent] = useState<string>(
+    clothingTypeText
+  );
+  const [brandContent, setBrandContent] = useState<string>();
+  const [sizeContent, setSizeContent] = useState<string>();
+  const [conditionContent, setConditionContent] = useState<string>();
+  const [colourContent, setColourContent] = useState<string>();
+  const [descriptionContent, setDescriptionContent] = useState<string>();
   const [price, setPrice] = useState<string>("");
   const { visible, setVisible } = useOutsideClickHandler(false);
 
+  const isInputDataValid = () => {
+    let isValid = true;
+    if (
+      !imageData ||
+      !nameContent ||
+      !descriptionContent ||
+      !categoryContent ||
+      !clothesTypeContent ||
+      !brandContent ||
+      !sizeContent ||
+      !conditionContent ||
+      !colourContent ||
+      !price
+    ) {
+      isValid = false;
+      alert("Fill out all the fields");
+    }
+    return isValid;
+  };
+
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
     history,
+  ]);
+
+  const submitClothes = useCallback(() => {
+    isInputDataValid() &&
+      dispatch(
+        addClothes({
+          selectedFile: imageData!,
+          name: nameContent!,
+          description: descriptionContent!,
+          category: categoryContent!,
+          clothingType: clothesTypeContent!,
+          brand: brandContent!,
+          size: sizeContent!,
+          condition: conditionContent!,
+          colour: colourContent!,
+          price: price!,
+          creator: user?.result?.name,
+        })
+      ) &&
+      goToHomeScreen();
+  }, [
+    imageData,
+    isInputDataValid,
+    nameContent,
+    descriptionContent,
+    categoryContent,
+    clothesTypeContent,
+    brandContent,
+    sizeContent,
+    conditionContent,
+    colourContent,
+    price,
+    user?.result?.name,
   ]);
 
   const {
@@ -85,6 +136,8 @@ const useAddClothesScreen = () => {
     carouselTitles,
     carouselImages,
     carouselContent,
+    categories,
+    clothingType,
   } = useDropdownBaseData();
 
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
@@ -98,12 +151,6 @@ const useAddClothesScreen = () => {
   const triggerReload = useCallback(() => {
     dispatch(setTriggerReload({ triggerReload: true }));
   }, [dispatch, setTriggerReload]);
-
-  const isDataValid = () => {
-    let isValid = true;
-  };
-
-  const user = JSON.parse(localStorage.getItem("profile")!);
 
   return {
     titleText,
@@ -158,6 +205,13 @@ const useAddClothesScreen = () => {
     currencyText,
     user,
     uploadLabelText,
+    categories,
+    clothingType,
+    clothesTypeContent,
+    setClothesTypeContent,
+    submitClothes,
+    isInputDataValid,
+    clothingTypeText,
   };
 };
 
@@ -215,6 +269,13 @@ const AddClothesScreen: FC = () => {
     currencyText,
     user,
     uploadLabelText,
+    categories,
+    clothingType,
+    clothesTypeContent,
+    setClothesTypeContent,
+    submitClothes,
+    isInputDataValid,
+    clothingTypeText,
   } = useAddClothesScreen();
 
   return (
@@ -285,10 +346,20 @@ const AddClothesScreen: FC = () => {
               categoryDropdown={
                 <DropdownMenu
                   items={category}
-                  content={categoryContent}
+                  content={categoryContent || categoryText}
                   addValueToDropdown={true}
                   onSelectItem={(item: IDropdownValues) => {
                     setCategoryContent(item.value);
+                  }}
+                />
+              }
+              secondCategoryDropdown={
+                <DropdownMenu
+                  items={clothingType}
+                  content={clothesTypeContent || clothingTypeText}
+                  addValueToDropdown={true}
+                  onSelectItem={(item: IDropdownValues) => {
+                    setClothesTypeContent(item.value);
                   }}
                 />
               }
@@ -297,7 +368,7 @@ const AddClothesScreen: FC = () => {
               brandDropdown={
                 <DropdownMenu
                   items={brands}
-                  content={brandContent}
+                  content={brandContent || brandText}
                   addValueToDropdown={true}
                   onSelectItem={(item: IDropdownValues) => {
                     setBrandContent(item.value);
@@ -309,7 +380,7 @@ const AddClothesScreen: FC = () => {
               sizeDropdown={
                 <DropdownMenu
                   items={sizes}
-                  content={sizeContent}
+                  content={sizeContent || sizeText}
                   addValueToDropdown={true}
                   onSelectItem={(item: IDropdownValues) => {
                     setSizeContent(item.value);
@@ -323,7 +394,7 @@ const AddClothesScreen: FC = () => {
               conditionDropdown={
                 <DropdownMenu
                   items={conditions}
-                  placeholder={conditionText}
+                  placeholder={conditionText || conditionText}
                   hasDescriptionRow
                   content={conditionContent}
                   addValueToDropdown={true}
@@ -338,7 +409,7 @@ const AddClothesScreen: FC = () => {
                 <DropdownMenu
                   items={colours}
                   hasDescriptionRow
-                  content={colourContent}
+                  content={colourContent || colourText}
                   addValueToDropdown={true}
                   onSelectItem={(item: IDropdownValues) => {
                     setColourContent(item.value);
@@ -382,22 +453,8 @@ const AddClothesScreen: FC = () => {
               buttonSize="normal"
               border="borderNone"
               onClick={() => {
-                dispatch(
-                  addClothes({
-                    selectedFile: imageData,
-                    name: nameContent,
-                    description: descriptionContent,
-                    category: categoryContent,
-                    brand: brandContent,
-                    size: sizeContent,
-                    condition: conditionContent,
-                    colour: colourContent,
-                    price: price,
-                    creator: user?.result?.name,
-                  })
-                );
+                submitClothes();
                 triggerReload();
-                goToHomeScreen();
               }}
             >
               <Text textType="text-normal-white"> {addText}</Text>

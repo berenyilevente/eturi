@@ -1,4 +1,5 @@
 import { FC } from "react";
+import SearchLayout from "../../layouts/SearchLayout";
 
 const useSearchScreen = () => {
   return {};
@@ -7,6 +8,10 @@ const useSearchScreen = () => {
 const SearchScreen: FC = () => {
   const {} = useSearchScreen();
 
-  return <>{"Search"}</>;
+  return (
+    <>
+      <SearchLayout searchField={<div>{"SearchField"}</div>} />
+    </>
+  );
 };
 export default SearchScreen;

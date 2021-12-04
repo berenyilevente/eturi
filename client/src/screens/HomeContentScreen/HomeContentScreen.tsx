@@ -13,28 +13,38 @@ import { ClothesListingLayout } from "../../layouts/ClothesListingLayout/Clothes
 import Card from "../../components/Card";
 import { Text } from "../../components/Text/Text.view";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router-dom";
 import pageURLS from "../../resources/constants/pageURLS";
 import Icon from "../../components/Icon";
 import DividerLine from "../../components/DividerLine";
+import Pagination from "../../components/Pagination";
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 const useHomeContentScreen = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
+  const query = useQuery();
 
-  const { triggerReload } = useSelector((state: AppState) => state.clothes);
-
-  useEffect(() => {
-    dispatch(getClothes());
-  }, [dispatch, triggerReload]);
+  //React router is going to read the url and check if we have the specified parameter
+  const page = query.get("page")!;
+  const searchQuery = query.get("searchQuery");
 
   const currencyText = t("currency.huf");
 
   const { clothes, isClothesLoading, likeLoading } = useSelector(
     (state: AppState) => state.clothes
   );
+
+  useEffect(() => {
+    dispatch(getClothes());
+  }, [dispatch]);
+
   const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
+
   const goToShowClothesScreen = useCallback(
     (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
@@ -52,6 +62,8 @@ const useHomeContentScreen = () => {
     dispatch,
     likeLoading,
     isUserLoggedIn,
+    page,
+    searchQuery,
   };
 };
 
@@ -66,12 +78,14 @@ const HomeContentScreen: FC = () => {
     dispatch,
     likeLoading,
     isUserLoggedIn,
+    page,
+    searchQuery,
   } = useHomeContentScreen();
 
   return (
     <LoadingSpinner isLoading={isClothesLoading}>
       <HomeContentLayout
-        contentCard={clothes.map((item) => {
+        contentCard={clothes!.map((item) => {
           return (
             <Card backgroundColorStyle="white" shadow key={item._id}>
               <ClothesListingLayout
@@ -127,7 +141,8 @@ const HomeContentScreen: FC = () => {
             </Card>
           );
         })}
-      />
+      />{" "}
+      <Pagination page={page}></Pagination>
     </LoadingSpinner>
   );
 };

@@ -18,6 +18,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import Button from "../../components/Button";
 import DividerLine from "../../components/DividerLine";
 import Icon from "../../components/Icon";
+import dayjs from "dayjs";
 
 const useEditClothesScreen = () => {
   const { t } = useTranslation();
@@ -49,6 +50,8 @@ const useEditClothesScreen = () => {
   const backText = t("general.back");
   const currencyText = t("currency.huf");
   const homeText = t("header.home");
+  const dateFormat = t("general.dateFormat");
+  const createdAtText = t("general.createdAt");
 
   const showClothes = useSelector((state: AppState) =>
     currentId
@@ -92,6 +95,8 @@ const useEditClothesScreen = () => {
     dispatch,
     user,
     homeText,
+    dateFormat,
+    createdAtText,
   };
 };
 
@@ -119,6 +124,8 @@ const ShowCLothesScreen: FC = () => {
     dispatch,
     user,
     homeText,
+    dateFormat,
+    createdAtText,
   } = useEditClothesScreen();
 
   return (
@@ -154,6 +161,11 @@ const ShowCLothesScreen: FC = () => {
             category={
               <Text textType="text-normal-dark">{showClothes.category}</Text>
             }
+            clothingType={
+              <Text textType="text-normal-dark">
+                {showClothes.clothingType}
+              </Text>
+            }
             sizeTitle={<Text textType="text-normal-dark">{sizeText}</Text>}
             size={<Text textType="text-normal-dark">{showClothes.size}</Text>}
             conditionTitle={
@@ -171,6 +183,14 @@ const ShowCLothesScreen: FC = () => {
             price={
               <Text textType="text-normal-dark">
                 {showClothes.price + " " + currencyText}
+              </Text>
+            }
+            createdAtTitle={
+              <Text textType="text-normal-dark">{createdAtText}</Text>
+            }
+            createdAt={
+              <Text textType="text-normal-dark">
+                {dayjs(showClothes.createdAt).format(dateFormat)}
               </Text>
             }
             buttons={

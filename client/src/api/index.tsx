@@ -25,7 +25,8 @@ API.interceptors.request.use((req) => {
 });
 
 //get all clothes
-export const fetchClothes = () => API.get("/clothes");
+export const fetchClothes = (page?: string | number) =>
+  API.get(`/clothes?page=${page}`);
 
 //add clothes
 export const addClothes = (newClothes: IClothesResponseData) =>

@@ -68,9 +68,10 @@ const useMainHeaderScreen = () => {
   const goToSellScreen = useCallback(() => history.push(pageURLS.SELL), [
     history,
   ]);
-  const goToSearchScreen = useCallback(() => history.push(pageURLS.SEARCH), [
-    history,
-  ]);
+  const goToSearchScreen = useCallback(
+    () => history.push(pageURLS.SEARCH_CLOTHES),
+    [history]
+  );
   const goToAboutScreen = useCallback(() => history.push(pageURLS.ABOUT), [
     history,
   ]);

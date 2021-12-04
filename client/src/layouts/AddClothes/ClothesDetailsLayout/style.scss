@@ -1,20 +1,25 @@
 $scope: layouts-clothes-details-layout;
 .#{$scope} {
   display: grid;
-  grid-auto-columns: 1fr;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content min-content min-content;
-  gap: 0px 0px;
   padding: 30px;
 
   &-line {
     grid-column-start: 1;
     grid-column-end: 3;
   }
+  &-categoriesClass {
+    grid-column: 2;
+    margin-top: 12px;
+  }
 }
 
 @media (max-width: 650px) {
   .#{$scope} {
-    grid-template-columns: 1fr 2fr;
+    gap: 0.4rem;
+    &-colSpan {
+      grid-column: 1 / 3;
+    }
   }
 }

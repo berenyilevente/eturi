@@ -17,6 +17,9 @@ const descriptionTitleClass = scope.and("descriptionTitle");
 const descriptionContentClass = scope.and("descriptionArea");
 const marginBottom = scope.and("marginBottom");
 const editBrandClass = scope.and("editBrandClass");
+const priceContentClass = scope.and("priceContentClass");
+const dateContentClass = scope.and("dateContentClass");
+const clothesTypeClass = scope.and("clothesTypeClass");
 
 interface Props {
   imageArea?: ReactNode;
@@ -26,6 +29,7 @@ interface Props {
   name?: ReactNode;
   description?: ReactNode;
   category?: ReactNode;
+  clothingType?: ReactNode;
   size?: ReactNode;
   condition?: ReactNode;
   colour?: ReactNode;
@@ -42,6 +46,8 @@ interface Props {
   line2?: ReactNode;
   deleteButton?: ReactNode;
   backButton?: ReactNode;
+  createdAtTitle?: ReactNode;
+  createdAt?: ReactNode;
 }
 
 export const ShowClothesDetailsLayout: FC<Props> = ({
@@ -52,6 +58,7 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
   name,
   description,
   category,
+  clothingType,
   size,
   condition,
   colour,
@@ -68,6 +75,8 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
   line2,
   deleteButton,
   backButton,
+  createdAt,
+  createdAtTitle,
 }) => (
   <div className={scope}>
     <div className={headerClass}>{brand}</div>
@@ -80,6 +89,7 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
     <div className={cn(lineClass)}>{line1}</div>
     <div>{categoryTitle}</div>
     <div className={colSpan}>{category}</div>
+    <div className={cn(clothesTypeClass, colSpan)}>{clothingType}</div>
     <div>{sizeTitle}</div>
     <div className={colSpan}>{size}</div>
     <div>{conditionTitle}</div>
@@ -88,7 +98,9 @@ export const ShowClothesDetailsLayout: FC<Props> = ({
     <div className={colSpan}>{colour}</div>
     <div className={lineClass}>{line2}</div>
     <div>{priceTitle}</div>
-    <div>{price}</div>
+    <div className={priceContentClass}>{price}</div>
+    <div>{createdAtTitle}</div>
+    <div className={dateContentClass}>{createdAt}</div>
     <div className={imageAreaClass}>{imageArea}</div>
     <div className={buttonAreaClass}>
       <div className={backButtonClass}>{backButton}</div>

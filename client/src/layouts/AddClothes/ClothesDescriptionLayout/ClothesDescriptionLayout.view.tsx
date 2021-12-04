@@ -4,6 +4,7 @@ import { CreateScopeCSS } from "../../../components/utils";
 
 const scope = CreateScopeCSS("layouts-clothes-description-layout");
 const lineClass = scope.and("line");
+const colSpan = scope.and("colSpan");
 
 interface Props {
   name: ReactNode;
@@ -21,10 +22,10 @@ export const ClothesDescriptionLayout: FC<Props> = ({
   line,
 }) => (
   <div className={scope}>
-    <div>{name}</div>
-    <div>{nameInput}</div>
+    <div className={colSpan}>{name}</div>
+    <div className={colSpan}>{nameInput}</div>
     <div className={lineClass}>{line}</div>
-    <div>{description}</div>
-    <div>{descriptionTextArea}</div>
+    <div className={colSpan}>{description}</div>
+    <div className={colSpan}>{descriptionTextArea}</div>
   </div>
 );

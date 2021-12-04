@@ -7,4 +7,9 @@ $scope: layouts-home-content-layout;
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
+  &-paginationClass {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
 }

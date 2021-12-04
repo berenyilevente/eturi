@@ -6,6 +6,7 @@ const clothesSchema = mongoose.Schema({
   name: String,
   description: String,
   category: String,
+  clothingType: String,
   brand: String,
   size: String,
   condition: String,

@@ -45,11 +45,27 @@
     "colourPlaceholder": "Choose colour",
     "sizeTable": "Size table",
     "pictureTips": "Tips",
+    "gender": "Men, Women or children",
+    "clothingType": "Clothing type",
+
     "clothesCategories":{
-      "clothes": "Clothes",
-      "shoes": "Shoes",
-      "bags": "Bags",
-      "accessories": "Accessories"
+      "clothes": "Dress",
+      "shoes": "Shoe",
+      "bags": "Bag",
+      "accessories": "Accessory",
+      "jeans": "Jeans",
+      "coats": "Coat",
+      "topsTShirts": "Top / T-Shirt",
+      "hoodieSweater": "Hoodie / Sweater",
+      "shorts": "Short",
+      "pants": "Pants",
+      "underwear": "Underwear",
+      "swimwear": "Swimwear",
+      "sportsEquipment": "Sports equipment",
+      "specialClothing": "Special clothing",
+      "other": "Other",
+      "skirts": "Skirt",
+      "leggings": "Leggings"
     }
   },
   "brands":{
@@ -143,7 +159,11 @@
     "noData": "No data",
     "save": "Save",
     "back": "Back",
-    "delete": "Delete"
+    "delete": "Delete",
+    "dateFormat": "YYYY-MM-DD",
+    "dateFormatHours": "YYYY/MM/DD HH:mm",
+    "createdAt": "Created at"
+
   },
   "deleteClothes":{
     "confirmationText": "Are you sure you want to delete the following listing?"

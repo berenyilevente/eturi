@@ -44,11 +44,27 @@
     "colourPlaceholder": "Szín kiválasztása",
     "sizeTable": "Mérettáblázat",
     "pictureTips": "Tippek",
+    "gender": "Férfi, Női vagy gyerek",
+    "clothingType": "Ruhatípus",
+
     "clothesCategories":{
-      "clothes": "Ruhák",
-      "shoes": "Cipők",
-      "bags": "Táskák",
-      "accessories": "Kiegészítők"
+      "clothes": "Ruha",
+      "shoes": "Cipő",
+      "bags": "Táska",
+      "accessories": "Kiegészítő",
+      "jeans": "Farmer",
+      "coats": "Kabát",
+      "topsTShirts": "Felső / póló",
+      "hoodieSweater": "Pulóver",
+      "shorts": "Rövidnadrág",
+      "pants": "Nadrág",
+      "underwear": "Fehérnemű",
+      "swimwear": "Fürdőruha",
+      "sportsEquipment": "Sportfelszerelés",
+      "specialClothing": "Speciális ruházat",
+      "other": "Egyéb",
+      "skirts": "Szoknya",
+      "leggings": "Leggings"
     }
     },
   "brands":{
@@ -141,8 +157,11 @@
     "noData": "Nincs megadott adat",
     "save": "Mentés",
     "back": "Vissza",
-    "delete": "Törlés"
-  },
+    "delete": "Törlés",
+    "dateFormat": "YYYY-MM-DD",
+    "dateFormatHours": "YYYY/MM/DD HH:mm",
+    "createdAt": "Feladva"
+    },
   "deleteClothes":{
     "confirmationText": "Biztosan törölni szeretnéd a ruhát?"
   },

@@ -2,10 +2,8 @@ $scope: layouts-clothes-description-layout;
 //just an example class, tbd
 .#{$scope} {
   display: grid;
-  grid-auto-columns: 1fr;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content min-content;
-  gap: 0px 0px;
   padding: 30px;
 
   &-line {
@@ -16,6 +14,12 @@ $scope: layouts-clothes-description-layout;
 
 @media (max-width: 650px) {
   .#{$scope} {
-    grid-template-columns: 1fr 2fr;
+    gap: 0.4rem;
+    &-colSpan {
+      grid-column: 1 / 3;
+    }
+    &-line {
+      display: none;
+    }
   }
 }

@@ -19,6 +19,7 @@ interface Props {
   errorTextValue?: string;
   hasIcon?: boolean;
   iconType?: keyof typeof iconMap;
+  ref?: any;
 }
 
 export const Input: FC<Props> = ({
@@ -30,6 +31,7 @@ export const Input: FC<Props> = ({
   required,
   hasIcon,
   iconType,
+  ref,
 }) => {
   const [, setInputText] = useState<string>("");
 
@@ -63,6 +65,7 @@ export const Input: FC<Props> = ({
           onChange={onChangeInputText}
           onKeyPress={onKeyPress}
           required={required}
+          ref={ref}
         />
         {hasIcon && <Icon iconType={iconType!} className={iconClass} />}
       </span>

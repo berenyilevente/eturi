@@ -104,6 +104,7 @@ export default (
     case SIGNUP_FAILURE:
       return {
         ...state,
+        isAuthLoading: false,
         errorMessage: action.error.message,
       };
 

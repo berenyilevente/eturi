@@ -15,6 +15,7 @@ export interface IClothesResponseData {
   name: string;
   description: string;
   category: string;
+  clothingType?: string;
   brand: string;
   size: string;
   condition: string;
@@ -32,6 +33,7 @@ export interface IUpdateClothesResponseData {
   name: string;
   description: string;
   category: string;
+  clothingType?: string;
   brand: string;
   size: string;
   condition: string;
@@ -47,6 +49,7 @@ export interface ILikeClothesResponseData {
   name: string;
   description: string;
   category: string;
+  clothingType?: string;
   brand: string;
   size: string;
   condition: string;

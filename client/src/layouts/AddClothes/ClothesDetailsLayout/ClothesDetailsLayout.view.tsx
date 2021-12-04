@@ -1,13 +1,16 @@
 import "../ClothesDetailsLayout/style.scss";
 import { FC, ReactNode } from "react";
-import { CreateScopeCSS } from "../../../components/utils";
+import { cn, CreateScopeCSS } from "../../../components/utils";
 
 const scope = CreateScopeCSS("layouts-clothes-details-layout");
 const lineClass = scope.and("line");
+const categoriesClass = scope.and("categoriesClass");
+const colSpan = scope.and("colSpan");
 
 interface Props {
   category: ReactNode;
   categoryDropdown: ReactNode;
+  secondCategoryDropdown?: ReactNode;
   brand: ReactNode;
   brandDropdown: ReactNode;
   condition: ReactNode;
@@ -37,21 +40,23 @@ export const ClothesDetailsLayout: FC<Props> = ({
   sizeDropdown,
   colour,
   colourDropdown,
+  secondCategoryDropdown,
 }) => (
   <div className={scope}>
-    <div>{category}</div>
-    <div>{categoryDropdown}</div>
+    <div className={colSpan}>{category}</div>
+    <div className={colSpan}>{categoryDropdown}</div>
+    <div className={cn(categoriesClass, colSpan)}>{secondCategoryDropdown}</div>
     <div className={lineClass}>{line1}</div>
-    <div>{brand}</div>
-    <div>{brandDropdown}</div>
+    <div className={colSpan}>{brand}</div>
+    <div className={colSpan}>{brandDropdown}</div>
     <div className={lineClass}>{line2}</div>
-    <div>{size}</div>
-    <div>{sizeDropdown}</div>
+    <div className={colSpan}>{size}</div>
+    <div className={colSpan}>{sizeDropdown}</div>
     <div className={lineClass}>{line4}</div>
-    <div>{condition}</div>
-    <div>{conditionDropdown}</div>
+    <div className={colSpan}>{condition}</div>
+    <div className={colSpan}>{conditionDropdown}</div>
     <div className={lineClass}>{line3}</div>
-    <div>{colour}</div>
-    <div>{colourDropdown}</div>
+    <div className={colSpan}>{colour}</div>
+    <div className={colSpan}>{colourDropdown}</div>
   </div>
 );

@@ -8,14 +8,12 @@ $scope: layouts-show-clothes-details-layout;
   padding-left: 24px;
   padding-right: 16px;
   align-items: center;
-  white-space: nowrap;
 
   &-header {
     padding-top: 10px;
     padding-bottom: 20px;
     grid-column: 1;
     grid-row: 1;
-    white-space: nowrap;
   }
   &-editBrandClass {
     margin-top: 24px;
@@ -33,7 +31,11 @@ $scope: layouts-show-clothes-details-layout;
   &-imageAreaClass {
     margin-top: 32px;
     grid-column: 3;
-    grid-row: 1 / 10;
+    grid-row: 1 / 11;
+  }
+
+  &-clothesTypeClass {
+    grid-column: 2;
   }
 
   &-imageAreaClass img {
@@ -56,6 +58,8 @@ $scope: layouts-show-clothes-details-layout;
   &-buttonArea {
     display: flex;
     grid-column: 3;
+    align-self: flex-end;
+    grid-row: 11 / 13;
     justify-content: space-between;
     margin: 1rem;
   }
@@ -72,12 +76,20 @@ $scope: layouts-show-clothes-details-layout;
   }
   &-line {
     grid-column-start: 1;
-
     grid-column-end: 3;
     margin-right: 20px;
   }
+
   &-marginBottom {
     margin-bottom: 24px;
+  }
+
+  &-priceContentClass {
+    grid-column: 2 / 3;
+  }
+
+  &-dateContentClass {
+    white-space: nowrap;
   }
 }
 
@@ -104,9 +116,25 @@ $scope: layouts-show-clothes-details-layout;
     &-line {
       grid-column: 1 / 4;
     }
+    &-nameTitleClass {
+      white-space: nowrap !important;
+    }
+    &-priceContentClass {
+      grid-column: 2 / 4;
+      white-space: nowrap !important;
+    }
+    &-nameContentClass {
+      white-space: nowrap !important;
+    }
+    &-buttonArea {
+      display: flex;
+      grid-row: unset;
+      justify-content: space-between;
+      margin: 1rem;
+    }
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 550px) {
   .#{$scope} {
     &-buttonArea {
       grid-column: 1 / 4;

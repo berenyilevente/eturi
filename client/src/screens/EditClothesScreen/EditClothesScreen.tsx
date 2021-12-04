@@ -69,14 +69,15 @@ const useEditClothesScreen = () => {
     (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
   );
-  const [imageData, setImageData] = useState<any>();
 
-  const [nameContent, setNameContent] = useState<string>("");
-  const [categoryContent, setCategoryContent] = useState<string>("");
-  const [brandContent, setBrandContent] = useState<string>("");
-  const [sizeContent, setSizeContent] = useState<string>("");
-  const [conditionContent, setConditionContent] = useState<string>("");
-  const [colourContent, setColourContent] = useState<string>("");
+  const [imageData, setImageData] = useState<any>();
+  const [nameContent, setNameContent] = useState<string>();
+  const [categoryContent, setCategoryContent] = useState<string>();
+  const [clothesType, setClothesType] = useState<string>();
+  const [brandContent, setBrandContent] = useState<string>();
+  const [sizeContent, setSizeContent] = useState<string>();
+  const [conditionContent, setConditionContent] = useState<string>();
+  const [colourContent, setColourContent] = useState<string>();
   const [descriptionContent, setDescriptionContent] = useState<string>("");
   const [price, setPrice] = useState<string>("");
 
@@ -86,12 +87,78 @@ const useEditClothesScreen = () => {
     history,
   ]);
 
+  useEffect(() => {
+    setImageData(showClothes!.selectedFile);
+    setBrandContent(showClothes!.brand);
+    setNameContent(showClothes!.name);
+    setDescriptionContent(showClothes!.description);
+    setCategoryContent(showClothes!.category);
+    setClothesType(showClothes!.clothingType!);
+    setSizeContent(showClothes!.size);
+    setConditionContent(showClothes!.condition);
+    setColourContent(showClothes!.colour);
+    setPrice(showClothes!.price);
+  }, []);
+
   const triggerReload = useCallback(() => {
     dispatch(setTriggerReload({ triggerReload: true }));
   }, [dispatch]);
 
+  const isInputDataValid = () => {
+    let isValid = true;
+    if (
+      !imageData ||
+      !nameContent ||
+      !descriptionContent ||
+      !categoryContent ||
+      !clothesType ||
+      !brandContent ||
+      !sizeContent ||
+      !conditionContent ||
+      !colourContent ||
+      !price
+    ) {
+      isValid = false;
+      alert("Fill out all the fields");
+    }
+    return isValid;
+  };
+
+  const patchClothes = useCallback(() => {
+    isInputDataValid() &&
+      dispatch(
+        updateClothesAction(showClothes!._id!, {
+          name: nameContent!,
+          selectedFile: imageData!,
+          description: descriptionContent!,
+          category: categoryContent!,
+          clothingType: clothesType!,
+          brand: brandContent!,
+          size: sizeContent!,
+          condition: conditionContent!,
+          colour: colourContent!,
+          price: price!,
+        })
+      ) &&
+      goToShowClothesScreen(showClothes!._id);
+  }, [
+    isInputDataValid,
+    showClothes,
+    nameContent,
+    imageData,
+    descriptionContent,
+    categoryContent,
+    clothesType,
+    brandContent,
+    sizeContent,
+    conditionContent,
+    colourContent,
+    price,
+  ]);
+
   const {
     category,
+    clothingType,
     brands,
     sizes,
     conditions,
@@ -157,6 +224,10 @@ const useEditClothesScreen = () => {
     imageData,
     setImageData,
     editPhotosText,
+    clothesType,
+    setClothesType,
+    clothingType,
+    patchClothes,
   };
 };
 
@@ -217,6 +288,10 @@ const EditClothesScreen: FC = () => {
     imageData,
     setImageData,
     editPhotosText,
+    clothesType,
+    setClothesType,
+    clothingType,
+    patchClothes,
   } = useEditClothesScreen();
 
   return (
@@ -271,6 +346,16 @@ const EditClothesScreen: FC = () => {
                 addValueToDropdown={true}
                 onSelectItem={(item: IDropdownValues) => {
                   setCategoryContent(item.value);
+                }}
+              />
+            }
+            clothingType={
+              <DropdownMenu
+                items={clothingType}
+                content={clothesType || showClothes.category}
+                addValueToDropdown={true}
+                onSelectItem={(item: IDropdownValues) => {
+                  setClothesType(item.value);
                 }}
               />
             }
@@ -369,21 +454,8 @@ const EditClothesScreen: FC = () => {
                   border="borderNone"
                   isLoading={isClothesLoading}
                   onClick={() => {
-                    dispatch(
-                      updateClothesAction(showClothes._id!, {
-                        name: nameContent!,
-                        selectedFile: imageData,
-                        description: descriptionContent,
-                        category: categoryContent,
-                        brand: brandContent,
-                        size: sizeContent,
-                        condition: conditionContent,
-                        colour: colourContent,
-                        price: price,
-                      })
-                    );
+                    patchClothes();
                     triggerReload();
-                    goToShowClothesScreen(showClothes._id);
                   }}
                 >
                   <Text textType="text-small-white"> {saveText}</Text>
