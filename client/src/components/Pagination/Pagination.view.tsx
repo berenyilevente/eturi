@@ -12,20 +12,46 @@ const example = scope.and("example");
 
 interface Props {
   totalClothes?: number;
+  clothesPerPage?: number;
+  paginate?: any;
   page: string | number;
-  renderItem?(item: any): ReactNode;
 }
 
-export const Pagination: FC<Props> = ({ totalClothes, page, renderItem }) => {
+export const Pagination: FC<Props> = ({
+  totalClothes,
+  clothesPerPage,
+  paginate,
+}) => {
   const dispatch = useDispatch();
+
   const [pageNumber, setPageNumber] = useState(0);
 
-  const clothesPerPage = 10;
-  const pagesVisited = pageNumber * clothesPerPage;
+  const pageNumbers = [];
+
+  for (
+    let index = 1;
+    index <= Math.ceil(totalClothes! / clothesPerPage!);
+    index++
+  )
+    pageNumbers.push(index);
 
   return (
     <div className={scope}>
-      <ul className="pagination"></ul>
+      <nav>
+        <ul className="pagination">
+          {pageNumbers.map((number) => (
+            <li key={number} className="page-item">
+              <Link
+                to={`/clothes?:page=${number}`}
+                onClick={() => paginate(number)}
+                className="page-link"
+              >
+                {number}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 };

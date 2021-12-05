@@ -30,16 +30,12 @@ const MainSiteContentScreen = () => {
         }
         primaryContent={
           <Switch>
-            <Route
-              exact
-              path={pageURLS.HOME}
-              component={() => <Redirect to={pageURLS.CLOTHES} />}
-            />
+            <Route exact path={pageURLS.HOME} component={HomeContentScreen} />
             <Route
               exact
               path={pageURLS.CLOTHES}
               component={HomeContentScreen}
-            />{" "}
+            />
             <Route
               exact
               path={pageURLS.SEARCH_CLOTHES}

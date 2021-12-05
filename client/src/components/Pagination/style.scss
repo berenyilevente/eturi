@@ -1,7 +1,8 @@
 $scope: components-pagination;
 //just an example class, tbd
-.#{$scope}{
-  //define css styles here
+.#{$scope} {
+  display: flex;
+  justify-content: center;
   &-example {
     //define css styles here
   }

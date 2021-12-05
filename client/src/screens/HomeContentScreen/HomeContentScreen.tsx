@@ -52,6 +52,18 @@ const useHomeContentScreen = () => {
 
   const [heartFill, setHeartFill] = useState<boolean>(false);
 
+  //basic frontend pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [clothesPerPage, setClothesPerPage] = useState(6);
+
+  const indexOfLastClothesItem = currentPage * clothesPerPage;
+  const indexOfFirstClothesItem = indexOfLastClothesItem - clothesPerPage;
+  const currentClothes = clothes.slice(
+    indexOfFirstClothesItem,
+    indexOfLastClothesItem
+  );
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
   return {
     clothes,
     isClothesLoading,
@@ -64,6 +76,9 @@ const useHomeContentScreen = () => {
     isUserLoggedIn,
     page,
     searchQuery,
+    clothesPerPage,
+    currentClothes,
+    paginate,
   };
 };
 
@@ -80,12 +95,15 @@ const HomeContentScreen: FC = () => {
     isUserLoggedIn,
     page,
     searchQuery,
+    currentClothes,
+    clothesPerPage,
+    paginate,
   } = useHomeContentScreen();
 
   return (
     <LoadingSpinner isLoading={isClothesLoading}>
       <HomeContentLayout
-        contentCard={clothes!.map((item) => {
+        contentCard={currentClothes!.map((item) => {
           return (
             <Card backgroundColorStyle="white" shadow key={item._id}>
               <ClothesListingLayout
@@ -141,8 +159,13 @@ const HomeContentScreen: FC = () => {
             </Card>
           );
         })}
-      />{" "}
-      <Pagination page={page}></Pagination>
+      />
+      <Pagination
+        page={page}
+        clothesPerPage={clothesPerPage}
+        totalClothes={clothes.length}
+        paginate={paginate}
+      ></Pagination>
     </LoadingSpinner>
   );
 };
