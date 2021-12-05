@@ -1,6 +1,6 @@
-import "@/components/Slider/style.scss";
+import "../../components/Slider/style.scss";
 import { FC, useCallback, useState } from "react";
-import { cn, CreateScopeCSS } from "@/components/utils";
+import { cn, CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("components-slider");
 const colorClass = scope.and("colors");
@@ -24,7 +24,7 @@ export const Slider: FC<Props> = ({
   maxRange,
 }) => {
   const [sliderValue, setSliderValue] = useState<number>(0);
-  const [secondarySliderValue, setSecondarySliderValue] = useState<number>(50);
+  const [secondarySliderValue, setSecondarySliderValue] = useState<number>(0);
 
   const handleSliderChange = useCallback(
     (event) => {
@@ -58,10 +58,14 @@ export const Slider: FC<Props> = ({
           value={secondarySliderValue}
           onChange={handleSecondarySliderChange}
         />
-      ) }
+      )}
 
-      <div className={cn(hasTwoValues ? valuesClass : "d-flex justify-content-center")}>
-        <div >{sliderValue}</div>
+      <div
+        className={cn(
+          hasTwoValues ? valuesClass : "d-flex justify-content-center"
+        )}
+      >
+        <div>{sliderValue}</div>
         <div>{hasTwoValues ? secondarySliderValue : ""}</div>
       </div>
     </div>

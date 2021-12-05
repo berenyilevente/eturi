@@ -49,11 +49,7 @@ export const Modal: FC<Props> = ({
             >
               <div className={modalHeaderClass}>
                 <Text textType="text-normal-dark">{title}</Text>
-                <Icon
-                  iconType="xIcon"
-                  onClick={closeModal}
-                  cursor={true}
-                ></Icon>
+                <Icon iconType="xIcon" onClick={closeModal} cursor={true} />
               </div>
               {children}
             </Card>

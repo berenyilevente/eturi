@@ -7,7 +7,6 @@ import * as iconMap from "../../components/Icon/icons";
 const scope = CreateScopeCSS("components-input");
 const inputAreaClass = scope.and("inputArea");
 const inputFieldClass = scope.and("inputField");
-const iconClass = scope.and("iconClass");
 
 interface Props {
   inputValue?: string;
@@ -15,6 +14,7 @@ interface Props {
   inputType?: "text" | "number" | "password";
   onEnterKeyPressed?: KeyboardEventHandler<HTMLInputElement>;
   onChange(value: string): void;
+  onSubmitSearch?(): void;
   required?: boolean;
   errorTextValue?: string;
   hasIcon?: boolean;
@@ -32,6 +32,7 @@ export const Input: FC<Props> = ({
   hasIcon,
   iconType,
   ref,
+  onSubmitSearch,
 }) => {
   const [, setInputText] = useState<string>("");
 
@@ -67,7 +68,7 @@ export const Input: FC<Props> = ({
           required={required}
           ref={ref}
         />
-        {hasIcon && <Icon iconType={iconType!} className={iconClass} />}
+        {hasIcon && <Icon iconType={iconType!} />}
       </span>
     </div>
   );

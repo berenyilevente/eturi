@@ -1,9 +1,12 @@
-
 $scope: layouts-search-layout;
 //just an example class, tbd
-.#{$scope}{
-  //define css styles here
-  &-example {
-    //define css styles here
+.#{$scope} {
+  &-searchArea {
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr;
+    gap: 1em;
+    margin-top: 20px;
+    margin-bottom: 24px;
+    grid-template-rows: min-content;
   }
 }

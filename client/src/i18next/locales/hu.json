@@ -185,5 +185,15 @@
     "editProfile": "Profil szerkesztése",
     "noClothes": "A gardróbod jelenleg üres",
     "addNow": "Hírdess most!"
+  },
+  "searchScreen":{
+    "search": "Keresés",
+    "searchField": "Keresés mező",
+    "filter": "Szűrés",
+    "searchTitle": "Keress rá kedven ruháidra",
+    "filterModalTitle": "Ruhák szűrése",
+    "price": "Árkategória",
+    "from": "Tól",
+    "to": "Ig"
   }
 }

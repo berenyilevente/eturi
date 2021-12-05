@@ -188,5 +188,15 @@
     "editProfile": "Edit profile",
     "noClothes": "Your wardrobe is currently empty",
     "addNow": "Start selling now!"
+  },
+  "searchScreen":{
+    "search": "Search",
+    "searchField": "Search field",
+    "filter": "Filter",
+    "searchTitle": "Find your favourite clothes",
+    "filterModalTitle": "Filter clothes",
+    "price": "Price range",
+    "from": "From",
+    "to": "To"
   }
 }

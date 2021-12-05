@@ -34,13 +34,13 @@ $scope: components-modal;
 
     &-modalWidth {
       &-narrow {
-        width: 400px;
+        width: 25vw;
       }
       &-normal {
-        width: 800px;
+        width: 50vw;
       }
       &-wide {
-        width: 1000px;
+        width: 75vw;
       }
     }
   }
@@ -51,6 +51,9 @@ $scope: components-modal;
     &-modalWidth {
       &-narrow {
         width: 50px;
+      }
+      &-normal {
+        width: 75vw !important;
       }
     }
   }

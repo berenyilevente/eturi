@@ -17,11 +17,12 @@ $scope: components-input;
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid rgb(230, 225, 225);
     outline: none;
     background-color: transparent;
     width: 100%;
   }
-  &-iconClass {
+  &-buttonClass {
+    margin-left: 24px;
   }
 }

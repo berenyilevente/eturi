@@ -394,9 +394,8 @@ const AddClothesScreen: FC = () => {
               conditionDropdown={
                 <DropdownMenu
                   items={conditions}
-                  placeholder={conditionText || conditionText}
                   hasDescriptionRow
-                  content={conditionContent}
+                  content={conditionContent || conditionText}
                   addValueToDropdown={true}
                   onSelectItem={(item: IDropdownValues) => {
                     setConditionContent(item.value);
