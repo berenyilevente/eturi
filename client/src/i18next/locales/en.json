@@ -186,7 +186,7 @@
   "profile":{
     "title": "My wardrobe",
     "editProfile": "Edit profile",
-    "noClothes": "No clothes found",
+    "noClothes": "Your wardrobe is currently empty",
     "addNow": "Start selling now!"
   }
 }

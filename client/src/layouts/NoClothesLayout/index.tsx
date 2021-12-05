@@ -1,0 +1,1 @@
+export { NoClothesLayout as default } from '../../layouts/NoClothesLayout/NoClothesLayout.view'

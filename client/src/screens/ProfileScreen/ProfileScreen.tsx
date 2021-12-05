@@ -16,7 +16,8 @@ import Card from "../../components/Card";
 import Button from "../../components/Button";
 import { useHistory } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
-
+import Icon from "../../components/Icon";
+import NoClothesLayout from "../../layouts/NoClothesLayout";
 const useProfileScreen = () => {
   const { t } = useTranslation();
 
@@ -46,8 +47,15 @@ const useProfileScreen = () => {
         )
       : null
   );
+
+  const goToSellScreen = useCallback(() => history.push(pageURLS.SELL), [
+    history,
+  ]);
+
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
+
   useEffect(() => {
+    console.log(showProfileClothes);
     dispatch(getClothes());
   }, [dispatch]);
 
@@ -67,6 +75,7 @@ const useProfileScreen = () => {
     goToShowClothesScreen,
     noClothesText,
     addNowText,
+    goToSellScreen,
   };
 };
 
@@ -81,6 +90,7 @@ const ProfileScreen: FC = () => {
     noDataText,
     noClothesText,
     addNowText,
+    goToSellScreen,
     goToShowClothesScreen,
   } = useProfileScreen();
 
@@ -98,15 +108,7 @@ const ProfileScreen: FC = () => {
           </>
         }
         editProfileButton={
-          <Button
-            colorStyle="grey"
-            rounded
-            buttonSize="normal"
-            border="borderSolid"
-            transparent
-          >
-            {editProfileText}
-          </Button>
+          <Icon iconType="settingsIcon" cursor onClick={() => {}} />
         }
         profileImage={
           <CircleImage
@@ -121,37 +123,61 @@ const ProfileScreen: FC = () => {
           <Text textType="text-medium-dark">{myClothesTitleText}</Text>
         }
         myClothesArea={
-          showProfileClothes &&
-          showProfileClothes.map((myClothesItem) => {
-            return (
-              <Card backgroundColorStyle="white" shadow key={myClothesItem._id}>
-                <ClothesListingLayout
-                  image={
-                    <img
-                      src={myClothesItem.selectedFile}
-                      alt="myClothes"
-                      onClick={() => goToShowClothesScreen(myClothesItem._id)}
-                    />
-                  }
-                  price={
-                    <Text textType="text-normal-dark">
-                      {myClothesItem.price + " " + currencyText}
-                    </Text>
-                  }
-                  size={
-                    <Text textType="text-normal-dark">
-                      {myClothesItem.size}
-                    </Text>
-                  }
-                  brand={
-                    <Text textType="text-normal-dark">
-                      {myClothesItem.brand}
-                    </Text>
-                  }
-                />
-              </Card>
-            );
-          })
+          showProfileClothes!.length ? (
+            showProfileClothes!.map((myClothesItem) => {
+              return (
+                <Card
+                  backgroundColorStyle="white"
+                  shadow
+                  key={myClothesItem._id}
+                >
+                  <ClothesListingLayout
+                    image={
+                      <img
+                        src={myClothesItem.selectedFile}
+                        alt="myClothes"
+                        onClick={() => goToShowClothesScreen(myClothesItem._id)}
+                      />
+                    }
+                    price={
+                      <Text textType="text-normal-dark">
+                        {myClothesItem.price + " " + currencyText}
+                      </Text>
+                    }
+                    size={
+                      <Text textType="text-normal-dark">
+                        {myClothesItem.size}
+                      </Text>
+                    }
+                    brand={
+                      <Text textType="text-normal-dark">
+                        {myClothesItem.brand}
+                      </Text>
+                    }
+                  />
+                </Card>
+              );
+            })
+          ) : (
+            <NoClothesLayout
+              icon={<Icon iconType="clothesIcon" />}
+              titleText={
+                <Text textType="text-normal-dark">{noClothesText}</Text>
+              }
+              button={
+                <Button
+                  colorStyle="grey"
+                  rounded
+                  buttonSize="normal"
+                  border="borderSolid"
+                  transparent
+                  onClick={goToSellScreen}
+                >
+                  {addNowText}
+                </Button>
+              }
+            />
+          )
         }
       />
     </LoadingSpinner>

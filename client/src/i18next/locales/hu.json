@@ -181,9 +181,9 @@
     "signUpHere": "Regisztálj itt!"
   },
   "profile":{
-    "title": "Ruháim",
+    "title": "Gardróbom",
     "editProfile": "Profil szerkesztése",
-    "noClothes": "Még nincs meghírdetve ruhád",
-    "addNow": "Töltsd fel most!"
+    "noClothes": "A gardróbod jelenleg üres",
+    "addNow": "Hírdess most!"
   }
 }

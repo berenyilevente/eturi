@@ -1,0 +1,13 @@
+$scope: layouts-no-clothes-layout;
+.#{$scope} {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, min-content);
+  justify-items: center;
+
+  gap: 1rem;
+  &-iconClass {
+    align-self: flex-end;
+    margin-top: 2em;
+  }
+}

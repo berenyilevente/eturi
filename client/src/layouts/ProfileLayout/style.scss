@@ -5,7 +5,7 @@ $scope: layouts-profile-layout;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: repeat(5, min-content);
     margin-top: 16px;
-    gap: 0.5em;
+    gap: 0em;
   }
   &-imageClass {
     grid-row: 1 / 2;
@@ -17,8 +17,10 @@ $scope: layouts-profile-layout;
     display: flex;
     flex-wrap: wrap;
   }
+
   &-editButtonClass {
     grid-column: 3;
+    margin-top: 0.8em;
     justify-self: center;
     white-space: nowrap;
   }
@@ -34,10 +36,6 @@ $scope: layouts-profile-layout;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-template-rows: repeat(auto-fit, min-content);
     gap: 2em;
-  }
-  &-noClothesText {
-  }
-  &-addClothesButton {
   }
 }
 

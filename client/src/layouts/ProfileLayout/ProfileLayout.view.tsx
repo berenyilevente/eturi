@@ -10,7 +10,6 @@ const editButtonClass = scope.and("editButtonClass");
 const lineClass = scope.and("lineClass");
 const clothesTitleClass = scope.and("clothesTitleClass");
 const clothesClass = scope.and("clothesClass");
-const noClothesTextClass = scope.and("noClothesText");
 const addClothesButtonClass = scope.and("addClothesButton");
 
 interface Props {
