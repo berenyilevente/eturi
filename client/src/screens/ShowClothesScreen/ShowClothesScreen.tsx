@@ -97,6 +97,7 @@ const useEditClothesScreen = () => {
     homeText,
     dateFormat,
     createdAtText,
+    history,
   };
 };
 
@@ -126,6 +127,7 @@ const ShowCLothesScreen: FC = () => {
     homeText,
     dateFormat,
     createdAtText,
+    history,
   } = useEditClothesScreen();
 
   return (
@@ -199,11 +201,26 @@ const ShowCLothesScreen: FC = () => {
                 user?.result?._id === showClothes?.creator ? (
                   <>
                     <Button
+                      buttonSize="medium"
+                      border="borderNone"
+                      hasIconLeft
+                      iconType="arrowLeft"
+                      iconColor="dark"
+                      transparent
+                      onClick={() => {
+                        history.goBack();
+                        dispatch(setTriggerReload({ triggerReload: true }));
+                      }}
+                    >
+                      <Text textType="text-small-dark">{backText}</Text>
+                    </Button>
+                    <Button
                       colorStyle="darkBlue"
                       transparent
                       buttonTextColor="dark"
                       buttonSize="medium"
                       border="borderNone"
+                      hasIconLeft
                       onClick={() => {
                         goToHomeScreen();
                         dispatch(setTriggerReload({ triggerReload: true }));
@@ -211,7 +228,6 @@ const ShowCLothesScreen: FC = () => {
                     >
                       {homeText}
                     </Button>
-
                     <Button
                       colorStyle="darkBlue"
                       rounded
@@ -223,21 +239,34 @@ const ShowCLothesScreen: FC = () => {
                     </Button>
                   </>
                 ) : (
-                  <Button
-                    colorStyle="darkBlue"
-                    buttonTextColor="dark"
-                    buttonSize="medium"
-                    border="borderNone"
-                    hasIconLeft
-                    iconType="arrowLeft"
-                    iconColor="white"
-                    onClick={() => {
-                      goToHomeScreen();
-                      dispatch(setTriggerReload({ triggerReload: true }));
-                    }}
-                  >
-                    <Text textType="text-small-white">{homeText}</Text>
-                  </Button>
+                  <>
+                    <Button
+                      buttonSize="medium"
+                      border="borderNone"
+                      hasIconLeft
+                      iconType="arrowLeft"
+                      iconColor="dark"
+                      transparent
+                      onClick={() => {
+                        history.goBack();
+                        dispatch(setTriggerReload({ triggerReload: true }));
+                      }}
+                    >
+                      <Text textType="text-small-dark">{backText}</Text>
+                    </Button>
+                    <Button
+                      colorStyle="darkBlue"
+                      buttonTextColor="dark"
+                      buttonSize="medium"
+                      border="borderNone"
+                      onClick={() => {
+                        goToHomeScreen();
+                        dispatch(setTriggerReload({ triggerReload: true }));
+                      }}
+                    >
+                      <Text textType="text-small-white">{homeText}</Text>
+                    </Button>
+                  </>
                 )}
               </>
             }

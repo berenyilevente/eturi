@@ -53,5 +53,9 @@ export const likeClothes = (id: string) =>
 //login
 export const login = (loginData: IUserLoginData) =>
   API.post("/user/signin", loginData);
+
 export const register = (signUpData: IUserRegistrationData) =>
   API.post("/user/signup", signUpData);
+
+export const fetchClothesBySearch = (searchQuery: string) =>
+  API.get(`/clothes/search?searchQuery=${searchQuery || "none"}`);

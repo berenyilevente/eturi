@@ -6,11 +6,13 @@ import {
   updateClothes,
   deleteClothes,
   likeClothes,
+  getClothesBySearch,
 } from "../controllers/clothesController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 //specify in a callback what should happen, when someone visits localhost:5000/
+router.get("/search?", getClothesBySearch);
 router.get("/", getClothes);
 router.get("/", getClothesById);
 router.post("/", authMiddleware, addClothes);

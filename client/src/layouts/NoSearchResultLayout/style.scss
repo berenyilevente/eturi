@@ -1,0 +1,11 @@
+$scope: layouts-no-search-result-layout;
+//just an example class, tbd
+.#{$scope} {
+  display: grid;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 24px;
+  &-icon {
+    justify-self: center;
+  }
+}

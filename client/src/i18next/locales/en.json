@@ -197,6 +197,7 @@
     "filterModalTitle": "Filter clothes",
     "price": "Price range",
     "from": "From",
-    "to": "To"
+    "to": "To",
+    "activeFilters": "Active filters"
   }
 }

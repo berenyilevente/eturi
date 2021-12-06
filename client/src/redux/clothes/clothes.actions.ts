@@ -15,6 +15,9 @@ import {
   LIKE_CLOTHES_FAILURE,
   LIKE_CLOTHES_REQUEST,
   LIKE_CLOTHES_SUCCESS,
+  SEARCH_CLOTHES_FAILURE,
+  SEARCH_CLOTHES_REQUEST,
+  SEARCH_CLOTHES_SUCCESS,
   SET_LIKE_LOADING,
   SET_TRIGGER_RELOAD,
   UPDATE_CLOTHES_FAILURE,
@@ -43,6 +46,26 @@ export const getClothes = () => async (dispatch: Dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_CLOTHES_FAILURE,
+      error,
+    });
+  }
+};
+
+export const searchClothesAction = (searchQuery: string) => async (
+  dispatch: Dispatch
+) => {
+  dispatch({
+    type: SEARCH_CLOTHES_REQUEST,
+  });
+  try {
+    const res = await api.fetchClothesBySearch(searchQuery);
+    dispatch({
+      type: SEARCH_CLOTHES_SUCCESS,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SEARCH_CLOTHES_FAILURE,
       error,
     });
   }

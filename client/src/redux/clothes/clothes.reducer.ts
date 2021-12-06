@@ -15,6 +15,9 @@ import {
   LIKE_CLOTHES_FAILURE,
   LIKE_CLOTHES_REQUEST,
   LIKE_CLOTHES_SUCCESS,
+  SEARCH_CLOTHES_FAILURE,
+  SEARCH_CLOTHES_REQUEST,
+  SEARCH_CLOTHES_SUCCESS,
   SET_LIKE_LOADING,
   SET_TRIGGER_RELOAD,
   UPDATE_CLOTHES_FAILURE,
@@ -158,6 +161,25 @@ export default (
       return {
         ...state,
         likeLoading: false,
+        errorMessage: action.error.message,
+      };
+    case SEARCH_CLOTHES_REQUEST:
+      return {
+        ...state,
+        isClothesLoading: true,
+        errorMessage: null,
+      };
+    case SEARCH_CLOTHES_SUCCESS:
+      return {
+        ...state,
+        errorMessage: null,
+        isClothesLoading: false,
+        clothes: action.payload,
+      };
+    case SEARCH_CLOTHES_FAILURE:
+      return {
+        ...state,
+        isClothesLoading: false,
         errorMessage: action.error.message,
       };
 

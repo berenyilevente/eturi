@@ -468,7 +468,7 @@ const AddClothesScreen: FC = () => {
           carouselTitle={carouselTitles}
           carouselImages={carouselImages}
           carouselContent={carouselContent}
-          carouselWidth={"narrow"}
+          carouselWidth={"normal"}
         />
       }
     </>

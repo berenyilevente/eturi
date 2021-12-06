@@ -3,7 +3,8 @@ $scope: components-pagination;
 .#{$scope} {
   display: flex;
   justify-content: center;
-  &-example {
-    //define css styles here
+  align-items: center;
+  &-iconClass {
+    padding-top: 12px;
   }
 }

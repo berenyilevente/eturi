@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import SearchLayout from "../../layouts/SearchLayout";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -10,9 +10,33 @@ import Modal from "../../components/Modal";
 import { useDropdownBaseData } from "../../hooks/useDropdownBaseData";
 import Slider from "../../components/Slider";
 import FilterClothesModalLayout from "../../layouts/FilterClothesModalLayout";
+import { useHistory, useLocation } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import pageURLS from "../../resources/constants/pageURLS";
+import {
+  getClothes,
+  likeClothesAction,
+  searchClothesAction,
+  setTriggerReload,
+} from "../../redux/clothes/clothes.actions";
+import { AppState } from "../../redux/store";
+import Card from "../../components/Card";
+import ClothesListingLayout from "../../layouts/ClothesListingLayout";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import Icon from "../../components/Icon";
+import NoSearchResultLayout from "../../layouts/NoSearchResultLayout";
 
 const useSearchScreen = () => {
   const { t } = useTranslation();
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+  const history = useHistory();
+  const query = useQuery();
+  const dispatch = useDispatch();
+  const currencyText = t("currency.huf");
+  const noSearchResult = t("searchScreen.noSearchResult");
+
   const searchText = t("searchScreen.search");
   const searchTitle = t("searchScreen.searchTitle");
   const filterText = t("searchScreen.filter");
@@ -28,6 +52,7 @@ const useSearchScreen = () => {
   const clothingTypeText = t("clothes.clothingType");
   const fromText = t("clothes.from");
   const toText = t("clothes.to");
+  const activeFiltersText = t("searchScreen.activeFilters");
 
   const [showFilterModal, setShowFilterModal] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
@@ -39,7 +64,32 @@ const useSearchScreen = () => {
   const [colourContent, setColourContent] = useState<string>();
   const [priceFrom, setPriceFrom] = useState<string>("");
   const [priceTo, setPriceTo] = useState<string>("");
+  const [showActiveFilters, setShowActiveFilters] = useState(false);
 
+  const searchQuery = query.get("searchQuery");
+
+  useEffect(() => {
+    dispatch(getClothes());
+  }, [dispatch]);
+
+  const { clothes, isClothesLoading, likeLoading } = useSelector(
+    (state: AppState) => state.clothes
+  );
+
+  const searchClothes = () => {
+    if (searchInput.trim()) {
+      //console.log(searchInput);
+      dispatch(searchClothesAction(searchInput));
+      history.push(`/clothes/search?searchQuery=${searchInput}`);
+    } else {
+      dispatch(getClothes());
+      history.push(pageURLS.SEARCH_CLOTHES);
+    }
+  };
+  const goToShowClothesScreen = useCallback(
+    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
+    [history]
+  );
   const {
     category,
     brands,
@@ -91,6 +141,17 @@ const useSearchScreen = () => {
     clothingTypeText,
     fromText,
     toText,
+    activeFiltersText,
+    showActiveFilters,
+    setShowActiveFilters,
+    searchClothes,
+    clothes,
+    dispatch,
+    goToShowClothesScreen,
+    currencyText,
+    isClothesLoading,
+    likeLoading,
+    noSearchResult,
   };
 };
 
@@ -137,6 +198,17 @@ const SearchScreen: FC = () => {
     clothingTypeText,
     fromText,
     toText,
+    activeFiltersText,
+    showActiveFilters,
+    setShowActiveFilters,
+    searchClothes,
+    clothes,
+    dispatch,
+    goToShowClothesScreen,
+    currencyText,
+    isClothesLoading,
+    likeLoading,
+    noSearchResult,
   } = useSearchScreen();
 
   return (
@@ -149,7 +221,7 @@ const SearchScreen: FC = () => {
             onChange={setSearchInput}
             inputValue={searchInput}
             onEnterKeyPressed={() => {
-              console.log(searchInput);
+              searchClothes();
             }}
           ></Input>
         }
@@ -162,7 +234,7 @@ const SearchScreen: FC = () => {
             transparent
             hasIconLeft
             iconType="searchIcon"
-            onClick={() => console.log(searchInput)}
+            onClick={() => searchClothes()}
           >
             {searchText}
           </Button>
@@ -177,10 +249,103 @@ const SearchScreen: FC = () => {
             transparent
             hasIconLeft
             iconType="filterIcon"
-            onClick={() => setShowFilterModal(true)}
+            onClick={() => {
+              setShowFilterModal(true);
+              setShowActiveFilters(false);
+            }}
           >
             {filterText}
           </Button>
+        }
+        activeFiltersTitle={
+          showActiveFilters && (
+            <Text textType="text-medium-dark">{activeFiltersText}</Text>
+          )
+        }
+        activeFilters={
+          showActiveFilters && (
+            <>
+              <div>{categoryContent}</div>
+              <div>{clothesTypeContent}</div>
+              <div>{brandContent}</div>
+              <div>{sizeContent}</div>
+              <div>{conditionContent}</div>
+              <div>{colourContent}</div>
+              <div>{priceFrom}</div>
+              <div>{priceTo}</div>
+            </>
+          )
+        }
+        clothesListing={
+          <LoadingSpinner isLoading={isClothesLoading}>
+            {clothes.length ? (
+              clothes.map((item) => {
+                return (
+                  <Card backgroundColorStyle="white" shadow key={item._id}>
+                    <ClothesListingLayout
+                      image={
+                        <img
+                          alt="homeImages"
+                          src={item.selectedFile}
+                          onClick={() => {
+                            goToShowClothesScreen(item._id);
+                            dispatch(setTriggerReload({ triggerReload: true }));
+                          }}
+                        />
+                      }
+                      price={
+                        <Text textType="text-normal-dark">
+                          {item.price + " " + currencyText}
+                        </Text>
+                      }
+                      size={
+                        <Text textType="text-normal-dark">{item.size}</Text>
+                      }
+                      brand={
+                        <Text textType="text-normal-dark">{item.brand}</Text>
+                      }
+                      heartIcon={
+                        likeLoading ? (
+                          <span
+                            className="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                        ) : (
+                          <>
+                            {item.isLiked ? (
+                              <Icon
+                                iconType="heartIconFilled"
+                                cursor
+                                onClick={() =>
+                                  dispatch(likeClothesAction(item._id!))
+                                }
+                              />
+                            ) : (
+                              <Icon
+                                iconType="heartIcon"
+                                cursor
+                                onClick={() => {
+                                  dispatch(likeClothesAction(item._id!));
+                                }}
+                              />
+                            )}
+                          </>
+                        )
+                      }
+                    />
+                  </Card>
+                );
+              })
+            ) : (
+              <NoSearchResultLayout
+                noResultText={
+                  <Text textType="text-normal-dark">{noSearchResult}</Text>
+                }
+                icon={<Icon iconType="clothesIcon" />}
+              />
+            )}
+          </LoadingSpinner>
         }
       />
       {
@@ -258,16 +423,16 @@ const SearchScreen: FC = () => {
               <Input
                 placeholderText={"From"}
                 inputType="number"
-                onChange={setSearchInput}
-                inputValue={searchInput}
+                onChange={setPriceFrom}
+                inputValue={priceFrom}
               />
             }
             priceTo={
               <Input
                 placeholderText={"To"}
                 inputType="number"
-                onChange={setSearchInput}
-                inputValue={searchInput}
+                onChange={setPriceTo}
+                inputValue={priceTo}
               />
             }
             priceRangeSlider={
@@ -289,7 +454,10 @@ const SearchScreen: FC = () => {
                 colorStyle="darkBlue"
                 border="borderNone"
                 buttonSize="normal"
-                onClick={() => {}}
+                onClick={() => {
+                  setShowFilterModal(false);
+                  setShowActiveFilters(true);
+                }}
               >
                 <Text textType="text-normal-white">{filterText}</Text>
               </Button>

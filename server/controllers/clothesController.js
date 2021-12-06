@@ -10,6 +10,26 @@ export const getClothes = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+//Query = /clothes?:page=1 -> used to query something
+//Params = /clothes/:id -> used to get a specific item
+export const getClothesBySearch = async (req, res) => {
+  const searchQuery = req.query.searchQuery;
+  try {
+    const brand = new RegExp(searchQuery, "i");
+    const category = new RegExp(searchQuery, "i");
+    const name = new RegExp(searchQuery, "i");
+    const clothingType = new RegExp(searchQuery, "i");
+
+    const clothes = await AddClothes.find({
+      $or: [{ brand }, { category }, { name }, { clothingType }],
+    });
+    res.json({ data: clothes });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getClothesById = async (req, res) => {
   try {
     const { id: _id } = req.params;

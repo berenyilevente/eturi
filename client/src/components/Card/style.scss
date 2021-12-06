@@ -2,7 +2,7 @@ $scope: components-card;
 .#{$scope} {
   &-borderRadius {
     border-radius: 12px;
-    overflow: hidden;
+    overflow: auto;
   }
   &-shadow {
     box-shadow: var(--boxShadow);

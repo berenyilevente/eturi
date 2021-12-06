@@ -1,0 +1,1 @@
+export { NoSearchResultLayout as default } from '../../layouts/NoSearchResultLayout/NoSearchResultLayout.view'

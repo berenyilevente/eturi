@@ -194,6 +194,8 @@
     "filterModalTitle": "Ruhák szűrése",
     "price": "Árkategória",
     "from": "Tól",
-    "to": "Ig"
+    "to": "Ig",
+    "activeFilters": "Aktív szűrők",
+    "noSearchResult": "Nincs a keresésnek megfelelő hírdetés"
   }
 }

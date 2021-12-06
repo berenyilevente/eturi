@@ -9,4 +9,8 @@ $scope: layouts-search-layout;
     margin-bottom: 24px;
     grid-template-rows: min-content;
   }
+  &-activeFiltersClass {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }

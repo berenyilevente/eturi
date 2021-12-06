@@ -12,6 +12,10 @@ export const GET_CLOTHES_REQUEST = "GET_CLOTHES_REQUEST";
 export const GET_CLOTHES_SUCCESS = "GET_CLOTHES_SUCCESS";
 export const GET_CLOTHES_FAILURE = "GET_CLOTHES_FAILURE";
 
+export const SEARCH_CLOTHES_REQUEST = "SEARCH_CLOTHES_REQUEST";
+export const SEARCH_CLOTHES_SUCCESS = "SEARCH_CLOTHES_SUCCESS";
+export const SEARCH_CLOTHES_FAILURE = "SEARCH_CLOTHES_FAILURE";
+
 export const GET_CLOTHES_BY_ID_REQUEST = "GET_CLOTHES_BY_ID_REQUEST";
 export const GET_CLOTHES_BY_ID_SUCCESS = "GET_CLOTHES_BY_ID_SUCCESS";
 export const GET_CLOTHES_BY_ID_FAILURE = "GET_CLOTHES_BY_ID_FAILURE";
@@ -47,6 +51,18 @@ export interface IGetClothesSuccessAction {
 }
 export interface IGetClothesFailureAction {
   type: typeof GET_CLOTHES_FAILURE;
+  error: AxiosError;
+}
+//
+export interface ISearchClothesRequestAction {
+  type: typeof SEARCH_CLOTHES_REQUEST;
+}
+export interface ISearchClothesSuccessAction {
+  type: typeof SEARCH_CLOTHES_SUCCESS;
+  payload: IClothesResponseData[];
+}
+export interface ISearchClothesFailureAction {
+  type: typeof SEARCH_CLOTHES_FAILURE;
   error: AxiosError;
 }
 
@@ -147,4 +163,7 @@ export type ClothesActionTypes =
   | IDeleteClothesRequestAction
   | IDeleteClothesSuccessAction
   | IDeleteClothesFailureAction
+  | ISearchClothesRequestAction
+  | ISearchClothesSuccessAction
+  | ISearchClothesFailureAction
   | ISetLikeLoading;
