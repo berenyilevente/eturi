@@ -44,7 +44,6 @@ const FooterScreen: FC = () => {
             <Icon iconType="linkedinIcon" cursor></Icon>
           </>
         }
-        languageSelector={<LanguageSelector />}
       />
     </>
   );

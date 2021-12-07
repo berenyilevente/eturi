@@ -1,7 +1,5 @@
 $scope: layouts-filter-clothes-modal-layout;
-//just an example class, tbd
 .#{$scope} {
-  //define css styles here
   &-optionsArea {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -15,11 +13,23 @@ $scope: layouts-filter-clothes-modal-layout;
   &-colSpan {
     grid-column: 1 / 3;
   }
+  &-resetButton {
+    display: flex;
+    justify-content: center;
+  }
   &-buttonArea {
     display: flex;
     flex-wrap: nowrap;
     margin-top: 24px;
     margin-bottom: 24px;
     justify-content: space-around;
+  }
+}
+
+@media (max-width: 560px) {
+  .#{$scope} {
+    &-buttonArea {
+      flex-wrap: wrap;
+    }
   }
 }

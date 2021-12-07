@@ -91,13 +91,13 @@ const useEditClothesScreen = () => {
     setImageData(showClothes!.selectedFile);
     setBrandContent(showClothes!.brand);
     setNameContent(showClothes!.name);
-    setDescriptionContent(showClothes!.description);
+    setDescriptionContent(showClothes!.description!);
     setCategoryContent(showClothes!.category);
     setClothesType(showClothes!.clothingType!);
     setSizeContent(showClothes!.size);
     setConditionContent(showClothes!.condition);
     setColourContent(showClothes!.colour);
-    setPrice(showClothes!.price);
+    setPrice(showClothes!.price!);
   }, []);
 
   const triggerReload = useCallback(() => {
@@ -329,7 +329,7 @@ const EditClothesScreen: FC = () => {
             }
             description={
               <TextArea
-                placeholderText={showClothes.description}
+                placeholderText={showClothes!.description!}
                 content={descriptionContent}
                 onChange={setDescriptionContent}
                 size="medium"

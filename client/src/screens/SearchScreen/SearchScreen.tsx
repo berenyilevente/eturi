@@ -14,6 +14,7 @@ import { useHistory, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import pageURLS from "../../resources/constants/pageURLS";
 import {
+  filterClothesAction,
   getClothes,
   likeClothesAction,
   searchClothesAction,
@@ -62,8 +63,8 @@ const useSearchScreen = () => {
   const [sizeContent, setSizeContent] = useState<string>();
   const [conditionContent, setConditionContent] = useState<string>();
   const [colourContent, setColourContent] = useState<string>();
-  const [priceFrom, setPriceFrom] = useState<string>("");
-  const [priceTo, setPriceTo] = useState<string>("");
+  const [priceFrom, setPriceFrom] = useState<string>();
+  const [priceTo, setPriceTo] = useState<string>();
   const [showActiveFilters, setShowActiveFilters] = useState(false);
 
   const searchQuery = query.get("searchQuery");
@@ -78,7 +79,6 @@ const useSearchScreen = () => {
 
   const searchClothes = () => {
     if (searchInput.trim()) {
-      //console.log(searchInput);
       dispatch(searchClothesAction(searchInput));
       history.push(`/clothes/search?searchQuery=${searchInput}`);
     } else {
@@ -86,6 +86,38 @@ const useSearchScreen = () => {
       history.push(pageURLS.SEARCH_CLOTHES);
     }
   };
+
+  const resetFilters = () => {
+    setCategoryContent(undefined);
+    setClothesTypeContent(undefined);
+    setBrandContent(undefined);
+    setSizeContent(undefined);
+    setConditionContent(undefined);
+    setColourContent(undefined);
+    setPriceFrom(undefined);
+    setPriceTo(undefined);
+    setShowActiveFilters(false);
+    dispatch(getClothes());
+  };
+
+  const filterClothes = () => {
+    dispatch(
+      filterClothesAction({
+        category: categoryContent!,
+        clothingType: clothesTypeContent!,
+        brand: brandContent!,
+        size: sizeContent!,
+        condition: conditionContent!,
+        colour: colourContent!,
+        price: priceFrom!,
+      })
+    );
+
+    setShowFilterModal(false);
+    setShowActiveFilters(true);
+    //dispatch filter action
+  };
+
   const goToShowClothesScreen = useCallback(
     (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
@@ -152,6 +184,8 @@ const useSearchScreen = () => {
     isClothesLoading,
     likeLoading,
     noSearchResult,
+    filterClothes,
+    resetFilters,
   };
 };
 
@@ -209,6 +243,8 @@ const SearchScreen: FC = () => {
     isClothesLoading,
     likeLoading,
     noSearchResult,
+    filterClothes,
+    resetFilters,
   } = useSearchScreen();
 
   return (
@@ -265,21 +301,20 @@ const SearchScreen: FC = () => {
         activeFilters={
           showActiveFilters && (
             <>
-              <div>{categoryContent}</div>
-              <div>{clothesTypeContent}</div>
-              <div>{brandContent}</div>
-              <div>{sizeContent}</div>
-              <div>{conditionContent}</div>
-              <div>{colourContent}</div>
-              <div>{priceFrom}</div>
-              <div>{priceTo}</div>
+              <div className="p-2">{categoryContent}</div>
+              <div className="p-2">{clothesTypeContent}</div>
+              <div className="p-2">{brandContent}</div>
+              <div className="p-2">{sizeContent}</div>
+              <div className="p-2">{conditionContent}</div>
+              <div className="p-2">{colourContent}</div>
+              <div className="p-2">{priceFrom}</div>
+              <div className="p-2">{priceTo}</div>
             </>
           )
         }
         clothesListing={
-          <LoadingSpinner isLoading={isClothesLoading}>
-            {clothes.length ? (
-              clothes.map((item) => {
+          !isClothesLoading && clothes.length
+            ? clothes.map((item) => {
                 return (
                   <Card backgroundColorStyle="white" shadow key={item._id}>
                     <ClothesListingLayout
@@ -337,22 +372,22 @@ const SearchScreen: FC = () => {
                   </Card>
                 );
               })
-            ) : (
-              <NoSearchResultLayout
-                noResultText={
-                  <Text textType="text-normal-dark">{noSearchResult}</Text>
-                }
-                icon={<Icon iconType="clothesIcon" />}
-              />
-            )}
-          </LoadingSpinner>
+            : !isClothesLoading && (
+                <NoSearchResultLayout
+                  noResultText={
+                    <Text textType="text-normal-dark">{noSearchResult}</Text>
+                  }
+                  icon={<Icon iconType="clothesIcon" />}
+                />
+              )
         }
+        loadingPlaceholder={<LoadingSpinner isLoading={isClothesLoading} />}
       />
       {
         <Modal
           showModal={showFilterModal}
           closeModal={() => setShowFilterModal(false)}
-          modalWidth="normal"
+          modalWidth="wide"
           title={filterModalTitle}
         >
           <FilterClothesModalLayout
@@ -454,12 +489,19 @@ const SearchScreen: FC = () => {
                 colorStyle="darkBlue"
                 border="borderNone"
                 buttonSize="normal"
-                onClick={() => {
-                  setShowFilterModal(false);
-                  setShowActiveFilters(true);
-                }}
+                onClick={() => filterClothes()}
               >
                 <Text textType="text-normal-white">{filterText}</Text>
+              </Button>
+            }
+            resetButton={
+              <Button
+                border="borderNone"
+                buttonSize="normal"
+                transparent
+                onClick={() => resetFilters()}
+              >
+                <Text textType="text-normal-dark">{"Reset"}</Text>
               </Button>
             }
           />

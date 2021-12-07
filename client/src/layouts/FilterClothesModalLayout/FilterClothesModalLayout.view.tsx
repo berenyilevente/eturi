@@ -7,6 +7,7 @@ const optionsArea = scope.and("optionsArea");
 const priceRangeClass = scope.and("priceRangeClass");
 const buttonArea = scope.and("buttonArea");
 const colSpan = scope.and("colSpan");
+const resetButtonClass = scope.and("resetButton");
 
 interface Props {
   categoryDropDown?: ReactNode;
@@ -17,6 +18,7 @@ interface Props {
   coloursDropDown?: ReactNode;
   cancelButton?: ReactNode;
   filterButton?: ReactNode;
+  resetButton?: ReactNode;
   priceRangeSlider?: ReactNode;
   priceRangeTitle?: ReactNode;
   priceFrom?: ReactNode;
@@ -36,6 +38,7 @@ export const FilterClothesModalLayout: FC<Props> = ({
   priceRangeTitle,
   priceFrom,
   priceTo,
+  resetButton,
 }) => (
   <div className={scope}>
     <div className={optionsArea}>
@@ -51,10 +54,10 @@ export const FilterClothesModalLayout: FC<Props> = ({
       <div>{priceFrom}</div>
       <div>{priceTo}</div>
     </div>
-
     <div className={buttonArea}>
       <div>{cancelButton}</div>
       <div>{filterButton}</div>
     </div>
+    <div className={resetButtonClass}>{resetButton}</div>
   </div>
 );

@@ -10,7 +10,30 @@ $scope: layouts-search-layout;
     grid-template-rows: min-content;
   }
   &-activeFiltersClass {
+    display: flex;
+    white-space: nowrap;
+  }
+  &-listingContainerClass {
+    display: none;
+    margin-top: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+    justify-content: center;
+  }
+  &-searchButtonClass {
+    justify-self: flex-end;
+  }
+}
+@media (max-width: 480px) {
+  .#{$scope} {
+    &-searchArea {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, min-content);
+      gap: 1em;
+    }
+    &-colSpan {
+      grid-column: 1 / 3;
+    }
   }
 }

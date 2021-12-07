@@ -43,6 +43,17 @@ export const getClothesById = async (req, res) => {
   }
 };
 
+export const filterClothes = async (req, res) => {
+  const filterQuery = req.query.filterQuery;
+  const filterParameters = JSON.parse(filterQuery);
+  try {
+    const clothesFiltered = await AddClothes.find(filterParameters);
+    res.json({ data: clothesFiltered });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const addClothes = async (req, res) => {
   //with post requests you have access to the req.body
   const postClothes = req.body;

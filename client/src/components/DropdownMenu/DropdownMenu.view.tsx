@@ -63,6 +63,7 @@ export const DropdownMenu: FC<Props> = ({
           (current) => current.id !== item.id
         );
         setSelection([...selectionAfterRemoval]);
+        content = undefined;
       }
       onSelectItem(item);
     },

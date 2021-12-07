@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import {
   IClothesResponseData,
   IDeleteClothesResponseData,
+  IFilterClothesResponse,
   ILikeClothesResponseData,
   ITriggerLikeLoading,
   ITriggerReload,
@@ -15,6 +16,10 @@ export const GET_CLOTHES_FAILURE = "GET_CLOTHES_FAILURE";
 export const SEARCH_CLOTHES_REQUEST = "SEARCH_CLOTHES_REQUEST";
 export const SEARCH_CLOTHES_SUCCESS = "SEARCH_CLOTHES_SUCCESS";
 export const SEARCH_CLOTHES_FAILURE = "SEARCH_CLOTHES_FAILURE";
+
+export const FILTER_CLOTHES_REQUEST = "FILTER_CLOTHES_REQUEST";
+export const FILTER_CLOTHES_SUCCESS = "FILTER_CLOTHES_SUCCESS";
+export const FILTER_CLOTHES_FAILURE = "FILTER_CLOTHES_FAILURE";
 
 export const GET_CLOTHES_BY_ID_REQUEST = "GET_CLOTHES_BY_ID_REQUEST";
 export const GET_CLOTHES_BY_ID_SUCCESS = "GET_CLOTHES_BY_ID_SUCCESS";
@@ -53,7 +58,7 @@ export interface IGetClothesFailureAction {
   type: typeof GET_CLOTHES_FAILURE;
   error: AxiosError;
 }
-//
+//Search clothes types
 export interface ISearchClothesRequestAction {
   type: typeof SEARCH_CLOTHES_REQUEST;
 }
@@ -63,6 +68,19 @@ export interface ISearchClothesSuccessAction {
 }
 export interface ISearchClothesFailureAction {
   type: typeof SEARCH_CLOTHES_FAILURE;
+  error: AxiosError;
+}
+
+//Filter clothes types
+export interface IFilterClothesRequestAction {
+  type: typeof FILTER_CLOTHES_REQUEST;
+}
+export interface IFilterClothesSuccessAction {
+  type: typeof FILTER_CLOTHES_SUCCESS;
+  payload: IFilterClothesResponse[];
+}
+export interface IFilterClothesFailureAction {
+  type: typeof FILTER_CLOTHES_FAILURE;
   error: AxiosError;
 }
 
@@ -166,4 +184,7 @@ export type ClothesActionTypes =
   | ISearchClothesRequestAction
   | ISearchClothesSuccessAction
   | ISearchClothesFailureAction
+  | IFilterClothesRequestAction
+  | IFilterClothesSuccessAction
+  | IFilterClothesFailureAction
   | ISetLikeLoading;

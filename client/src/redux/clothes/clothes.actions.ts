@@ -6,6 +6,9 @@ import {
   DELETE_CLOTHES_FAILURE,
   DELETE_CLOTHES_REQUEST,
   DELETE_CLOTHES_SUCCESS,
+  FILTER_CLOTHES_FAILURE,
+  FILTER_CLOTHES_REQUEST,
+  FILTER_CLOTHES_SUCCESS,
   GET_CLOTHES_BY_ID_FAILURE,
   GET_CLOTHES_BY_ID_REQUEST,
   GET_CLOTHES_BY_ID_SUCCESS,
@@ -27,6 +30,7 @@ import {
 import * as api from "../../api";
 import {
   IClothesResponseData,
+  IFilterClothesResponse,
   ITriggerLikeLoading,
   ITriggerReload,
   IUpdateClothesResponseData,
@@ -66,6 +70,28 @@ export const searchClothesAction = (searchQuery: string) => async (
   } catch (error) {
     dispatch({
       type: SEARCH_CLOTHES_FAILURE,
+      error,
+    });
+  }
+};
+
+export const filterClothesAction = (
+  filterParameters: IFilterClothesResponse
+) => async (dispatch: Dispatch) => {
+  dispatch({
+    type: FILTER_CLOTHES_REQUEST,
+  });
+  console.log(JSON.stringify(filterParameters));
+  try {
+    const res = await api.filterClothes(filterParameters);
+    console.log(res.data.data);
+    dispatch({
+      type: FILTER_CLOTHES_SUCCESS,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: FILTER_CLOTHES_FAILURE,
       error,
     });
   }

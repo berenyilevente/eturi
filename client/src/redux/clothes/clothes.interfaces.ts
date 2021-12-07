@@ -5,6 +5,7 @@ export interface IClothesState {
   showClothes: IClothesResponseData[];
   clothesAdded: IClothesResponseData[];
   clothesUpdated: IUpdateClothesResponseData[];
+  filteredClothes: IClothesResponseData[];
   triggerReload?: boolean;
   likeLoading?: boolean | boolean[];
 }
@@ -12,8 +13,22 @@ export interface IClothesState {
 export interface IClothesResponseData {
   _id?: string;
   selectedFile?: string;
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
+  category?: string;
+  clothingType?: string;
+  brand?: string;
+  size?: string;
+  condition?: string;
+  colour?: string;
+  price?: string;
+  isLiked?: boolean;
+  createdAt?: Date;
+  creator?: string;
+}
+[];
+
+export interface IFilterClothesResponse {
   category: string;
   clothingType?: string;
   brand: string;
@@ -21,12 +36,7 @@ export interface IClothesResponseData {
   condition: string;
   colour: string;
   price: string;
-  isLiked?: boolean;
-  createdAt?: Date;
-  creator?: string;
 }
-[];
-
 export interface IUpdateClothesResponseData {
   _id?: string;
   selectedFile?: string;

@@ -7,6 +7,7 @@ import {
   deleteClothes,
   likeClothes,
   getClothesBySearch,
+  filterClothes,
 } from "../controllers/clothesController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 const router = express.Router();
@@ -19,5 +20,6 @@ router.post("/", authMiddleware, addClothes);
 router.patch("/:id", authMiddleware, updateClothes);
 router.delete("/:id", authMiddleware, deleteClothes);
 router.patch("/:id/likeClothes", authMiddleware, likeClothes);
+router.get("/filter?", filterClothes);
 
 export default router;

@@ -5,6 +5,9 @@ import { cn, CreateScopeCSS } from "../../components/utils";
 const scope = CreateScopeCSS("layouts-search-layout");
 const searchAreaClass = scope.and("searchArea");
 const activeFiltersClass = scope.and("activeFiltersClass");
+const listingContainerClass = scope.and("listingContainerClass");
+const colSpan = scope.and("colSpan");
+const searchButtonClass = scope.and("searchButtonClass");
 
 interface Props {
   searchTitle?: ReactNode;
@@ -16,6 +19,7 @@ interface Props {
   activeFiltersTitle?: ReactNode;
   activeFilters?: ReactNode;
   clearFilters?: ReactNode;
+  loadingPlaceholder?: ReactNode;
 }
 
 export const SearchLayout: FC<Props> = ({
@@ -28,12 +32,13 @@ export const SearchLayout: FC<Props> = ({
   activeFiltersTitle,
   activeFilters,
   clearFilters,
+  loadingPlaceholder,
 }) => (
   <div className={scope}>
     <div>{searchTitle}</div>
     <div className={searchAreaClass}>
-      <div>{searchField}</div>
-      <div>{searchButton}</div>
+      <div className={colSpan}>{searchField}</div>
+      <div className={searchButtonClass}>{searchButton}</div>
       <div>{filterButton}</div>
     </div>
     <div>
@@ -42,6 +47,7 @@ export const SearchLayout: FC<Props> = ({
       <div className={activeFiltersClass}>{activeFilters}</div>
     </div>
     <div>{line}</div>
-    <div>{clothesListing}</div>
+    <div className={listingContainerClass}>{clothesListing}</div>
+    <div>{loadingPlaceholder}</div>
   </div>
 );

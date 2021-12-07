@@ -8,6 +8,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["clothes"],
 };
 
 export const rootReducer = combineReducers({

@@ -54,7 +54,7 @@ const useHomeContentScreen = () => {
 
   //basic frontend pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [clothesPerPage, setClothesPerPage] = useState(8);
+  const [clothesPerPage, setClothesPerPage] = useState(6);
 
   const indexOfLastClothesItem = currentPage * clothesPerPage;
   const indexOfFirstClothesItem = indexOfLastClothesItem - clothesPerPage;

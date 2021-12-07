@@ -6,6 +6,9 @@ import {
   DELETE_CLOTHES_FAILURE,
   DELETE_CLOTHES_REQUEST,
   DELETE_CLOTHES_SUCCESS,
+  FILTER_CLOTHES_FAILURE,
+  FILTER_CLOTHES_REQUEST,
+  FILTER_CLOTHES_SUCCESS,
   GET_CLOTHES_BY_ID_FAILURE,
   GET_CLOTHES_BY_ID_REQUEST,
   GET_CLOTHES_BY_ID_SUCCESS,
@@ -33,6 +36,7 @@ const defaultClothesState: IClothesState = {
   showClothes: [],
   clothesAdded: [],
   clothesUpdated: [],
+  filteredClothes: [],
   triggerReload: true,
   likeLoading: false,
 };
@@ -177,6 +181,25 @@ export default (
         clothes: action.payload,
       };
     case SEARCH_CLOTHES_FAILURE:
+      return {
+        ...state,
+        isClothesLoading: false,
+        errorMessage: action.error.message,
+      };
+    case FILTER_CLOTHES_REQUEST:
+      return {
+        ...state,
+        isClothesLoading: true,
+        errorMessage: null,
+      };
+    case FILTER_CLOTHES_SUCCESS:
+      return {
+        ...state,
+        errorMessage: null,
+        isClothesLoading: false,
+        clothes: action.payload,
+      };
+    case FILTER_CLOTHES_FAILURE:
       return {
         ...state,
         isClothesLoading: false,

@@ -2,7 +2,10 @@ import {
   IUserLoginData,
   IUserRegistrationData,
 } from "@/redux/auth/auth.interfaces";
-import { IClothesResponseData } from "@/redux/clothes/clothes.interfaces";
+import {
+  IClothesResponseData,
+  IFilterClothesResponse,
+} from "@/redux/clothes/clothes.interfaces";
 import axios from "axios";
 
 //fetch data for local development
@@ -59,3 +62,6 @@ export const register = (signUpData: IUserRegistrationData) =>
 
 export const fetchClothesBySearch = (searchQuery: string) =>
   API.get(`/clothes/search?searchQuery=${searchQuery || "none"}`);
+
+export const filterClothes = (filterParameters: IFilterClothesResponse) =>
+  API.get(`/clothes/filter?filterQuery=${JSON.stringify(filterParameters)}`);
