@@ -18,7 +18,7 @@ $scope: layouts-search-layout;
     margin-top: 20px;
     display: grid;
     gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
     justify-content: center;
   }
   &-searchButtonClass {

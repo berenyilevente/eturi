@@ -1,6 +1,8 @@
+import { AxiosError } from "axios";
+
 export interface IDefaultAuthState {
   isAuthLoading?: boolean;
-  errorMessage: string | null;
+  errorMessage: AxiosError | Error | null;
   auth?: IAuthResponseData[] | null;
   isUserLoggedIn?: boolean;
 }

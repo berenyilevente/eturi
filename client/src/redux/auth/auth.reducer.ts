@@ -47,7 +47,7 @@ export default (
       return {
         ...state,
         isAuthLoading: false,
-        errorMessage: action.error.message,
+        errorMessage: action.error,
       };
     case LOGOUT_REQUEST:
       return {
@@ -67,7 +67,7 @@ export default (
     case LOGOUT_FAILURE:
       return {
         ...state,
-        errorMessage: action.error.message,
+        errorMessage: action.error,
       };
     case LOGIN_REQUEST:
       return {
@@ -91,7 +91,7 @@ export default (
         ...state,
         isAuthLoading: false,
         isUserLoggedIn: false,
-        errorMessage: action.error.message,
+        errorMessage: action.error,
       };
     case SIGNUP_REQUEST:
       return {
@@ -105,7 +105,7 @@ export default (
       return {
         ...state,
         isAuthLoading: false,
-        errorMessage: action.error.message,
+        errorMessage: action.error,
       };
 
     default:

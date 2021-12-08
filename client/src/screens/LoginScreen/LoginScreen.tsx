@@ -49,7 +49,7 @@ const useLoginScreen = () => {
     }
   }, []);
 
-  const { isAuthLoading, isUserLoggedIn, errorMessage } = useSelector(
+  const { isAuthLoading, errorMessage } = useSelector(
     (state: AppState) => state.auth
   );
 
@@ -63,7 +63,7 @@ const useLoginScreen = () => {
     (e) => {
       e.preventDefault();
       console.log(errorMessage);
-      isUserLoggedIn === false
+      errorMessage
         ? setNoUserFoundErrorMessage("Email or password invalid")
         : setNoUserFoundErrorMessage("");
       dispatch(loginAction(loginValues, history));
