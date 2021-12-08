@@ -1,5 +1,5 @@
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -14,6 +14,8 @@ import { setTriggerReload } from "../../redux/clothes/clothes.actions";
 import { googleAuthAction, loginAction } from "../../redux/auth/auth.actions";
 import pageURLS from "../../resources/constants/pageURLS";
 import { AppState } from "@/redux/store";
+import useForm from "../../hooks/useForm";
+import ErrorField from "../../components/ErrorField";
 
 const useLoginScreen = () => {
   const { t } = useTranslation();
@@ -28,7 +30,13 @@ const useLoginScreen = () => {
 
   const [emailContentLogin, setEmailContentLogin] = useState("");
   const [passwordContentLogin, setPasswordContentLogin] = useState("");
+  const { loginValues, handleChange } = useForm();
 
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
+  const [
+    noUserFoundErrorMessage,
+    setNoUserFoundErrorMessage,
+  ] = useState<string>();
   const googleSuccess = useCallback(async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
@@ -41,7 +49,7 @@ const useLoginScreen = () => {
     }
   }, []);
 
-  const { isAuthLoading, isUserLoggedIn } = useSelector(
+  const { isAuthLoading, isUserLoggedIn, errorMessage } = useSelector(
     (state: AppState) => state.auth
   );
 
@@ -49,21 +57,19 @@ const useLoginScreen = () => {
     console.log("Sign in unsuccessful...");
   }, []);
 
+  useEffect(() => {}, [setNoUserFoundErrorMessage]);
+
   const onSubmitLogin = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(
-        loginAction(
-          {
-            email: emailContentLogin,
-            password: passwordContentLogin,
-          },
-          history
-        )
-      );
+      console.log(errorMessage);
+      isUserLoggedIn === false
+        ? setNoUserFoundErrorMessage("Email or password invalid")
+        : setNoUserFoundErrorMessage("");
+      dispatch(loginAction(loginValues, history));
       dispatch(setTriggerReload({ triggerReload: true }));
     },
-    [emailContentLogin, passwordContentLogin]
+    [loginValues]
   );
 
   const goToAuthScreen = useCallback(() => {
@@ -85,6 +91,11 @@ const useLoginScreen = () => {
     googleFailure,
     goToAuthScreen,
     isAuthLoading,
+    loginValues,
+    handleChange,
+    showErrorMessage,
+    setShowErrorMessage,
+    noUserFoundErrorMessage,
   };
 };
 
@@ -104,6 +115,11 @@ const LoginScreen: FC = () => {
     googleFailure,
     goToAuthScreen,
     isAuthLoading,
+    loginValues,
+    handleChange,
+    showErrorMessage,
+    setShowErrorMessage,
+    noUserFoundErrorMessage,
   } = useLoginScreen();
 
   return (
@@ -114,17 +130,24 @@ const LoginScreen: FC = () => {
         email={
           <Input
             placeholderText={emailText}
-            onChange={setEmailContentLogin}
-            inputValue={emailContentLogin}
+            onChange={handleChange}
+            inputValue={loginValues.email}
+            name="email"
           />
         }
         password={
-          <Input
-            placeholderText={passwordText}
-            onChange={setPasswordContentLogin}
-            inputValue={passwordContentLogin}
-            inputType="password"
-          />
+          <>
+            <Input
+              placeholderText={passwordText}
+              onChange={handleChange}
+              inputValue={loginValues.password}
+              inputType="password"
+              name="password"
+            />
+            {noUserFoundErrorMessage && (
+              <ErrorField errorMessage={noUserFoundErrorMessage!} />
+            )}
+          </>
         }
         actionButton={
           <Button

@@ -177,7 +177,7 @@
     "lastName": "Last name",
     "email": "Email Address",
     "password": "Password",
-    "repeatPassword": "Confirm password",
+    "confirmPassword": "Confirm password",
     "haveAnAccount": "Already have and account?",
     "signIn": "Sign in!",
     "dontHaveAnAccount": "Need an account?",

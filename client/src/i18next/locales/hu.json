@@ -174,7 +174,7 @@
     "lastName": "Vezetéknév",
     "email": "Email cím",
     "password": "Jelszó",
-    "repeatPassword": "Jelszó megerősítése",
+    "confirmPassword": "Jelszó megerősítése",
     "haveAnAccount": "Már van fiókod?",
     "signIn": "Jelentkezz be!",
     "dontHaveAnAccount": "Még nincs fiókod?",

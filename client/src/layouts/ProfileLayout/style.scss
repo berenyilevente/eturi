@@ -33,7 +33,7 @@ $scope: layouts-profile-layout;
   }
   &-clothesClass {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 350px));
     grid-template-rows: repeat(auto-fit, min-content);
     gap: 2em;
   }

@@ -1,5 +1,5 @@
 import AuthLayout from "../../layouts/AuthLayout";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Icon from "../../components/Icon";
 import Text from "../../components/Text";
@@ -18,6 +18,16 @@ import pageURLS from "../../resources/constants/pageURLS";
 import { AppState } from "../../redux/store";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { setTriggerReload } from "../../redux/clothes/clothes.actions";
+import useForm from "../../hooks/useForm";
+import { validateAuthInfo } from "../../resources/functions/validateAuthInfo";
+import ErrorField from "../../components/ErrorField";
+export interface IErrorFieldValues {
+  firstName: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}
 
 const useAuthScreen = () => {
   const { t } = useTranslation();
@@ -31,7 +41,7 @@ const useAuthScreen = () => {
   const lastNameText = t("auth.lastName");
   const emailText = t("auth.email");
   const passwordText = t("auth.password");
-  const repeatPasswordText = t("auth.repeatPassword");
+  const confirmPasswordText = t("auth.confirmPassword");
   const haveAnAccountText = t("auth.haveAnAccount");
   const signInText = t("auth.signIn");
   const dontHaveAnAccountText = t("auth.dontHaveAnAccount");
@@ -40,28 +50,14 @@ const useAuthScreen = () => {
   const { isAuthLoading, isUserLoggedIn } = useSelector(
     (state: AppState) => state.auth
   );
+  const { authValues, handleChange } = useForm();
 
   const [emailContent, setEmailContent] = useState<string>();
   const [passwordContent, setPasswordContent] = useState("");
-  const [repeatPasswordContent, setRepeatPasswordContent] = useState("");
+  const [confirmPasswordContent, setConfirmPasswordContent] = useState("");
   const [lastNameContent, setLastNameContent] = useState("");
   const [firstNameContent, setFirstNameContent] = useState("");
-
-  const validationPatterns = {
-    email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    password: /^[\w]{8,20}$/,
-  };
-
-  const validateEmail = (content: string, regex: any) => {
-    let isValid = true;
-    if (regex.test(content)) {
-      isValid = true;
-    } else {
-      alert("Invalid input");
-      isValid = false;
-    }
-    return isValid;
-  };
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
 
   const googleSuccess = useCallback(async (res) => {
     const result = res?.profileObj;
@@ -79,31 +75,20 @@ const useAuthScreen = () => {
     console.log("Sign in unsuccessful...");
   }, []);
 
-  const onSubmitSignUp = useCallback(() => {
-    dispatch(
-      registerUserAction(
-        {
-          firstName: firstNameContent,
-          lastName: lastNameContent,
-          email: emailContent!,
-          password: passwordContent,
-          confirmPassword: repeatPasswordContent,
-        },
-        history
-      )
-    );
-    dispatch(setTriggerReload({ triggerReload: true }));
-  }, [
-    firstNameContent,
-    lastNameContent,
-    emailContent,
-    passwordContent,
-    repeatPasswordContent,
-  ]);
+  const onSubmitSignUp = () => {
+    !validateAuthInfo(authValues).firstName &&
+    !validateAuthInfo(authValues).lastName &&
+    !validateAuthInfo(authValues).email &&
+    !validateAuthInfo(authValues).password &&
+    !validateAuthInfo(authValues).confirmPassword
+      ? dispatch(registerUserAction(authValues, history))
+      : setShowErrorMessage(true);
+  };
 
   const goToLoginScreen = useCallback(() => history.push(pageURLS.LOGIN), [
     history,
   ]);
+
   return {
     signUpText,
     loginText,
@@ -111,7 +96,7 @@ const useAuthScreen = () => {
     lastNameText,
     emailText,
     passwordText,
-    repeatPasswordText,
+    confirmPasswordText,
     haveAnAccountText,
     signInText,
     signUpTitleText,
@@ -125,16 +110,17 @@ const useAuthScreen = () => {
     setLastNameContent,
     firstNameContent,
     setFirstNameContent,
-    repeatPasswordContent,
-    setRepeatPasswordContent,
+    confirmPasswordContent,
+    setConfirmPasswordContent,
     googleSuccess,
     googleFailure,
     onSubmitSignUp,
     isUserLoggedIn,
     isAuthLoading,
     goToLoginScreen,
-    validationPatterns,
-    validateEmail,
+    authValues,
+    handleChange,
+    showErrorMessage,
   };
 };
 
@@ -145,7 +131,7 @@ const AuthScreen: FC = () => {
     lastNameText,
     emailText,
     passwordText,
-    repeatPasswordText,
+    confirmPasswordText,
     haveAnAccountText,
     signInText,
     signUpTitleText,
@@ -158,15 +144,16 @@ const AuthScreen: FC = () => {
     setLastNameContent,
     firstNameContent,
     setFirstNameContent,
-    repeatPasswordContent,
-    setRepeatPasswordContent,
+    confirmPasswordContent,
+    setConfirmPasswordContent,
     googleSuccess,
     googleFailure,
     onSubmitSignUp,
     isAuthLoading,
     goToLoginScreen,
-    validationPatterns,
-    validateEmail,
+    authValues,
+    handleChange,
+    showErrorMessage,
   } = useAuthScreen();
 
   return (
@@ -175,50 +162,90 @@ const AuthScreen: FC = () => {
         icon={<Icon iconType="lockIcon" />}
         title={<Text textType="text-large-dark">{signUpTitleText}</Text>}
         firstNameInput={
-          <Input
-            placeholderText={firstNameText}
-            onChange={setFirstNameContent}
-            inputValue={firstNameContent}
-          ></Input>
+          <>
+            <Input
+              placeholderText={firstNameText}
+              onChange={handleChange}
+              inputValue={authValues.firstName}
+              inputType="text"
+              name="firstName"
+            />
+            {showErrorMessage && (
+              <ErrorField
+                errorMessage={validateAuthInfo(authValues).firstName!}
+              />
+            )}
+          </>
         }
         lastNameInput={
-          <Input
-            placeholderText={lastNameText}
-            onChange={setLastNameContent}
-            inputValue={lastNameContent}
-          ></Input>
+          <>
+            <Input
+              placeholderText={lastNameText}
+              onChange={handleChange}
+              inputValue={authValues.lastName}
+              inputType="text"
+              name="lastName"
+            />
+            {showErrorMessage && (
+              <ErrorField
+                errorMessage={validateAuthInfo(authValues).lastName!}
+              />
+            )}
+          </>
         }
         email={
-          <Input
-            placeholderText={emailText}
-            onChange={setEmailContent}
-            inputValue={emailContent}
-          ></Input>
+          <>
+            <Input
+              placeholderText={emailText}
+              onChange={handleChange}
+              inputValue={authValues.email}
+              inputType="email"
+              name="email"
+              required
+            />
+            {showErrorMessage && (
+              <ErrorField errorMessage={validateAuthInfo(authValues).email!} />
+            )}
+          </>
         }
         password={
-          <Input
-            placeholderText={passwordText}
-            onChange={setPasswordContent}
-            inputValue={passwordContent}
-            inputType="password"
-          ></Input>
+          <>
+            <Input
+              placeholderText={passwordText}
+              onChange={handleChange}
+              inputValue={authValues.password}
+              inputType="password"
+              name="password"
+            />
+            {showErrorMessage && (
+              <ErrorField
+                errorMessage={validateAuthInfo(authValues).password!}
+              />
+            )}
+          </>
         }
-        repeatPassword={
-          <Input
-            placeholderText={repeatPasswordText}
-            onChange={setRepeatPasswordContent}
-            inputValue={repeatPasswordContent}
-            inputType="password"
-          ></Input>
+        confirmPassword={
+          <>
+            <Input
+              placeholderText={confirmPasswordText}
+              onChange={handleChange}
+              inputValue={authValues.confirmPassword}
+              inputType="password"
+              name="confirmPassword"
+            />
+            {showErrorMessage && (
+              <ErrorField
+                errorMessage={validateAuthInfo(authValues).confirmPassword!}
+              />
+            )}
+          </>
         }
         actionButton={
           <Button
             colorStyle="darkBlue"
             border="borderNone"
             buttonSize="large"
-            onClick={() => {
-              onSubmitSignUp();
-            }}
+            onClick={() => onSubmitSignUp()}
             isLoading={isAuthLoading}
           >
             <Text textType="text-normal-white"> {signUpText}</Text>

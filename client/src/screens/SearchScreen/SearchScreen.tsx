@@ -26,6 +26,7 @@ import ClothesListingLayout from "../../layouts/ClothesListingLayout";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Icon from "../../components/Icon";
 import NoSearchResultLayout from "../../layouts/NoSearchResultLayout";
+import useForm from "../../hooks/useForm";
 
 const useSearchScreen = () => {
   const { t } = useTranslation();
@@ -69,6 +70,8 @@ const useSearchScreen = () => {
 
   const searchQuery = query.get("searchQuery");
 
+  const { searchClothesValue, handleChange } = useForm();
+
   useEffect(() => {
     dispatch(getClothes());
   }, [dispatch]);
@@ -78,9 +81,9 @@ const useSearchScreen = () => {
   );
 
   const searchClothes = () => {
-    if (searchInput.trim()) {
-      dispatch(searchClothesAction(searchInput));
-      history.push(`/clothes/search?searchQuery=${searchInput}`);
+    if (searchClothesValue.search.trim()) {
+      dispatch(searchClothesAction(searchClothesValue.search));
+      history.push(`/clothes/search?searchQuery=${searchClothesValue.search}`);
     } else {
       dispatch(getClothes());
       history.push(pageURLS.SEARCH_CLOTHES);
@@ -122,6 +125,7 @@ const useSearchScreen = () => {
     (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
   );
+
   const {
     category,
     brands,
@@ -186,6 +190,8 @@ const useSearchScreen = () => {
     noSearchResult,
     filterClothes,
     resetFilters,
+    searchClothesValue,
+    handleChange,
   };
 };
 
@@ -245,6 +251,8 @@ const SearchScreen: FC = () => {
     noSearchResult,
     filterClothes,
     resetFilters,
+    searchClothesValue,
+    handleChange,
   } = useSearchScreen();
 
   return (
@@ -254,12 +262,13 @@ const SearchScreen: FC = () => {
         searchField={
           <Input
             placeholderText={searchField}
-            onChange={setSearchInput}
-            inputValue={searchInput}
+            onChange={handleChange}
+            inputValue={searchClothesValue.search}
+            name="search"
             onEnterKeyPressed={() => {
               searchClothes();
             }}
-          ></Input>
+          />
         }
         searchButton={
           <Button
@@ -387,7 +396,7 @@ const SearchScreen: FC = () => {
         <Modal
           showModal={showFilterModal}
           closeModal={() => setShowFilterModal(false)}
-          modalWidth="wide"
+          modalWidth="normal"
           title={filterModalTitle}
         >
           <FilterClothesModalLayout
@@ -458,16 +467,18 @@ const SearchScreen: FC = () => {
               <Input
                 placeholderText={"From"}
                 inputType="number"
-                onChange={setPriceFrom}
-                inputValue={priceFrom}
+                onChange={handleChange}
+                inputValue={searchClothesValue.priceFrom}
+                name="priceFrom"
               />
             }
             priceTo={
               <Input
                 placeholderText={"To"}
                 inputType="number"
-                onChange={setPriceTo}
-                inputValue={priceTo}
+                onChange={handleChange}
+                inputValue={searchClothesValue.priceTo}
+                name="priceTo"
               />
             }
             priceRangeSlider={

@@ -52,6 +52,7 @@ export interface ILogoutFailure {
 //Login types
 export interface ILoginRequest {
   type: typeof LOGIN_REQUEST;
+  error: AxiosError | Error;
 }
 export interface ILoginSuccess {
   type: typeof LOGIN_SUCCESS;

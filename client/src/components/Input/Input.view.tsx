@@ -1,5 +1,11 @@
 import "../../components/Input/style.scss";
-import { FC, KeyboardEventHandler, useCallback, useState } from "react";
+import {
+  ChangeEventHandler,
+  FC,
+  KeyboardEventHandler,
+  useCallback,
+  useState,
+} from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
 import Icon from "../Icon";
 import * as iconMap from "../../components/Icon/icons";
@@ -11,15 +17,15 @@ const inputFieldClass = scope.and("inputField");
 interface Props {
   inputValue?: string;
   placeholderText: string;
-  inputType?: "text" | "number" | "password";
+  inputType?: "text" | "number" | "password" | "email";
   onEnterKeyPressed?: KeyboardEventHandler<HTMLInputElement>;
-  onChange(value: string): void;
-  onSubmitSearch?(): void;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   required?: boolean;
   errorTextValue?: string;
   hasIcon?: boolean;
   iconType?: keyof typeof iconMap;
   ref?: any;
+  name: string;
 }
 
 export const Input: FC<Props> = ({
@@ -32,19 +38,11 @@ export const Input: FC<Props> = ({
   hasIcon,
   iconType,
   ref,
-  onSubmitSearch,
+  name,
 }) => {
   const [, setInputText] = useState<string>("");
 
-  const onChangeInputText = useCallback(
-    (e) => {
-      onChange(e);
-      let currentValue: string = e.target.value;
-      if (onChange) onChange(currentValue);
-      setInputText(currentValue);
-    },
-    [setInputText, onChange]
-  );
+  const onChangeInputText = useCallback((e) => {}, [setInputText, onChange]);
 
   const onKeyPress = useCallback<KeyboardEventHandler<HTMLInputElement>>(
     (e) => {
@@ -63,10 +61,11 @@ export const Input: FC<Props> = ({
           type={inputType}
           className={cn(inputFieldClass)}
           value={inputValue}
-          onChange={onChangeInputText}
+          onChange={onChange}
           onKeyPress={onKeyPress}
           required={required}
           ref={ref}
+          name={name}
         />
         {hasIcon && <Icon iconType={iconType!} />}
       </span>

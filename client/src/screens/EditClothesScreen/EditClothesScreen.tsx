@@ -26,6 +26,7 @@ import DividerLine from "../../components/DividerLine";
 import TextArea from "../../components/TextArea";
 import Modal from "../../components/Modal";
 import ImageUploader from "../../components/ImageUploader";
+import useForm from "../../hooks/useForm";
 
 const useEditClothesScreen = () => {
   const { t } = useTranslation();
@@ -60,6 +61,7 @@ const useEditClothesScreen = () => {
       : null
   );
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
+  const { editClothesValue, handleChange } = useForm();
 
   useEffect(() => {
     dispatch(getClothesById(currentId));
@@ -108,7 +110,7 @@ const useEditClothesScreen = () => {
     let isValid = true;
     if (
       !imageData ||
-      !nameContent ||
+      !editClothesValue.name ||
       !descriptionContent ||
       !categoryContent ||
       !clothesType ||
@@ -116,7 +118,7 @@ const useEditClothesScreen = () => {
       !sizeContent ||
       !conditionContent ||
       !colourContent ||
-      !price
+      !editClothesValue.price
     ) {
       isValid = false;
       alert("Fill out all the fields");
@@ -128,7 +130,7 @@ const useEditClothesScreen = () => {
     isInputDataValid() &&
       dispatch(
         updateClothesAction(showClothes!._id!, {
-          name: nameContent!,
+          name: editClothesValue.name!,
           selectedFile: imageData!,
           description: descriptionContent!,
           category: categoryContent!,
@@ -137,7 +139,7 @@ const useEditClothesScreen = () => {
           size: sizeContent!,
           condition: conditionContent!,
           colour: colourContent!,
-          price: price!,
+          price: editClothesValue.price,
         })
       ) &&
       goToShowClothesScreen(showClothes!._id);
@@ -228,6 +230,8 @@ const useEditClothesScreen = () => {
     setClothesType,
     clothingType,
     patchClothes,
+    editClothesValue,
+    handleChange,
   };
 };
 
@@ -292,6 +296,8 @@ const EditClothesScreen: FC = () => {
     setClothesType,
     clothingType,
     patchClothes,
+    editClothesValue,
+    handleChange,
   } = useEditClothesScreen();
 
   return (
@@ -319,9 +325,10 @@ const EditClothesScreen: FC = () => {
             }
             name={
               <Input
-                inputValue={nameContent}
+                inputValue={editClothesValue.name}
                 placeholderText={showClothes.name || clothesNamePlaceholderText}
-                onChange={setNameContent}
+                name="name"
+                onChange={handleChange}
               />
             }
             descriptionTitle={
@@ -413,8 +420,9 @@ const EditClothesScreen: FC = () => {
               <Input
                 placeholderText={showClothes.price + " " + currencyText}
                 inputType="number"
-                inputValue={price}
-                onChange={setPrice}
+                inputValue={editClothesValue.price}
+                onChange={handleChange}
+                name="price"
                 required={true}
               />
             }

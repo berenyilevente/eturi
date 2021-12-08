@@ -14,6 +14,7 @@ const helperTextClass = scope.and("helperText");
 const googleButtonClass = scope.and("googleButton");
 const firstNameContainer = scope.and("firstNameContainer");
 const lastNameContainer = scope.and("lastNameContainer");
+const positionRelative = scope.and("positionRelative");
 
 interface Props {
   icon?: ReactNode;
@@ -22,7 +23,7 @@ interface Props {
   lastNameInput?: ReactNode;
   email?: ReactNode;
   password?: ReactNode;
-  repeatPassword?: ReactNode;
+  confirmPassword?: ReactNode;
   actionButton?: ReactNode;
   helperText?: ReactNode;
   googleButton?: ReactNode;
@@ -35,7 +36,7 @@ export const AuthLayout: FC<Props> = ({
   lastNameInput,
   email,
   password,
-  repeatPassword,
+  confirmPassword,
   actionButton,
   helperText,
   googleButton,
@@ -43,11 +44,17 @@ export const AuthLayout: FC<Props> = ({
   <Card backgroundColorStyle="white" shadow className={scope}>
     <div className={iconClass}>{icon}</div>
     <div className={titleClass}>{title}</div>
-    <div className={firstNameContainer}>{firstNameInput}</div>
-    <div className={lastNameContainer}>{lastNameInput}</div>
-    <div className={emailClass}>{email}</div>
-    <div className={passwordClass}>{password}</div>
-    <div className={resetPasswordClass}>{repeatPassword}</div>
+    <div className={cn(firstNameContainer, positionRelative)}>
+      {firstNameInput}
+    </div>
+    <div className={cn(lastNameContainer, positionRelative)}>
+      {lastNameInput}
+    </div>
+    <div className={cn(emailClass, positionRelative)}>{email}</div>
+    <div className={cn(passwordClass, positionRelative)}>{password}</div>
+    <div className={cn(resetPasswordClass, positionRelative)}>
+      {confirmPassword}
+    </div>
     <div className={signUpButtonClass}>{actionButton}</div>
     <div className={helperTextClass}>{helperText}</div>
     <div className={googleButtonClass}>{googleButton}</div>

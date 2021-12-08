@@ -11,6 +11,7 @@ const passwordClass = scope.and("password");
 const loginButtonClass = scope.and("loginButton");
 const helperTextClass = scope.and("helperText");
 const googleButtonClass = scope.and("googleButton");
+const positionRelative = scope.and("positionRelative");
 
 interface Props {
   icon?: ReactNode;
@@ -34,8 +35,8 @@ export const LoginLayout: FC<Props> = ({
   <Card backgroundColorStyle="white" className={scope} shadow>
     <div className={iconClass}>{icon}</div>
     <div className={titleClass}>{title}</div>
-    <div className={emailClass}>{email}</div>
-    <div className={passwordClass}>{password}</div>
+    <div className={cn(emailClass, positionRelative)}>{email}</div>
+    <div className={cn(passwordClass, positionRelative)}>{password}</div>
     <div className={loginButtonClass}>{actionButton}</div>
     <div className={helperTextClass}>{helperText}</div>
     <div className={googleButtonClass}>{googleButton}</div>

@@ -18,7 +18,6 @@ import pageURLS from "../../resources/constants/pageURLS";
 import Link from "../../components/Link";
 import ModalCarousel from "../../components/ModalCarousel";
 import { useOutsideClickHandler } from "../../hooks/useOutsideClickHandler";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   addClothes,
@@ -30,6 +29,7 @@ import {
   useDropdownBaseData,
 } from "../../hooks/useDropdownBaseData";
 import { cn } from "@/components/utils";
+import useForm from "../../hooks/useForm";
 
 const useAddClothesScreen = () => {
   const { t } = useTranslation();
@@ -69,12 +69,13 @@ const useAddClothesScreen = () => {
   const [descriptionContent, setDescriptionContent] = useState<string>();
   const [price, setPrice] = useState<string>("");
   const { visible, setVisible } = useOutsideClickHandler(false);
+  const { addClothesValues, handleChange } = useForm();
 
   const isInputDataValid = () => {
     let isValid = true;
     if (
       !imageData ||
-      !nameContent ||
+      !addClothesValues.name ||
       !descriptionContent ||
       !categoryContent ||
       !clothesTypeContent ||
@@ -82,7 +83,7 @@ const useAddClothesScreen = () => {
       !sizeContent ||
       !conditionContent ||
       !colourContent ||
-      !price
+      !addClothesValues.price
     ) {
       isValid = false;
       alert("Fill out all the fields");
@@ -99,7 +100,7 @@ const useAddClothesScreen = () => {
       dispatch(
         addClothes({
           selectedFile: imageData!,
-          name: nameContent!,
+          name: addClothesValues.name!,
           description: descriptionContent!,
           category: categoryContent!,
           clothingType: clothesTypeContent!,
@@ -107,7 +108,7 @@ const useAddClothesScreen = () => {
           size: sizeContent!,
           condition: conditionContent!,
           colour: colourContent!,
-          price: price!,
+          price: addClothesValues.price!,
           creator: user?.result?.name,
         })
       ) &&
@@ -212,6 +213,8 @@ const useAddClothesScreen = () => {
     submitClothes,
     isInputDataValid,
     clothingTypeText,
+    addClothesValues,
+    handleChange,
   };
 };
 
@@ -276,6 +279,8 @@ const AddClothesScreen: FC = () => {
     submitClothes,
     isInputDataValid,
     clothingTypeText,
+    addClothesValues,
+    handleChange,
   } = useAddClothesScreen();
 
   return (
@@ -319,9 +324,10 @@ const AddClothesScreen: FC = () => {
               name={<Text textType="text-normal-dark">{clothesNameText}</Text>}
               nameInput={
                 <Input
-                  inputValue={nameContent}
+                  inputValue={addClothesValues.name}
                   placeholderText={clothesNamePlaceholderText}
-                  onChange={setNameContent}
+                  onChange={handleChange}
+                  name="name"
                 />
               }
               line={<DividerLine />}
@@ -426,9 +432,10 @@ const AddClothesScreen: FC = () => {
                 <Input
                   placeholderText={pricePlaceholderText + " " + currencyText}
                   inputType="number"
-                  inputValue={price}
-                  onChange={setPrice}
+                  inputValue={addClothesValues.price}
+                  onChange={handleChange}
                   required={true}
+                  name="price"
                 />
               }
             />
