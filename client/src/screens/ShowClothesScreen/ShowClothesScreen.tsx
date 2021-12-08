@@ -58,6 +58,7 @@ const useEditClothesScreen = () => {
       ? state.clothes.showClothes.find((item) => item._id === currentId)
       : null
   );
+  
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
 
   useEffect(() => {

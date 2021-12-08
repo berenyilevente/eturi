@@ -9,10 +9,10 @@ import {
 import axios from "axios";
 
 //fetch data for local development
-const API = axios.create({ baseURL: "http://localhost:5000" });
+//const API = axios.create({ baseURL: "http://localhost:5000" });
 
 //fetch data from deployed api
-//const API = axios.create({ baseURL: "https://eturi-project.herokuapp.com" });
+const API = axios.create({ baseURL: "https://eturi-project.herokuapp.com" });
 
 //send the token to the backend middleware so that it can verify our token
 API.interceptors.request.use((req) => {
