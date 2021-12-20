@@ -3,7 +3,7 @@ import pageURLS from "../../resources/constants/pageURLS";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "../../components/Card";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
 import { Text } from "../../components/Text/Text.view";
@@ -22,7 +22,7 @@ const ShowCLothesScreen: FC = () => {
   //const queryParams = new URLSearchParams(window.location.search);
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile")!)
@@ -32,7 +32,7 @@ const ShowCLothesScreen: FC = () => {
     setUser(JSON.parse(localStorage.getItem("profile")!));
   }, [setUser]);
 
-  const currentId = id.slice(3);
+  const currentId = id!.slice(3);
   const clothesNameText = t("clothes.clothesName");
   const descriptionText = t("clothes.description");
   const categoryText = t("clothes.category");
@@ -59,13 +59,11 @@ const ShowCLothesScreen: FC = () => {
     dispatch(getClothesById(currentId));
   }, [dispatch, currentId]);
 
-  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
-    history,
-  ]);
+  const goToHomeScreen = useCallback(() => navigate(pageURLS.HOME), [navigate]);
 
   const goToEditClothesScreen = useCallback(
-    (id) => history.push(pageURLS.EDIT_CLOTHES + id),
-    [history]
+    (id) => navigate(pageURLS.EDIT_CLOTHES + id),
+    [navigate]
   );
 
   return (
@@ -148,7 +146,7 @@ const ShowCLothesScreen: FC = () => {
                       iconColor="dark"
                       transparent
                       onClick={() => {
-                        history.goBack();
+                        navigate(-1);
                         dispatch(setTriggerReload({ triggerReload: true }));
                       }}
                     >
@@ -188,7 +186,7 @@ const ShowCLothesScreen: FC = () => {
                       iconColor="dark"
                       transparent
                       onClick={() => {
-                        history.goBack();
+                        navigate(-1);
                         dispatch(setTriggerReload({ triggerReload: true }));
                       }}
                     >

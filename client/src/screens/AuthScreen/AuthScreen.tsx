@@ -12,13 +12,13 @@ import {
   googleAuthAction,
   registerUserAction,
 } from "../../redux/auth/auth.actions";
-import { useHistory } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import { AppState } from "../../redux/store";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import useForm from "../../hooks/useForm";
 import { validateAuthInfo } from "../../resources/functions/validateAuthInfo";
 import ErrorField from "../../components/ErrorField";
+import { useNavigate } from "react-router-dom";
 export interface IErrorFieldValues {
   firstName: string;
   lastName?: string;
@@ -30,7 +30,7 @@ export interface IErrorFieldValues {
 const AuthScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const signUpText = t("auth.signUp");
   const signUpTitleText = t("auth.signUpTitle");
@@ -54,12 +54,12 @@ const AuthScreen: FC = () => {
 
       try {
         dispatch(googleAuthAction({ result: result, token: token }));
-        history.push(pageURLS.HOME);
+        navigate(pageURLS.HOME);
       } catch (error) {
         console.log(error);
       }
     },
-    [dispatch, history]
+    [dispatch, navigate]
   );
 
   const googleFailure = useCallback(() => {
@@ -72,12 +72,12 @@ const AuthScreen: FC = () => {
     !validateAuthInfo(authValues).email &&
     !validateAuthInfo(authValues).password &&
     !validateAuthInfo(authValues).confirmPassword
-      ? dispatch(registerUserAction(authValues, history))
+      ? dispatch(registerUserAction(authValues, navigate))
       : setShowErrorMessage(true);
   };
 
-  const goToLoginScreen = useCallback(() => history.push(pageURLS.LOGIN), [
-    history,
+  const goToLoginScreen = useCallback(() => navigate(pageURLS.LOGIN), [
+    navigate,
   ]);
 
   return (

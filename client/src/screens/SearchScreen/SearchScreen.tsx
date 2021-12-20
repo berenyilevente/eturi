@@ -10,7 +10,7 @@ import Modal from "../../components/Modal";
 import { useDropdownBaseData } from "../../hooks/useDropdownBaseData";
 import Slider from "../../components/Slider";
 import FilterClothesModalLayout from "../../layouts/FilterClothesModalLayout";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import pageURLS from "../../resources/constants/pageURLS";
 import {
@@ -31,7 +31,7 @@ import useForm from "../../hooks/useForm";
 const SearchScreen: FC = () => {
   const { t } = useTranslation();
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currencyText = t("currency.huf");
   const noSearchResult = t("searchScreen.noSearchResult");
@@ -75,10 +75,10 @@ const SearchScreen: FC = () => {
   const searchClothes = () => {
     if (searchClothesValue.search.trim()) {
       dispatch(searchClothesAction(searchClothesValue.search));
-      history.push(`/clothes/search?searchQuery=${searchClothesValue.search}`);
+      navigate(`/clothes/search?searchQuery=${searchClothesValue.search}`);
     } else {
       dispatch(getClothes());
-      history.push(pageURLS.SEARCH_CLOTHES);
+      navigate(pageURLS.SEARCH_CLOTHES);
     }
   };
 
@@ -113,8 +113,8 @@ const SearchScreen: FC = () => {
   };
 
   const goToShowClothesScreen = useCallback(
-    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
-    [history]
+    (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
+    [navigate]
   );
 
   const {

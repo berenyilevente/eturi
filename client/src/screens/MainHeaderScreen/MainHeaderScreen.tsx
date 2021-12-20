@@ -5,7 +5,7 @@ import Icon from "../../components/Icon";
 import Card from "../../components/Card";
 import { useTranslation } from "react-i18next";
 import { ReactNode, useCallback, useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 import pageURLS from "../../resources/constants/pageURLS";
 import NavigationMenu from "../../components/NavigationMenu";
 import Button from "../../components/Button";
@@ -23,7 +23,7 @@ export interface INavigationMenuValues {
 
 const MainHeaderScreen = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const homeText = t("header.home");
@@ -42,8 +42,8 @@ const MainHeaderScreen = () => {
   const logout = useCallback(() => {
     dispatch(logoutAction());
     setUser(null);
-    history.push(pageURLS.HOME);
-  }, [dispatch, history]);
+    navigate(pageURLS.HOME);
+  }, [dispatch, navigate]);
 
   useEffect(() => {
     const token = user?.token;
@@ -55,26 +55,22 @@ const MainHeaderScreen = () => {
     //setUser(JSON.parse(localStorage.getItem("profile") || "null"));
   }, [user, location, logout]);
 
-  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
-    history,
-  ]);
+  const goToHomeScreen = useCallback(() => navigate(pageURLS.HOME), [navigate]);
 
-  const goToSellScreen = useCallback(() => history.push(pageURLS.SELL), [
-    history,
-  ]);
+  const goToSellScreen = useCallback(() => navigate(pageURLS.SELL), [navigate]);
   const goToSearchScreen = useCallback(
-    () => history.push(pageURLS.SEARCH_CLOTHES),
-    [history]
+    () => navigate(pageURLS.SEARCH_CLOTHES),
+    [navigate]
   );
-  const goToAboutScreen = useCallback(() => history.push(pageURLS.ABOUT), [
-    history,
+  const goToAboutScreen = useCallback(() => navigate(pageURLS.ABOUT), [
+    navigate,
   ]);
-  const goToProfileScreen = useCallback(() => history.push(pageURLS.PROFILE), [
-    history,
+  const goToProfileScreen = useCallback(() => navigate(pageURLS.PROFILE), [
+    navigate,
   ]);
 
-  const goToLoginScreen = useCallback(() => history.push(pageURLS.LOGIN), [
-    history,
+  const goToLoginScreen = useCallback(() => navigate(pageURLS.LOGIN), [
+    navigate,
   ]);
 
   const navigationMenuItemsLoggedIn: INavigationMenuValues[] = [

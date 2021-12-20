@@ -12,7 +12,7 @@ import { ClothesListingLayout } from "../../layouts/ClothesListingLayout/Clothes
 import Card from "../../components/Card";
 import { Text } from "../../components/Text/Text.view";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import pageURLS from "../../resources/constants/pageURLS";
 import Icon from "../../components/Icon";
 import Pagination from "../../components/Pagination";
@@ -24,7 +24,7 @@ const useQuery = () => {
 const HomeContentScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const query = useQuery();
 
   //React router is going to read the url and check if we have the specified parameter
@@ -43,8 +43,8 @@ const HomeContentScreen: FC = () => {
   const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
 
   const goToShowClothesScreen = useCallback(
-    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
-    [history]
+    (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
+    [navigate]
   );
 
   //basic frontend pagination

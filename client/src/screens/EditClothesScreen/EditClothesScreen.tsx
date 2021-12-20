@@ -3,7 +3,7 @@ import pageURLS from "../../resources/constants/pageURLS";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "../../components/Card";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
 import Text from "../../components/Text";
@@ -31,9 +31,9 @@ const EditClothesScreen: FC = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const currentId = id.slice(3);
+  const currentId = id!.slice(3);
   const clothesNameText = t("clothes.clothesName");
   const descriptionText = t("clothes.description");
   const categoryText = t("clothes.category");
@@ -63,8 +63,8 @@ const EditClothesScreen: FC = () => {
   }, [dispatch, currentId]);
 
   const goToShowClothesScreen = useCallback(
-    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
-    [history]
+    (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
+    [navigate]
   );
 
   const [imageData, setImageData] = useState<any>();
@@ -78,9 +78,7 @@ const EditClothesScreen: FC = () => {
 
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
-    history,
-  ]);
+  const goToHomeScreen = useCallback(() => navigate(pageURLS.HOME), [navigate]);
 
   useEffect(() => {
     setBrandContent(showClothes!.brand);
