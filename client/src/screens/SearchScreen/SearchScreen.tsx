@@ -10,7 +10,7 @@ import Modal from "../../components/Modal";
 import { useDropdownBaseData } from "../../hooks/useDropdownBaseData";
 import Slider from "../../components/Slider";
 import FilterClothesModalLayout from "../../layouts/FilterClothesModalLayout";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import pageURLS from "../../resources/constants/pageURLS";
 import {
@@ -28,13 +28,10 @@ import Icon from "../../components/Icon";
 import NoSearchResultLayout from "../../layouts/NoSearchResultLayout";
 import useForm from "../../hooks/useForm";
 
-const useSearchScreen = () => {
+const SearchScreen: FC = () => {
   const { t } = useTranslation();
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
+
   const history = useHistory();
-  const query = useQuery();
   const dispatch = useDispatch();
   const currencyText = t("currency.huf");
   const noSearchResult = t("searchScreen.noSearchResult");
@@ -52,12 +49,9 @@ const useSearchScreen = () => {
   const brandText = t("clothes.brand");
   const conditionText = t("clothes.condition");
   const clothingTypeText = t("clothes.clothingType");
-  const fromText = t("clothes.from");
-  const toText = t("clothes.to");
   const activeFiltersText = t("searchScreen.activeFilters");
 
   const [showFilterModal, setShowFilterModal] = useState<boolean>(false);
-  const [searchInput, setSearchInput] = useState<string>("");
   const [categoryContent, setCategoryContent] = useState<string>();
   const [clothesTypeContent, setClothesTypeContent] = useState<string>();
   const [brandContent, setBrandContent] = useState<string>();
@@ -67,8 +61,6 @@ const useSearchScreen = () => {
   const [priceFrom, setPriceFrom] = useState<string>();
   const [priceTo, setPriceTo] = useState<string>();
   const [showActiveFilters, setShowActiveFilters] = useState(false);
-
-  const searchQuery = query.get("searchQuery");
 
   const { searchClothesValue, handleChange } = useForm();
 
@@ -118,7 +110,6 @@ const useSearchScreen = () => {
 
     setShowFilterModal(false);
     setShowActiveFilters(true);
-    //dispatch filter action
   };
 
   const goToShowClothesScreen = useCallback(
@@ -134,126 +125,6 @@ const useSearchScreen = () => {
     colours,
     clothingType,
   } = useDropdownBaseData();
-
-  return {
-    searchText,
-    searchTitle,
-    searchField,
-    filterText,
-    showFilterModal,
-    setShowFilterModal,
-    filterModalTitle,
-    category,
-    brands,
-    sizes,
-    conditions,
-    colours,
-    clothingType,
-    priceText,
-    cancelText,
-    searchInput,
-    setSearchInput,
-    categoryContent,
-    setCategoryContent,
-    clothesTypeContent,
-    setClothesTypeContent,
-    brandContent,
-    setBrandContent,
-    sizeContent,
-    setSizeContent,
-    conditionContent,
-    setConditionContent,
-    colourContent,
-    setColourContent,
-    priceFrom,
-    setPriceFrom,
-    priceTo,
-    setPriceTo,
-    sizeText,
-    colourText,
-    categoryText,
-    brandText,
-    conditionText,
-    clothingTypeText,
-    fromText,
-    toText,
-    activeFiltersText,
-    showActiveFilters,
-    setShowActiveFilters,
-    searchClothes,
-    clothes,
-    dispatch,
-    goToShowClothesScreen,
-    currencyText,
-    isClothesLoading,
-    likeLoading,
-    noSearchResult,
-    filterClothes,
-    resetFilters,
-    searchClothesValue,
-    handleChange,
-  };
-};
-
-const SearchScreen: FC = () => {
-  const {
-    searchText,
-    searchTitle,
-    searchField,
-    filterText,
-    showFilterModal,
-    setShowFilterModal,
-    filterModalTitle,
-    category,
-    brands,
-    sizes,
-    conditions,
-    colours,
-    clothingType,
-    priceText,
-    cancelText,
-    searchInput,
-    setSearchInput,
-    categoryContent,
-    setCategoryContent,
-    clothesTypeContent,
-    setClothesTypeContent,
-    brandContent,
-    setBrandContent,
-    sizeContent,
-    setSizeContent,
-    conditionContent,
-    setConditionContent,
-    colourContent,
-    setColourContent,
-    priceFrom,
-    setPriceFrom,
-    priceTo,
-    setPriceTo,
-    sizeText,
-    colourText,
-    categoryText,
-    brandText,
-    conditionText,
-    clothingTypeText,
-    fromText,
-    toText,
-    activeFiltersText,
-    showActiveFilters,
-    setShowActiveFilters,
-    searchClothes,
-    clothes,
-    dispatch,
-    goToShowClothesScreen,
-    currencyText,
-    isClothesLoading,
-    likeLoading,
-    noSearchResult,
-    filterClothes,
-    resetFilters,
-    searchClothesValue,
-    handleChange,
-  } = useSearchScreen();
 
   return (
     <>

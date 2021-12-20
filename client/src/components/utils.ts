@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export function cn(...cns: any[]) {
     return cns
       .filter((cn) => (typeof cn === 'string' || cn instanceof String) && cn !== '')

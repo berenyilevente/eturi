@@ -4,18 +4,14 @@ import { Link } from "../../components/Link/Link.view";
 import Icon from "../../components/Icon";
 import Card from "../../components/Card";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "../../components/Tooltip/Tooltip.view";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
-import DividerLine from "../../components/DividerLine";
 import NavigationMenu from "../../components/NavigationMenu";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../redux/auth/auth.actions";
-import { setTriggerReload } from "../../redux/clothes/clothes.actions";
-import LoadingSpinner from "../../components/LoadingSpinner";
 import { AppState } from "../../redux/store";
 import decode from "jwt-decode";
 export interface INavigationMenuValues {
@@ -25,7 +21,7 @@ export interface INavigationMenuValues {
   onClick(): void;
 }
 
-const useMainHeaderScreen = () => {
+const MainHeaderScreen = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const location = useLocation();
@@ -36,15 +32,19 @@ const useMainHeaderScreen = () => {
   const aboutText = t("header.about");
   const profileText = t("header.profile");
   const loginText = t("auth.login");
-  const signUpText = t("auth.signUpTitle");
   const logoutText = t("auth.logout");
 
-  const { isAuthLoading, isUserLoggedIn } = useSelector(
-    (state: AppState) => state.auth
-  );
+  const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile") || "null")
   );
+
+  const logout = useCallback(() => {
+    dispatch(logoutAction());
+    setUser(null);
+    history.push(pageURLS.HOME);
+  }, [dispatch, history]);
+
   useEffect(() => {
     const token = user?.token;
     //decode the token to see when it is expiring
@@ -52,14 +52,8 @@ const useMainHeaderScreen = () => {
       const decodedToken = decode<any>(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
-    setUser(JSON.parse(localStorage.getItem("profile") || "null"));
-  }, [location]);
-
-  const logout = () => {
-    dispatch(logoutAction());
-    setUser(null);
-    history.push(pageURLS.HOME);
-  };
+    //setUser(JSON.parse(localStorage.getItem("profile") || "null"));
+  }, [user, location, logout]);
 
   const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
     history,
@@ -79,9 +73,6 @@ const useMainHeaderScreen = () => {
     history,
   ]);
 
-  const goToAuthScreen = useCallback(() => history.push(pageURLS.AUTH), [
-    history,
-  ]);
   const goToLoginScreen = useCallback(() => history.push(pageURLS.LOGIN), [
     history,
   ]);
@@ -133,57 +124,6 @@ const useMainHeaderScreen = () => {
     },
   ];
 
-  return {
-    homeText,
-    sellClothesText,
-    searchText,
-    aboutText,
-    profileText,
-    goToSellScreen,
-    goToSearchScreen,
-    goToHomeScreen,
-    goToAboutScreen,
-    goToProfileScreen,
-    navigationMenuItemsLoggedIn,
-    user,
-    goToAuthScreen,
-    logout,
-    isAuthLoading,
-    dispatch,
-    loginText,
-    signUpText,
-    logoutText,
-    navigationMenuItems,
-    isUserLoggedIn,
-    goToLoginScreen,
-  };
-};
-
-const MainHeaderScreen = () => {
-  const {
-    homeText,
-    sellClothesText,
-    searchText,
-    aboutText,
-    profileText,
-    goToSellScreen,
-    goToSearchScreen,
-    goToHomeScreen,
-    goToAboutScreen,
-    goToProfileScreen,
-    navigationMenuItemsLoggedIn,
-    navigationMenuItems,
-    user,
-    goToAuthScreen,
-    logout,
-    isAuthLoading,
-    dispatch,
-    loginText,
-    signUpText,
-    logoutText,
-    isUserLoggedIn,
-    goToLoginScreen,
-  } = useMainHeaderScreen();
   return (
     <Card backgroundColorStyle="white" rounded>
       <HeaderLayout

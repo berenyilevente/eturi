@@ -12,7 +12,6 @@ import {
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
-  USER_AUTH_STATE,
 } from "./auth.types";
 import { IDefaultAuthState } from "./auth.interfaces";
 
@@ -23,7 +22,7 @@ const defaultClothesState: IDefaultAuthState = {
   isUserLoggedIn: false,
 };
 
-export default (
+const authReducer = (
   state = defaultClothesState,
   action: AuthActionTypes
 ): IDefaultAuthState => {
@@ -112,3 +111,5 @@ export default (
       return state;
   }
 };
+
+export default authReducer;

@@ -33,7 +33,6 @@ import {
   IFilterClothesResponse,
   ITriggerLikeLoading,
   ITriggerReload,
-  IUpdateClothesResponseData,
 } from "./clothes.interfaces";
 
 export const getClothes = () => async (dispatch: Dispatch) => {

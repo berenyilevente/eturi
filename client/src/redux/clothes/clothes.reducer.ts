@@ -21,7 +21,6 @@ import {
   SEARCH_CLOTHES_FAILURE,
   SEARCH_CLOTHES_REQUEST,
   SEARCH_CLOTHES_SUCCESS,
-  SET_LIKE_LOADING,
   SET_TRIGGER_RELOAD,
   UPDATE_CLOTHES_FAILURE,
   UPDATE_CLOTHES_REQUEST,
@@ -41,7 +40,7 @@ const defaultClothesState: IClothesState = {
   likeLoading: false,
 };
 
-export default (
+const clothesReducer = (
   state = defaultClothesState,
   action: ClothesActionTypes
 ): IClothesState => {
@@ -216,3 +215,5 @@ export default (
       return state;
   }
 };
+
+export default clothesReducer;

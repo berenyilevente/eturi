@@ -21,7 +21,6 @@ export const signIn = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials." });
 
     //If user exists and pw is correct, then we can get the json web token that we need to send to the frontend
-    //ToDo: store secret string ("test") in an env file
     const token = jwt.sign(
       { email: existingUser.email, id: existingUser._id },
       process.env.SECRET,
@@ -53,9 +52,13 @@ export const signUp = async (req, res) => {
       password: hashedPassword,
       name: `${firstName} ${lastName}`,
     });
-    const token = jwt.sign({ email: result.email, id: result._id }, "test", {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { email: result.email, id: result._id },
+      process.env.SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.status(200).json({ result: result, token });
   } catch (error) {

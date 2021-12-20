@@ -4,7 +4,6 @@ import {
   FC,
   KeyboardEventHandler,
   useCallback,
-  useState,
 } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
 import Icon from "../Icon";
@@ -40,10 +39,6 @@ export const Input: FC<Props> = ({
   ref,
   name,
 }) => {
-  const [, setInputText] = useState<string>("");
-
-  const onChangeInputText = useCallback((e) => {}, [setInputText, onChange]);
-
   const onKeyPress = useCallback<KeyboardEventHandler<HTMLInputElement>>(
     (e) => {
       if (e.key === "Enter") {

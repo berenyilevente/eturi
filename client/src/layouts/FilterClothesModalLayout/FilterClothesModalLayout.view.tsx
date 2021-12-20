@@ -1,6 +1,6 @@
 import "../../layouts/FilterClothesModalLayout/style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("layouts-filter-clothes-modal-layout");
 const optionsArea = scope.and("optionsArea");
@@ -34,7 +34,6 @@ export const FilterClothesModalLayout: FC<Props> = ({
   coloursDropDown,
   cancelButton,
   filterButton,
-  priceRangeSlider,
   priceRangeTitle,
   priceFrom,
   priceTo,

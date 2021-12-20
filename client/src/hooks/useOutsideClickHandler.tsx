@@ -17,7 +17,7 @@ export const useOutsideClickHandler = (initialValue: boolean) => {
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [ref]);
+  }, [ref, handleClickOutside]);
 
   return { visible, setVisible, ref, handleClickOutside };
 };

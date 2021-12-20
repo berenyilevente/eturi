@@ -17,72 +17,62 @@ import { useSelector } from "react-redux";
 import { AppState } from "@/redux/store";
 
 const MainSiteContentScreen = () => {
-  {
-    const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
+  const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
 
-    return (
-      <MainLayout
-        header={<MainHeaderScreen />}
-        intro={
-          <Switch>
-            <Route exact path={pageURLS.CLOTHES} component={IntroScreen} />
-          </Switch>
-        }
-        primaryContent={
-          <Switch>
-            <Route
-              exact
-              path={pageURLS.HOME}
-              component={() => <Redirect to={pageURLS.CLOTHES} />}
-            />
-            <Route
-              exact
-              path={pageURLS.CLOTHES}
-              component={HomeContentScreen}
-            />
-          </Switch>
-        }
-        authContent={
-          <Switch>
-            <Route
-              exact
-              path={pageURLS.AUTH}
-              component={() =>
-                !isUserLoggedIn ? (
-                  <AuthScreen />
-                ) : (
-                  <Redirect to={pageURLS.HOME} />
-                )
-              }
-            />
-            <Route exact path={pageURLS.LOGIN} component={LoginScreen} />
-          </Switch>
-        }
-        secondaryContent={
-          <Switch>
-            <Route exact path={pageURLS.SELL} component={AddClothesScreen} />
-            <Route exact path={pageURLS.ABOUT} component={AboutScreen} />
-            <Route
-              exact
-              path={pageURLS.SEARCH_CLOTHES}
-              component={SearchScreen}
-            />
-            <Route
-              path={pageURLS.GET_CLOTHES_BY_ID}
-              component={ShowCLothesScreen}
-            />
-            <Route
-              exact
-              path={pageURLS.EDIT_CLOTHES}
-              component={EditClothesScreen}
-            />
-            <Route exact path={pageURLS.PROFILE} component={ProfileScreen} />
-          </Switch>
-        }
-        footer={<FooterScreen />}
-      />
-    );
-  }
+  return (
+    <MainLayout
+      header={<MainHeaderScreen />}
+      intro={
+        <Switch>
+          <Route exact path={pageURLS.CLOTHES} component={IntroScreen} />
+        </Switch>
+      }
+      primaryContent={
+        <Switch>
+          <Route
+            exact
+            path={pageURLS.HOME}
+            component={() => <Redirect to={pageURLS.CLOTHES} />}
+          />
+          <Route exact path={pageURLS.CLOTHES} component={HomeContentScreen} />
+        </Switch>
+      }
+      authContent={
+        <Switch>
+          <Route
+            exact
+            path={pageURLS.AUTH}
+            component={() =>
+              !isUserLoggedIn ? <AuthScreen /> : <Redirect to={pageURLS.HOME} />
+            }
+          />
+          <Route exact path={pageURLS.LOGIN} component={LoginScreen} />
+        </Switch>
+      }
+      secondaryContent={
+        <Switch>
+          <Route exact path={pageURLS.SELL} component={AddClothesScreen} />
+          <Route exact path={pageURLS.ABOUT} component={AboutScreen} />
+          <Route
+            exact
+            path={pageURLS.SEARCH_CLOTHES}
+            component={SearchScreen}
+          />
+          <Route
+            path={pageURLS.GET_CLOTHES_BY_ID}
+            component={ShowCLothesScreen}
+          />
+          <Route
+            exact
+            path={pageURLS.EDIT_CLOTHES}
+            component={EditClothesScreen}
+          />
+          <Route exact path={pageURLS.PROFILE} component={ProfileScreen} />
+        </Switch>
+      }
+      footer={<FooterScreen />}
+    />
+  );
 };
 
 export default MainSiteContentScreen;

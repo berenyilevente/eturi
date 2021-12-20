@@ -1,5 +1,5 @@
 import AuthLayout from "../../layouts/AuthLayout";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Icon from "../../components/Icon";
 import Text from "../../components/Text";
@@ -10,14 +10,12 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import {
   googleAuthAction,
-  loginAction,
   registerUserAction,
 } from "../../redux/auth/auth.actions";
 import { useHistory } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import { AppState } from "../../redux/store";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { setTriggerReload } from "../../redux/clothes/clothes.actions";
 import useForm from "../../hooks/useForm";
 import { validateAuthInfo } from "../../resources/functions/validateAuthInfo";
 import ErrorField from "../../components/ErrorField";
@@ -29,14 +27,13 @@ export interface IErrorFieldValues {
   confirmPassword?: string;
 }
 
-const useAuthScreen = () => {
+const AuthScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
 
   const signUpText = t("auth.signUp");
   const signUpTitleText = t("auth.signUpTitle");
-  const loginText = t("auth.login");
   const firstNameText = t("auth.firstName");
   const lastNameText = t("auth.lastName");
   const emailText = t("auth.email");
@@ -44,32 +41,26 @@ const useAuthScreen = () => {
   const confirmPasswordText = t("auth.confirmPassword");
   const haveAnAccountText = t("auth.haveAnAccount");
   const signInText = t("auth.signIn");
-  const dontHaveAnAccountText = t("auth.dontHaveAnAccount");
-  const signUpHereText = t("auth.signUpHere");
 
-  const { isAuthLoading, isUserLoggedIn } = useSelector(
-    (state: AppState) => state.auth
-  );
+  const { isAuthLoading } = useSelector((state: AppState) => state.auth);
   const { authValues, handleChange } = useForm();
 
-  const [emailContent, setEmailContent] = useState<string>();
-  const [passwordContent, setPasswordContent] = useState("");
-  const [confirmPasswordContent, setConfirmPasswordContent] = useState("");
-  const [lastNameContent, setLastNameContent] = useState("");
-  const [firstNameContent, setFirstNameContent] = useState("");
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
 
-  const googleSuccess = useCallback(async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+  const googleSuccess = useCallback(
+    async (res) => {
+      const result = res?.profileObj;
+      const token = res?.tokenId;
 
-    try {
-      dispatch(googleAuthAction({ result: result, token: token }));
-      history.push(pageURLS.HOME);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+      try {
+        dispatch(googleAuthAction({ result: result, token: token }));
+        history.push(pageURLS.HOME);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch, history]
+  );
 
   const googleFailure = useCallback(() => {
     console.log("Sign in unsuccessful...");
@@ -88,73 +79,6 @@ const useAuthScreen = () => {
   const goToLoginScreen = useCallback(() => history.push(pageURLS.LOGIN), [
     history,
   ]);
-
-  return {
-    signUpText,
-    loginText,
-    firstNameText,
-    lastNameText,
-    emailText,
-    passwordText,
-    confirmPasswordText,
-    haveAnAccountText,
-    signInText,
-    signUpTitleText,
-    dontHaveAnAccountText,
-    signUpHereText,
-    emailContent,
-    setEmailContent,
-    passwordContent,
-    setPasswordContent,
-    lastNameContent,
-    setLastNameContent,
-    firstNameContent,
-    setFirstNameContent,
-    confirmPasswordContent,
-    setConfirmPasswordContent,
-    googleSuccess,
-    googleFailure,
-    onSubmitSignUp,
-    isUserLoggedIn,
-    isAuthLoading,
-    goToLoginScreen,
-    authValues,
-    handleChange,
-    showErrorMessage,
-  };
-};
-
-const AuthScreen: FC = () => {
-  const {
-    signUpText,
-    firstNameText,
-    lastNameText,
-    emailText,
-    passwordText,
-    confirmPasswordText,
-    haveAnAccountText,
-    signInText,
-    signUpTitleText,
-    dontHaveAnAccountText,
-    emailContent,
-    setEmailContent,
-    passwordContent,
-    setPasswordContent,
-    lastNameContent,
-    setLastNameContent,
-    firstNameContent,
-    setFirstNameContent,
-    confirmPasswordContent,
-    setConfirmPasswordContent,
-    googleSuccess,
-    googleFailure,
-    onSubmitSignUp,
-    isAuthLoading,
-    goToLoginScreen,
-    authValues,
-    handleChange,
-    showErrorMessage,
-  } = useAuthScreen();
 
   return (
     <LoadingSpinner>

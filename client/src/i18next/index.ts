@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import detector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-import { en, hu } from "./locales";
+import { hu } from "./locales";
 // the translations
 const resources = {
   hu: {

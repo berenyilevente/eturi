@@ -17,7 +17,7 @@ import { AppState } from "@/redux/store";
 import useForm from "../../hooks/useForm";
 import ErrorField from "../../components/ErrorField";
 
-const useLoginScreen = () => {
+const LoginScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -28,26 +28,28 @@ const useLoginScreen = () => {
   const dontHaveAnAccountText = t("auth.dontHaveAnAccount");
   const signUpHereText = t("auth.signUpHere");
 
-  const [emailContentLogin, setEmailContentLogin] = useState("");
-  const [passwordContentLogin, setPasswordContentLogin] = useState("");
   const { loginValues, handleChange } = useForm();
 
-  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
   const [
     noUserFoundErrorMessage,
     setNoUserFoundErrorMessage,
   ] = useState<string>();
-  const googleSuccess = useCallback(async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
 
-    try {
-      dispatch(googleAuthAction({ result: result, token: token }));
-      history.push(pageURLS.HOME);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  //in here we get access to a full response
+  const googleSuccess = useCallback(
+    async (res) => {
+      const result = res?.profileObj;
+      const token = res?.tokenId;
+
+      try {
+        dispatch(googleAuthAction({ result: result, token: token }));
+        history.push(pageURLS.HOME);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch, history]
+  );
 
   const { isAuthLoading, errorMessage } = useSelector(
     (state: AppState) => state.auth
@@ -69,58 +71,12 @@ const useLoginScreen = () => {
       dispatch(loginAction(loginValues, history));
       dispatch(setTriggerReload({ triggerReload: true }));
     },
-    [loginValues]
+    [loginValues, errorMessage, dispatch, history]
   );
 
   const goToAuthScreen = useCallback(() => {
     history.push(pageURLS.AUTH);
   }, [history]);
-
-  return {
-    loginText,
-    emailText,
-    passwordText,
-    dontHaveAnAccountText,
-    signUpHereText,
-    emailContentLogin,
-    setEmailContentLogin,
-    passwordContentLogin,
-    setPasswordContentLogin,
-    onSubmitLogin,
-    googleSuccess,
-    googleFailure,
-    goToAuthScreen,
-    isAuthLoading,
-    loginValues,
-    handleChange,
-    showErrorMessage,
-    setShowErrorMessage,
-    noUserFoundErrorMessage,
-  };
-};
-
-const LoginScreen: FC = () => {
-  const {
-    loginText,
-    emailText,
-    passwordText,
-    dontHaveAnAccountText,
-    signUpHereText,
-    emailContentLogin,
-    setEmailContentLogin,
-    passwordContentLogin,
-    setPasswordContentLogin,
-    onSubmitLogin,
-    googleSuccess,
-    googleFailure,
-    goToAuthScreen,
-    isAuthLoading,
-    loginValues,
-    handleChange,
-    showErrorMessage,
-    setShowErrorMessage,
-    noUserFoundErrorMessage,
-  } = useLoginScreen();
 
   return (
     <LoadingSpinner>

@@ -1,6 +1,5 @@
 import { Text } from "../../components/Text/Text.view";
 import { Link } from "../../components/Link/Link.view";
-import Icon from "../../components/Icon";
 import Card from "../../components/Card";
 import IntroLayout from "../../layouts/IntroLayout";
 import IntroCardLayout from "../../layouts/IntroCardLayout";
@@ -12,7 +11,7 @@ import pageURLS from "../../resources/constants/pageURLS";
 import { useSelector } from "react-redux";
 import { AppState } from "@/redux/store";
 
-const useIntroScreen = () => {
+const IntroScreen = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -30,28 +29,6 @@ const useIntroScreen = () => {
   const goToAuthScreen = useCallback(() => history.push(pageURLS.AUTH), [
     history,
   ]);
-
-  return {
-    introTitleText,
-    introButtonText,
-    introHelperText,
-    goToSellScreen,
-    goToAboutScreen,
-    goToAuthScreen,
-    isUserLoggedIn,
-  };
-};
-
-const IntroScreen = () => {
-  const {
-    introTitleText,
-    introButtonText,
-    introHelperText,
-    goToSellScreen,
-    goToAboutScreen,
-    goToAuthScreen,
-    isUserLoggedIn,
-  } = useIntroScreen();
   return (
     <IntroLayout
       introCard={

@@ -1,6 +1,6 @@
 import "../../layouts/NoClothesLayout/style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("layouts-no-clothes-layout");
 const iconClass = scope.and("iconClass");

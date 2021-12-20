@@ -1,7 +1,4 @@
-import {
-  getClothes,
-  getClothesById,
-} from "../../redux/clothes/clothes.actions";
+import { getClothes } from "../../redux/clothes/clothes.actions";
 import { AppState } from "../../redux/store";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,15 +15,14 @@ import { useHistory } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import Icon from "../../components/Icon";
 import NoClothesLayout from "../../layouts/NoClothesLayout";
-const useProfileScreen = () => {
+
+const ProfileScreen: FC = () => {
   const { t } = useTranslation();
 
   const myClothesTitleText = t("profile.title");
-  const editProfileText = t("profile.editProfile");
   const noClothesText = t("profile.noClothes");
   const addNowText = t("profile.addNow");
   const currencyText = t("currency.huf");
-  const noDataText = t("general.noData");
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile") || "null")
@@ -37,6 +33,10 @@ const useProfileScreen = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(getClothes());
+  }, [dispatch]);
 
   const showProfileClothes = useSelector((state: AppState) =>
     user
@@ -54,45 +54,10 @@ const useProfileScreen = () => {
 
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
 
-  useEffect(() => {
-    console.log(showProfileClothes);
-    dispatch(getClothes());
-  }, [dispatch]);
-
   const goToShowClothesScreen = useCallback(
     (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
     [history]
   );
-
-  return {
-    myClothesTitleText,
-    user,
-    showProfileClothes,
-    isClothesLoading,
-    editProfileText,
-    currencyText,
-    noDataText,
-    goToShowClothesScreen,
-    noClothesText,
-    addNowText,
-    goToSellScreen,
-  };
-};
-
-const ProfileScreen: FC = () => {
-  const {
-    myClothesTitleText,
-    user,
-    showProfileClothes,
-    isClothesLoading,
-    editProfileText,
-    currencyText,
-    noDataText,
-    noClothesText,
-    addNowText,
-    goToSellScreen,
-    goToShowClothesScreen,
-  } = useProfileScreen();
 
   return (
     <LoadingSpinner isLoading={isClothesLoading}>
@@ -123,7 +88,7 @@ const ProfileScreen: FC = () => {
           <Text textType="text-medium-dark">{myClothesTitleText}</Text>
         }
         myClothesArea={
-          showProfileClothes!.length ? (
+          showProfileClothes && showProfileClothes!.length ? (
             showProfileClothes!.map((myClothesItem) => {
               return (
                 <Card

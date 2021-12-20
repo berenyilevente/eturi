@@ -1,6 +1,5 @@
 import {
   getClothes,
-  getClothesById,
   likeClothesAction,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
@@ -16,14 +15,13 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { useHistory, useLocation } from "react-router-dom";
 import pageURLS from "../../resources/constants/pageURLS";
 import Icon from "../../components/Icon";
-import DividerLine from "../../components/DividerLine";
 import Pagination from "../../components/Pagination";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-const useHomeContentScreen = () => {
+const HomeContentScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -31,7 +29,6 @@ const useHomeContentScreen = () => {
 
   //React router is going to read the url and check if we have the specified parameter
   const page = query.get("page")!;
-  const searchQuery = query.get("searchQuery");
 
   const currencyText = t("currency.huf");
 
@@ -50,11 +47,9 @@ const useHomeContentScreen = () => {
     [history]
   );
 
-  const [heartFill, setHeartFill] = useState<boolean>(false);
-
   //basic frontend pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [clothesPerPage, setClothesPerPage] = useState(6);
+  const [clothesPerPage] = useState(6);
 
   const indexOfLastClothesItem = currentPage * clothesPerPage;
   const indexOfFirstClothesItem = indexOfLastClothesItem - clothesPerPage;
@@ -63,42 +58,6 @@ const useHomeContentScreen = () => {
     indexOfLastClothesItem
   );
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-  return {
-    clothes,
-    isClothesLoading,
-    currencyText,
-    goToShowClothesScreen,
-    heartFill,
-    setHeartFill,
-    dispatch,
-    likeLoading,
-    isUserLoggedIn,
-    page,
-    searchQuery,
-    clothesPerPage,
-    currentClothes,
-    paginate,
-  };
-};
-
-const HomeContentScreen: FC = () => {
-  const {
-    clothes,
-    isClothesLoading,
-    currencyText,
-    goToShowClothesScreen,
-    heartFill,
-    setHeartFill,
-    dispatch,
-    likeLoading,
-    isUserLoggedIn,
-    page,
-    searchQuery,
-    currentClothes,
-    clothesPerPage,
-    paginate,
-  } = useHomeContentScreen();
 
   return (
     <LoadingSpinner isLoading={isClothesLoading}>

@@ -3,25 +3,14 @@ import { useTranslation } from "react-i18next";
 import { FooterLayout } from "../../layouts/FooterLayout/FooterLayout.view";
 import { Link } from "../../components/Link/Link.view";
 import Icon from "../../components/Icon";
-import LanguageSelector from "../../components/LanguageSelector";
 import DividerLine from "../../components/DividerLine";
 
-const useFooterScreen = () => {
+const FooterScreen: FC = () => {
   const { t } = useTranslation();
   const homeText = t("footer.home");
   const contractText = t("footer.contract");
   const privacyText = t("footer.privacy");
   const imprintText = t("footer.imprint");
-  return { homeText, contractText, privacyText, imprintText };
-};
-
-const FooterScreen: FC = () => {
-  const {
-    homeText,
-    contractText,
-    privacyText,
-    imprintText,
-  } = useFooterScreen();
 
   return (
     <>
