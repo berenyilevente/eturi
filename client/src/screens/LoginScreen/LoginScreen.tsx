@@ -2,7 +2,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import LoginLayout from "../../layouts/LoginLayout";
 import Icon from "../../components/Icon";
 import Text from "../../components/Text";
@@ -20,7 +20,7 @@ import ErrorField from "../../components/ErrorField";
 const LoginScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const loginText = t("auth.login");
   const emailText = t("auth.email");
@@ -43,12 +43,12 @@ const LoginScreen: FC = () => {
 
       try {
         dispatch(googleAuthAction({ result: result, token: token }));
-        history.push(pageURLS.HOME);
+        navigate(pageURLS.HOME);
       } catch (error) {
         console.log(error);
       }
     },
-    [dispatch, history]
+    [dispatch, navigate]
   );
 
   const { isAuthLoading, errorMessage } = useSelector(
@@ -68,15 +68,15 @@ const LoginScreen: FC = () => {
       errorMessage
         ? setNoUserFoundErrorMessage("Email or password invalid")
         : setNoUserFoundErrorMessage("");
-      dispatch(loginAction(loginValues, history));
+      dispatch(loginAction(loginValues, navigate));
       dispatch(setTriggerReload({ triggerReload: true }));
     },
-    [loginValues, errorMessage, dispatch, history]
+    [loginValues, errorMessage, dispatch, navigate]
   );
 
   const goToAuthScreen = useCallback(() => {
-    history.push(pageURLS.AUTH);
-  }, [history]);
+    navigate(pageURLS.AUTH);
+  }, [navigate]);
 
   return (
     <LoadingSpinner>

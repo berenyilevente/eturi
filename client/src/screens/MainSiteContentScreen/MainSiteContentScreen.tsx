@@ -2,7 +2,7 @@ import MainLayout from "../../layouts/MainLayout";
 import MainHeaderScreen from "../MainHeaderScreen/MainHeaderScreen";
 import IntroScreen from "../IntroScreen/IntroScreen";
 import FooterScreen from "../FooterScreen/FooterScreen";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import AddClothesScreen from "../../screens/AddClothesScreen/AddClothesScreen";
 import SearchScreen from "../../screens/SearchScreen/SearchScreen";
 import AboutScreen from "../../screens/AboutScreen/AboutScreen";
@@ -23,52 +23,42 @@ const MainSiteContentScreen = () => {
     <MainLayout
       header={<MainHeaderScreen />}
       intro={
-        <Switch>
-          <Route exact path={pageURLS.CLOTHES} component={IntroScreen} />
-        </Switch>
+        <Routes>
+          <Route path={pageURLS.CLOTHES} element={<IntroScreen />} />
+        </Routes>
       }
       primaryContent={
-        <Switch>
+        <Routes>
           <Route
-            exact
             path={pageURLS.HOME}
-            component={() => <Redirect to={pageURLS.CLOTHES} />}
+            element={<Navigate to={pageURLS.CLOTHES} />}
           />
-          <Route exact path={pageURLS.CLOTHES} component={HomeContentScreen} />
-        </Switch>
+          <Route path={pageURLS.CLOTHES} element={<HomeContentScreen />} />
+        </Routes>
       }
       authContent={
-        <Switch>
+        <Routes>
           <Route
-            exact
             path={pageURLS.AUTH}
-            component={() =>
-              !isUserLoggedIn ? <AuthScreen /> : <Redirect to={pageURLS.HOME} />
+            element={
+              !isUserLoggedIn ? <AuthScreen /> : <Navigate to={pageURLS.HOME} />
             }
           />
-          <Route exact path={pageURLS.LOGIN} component={LoginScreen} />
-        </Switch>
+          <Route path={pageURLS.LOGIN} element={<LoginScreen />} />
+        </Routes>
       }
       secondaryContent={
-        <Switch>
-          <Route exact path={pageURLS.SELL} component={AddClothesScreen} />
-          <Route exact path={pageURLS.ABOUT} component={AboutScreen} />
-          <Route
-            exact
-            path={pageURLS.SEARCH_CLOTHES}
-            component={SearchScreen}
-          />
+        <Routes>
+          <Route path={pageURLS.SELL} element={<AddClothesScreen />} />
+          <Route path={pageURLS.ABOUT} element={<AboutScreen />} />
+          <Route path={pageURLS.SEARCH_CLOTHES} element={<SearchScreen />} />
           <Route
             path={pageURLS.GET_CLOTHES_BY_ID}
-            component={ShowCLothesScreen}
+            element={<ShowCLothesScreen />}
           />
-          <Route
-            exact
-            path={pageURLS.EDIT_CLOTHES}
-            component={EditClothesScreen}
-          />
-          <Route exact path={pageURLS.PROFILE} component={ProfileScreen} />
-        </Switch>
+          <Route path={pageURLS.EDIT_CLOTHES} element={<EditClothesScreen />} />
+          <Route path={pageURLS.PROFILE} element={<ProfileScreen />} />
+        </Routes>
       }
       footer={<FooterScreen />}
     />

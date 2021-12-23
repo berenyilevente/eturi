@@ -11,7 +11,7 @@ import DividerLine from "../../components/DividerLine";
 import ClothesListingLayout from "../../layouts/ClothesListingLayout";
 import Card from "../../components/Card";
 import Button from "../../components/Button";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import Icon from "../../components/Icon";
 import NoClothesLayout from "../../layouts/NoClothesLayout";
@@ -32,7 +32,7 @@ const ProfileScreen: FC = () => {
   }, [setUser]);
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getClothes());
@@ -48,15 +48,13 @@ const ProfileScreen: FC = () => {
       : null
   );
 
-  const goToSellScreen = useCallback(() => history.push(pageURLS.SELL), [
-    history,
-  ]);
+  const goToSellScreen = useCallback(() => navigate(pageURLS.SELL), [navigate]);
 
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
 
   const goToShowClothesScreen = useCallback(
-    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
-    [history]
+    (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
+    [navigate]
   );
 
   return (

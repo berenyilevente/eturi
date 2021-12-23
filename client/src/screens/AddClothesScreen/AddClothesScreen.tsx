@@ -13,7 +13,7 @@ import { ClothesDescriptionLayout } from "../../layouts/AddClothes/ClothesDescri
 import { ClothesPriceLayout } from "../../layouts/AddClothes/ClothesPriceLayout/ClothesPriceLayout.view";
 import { ClothesImageUploadLayout } from "../../layouts/AddClothes/ClothesImageUploadLayout/ClothesImageUploadLayout.view";
 import DividerLine from "../../components/DividerLine";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import Link from "../../components/Link";
 import ModalCarousel from "../../components/ModalCarousel";
@@ -31,7 +31,7 @@ import useForm from "../../hooks/useForm";
 
 const AddClothesScreen: FC = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile")!);
 
   const titleText = t("clothes.title");
@@ -87,9 +87,7 @@ const AddClothesScreen: FC = () => {
     return isValid;
   };
 
-  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
-    history,
-  ]);
+  const goToHomeScreen = useCallback(() => navigate(pageURLS.HOME), [navigate]);
 
   const submitClothes = () => {
     isInputDataValid() &&
