@@ -24,6 +24,8 @@ const ShowCLothesScreen: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { auth } = useSelector((state: AppState) => state.auth);
+
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile")!)
   );
@@ -53,7 +55,7 @@ const ShowCLothesScreen: FC = () => {
       ? state.clothes.showClothes.find((item) => item._id === currentId)
       : null
   );
-  
+
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
 
   useEffect(() => {
@@ -147,7 +149,7 @@ const ShowCLothesScreen: FC = () => {
             buttons={
               <>
                 {user?.result?.googleId === showClothes.creator ||
-                user?.result?._id === showClothes?.creator ? (
+                auth?.result?._id === showClothes?.creator ? (
                   <>
                     <Button
                       buttonSize="medium"

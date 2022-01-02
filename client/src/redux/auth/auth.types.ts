@@ -1,8 +1,8 @@
 import { AxiosError } from "axios";
 import {
   IAuthResponseData,
+  ILoginResponseData,
   IUserAuthState,
-  IUserLoginData,
   IUserRegistrationData,
 } from "./auth.interfaces";
 
@@ -30,7 +30,7 @@ export interface IAuthRequest {
 }
 export interface IAuthSuccess {
   type: typeof AUTH_SUCCESS;
-  payload: IAuthResponseData[];
+  payload: IAuthResponseData;
 }
 export interface IAuthFailure {
   type: typeof AUTH_FAILURE;
@@ -56,7 +56,7 @@ export interface ILoginRequest {
 }
 export interface ILoginSuccess {
   type: typeof LOGIN_SUCCESS;
-  payload: IUserLoginData;
+  payload: ILoginResponseData;
 }
 export interface ILoginFailure {
   type: typeof LOGIN_FAILURE;

@@ -1,7 +1,7 @@
 import pageURLS from "../../resources/constants/pageURLS";
 import { Dispatch } from "redux";
 import * as api from "../../api";
-import { IUserLoginData, IUserRegistrationData } from "./auth.interfaces";
+import { ILoginResult, IUserRegistrationData } from "./auth.interfaces";
 import {
   AUTH_FAILURE,
   AUTH_REQUEST,
@@ -16,6 +16,7 @@ import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
 } from "./auth.types";
+import { NavigateFunction } from "react-router-dom";
 
 export const googleAuthAction = (data: { result: any; token: any }) => async (
   dispatch: Dispatch
@@ -36,9 +37,10 @@ export const googleAuthAction = (data: { result: any; token: any }) => async (
   }
 };
 
-export const loginAction = (loginData: IUserLoginData, navigate: any) => async (
-  dispatch: Dispatch
-) => {
+export const loginAction = (
+  loginData: ILoginResult,
+  navigate: NavigateFunction
+) => async (dispatch: Dispatch) => {
   dispatch({
     type: LOGIN_REQUEST,
   });
@@ -59,7 +61,7 @@ export const loginAction = (loginData: IUserLoginData, navigate: any) => async (
 
 export const registerUserAction = (
   signUpData: IUserRegistrationData,
-  history: any
+  navigate: NavigateFunction
 ) => async (dispatch: Dispatch) => {
   dispatch({
     type: SIGNUP_REQUEST,
@@ -70,7 +72,7 @@ export const registerUserAction = (
       type: SIGNUP_SUCCESS,
       payload: res.data,
     });
-    history.push(pageURLS.HOME);
+    navigate(pageURLS.HOME);
   } catch (error) {
     dispatch({
       type: SIGNUP_FAILURE,

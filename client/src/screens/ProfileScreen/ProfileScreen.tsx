@@ -24,9 +24,12 @@ const ProfileScreen: FC = () => {
   const addNowText = t("profile.addNow");
   const currencyText = t("currency.huf");
 
+  const { auth } = useSelector((state: AppState) => state.auth);
+
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile") || "null")
   );
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile") || "null"));
   }, [setUser]);
@@ -39,10 +42,10 @@ const ProfileScreen: FC = () => {
   }, [dispatch]);
 
   const showProfileClothes = useSelector((state: AppState) =>
-    user
+    auth
       ? state.clothes.clothes.filter(
           (item) =>
-            item.creator === user?.result?._id ||
+            item.creator === auth?.result?._id ||
             item.creator === user?.result.googleId
         )
       : null

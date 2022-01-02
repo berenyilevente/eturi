@@ -18,7 +18,7 @@ import { IDefaultAuthState } from "./auth.interfaces";
 const defaultClothesState: IDefaultAuthState = {
   isAuthLoading: undefined,
   errorMessage: null,
-  auth: [],
+  auth: undefined,
   isUserLoggedIn: false,
 };
 
@@ -61,6 +61,7 @@ const authReducer = (
           ...state,
           isAuthLoading: false,
           isUserLoggedIn: false,
+          auth: null,
         }
       );
     case LOGOUT_FAILURE:
@@ -76,15 +77,12 @@ const authReducer = (
         errorMessage: null,
       };
     case LOGIN_SUCCESS:
-      return (
-        localStorage.setItem("profile", JSON.stringify({ ...action.payload })),
-        {
-          errorMessage: null,
-          isAuthLoading: false,
-          isUserLoggedIn: true,
-          ...action.payload,
-        }
-      );
+      return {
+        errorMessage: null,
+        isAuthLoading: false,
+        isUserLoggedIn: true,
+        auth: action.payload,
+      };
     case LOGIN_FAILURE:
       return {
         ...state,

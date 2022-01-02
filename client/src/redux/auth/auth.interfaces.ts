@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 export interface IDefaultAuthState {
   isAuthLoading?: boolean;
   errorMessage: AxiosError | Error | null;
-  auth?: IAuthResponseData[] | null;
+  auth?: IRegisterResponseData | null;
   isUserLoggedIn?: boolean;
 }
 
@@ -20,15 +20,26 @@ export interface IUserAuthState {
   isLogin: boolean;
 }
 
-export interface IUserLoginData {
-  email: string;
-  password: string;
+export interface IRegisterResponseData {
+  result: IUserRegistrationData;
+  token?: string;
+}
+
+export interface ILoginResponseData {
+  result: ILoginResult;
+  token?: string;
+}
+
+export interface ILoginResult {
+  email?: string;
+  password?: string;
 }
 
 export interface IUserRegistrationData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+  _id?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
 }

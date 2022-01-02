@@ -1,11 +1,12 @@
 import {
-  IUserLoginData,
+  ILoginResult,
   IUserRegistrationData,
 } from "@/redux/auth/auth.interfaces";
 import {
   IClothesResponseData,
   IFilterClothesResponse,
 } from "@/redux/clothes/clothes.interfaces";
+import { store } from "../redux/store";
 import axios from "axios";
 
 //fetch data for local development
@@ -14,19 +15,19 @@ const API = axios.create({ baseURL: "http://localhost:5000" });
 //fetch data from deployed api
 //const API = axios.create({ baseURL: "https://eturi-project.herokuapp.com" });
 
-//send the token to the backend middleware so that it can verify our token
-API.interceptors.request.use((req) => {
-  /*get the Bearer token from the local storage: allows us to get a 
-  specific header and based on that we can decode the data in the backend middleware*/
-  if (localStorage.getItem("profile")) {
-    req.headers!.Authorization = `Bearer ${
-      JSON.parse(localStorage.getItem("profile")!).token
-    }`;
+API.interceptors.request.use(
+  (config) => {
+    const state = store.getState();
+    const token = state.auth.auth?.token;
+    if (token) {
+      config!.headers!.Authorization! = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  //return the request for future api calls
-  return req;
-});
-
+);
 //get all clothes
 export const fetchClothes = (page?: string | number) =>
   API.get(`/clothes?page=${page}`);
@@ -54,7 +55,7 @@ export const likeClothes = (id: string) =>
   API.patch(`/clothes/${id}/likeClothes`);
 
 //login
-export const login = (loginData: IUserLoginData) =>
+export const login = (loginData: ILoginResult) =>
   API.post("/user/signin", loginData);
 
 export const register = (signUpData: IUserRegistrationData) =>

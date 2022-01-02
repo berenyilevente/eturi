@@ -4,7 +4,7 @@ import { Link } from "../../components/Link/Link.view";
 import Icon from "../../components/Icon";
 import Card from "../../components/Card";
 import { useTranslation } from "react-i18next";
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import NavigationMenu from "../../components/NavigationMenu";
@@ -34,26 +34,21 @@ const MainHeaderScreen = () => {
   const loginText = t("auth.login");
   const logoutText = t("auth.logout");
 
-  const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("profile") || "null")
-  );
+  const { isUserLoggedIn, auth } = useSelector((state: AppState) => state.auth);
 
   const logout = useCallback(() => {
     dispatch(logoutAction());
-    setUser(null);
     navigate(pageURLS.HOME);
   }, [dispatch, navigate]);
 
   useEffect(() => {
-    const token = user?.token;
+    const token = auth?.token;
     //decode the token to see when it is expiring
     if (token) {
       const decodedToken = decode<any>(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
-    //setUser(JSON.parse(localStorage.getItem("profile") || "null"));
-  }, [user, location, logout]);
+  }, [auth, location, logout]);
 
   const goToHomeScreen = useCallback(() => navigate(pageURLS.HOME), [navigate]);
 
