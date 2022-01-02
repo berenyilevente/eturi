@@ -96,17 +96,23 @@ export const deleteClothes = async (req, res) => {
 
 export const likeClothes = async (req, res) => {
   const { id } = req.params;
+
+  if (!req.userId) return res.json({ message: "Not authenticated" });
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No clothes with that id");
 
   const clothes = await AddClothes.findById(id);
-  const likedClothes = await AddClothes.findByIdAndUpdate(
-    id,
-    {
-      //value (^=) xor-equals true, which will flip it every time
-      isLiked: (clothes.isLiked ^= true),
-    },
-    { new: true }
-  );
+
+  const index = clothes.likes.findIndex((id) => id === String(req.userId));
+
+  if (index === -1) {
+    clothes.likes.push(req.userId);
+  } else {
+    clothes.likes = clothes.likes.filter((id) => id !== String(req.userId));
+  }
+
+  const likedClothes = await AddClothes.findByIdAndUpdate(id, clothes, {
+    new: true,
+  });
   res.json(likedClothes);
 };

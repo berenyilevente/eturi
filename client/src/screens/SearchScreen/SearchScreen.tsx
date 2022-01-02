@@ -228,23 +228,21 @@ const SearchScreen: FC = () => {
                           />
                         ) : (
                           <>
-                            {item.isLiked ? (
-                              <Icon
-                                iconType="heartIconFilled"
-                                cursor
-                                onClick={() =>
-                                  dispatch(likeClothesAction(item._id!))
-                                }
-                              />
-                            ) : (
-                              <Icon
-                                iconType="heartIcon"
-                                cursor
-                                onClick={() => {
-                                  dispatch(likeClothesAction(item._id!));
-                                }}
-                              />
-                            )}
+                            <Icon
+                              iconType="heartIconFilled"
+                              cursor
+                              onClick={() =>
+                                dispatch(likeClothesAction(item._id!))
+                              }
+                            />
+
+                            <Icon
+                              iconType="heartIcon"
+                              cursor
+                              onClick={() => {
+                                dispatch(likeClothesAction(item._id!));
+                              }}
+                            />
                           </>
                         )
                       }

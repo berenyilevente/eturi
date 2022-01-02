@@ -12,7 +12,10 @@ const clothesSchema = mongoose.Schema({
   condition: String,
   colour: String,
   price: Number,
-  isLiked: Boolean,
+  likes: {
+    type: [String],
+    default: [],
+  },
   createdAt: {
     type: Date,
     default: new Date(),
