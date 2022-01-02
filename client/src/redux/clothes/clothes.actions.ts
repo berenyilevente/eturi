@@ -176,14 +176,14 @@ export const deleteClothesAction = (id: string) => async (
   }
 };
 
-export const likeClothesAction = (id: string) => async (dispatch: Dispatch) => {
+export const likeClothesAction = (id: string, likeId?: string) => async (
+  dispatch: Dispatch
+) => {
   dispatch({
     type: LIKE_CLOTHES_REQUEST,
   });
-
   try {
     const response = await api.likeClothes(id);
-
     dispatch({
       type: LIKE_CLOTHES_SUCCESS,
       payload: response.data,

@@ -64,7 +64,6 @@ const LoginScreen: FC = () => {
   const onSubmitLogin = useCallback(
     (e) => {
       e.preventDefault();
-      console.log(errorMessage);
       errorMessage
         ? setNoUserFoundErrorMessage("Email or password invalid")
         : setNoUserFoundErrorMessage("");

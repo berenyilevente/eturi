@@ -23,6 +23,7 @@ export interface IClothesResponseData {
   colour?: string;
   price?: string;
   likes?: string[];
+  isLiked?: boolean;
   createdAt?: Date;
   creator?: string;
 }
@@ -50,6 +51,7 @@ export interface IUpdateClothesResponseData {
   colour: string;
   price: string;
   likes?: string[];
+  isLiked?: boolean;
   createdAt?: Date;
 }
 
@@ -66,6 +68,7 @@ export interface ILikeClothesResponseData {
   colour: string;
   price: string;
   likes?: string[];
+  isLiked?: boolean;
   createdAt?: Date;
 }
 export interface IDeleteClothesResponseData {

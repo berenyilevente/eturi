@@ -7,18 +7,18 @@
     "profile": "Profil"
   },
   "intro": {
-    "introHeader": "Készen állsz rendezni a szekrényedet?",
+    "introHeader": "Készen állsz rendezni a ruháidat?",
     "introButton": "Hírdess most!",
     "introHelperText": "Tudd meg hogyan működik..."
   },
-  "footer":{
+  "footer": {
     "home": "Főoldal",
     "contract": "ÁSZF",
     "privacy": "Adatvédelem",
     "imprint": "Impresszum",
     "changeLanguage": "Fordítás"
   },
-  "clothes":{
+  "clothes": {
     "title": "Hírdesd meg a már nem használt ruháidat",
     "uploadPicture": "Töltsd fel a képeidet",
     "uploadPictureTips": "Tippek",
@@ -37,9 +37,9 @@
     "add": "Hozzáadás",
     "menCategory": "Férfi",
     "womenCategory": "Női",
-    "childrenCategory": "Gyerek",  
+    "childrenCategory": "Gyerek",
     "size": "Méret",
-    "sizePlaceholder": "Méret kiválasztása",    
+    "sizePlaceholder": "Méret kiválasztása",
     "colour": "Szín",
     "colourPlaceholder": "Szín kiválasztása",
     "sizeTable": "Mérettáblázat",
@@ -47,7 +47,7 @@
     "gender": "Férfi, Női vagy gyerek",
     "clothingType": "Ruhatípus",
 
-    "clothesCategories":{
+    "clothesCategories": {
       "clothes": "Ruha",
       "shoes": "Cipő",
       "bags": "Táska",
@@ -66,8 +66,8 @@
       "skirts": "Szoknya",
       "leggings": "Leggings"
     }
-    },
-  "brands":{
+  },
+  "brands": {
     "nike": "Nike",
     "puma": "Puma",
     "zara": "Zara",
@@ -95,7 +95,7 @@
     "satisfactory": "Megfelelő",
     "satisfactoryDescription": "Gyakran használt darab, hibákkal és használati nyomokkal, amelyekre a leírás és a fotók is rámutatnak."
   },
-  "size":{
+  "size": {
     "XS": "XS / 34 / 6",
     "S": "S / 36 / 8",
     "M": "M / 38 / 10",
@@ -104,7 +104,7 @@
     "XXL": "XXL / 44 / 16",
     "other": "Más"
   },
-  "colour":{
+  "colour": {
     "black": "Fekete",
     "brown": "Barna",
     "grey": "Szürke",
@@ -127,15 +127,15 @@
     "lightBlue": "Világoskék",
     "darkGreen": "Sötétzöld"
   },
-  "tips":{
-    "titles":{
+  "tips": {
+    "titles": {
       "lighting": "Természetes fény",
       "background": "Semleges háttér",
       "noFlash": "Vaku nélkül",
       "many": "Lehetőleg sok képet",
       "yourPhotos": "Csak saját képet"
     },
-    "content":{
+    "content": {
       "lightingContent": "Fotózz világos környezetben. A nappali fény a legjobb.",
       "backgroundContent": "Ahhoz, hogy a ruha igazán kiemelkedjen, helyezd egy tiszta, semleges háttér elé.",
       "noFlashContent": "A mesterséges fény torzíthatja a színeket, ezért jobb, ha nem használsz vakut.",
@@ -143,14 +143,14 @@
       "yourPhotosContent": "Csak saját fényképeket használj. Szerzői jogvédelem alatt álló képek nem engedélyezettek."
     }
   },
-  "currency":{
+  "currency": {
     "huf": "Ft"
   },
-  "images":{
+  "images": {
     "uploadImageLabel": "Fényképek feltöltése",
     "editImage": "Fényképek szerkesztése"
   },
-  "general":{
+  "general": {
     "cancel": "Mégsem",
     "confirm": "Megerősítés",
     "edit": "Szerkesztés",
@@ -161,11 +161,11 @@
     "dateFormat": "YYYY-MM-DD",
     "dateFormatHours": "YYYY/MM/DD HH:mm",
     "createdAt": "Feladva"
-    },
-  "deleteClothes":{
+  },
+  "deleteClothes": {
     "confirmationText": "Biztosan törölni szeretnéd a ruhát?"
   },
-  "auth":{
+  "auth": {
     "signUpTitle": "Regisztráció",
     "signUp": "Regisztrálok",
     "login": "Bejelentkezés",
@@ -180,13 +180,13 @@
     "dontHaveAnAccount": "Még nincs fiókod?",
     "signUpHere": "Regisztálj itt!"
   },
-  "profile":{
+  "profile": {
     "title": "Gardróbom",
     "editProfile": "Profil szerkesztése",
     "noClothes": "A gardróbod jelenleg üres",
     "addNow": "Hírdess most!"
   },
-  "searchScreen":{
+  "searchScreen": {
     "search": "Keresés",
     "searchField": "Keresés mező",
     "filter": "Szűrés",

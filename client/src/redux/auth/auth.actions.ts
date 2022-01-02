@@ -36,7 +36,7 @@ export const googleAuthAction = (data: { result: any; token: any }) => async (
   }
 };
 
-export const loginAction = (loginData: IUserLoginData, history: any) => async (
+export const loginAction = (loginData: IUserLoginData, navigate: any) => async (
   dispatch: Dispatch
 ) => {
   dispatch({
@@ -48,7 +48,7 @@ export const loginAction = (loginData: IUserLoginData, history: any) => async (
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    history.push(pageURLS.HOME);
+    navigate(pageURLS.HOME);
   } catch (error) {
     dispatch({
       type: LOGIN_FAILURE,

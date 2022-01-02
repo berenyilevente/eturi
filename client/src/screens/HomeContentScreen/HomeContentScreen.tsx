@@ -92,23 +92,25 @@ const HomeContentScreen: FC = () => {
                     />
                   ) : (
                     <>
-                      {item.likes?.length ? (
-                        <Icon
-                          iconType="heartIconFilled"
-                          cursor
-                          onClick={() => {
-                            dispatch(likeClothesAction(item._id!));
-                          }}
-                        />
-                      ) : (
-                        <Icon
-                          iconType="heartIcon"
-                          cursor
-                          onClick={() => {
-                            dispatch(likeClothesAction(item._id!));
-                          }}
-                        />
-                      )}
+                      {item.likes?.length
+                        ? isUserLoggedIn && (
+                            <Icon
+                              iconType="heartIconFilled"
+                              cursor
+                              onClick={() => {
+                                dispatch(likeClothesAction(item._id!));
+                              }}
+                            />
+                          )
+                        : isUserLoggedIn && (
+                            <Icon
+                              iconType="heartIcon"
+                              cursor
+                              onClick={() => {
+                                dispatch(likeClothesAction(item._id!));
+                              }}
+                            />
+                          )}
                     </>
                   )
                 }

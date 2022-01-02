@@ -16,6 +16,7 @@ const clothesSchema = mongoose.Schema({
     type: [String],
     default: [],
   },
+  isLiked: Boolean,
   createdAt: {
     type: Date,
     default: new Date(),
