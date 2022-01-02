@@ -77,7 +77,17 @@ const ShowCLothesScreen: FC = () => {
             }
             brand={<Text textType="text-large-dark">{showClothes.brand}</Text>}
             likeIcon={
-              showClothes.isLiked && <Icon iconType="heartIconFilled" />
+              showClothes!.likes!.length ? (
+                <>
+                  <Icon iconType="heartIconFilled" />
+                  <div>{showClothes.likes?.length}</div>
+                </>
+              ) : (
+                <>
+                  <Icon iconType="heartIcon" />
+                  <div>{showClothes.likes?.length}</div>
+                </>
+              )
             }
             nameTitle={
               <Text textType="text-normal-dark">{clothesNameText}</Text>
