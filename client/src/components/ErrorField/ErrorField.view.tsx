@@ -1,6 +1,6 @@
 import "../../components/ErrorField/style.scss";
 import { FC } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 import Text from "../Text";
 
 const scope = CreateScopeCSS("components-error-field");

@@ -1,6 +1,6 @@
 import "../../layouts/NoSearchResultLayout/style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("layouts-no-search-result-layout");
 const iconClass = scope.and("icon");

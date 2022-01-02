@@ -134,7 +134,8 @@ export const useDropdownBaseData = () => {
     { id: 13, value: specialClothing },
     { id: 14, value: skirts },
     { id: 15, value: leggings },
-    { id: 16, value: other },
+    { id: 16, value: accessoriesText },
+    { id: 17, value: other },
   ];
 
   const categories = category.concat(clothingType);

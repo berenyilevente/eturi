@@ -1,6 +1,6 @@
 import "../../layouts/ProfileLayout/style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("layouts-profile-layout");
 const profileContentClass = scope.and("profileContent");
@@ -10,7 +10,6 @@ const editButtonClass = scope.and("editButtonClass");
 const lineClass = scope.and("lineClass");
 const clothesTitleClass = scope.and("clothesTitleClass");
 const clothesClass = scope.and("clothesClass");
-const addClothesButtonClass = scope.and("addClothesButton");
 
 interface Props {
   profileImage?: ReactNode;

@@ -1,6 +1,6 @@
 import "../../components/NavigationMenu/style.scss";
 import { FC, ReactNode } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
+import { CreateScopeCSS } from "../../components/utils";
 import { useOutsideClickHandler } from "../../hooks/useOutsideClickHandler";
 import Icon from "../Icon";
 

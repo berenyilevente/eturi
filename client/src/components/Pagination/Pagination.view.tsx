@@ -1,11 +1,7 @@
 import "../../components/Pagination/style.scss";
-import React, { FC, ReactNode, useEffect, useState } from "react";
-import { cn, CreateScopeCSS } from "../../components/utils";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getClothes } from "../../redux/clothes/clothes.actions";
-import { AppState } from "@/redux/store";
-import ReactPaginate from "react-paginate";
+import { FC } from "react";
+import { CreateScopeCSS } from "../../components/utils";
+import { Link, useLocation } from "react-router-dom";
 import Icon from "../Icon";
 
 const scope = CreateScopeCSS("components-pagination");
@@ -26,8 +22,7 @@ export const Pagination: FC<Props> = ({
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
-  const dispatch = useDispatch();
-  const history = useHistory();
+
   const query = useQuery();
 
   const pageNumbers = [];

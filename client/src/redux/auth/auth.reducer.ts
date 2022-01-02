@@ -12,7 +12,6 @@ import {
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
-  USER_AUTH_STATE,
 } from "./auth.types";
 import { IDefaultAuthState } from "./auth.interfaces";
 
@@ -23,7 +22,7 @@ const defaultClothesState: IDefaultAuthState = {
   isUserLoggedIn: false,
 };
 
-export default (
+const authReducer = (
   state = defaultClothesState,
   action: AuthActionTypes
 ): IDefaultAuthState => {
@@ -47,7 +46,7 @@ export default (
       return {
         ...state,
         isAuthLoading: false,
-        errorMessage: action.error.message,
+        errorMessage: action.error,
       };
     case LOGOUT_REQUEST:
       return {
@@ -67,7 +66,7 @@ export default (
     case LOGOUT_FAILURE:
       return {
         ...state,
-        errorMessage: action.error.message,
+        errorMessage: action.error,
       };
     case LOGIN_REQUEST:
       return {
@@ -91,7 +90,7 @@ export default (
         ...state,
         isAuthLoading: false,
         isUserLoggedIn: false,
-        errorMessage: action.error.message,
+        errorMessage: action.error,
       };
     case SIGNUP_REQUEST:
       return {
@@ -105,10 +104,12 @@ export default (
       return {
         ...state,
         isAuthLoading: false,
-        errorMessage: action.error.message,
+        errorMessage: action.error,
       };
 
     default:
       return state;
   }
 };
+
+export default authReducer;

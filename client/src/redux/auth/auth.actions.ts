@@ -1,11 +1,7 @@
 import pageURLS from "../../resources/constants/pageURLS";
 import { Dispatch } from "redux";
 import * as api from "../../api";
-import {
-  IUserAuthState,
-  IUserLoginData,
-  IUserRegistrationData,
-} from "./auth.interfaces";
+import { IUserLoginData, IUserRegistrationData } from "./auth.interfaces";
 import {
   AUTH_FAILURE,
   AUTH_REQUEST,
@@ -19,7 +15,6 @@ import {
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
-  USER_AUTH_STATE,
 } from "./auth.types";
 
 export const googleAuthAction = (data: { result: any; token: any }) => async (

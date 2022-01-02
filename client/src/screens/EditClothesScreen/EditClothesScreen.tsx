@@ -3,9 +3,8 @@ import pageURLS from "../../resources/constants/pageURLS";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "../../components/Card";
-import ShowClothesLayout from "../../layouts/ShowClothesLayout";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
 import Text from "../../components/Text";
 import {
@@ -28,13 +27,13 @@ import Modal from "../../components/Modal";
 import ImageUploader from "../../components/ImageUploader";
 import useForm from "../../hooks/useForm";
 
-const useEditClothesScreen = () => {
+const EditClothesScreen: FC = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const currentId = id.slice(3);
+  const currentId = id!.slice(3);
   const clothesNameText = t("clothes.clothesName");
   const descriptionText = t("clothes.description");
   const categoryText = t("clothes.category");
@@ -44,11 +43,7 @@ const useEditClothesScreen = () => {
   const sizeText = t("clothes.size");
   const colourText = t("clothes.colour");
   const cancelText = t("general.cancel");
-  const editText = t("general.edit");
-  const noDataText = t("general.noData");
   const clothesNamePlaceholderText = t("clothes.clothesNamePlaceholder");
-  const descriptionPlaceholderText = t("clothes.descriptionPlaceholder");
-  const pricePlaceholderText = t("clothes.pricePlaceholder");
   const currencyText = t("currency.huf");
   const saveText = t("general.save");
   const deleteText = t("general.delete");
@@ -65,15 +60,14 @@ const useEditClothesScreen = () => {
 
   useEffect(() => {
     dispatch(getClothesById(currentId));
-  }, [dispatch]);
+  }, [dispatch, currentId]);
 
   const goToShowClothesScreen = useCallback(
-    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
-    [history]
+    (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
+    [navigate]
   );
 
   const [imageData, setImageData] = useState<any>();
-  const [nameContent, setNameContent] = useState<string>();
   const [categoryContent, setCategoryContent] = useState<string>();
   const [clothesType, setClothesType] = useState<string>();
   const [brandContent, setBrandContent] = useState<string>();
@@ -81,26 +75,21 @@ const useEditClothesScreen = () => {
   const [conditionContent, setConditionContent] = useState<string>();
   const [colourContent, setColourContent] = useState<string>();
   const [descriptionContent, setDescriptionContent] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
 
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
-    history,
-  ]);
+  const goToHomeScreen = useCallback(() => navigate(pageURLS.HOME), [navigate]);
 
   useEffect(() => {
-    setImageData(showClothes!.selectedFile);
     setBrandContent(showClothes!.brand);
-    setNameContent(showClothes!.name);
     setDescriptionContent(showClothes!.description!);
     setCategoryContent(showClothes!.category);
     setClothesType(showClothes!.clothingType!);
     setSizeContent(showClothes!.size);
     setConditionContent(showClothes!.condition);
     setColourContent(showClothes!.colour);
-    setPrice(showClothes!.price!);
-  }, []);
+    setImageData(showClothes!.selectedFile);
+  }, [showClothes]);
 
   const triggerReload = useCallback(() => {
     dispatch(setTriggerReload({ triggerReload: true }));
@@ -126,7 +115,7 @@ const useEditClothesScreen = () => {
     return isValid;
   };
 
-  const patchClothes = useCallback(() => {
+  const patchClothes = () => {
     isInputDataValid() &&
       dispatch(
         updateClothesAction(showClothes!._id!, {
@@ -143,162 +132,16 @@ const useEditClothesScreen = () => {
         })
       ) &&
       goToShowClothesScreen(showClothes!._id);
-  }, [
-    isInputDataValid,
-    showClothes,
-    nameContent,
-    imageData,
-    descriptionContent,
-    categoryContent,
-    clothesType,
-    brandContent,
-    sizeContent,
-    conditionContent,
-    colourContent,
-    price,
-  ]);
-
-  const {
-    category,
-    clothingType,
-    brands,
-    sizes,
-    conditions,
-    colours,
-    carouselTitles,
-    carouselImages,
-    carouselContent,
-  } = useDropdownBaseData();
-
-  return {
-    showClothes,
-    id,
-    isClothesLoading,
-    cancelText,
-    editText,
-    clothesNameText,
-    descriptionText,
-    categoryText,
-    brandText,
-    conditionText,
-    priceText,
-    sizeText,
-    colourText,
-    noDataText,
-    goToShowClothesScreen,
-    currentId,
-    category,
-    brands,
-    sizes,
-    conditions,
-    colours,
-    carouselTitles,
-    carouselImages,
-    carouselContent,
-    nameContent,
-    setNameContent,
-    categoryContent,
-    setCategoryContent,
-    brandContent,
-    setBrandContent,
-    sizeContent,
-    setSizeContent,
-    conditionContent,
-    setConditionContent,
-    colourContent,
-    setColourContent,
-    descriptionContent,
-    setDescriptionContent,
-    price,
-    setPrice,
-    clothesNamePlaceholderText,
-    descriptionPlaceholderText,
-    pricePlaceholderText,
-    currencyText,
-    saveText,
-    dispatch,
-    triggerReload,
-    deleteText,
-    openModal,
-    setOpenModal,
-    confirmDeleteText,
-    goToHomeScreen,
-    imageData,
-    setImageData,
-    editPhotosText,
-    clothesType,
-    setClothesType,
-    clothingType,
-    patchClothes,
-    editClothesValue,
-    handleChange,
   };
-};
 
-const EditClothesScreen: FC = () => {
   const {
-    showClothes,
-    id,
-    isClothesLoading,
-    cancelText,
-    editText,
-    clothesNameText,
-    descriptionText,
-    categoryText,
-    brandText,
-    conditionText,
-    priceText,
-    sizeText,
-    colourText,
-    noDataText,
-    goToShowClothesScreen,
-    currentId,
     category,
+    clothingType,
     brands,
     sizes,
     conditions,
     colours,
-    carouselTitles,
-    carouselImages,
-    carouselContent,
-    nameContent,
-    setNameContent,
-    categoryContent,
-    setCategoryContent,
-    brandContent,
-    setBrandContent,
-    sizeContent,
-    setSizeContent,
-    conditionContent,
-    setConditionContent,
-    colourContent,
-    setColourContent,
-    descriptionContent,
-    setDescriptionContent,
-    price,
-    setPrice,
-    clothesNamePlaceholderText,
-    descriptionPlaceholderText,
-    pricePlaceholderText,
-    currencyText,
-    saveText,
-    dispatch,
-    triggerReload,
-    deleteText,
-    openModal,
-    setOpenModal,
-    confirmDeleteText,
-    goToHomeScreen,
-    imageData,
-    setImageData,
-    editPhotosText,
-    clothesType,
-    setClothesType,
-    clothingType,
-    patchClothes,
-    editClothesValue,
-    handleChange,
-  } = useEditClothesScreen();
+  } = useDropdownBaseData();
 
   return (
     <LoadingSpinner>

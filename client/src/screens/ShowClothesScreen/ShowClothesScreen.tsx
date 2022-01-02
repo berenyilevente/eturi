@@ -3,14 +3,11 @@ import pageURLS from "../../resources/constants/pageURLS";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "../../components/Card";
-import ShowClothesLayout from "../../layouts/ShowClothesLayout";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
-import React from "react";
 import { Text } from "../../components/Text/Text.view";
 import {
-  getClothes,
   getClothesById,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
@@ -20,12 +17,12 @@ import DividerLine from "../../components/DividerLine";
 import Icon from "../../components/Icon";
 import dayjs from "dayjs";
 
-const useEditClothesScreen = () => {
+const ShowCLothesScreen: FC = () => {
   const { t } = useTranslation();
   //const queryParams = new URLSearchParams(window.location.search);
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile")!)
@@ -35,16 +32,14 @@ const useEditClothesScreen = () => {
     setUser(JSON.parse(localStorage.getItem("profile")!));
   }, [setUser]);
 
-  const currentId = id.slice(3);
+  const currentId = id!.slice(3);
   const clothesNameText = t("clothes.clothesName");
   const descriptionText = t("clothes.description");
   const categoryText = t("clothes.category");
-  const brandText = t("clothes.brand");
   const conditionText = t("clothes.condition");
   const priceText = t("clothes.price");
   const sizeText = t("clothes.size");
   const colourText = t("clothes.colour");
-  const cancelText = t("general.cancel");
   const editText = t("general.edit");
   const noDataText = t("general.noData");
   const backText = t("general.back");
@@ -63,80 +58,23 @@ const useEditClothesScreen = () => {
 
   useEffect(() => {
     dispatch(getClothesById(currentId));
-  }, [dispatch]);
+  }, [dispatch, currentId]);
 
-  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
-    history,
-  ]);
+  const goToHomeScreen = useCallback(() => navigate(pageURLS.HOME), [navigate]);
+
   const goToEditClothesScreen = useCallback(
-    (id) => history.push(pageURLS.EDIT_CLOTHES + id),
-    [history]
+    (id) => navigate(pageURLS.EDIT_CLOTHES + id),
+    [navigate]
   );
-
-  return {
-    showClothes,
-    id,
-    isClothesLoading,
-    cancelText,
-    editText,
-    clothesNameText,
-    descriptionText,
-    categoryText,
-    brandText,
-    conditionText,
-    priceText,
-    sizeText,
-    colourText,
-    noDataText,
-    goToHomeScreen,
-    currentId,
-    currencyText,
-    backText,
-    goToEditClothesScreen,
-    dispatch,
-    user,
-    homeText,
-    dateFormat,
-    createdAtText,
-    history,
-  };
-};
-
-const ShowCLothesScreen: FC = () => {
-  const {
-    showClothes,
-    id,
-    isClothesLoading,
-    cancelText,
-    editText,
-    clothesNameText,
-    descriptionText,
-    categoryText,
-    brandText,
-    conditionText,
-    priceText,
-    sizeText,
-    colourText,
-    noDataText,
-    goToHomeScreen,
-    currentId,
-    currencyText,
-    backText,
-    goToEditClothesScreen,
-    dispatch,
-    user,
-    homeText,
-    dateFormat,
-    createdAtText,
-    history,
-  } = useEditClothesScreen();
 
   return (
     <LoadingSpinner isLoading={isClothesLoading}>
       {showClothes && (
         <Card backgroundColorStyle="white" shadow>
           <ShowClothesDetailsLayout
-            imageArea={<img src={showClothes.selectedFile} />}
+            imageArea={
+              <img src={showClothes.selectedFile} alt="showClothesImages" />
+            }
             brand={<Text textType="text-large-dark">{showClothes.brand}</Text>}
             likeIcon={
               showClothes.isLiked && <Icon iconType="heartIconFilled" />
@@ -209,7 +147,7 @@ const ShowCLothesScreen: FC = () => {
                       iconColor="dark"
                       transparent
                       onClick={() => {
-                        history.goBack();
+                        navigate(-1);
                         dispatch(setTriggerReload({ triggerReload: true }));
                       }}
                     >
@@ -249,7 +187,7 @@ const ShowCLothesScreen: FC = () => {
                       iconColor="dark"
                       transparent
                       onClick={() => {
-                        history.goBack();
+                        navigate(-1);
                         dispatch(setTriggerReload({ triggerReload: true }));
                       }}
                     >

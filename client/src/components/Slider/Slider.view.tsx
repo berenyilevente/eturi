@@ -3,7 +3,6 @@ import { FC, useCallback, useState } from "react";
 import { cn, CreateScopeCSS } from "../../components/utils";
 
 const scope = CreateScopeCSS("components-slider");
-const colorClass = scope.and("colors");
 const valuesClass = scope.and("values");
 const sliderClass = scope.and("slider");
 const secondarySliderClass = scope.and("secondarySlider");

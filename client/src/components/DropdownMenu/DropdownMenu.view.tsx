@@ -48,27 +48,24 @@ export const DropdownMenu: FC<Props> = ({
   );
   const { visible, setVisible, ref } = useOutsideClickHandler(false);
 
-  const onSelectClick = useCallback(
-    (item: IDropdownItem) => {
-      if (!selection.some((current) => current.id === item.id)) {
-        if (!multiselect) {
-          setSelection([item]);
-          setVisible(false);
-        } else if (multiselect) {
-          setSelection([...selection, item]);
-        }
-      } else {
-        let selectionAfterRemoval = selection;
-        selectionAfterRemoval = selectionAfterRemoval.filter(
-          (current) => current.id !== item.id
-        );
-        setSelection([...selectionAfterRemoval]);
-        content = undefined;
+  const onSelectClick = (item: IDropdownItem) => {
+    if (!selection.some((current) => current.id === item.id)) {
+      if (!multiselect) {
+        setSelection([item]);
+        setVisible(false);
+      } else if (multiselect) {
+        setSelection([...selection, item]);
       }
-      onSelectItem(item);
-    },
-    [selection, setSelection, onSelectItem, multiselect, setVisible]
-  );
+    } else {
+      let selectionAfterRemoval = selection;
+      selectionAfterRemoval = selectionAfterRemoval.filter(
+        (current) => current.id !== item.id
+      );
+      setSelection([...selectionAfterRemoval]);
+      content = undefined;
+    }
+    onSelectItem(item);
+  };
 
   const isItemInSelection = useCallback(
     (item) => {

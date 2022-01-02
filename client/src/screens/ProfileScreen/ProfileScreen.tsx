@@ -1,7 +1,4 @@
-import {
-  getClothes,
-  getClothesById,
-} from "../../redux/clothes/clothes.actions";
+import { getClothes } from "../../redux/clothes/clothes.actions";
 import { AppState } from "../../redux/store";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,19 +11,18 @@ import DividerLine from "../../components/DividerLine";
 import ClothesListingLayout from "../../layouts/ClothesListingLayout";
 import Card from "../../components/Card";
 import Button from "../../components/Button";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import Icon from "../../components/Icon";
 import NoClothesLayout from "../../layouts/NoClothesLayout";
-const useProfileScreen = () => {
+
+const ProfileScreen: FC = () => {
   const { t } = useTranslation();
 
   const myClothesTitleText = t("profile.title");
-  const editProfileText = t("profile.editProfile");
   const noClothesText = t("profile.noClothes");
   const addNowText = t("profile.addNow");
   const currencyText = t("currency.huf");
-  const noDataText = t("general.noData");
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("profile") || "null")
@@ -36,7 +32,11 @@ const useProfileScreen = () => {
   }, [setUser]);
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getClothes());
+  }, [dispatch]);
 
   const showProfileClothes = useSelector((state: AppState) =>
     user
@@ -48,51 +48,14 @@ const useProfileScreen = () => {
       : null
   );
 
-  const goToSellScreen = useCallback(() => history.push(pageURLS.SELL), [
-    history,
-  ]);
+  const goToSellScreen = useCallback(() => navigate(pageURLS.SELL), [navigate]);
 
   const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
 
-  useEffect(() => {
-    console.log(showProfileClothes);
-    dispatch(getClothes());
-  }, [dispatch]);
-
   const goToShowClothesScreen = useCallback(
-    (id) => history.push(pageURLS.GET_CLOTHES_BY_ID + id),
-    [history]
+    (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
+    [navigate]
   );
-
-  return {
-    myClothesTitleText,
-    user,
-    showProfileClothes,
-    isClothesLoading,
-    editProfileText,
-    currencyText,
-    noDataText,
-    goToShowClothesScreen,
-    noClothesText,
-    addNowText,
-    goToSellScreen,
-  };
-};
-
-const ProfileScreen: FC = () => {
-  const {
-    myClothesTitleText,
-    user,
-    showProfileClothes,
-    isClothesLoading,
-    editProfileText,
-    currencyText,
-    noDataText,
-    noClothesText,
-    addNowText,
-    goToSellScreen,
-    goToShowClothesScreen,
-  } = useProfileScreen();
 
   return (
     <LoadingSpinner isLoading={isClothesLoading}>
@@ -123,7 +86,7 @@ const ProfileScreen: FC = () => {
           <Text textType="text-medium-dark">{myClothesTitleText}</Text>
         }
         myClothesArea={
-          showProfileClothes!.length ? (
+          showProfileClothes && showProfileClothes!.length ? (
             showProfileClothes!.map((myClothesItem) => {
               return (
                 <Card

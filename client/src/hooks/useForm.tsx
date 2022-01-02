@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 
 const useForm = () => {
   const [authValues, setAuthValues] = useState({
@@ -29,8 +29,6 @@ const useForm = () => {
     priceFrom: "",
     priceTo: "",
   });
-
-  const [errors, setErrors] = useState({});
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;

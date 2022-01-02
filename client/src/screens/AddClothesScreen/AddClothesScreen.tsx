@@ -13,27 +13,25 @@ import { ClothesDescriptionLayout } from "../../layouts/AddClothes/ClothesDescri
 import { ClothesPriceLayout } from "../../layouts/AddClothes/ClothesPriceLayout/ClothesPriceLayout.view";
 import { ClothesImageUploadLayout } from "../../layouts/AddClothes/ClothesImageUploadLayout/ClothesImageUploadLayout.view";
 import DividerLine from "../../components/DividerLine";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import Link from "../../components/Link";
 import ModalCarousel from "../../components/ModalCarousel";
 import { useOutsideClickHandler } from "../../hooks/useOutsideClickHandler";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addClothes,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
-import { AppState } from "@/redux/store";
 import {
   IDropdownValues,
   useDropdownBaseData,
 } from "../../hooks/useDropdownBaseData";
-import { cn } from "@/components/utils";
 import useForm from "../../hooks/useForm";
 
-const useAddClothesScreen = () => {
+const AddClothesScreen: FC = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile")!);
 
   const titleText = t("clothes.title");
@@ -57,7 +55,6 @@ const useAddClothesScreen = () => {
   const clothingTypeText = t("clothes.clothingType");
 
   const [imageData, setImageData] = useState<any>();
-  const [nameContent, setNameContent] = useState<string>("");
   const [categoryContent, setCategoryContent] = useState<string>();
   const [clothesTypeContent, setClothesTypeContent] = useState<string>(
     clothingTypeText
@@ -67,7 +64,6 @@ const useAddClothesScreen = () => {
   const [conditionContent, setConditionContent] = useState<string>();
   const [colourContent, setColourContent] = useState<string>();
   const [descriptionContent, setDescriptionContent] = useState<string>();
-  const [price, setPrice] = useState<string>("");
   const { visible, setVisible } = useOutsideClickHandler(false);
   const { addClothesValues, handleChange } = useForm();
 
@@ -91,11 +87,9 @@ const useAddClothesScreen = () => {
     return isValid;
   };
 
-  const goToHomeScreen = useCallback(() => history.push(pageURLS.HOME), [
-    history,
-  ]);
+  const goToHomeScreen = useCallback(() => navigate(pageURLS.HOME), [navigate]);
 
-  const submitClothes = useCallback(() => {
+  const submitClothes = () => {
     isInputDataValid() &&
       dispatch(
         addClothes({
@@ -113,20 +107,7 @@ const useAddClothesScreen = () => {
         })
       ) &&
       goToHomeScreen();
-  }, [
-    imageData,
-    isInputDataValid,
-    nameContent,
-    descriptionContent,
-    categoryContent,
-    clothesTypeContent,
-    brandContent,
-    sizeContent,
-    conditionContent,
-    colourContent,
-    price,
-    user?.result?.name,
-  ]);
+  };
 
   const {
     category,
@@ -137,11 +118,8 @@ const useAddClothesScreen = () => {
     carouselTitles,
     carouselImages,
     carouselContent,
-    categories,
     clothingType,
   } = useDropdownBaseData();
-
-  const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
 
   const openTipsModal = useCallback(() => {
     setVisible(true);
@@ -151,137 +129,7 @@ const useAddClothesScreen = () => {
 
   const triggerReload = useCallback(() => {
     dispatch(setTriggerReload({ triggerReload: true }));
-  }, [dispatch, setTriggerReload]);
-
-  return {
-    titleText,
-    uploadPictureText,
-    clothesNameText,
-    clothesNamePlaceholderText,
-    descriptionText,
-    descriptionPlaceholderText,
-    categoryText,
-    brandText,
-    conditionText,
-    priceText,
-    pricePlaceholderText,
-    cancelText,
-    addText,
-    category,
-    brands,
-    conditions,
-    sizes,
-    sizeText,
-    colourText,
-    goToHomeScreen,
-    colours,
-    pictureTipsText,
-    openTipsModal,
-    categoryContent,
-    setCategoryContent,
-    brandContent,
-    setBrandContent,
-    sizeContent,
-    setSizeContent,
-    conditionContent,
-    setConditionContent,
-    colourContent,
-    setColourContent,
-    visible,
-    setVisible,
-    carouselTitles,
-    carouselContent,
-    carouselImages,
-    price,
-    setPrice,
-    dispatch,
-    imageData,
-    setImageData,
-    nameContent,
-    setNameContent,
-    descriptionContent,
-    setDescriptionContent,
-    triggerReload,
-    isClothesLoading,
-    currencyText,
-    user,
-    uploadLabelText,
-    categories,
-    clothingType,
-    clothesTypeContent,
-    setClothesTypeContent,
-    submitClothes,
-    isInputDataValid,
-    clothingTypeText,
-    addClothesValues,
-    handleChange,
-  };
-};
-
-const AddClothesScreen: FC = () => {
-  const {
-    titleText,
-    uploadPictureText,
-    clothesNameText,
-    clothesNamePlaceholderText,
-    descriptionText,
-    descriptionPlaceholderText,
-    categoryText,
-    brandText,
-    conditionText,
-    priceText,
-    pricePlaceholderText,
-    cancelText,
-    addText,
-    category,
-    brands,
-    conditions,
-    sizes,
-    sizeText,
-    colourText,
-    goToHomeScreen,
-    colours,
-    pictureTipsText,
-    openTipsModal,
-    categoryContent,
-    setCategoryContent,
-    brandContent,
-    setBrandContent,
-    sizeContent,
-    setSizeContent,
-    conditionContent,
-    setConditionContent,
-    colourContent,
-    setColourContent,
-    visible,
-    setVisible,
-    carouselTitles,
-    carouselContent,
-    carouselImages,
-    price,
-    setPrice,
-    dispatch,
-    imageData,
-    setImageData,
-    nameContent,
-    setNameContent,
-    descriptionContent,
-    setDescriptionContent,
-    triggerReload,
-    isClothesLoading,
-    currencyText,
-    user,
-    uploadLabelText,
-    categories,
-    clothingType,
-    clothesTypeContent,
-    setClothesTypeContent,
-    submitClothes,
-    isInputDataValid,
-    clothingTypeText,
-    addClothesValues,
-    handleChange,
-  } = useAddClothesScreen();
+  }, [dispatch]);
 
   return (
     <>
