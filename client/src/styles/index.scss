@@ -64,7 +64,7 @@ $boxShadow: 0px 3px 10px rgba(0, 0, 0, 0.12);
   --darkGreen: #{$darkGreen};
 
   //Font styles
-  --font-family-lato: Lato;
+  --font-family-roboto: Roboto;
   --font-style-normal: normal;
   --font-weight-normal: normal;
   --font-weight-300: 300;
@@ -133,14 +133,14 @@ $boxShadow: 0px 3px 10px rgba(0, 0, 0, 0.12);
 }
 
 @font-face {
-  font-family: "Lato";
-  src: url("./fonts/Lato-Regular.ttf") format("opentype");
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Regular.ttf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "Lato";
-  src: url("./fonts/Lato-Bold.ttf") format("opentype");
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Bold.ttf") format("opentype");
   font-weight: bold;
   font-style: normal;
 }

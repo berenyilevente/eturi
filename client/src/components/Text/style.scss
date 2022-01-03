@@ -1,7 +1,7 @@
 $scope: components-text;
 //just an example class, tbd
 .#{$scope} {
-  font-family: var(--font-family-lato);
+  font-family: var(--font-family-roboto);
   text-overflow: fade;
 
   &-uppercase {
