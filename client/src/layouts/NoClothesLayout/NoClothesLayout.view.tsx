@@ -14,6 +14,7 @@ interface Props {
 export const NoClothesLayout: FC<Props> = ({ icon, titleText, button }) => (
   <div className={scope}>
     <div>{titleText}</div>
-    <div>{button}</div> <div className={iconClass}>{icon}</div>
+    <div>{button}</div>
+    <div className={iconClass}>{icon}</div>
   </div>
 );

@@ -1,6 +1,7 @@
 import {
   getClothes,
   likeClothesAction,
+  setLikeId,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
 import { AppState } from "../../redux/store";
@@ -32,7 +33,7 @@ const HomeContentScreen: FC = () => {
 
   const currencyText = t("currency.huf");
 
-  const { clothes, isClothesLoading, likeLoading } = useSelector(
+  const { clothes, isClothesLoading, likeLoading, likeId } = useSelector(
     (state: AppState) => state.clothes
   );
 
@@ -40,7 +41,7 @@ const HomeContentScreen: FC = () => {
     dispatch(getClothes());
   }, [dispatch]);
 
-  const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
+  const { isUserLoggedIn, auth } = useSelector((state: AppState) => state.auth);
 
   const goToShowClothesScreen = useCallback(
     (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
@@ -57,6 +58,7 @@ const HomeContentScreen: FC = () => {
     indexOfFirstClothesItem,
     indexOfLastClothesItem
   );
+
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
@@ -84,35 +86,35 @@ const HomeContentScreen: FC = () => {
                 size={<Text textType="text-normal-dark">{item.size}</Text>}
                 brand={<Text textType="text-normal-dark">{item.brand}</Text>}
                 heartIcon={
-                  likeLoading ? (
-                    <span
-                      className="spinner-border spinner-border-sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <>
-                      {item.likes?.length
-                        ? isUserLoggedIn && (
-                            <Icon
-                              iconType="heartIconFilled"
-                              cursor
-                              onClick={() => {
-                                dispatch(likeClothesAction(item._id!));
-                              }}
-                            />
-                          )
-                        : isUserLoggedIn && (
-                            <Icon
-                              iconType="heartIcon"
-                              cursor
-                              onClick={() => {
-                                dispatch(likeClothesAction(item._id!));
-                              }}
-                            />
-                          )}
-                    </>
-                  )
+                  <>
+                    {item.likes?.includes(auth?.result._id!)
+                      ? isUserLoggedIn && (
+                          <Icon
+                            iconType="heartIconFilled"
+                            cursor
+                            isLoading={
+                              item._id === likeId ? likeLoading : undefined
+                            }
+                            onClick={() => {
+                              dispatch(likeClothesAction(item._id!));
+                              dispatch(setLikeId(item._id!));
+                            }}
+                          />
+                        )
+                      : isUserLoggedIn && (
+                          <Icon
+                            iconType="heartIcon"
+                            cursor
+                            isLoading={
+                              item._id === likeId ? likeLoading : undefined
+                            }
+                            onClick={() => {
+                              dispatch(likeClothesAction(item._id!));
+                              dispatch(setLikeId(item._id!));
+                            }}
+                          />
+                        )}
+                  </>
                 }
               />
             </Card>

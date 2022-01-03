@@ -182,8 +182,11 @@
   },
   "profile": {
     "title": "Gardróbom",
+    "likedClothesTitle": "Kedvelt ruháim",
     "editProfile": "Profil szerkesztése",
     "noClothes": "A gardróbod jelenleg üres",
+    "noLikedClothes": "Még nem adtál hozzá kedvenc ruhákat",
+    "searchNow": "Keresés",
     "addNow": "Hírdess most!"
   },
   "searchScreen": {

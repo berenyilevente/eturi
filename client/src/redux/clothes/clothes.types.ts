@@ -4,7 +4,6 @@ import {
   IDeleteClothesResponseData,
   IFilterClothesResponse,
   ILikeClothesResponseData,
-  ITriggerLikeLoading,
   ITriggerReload,
   IUpdateClothesResponseData,
 } from "./clothes.interfaces";
@@ -44,7 +43,7 @@ export const LIKE_CLOTHES_FAILURE = "LIKE_CLOTHES_FAILURE";
 export const SET_TRIGGER_RELOAD = "SET_TRIGGER_RELOAD";
 export const RESET_TRIGGER_RELOAD = "RESET_TRIGGER_RELOAD";
 
-export const SET_LIKE_LOADING = "SET_LIKE_LOADING";
+export const SET_LIKE_ID = "SET_LIKE_ID";
 
 //Get clothes types
 export interface IGetClothesRequestAction {
@@ -139,7 +138,7 @@ export interface IDeleteClothesFailureAction {
 //Like clothes types
 export interface ILikeClothesRequestAction {
   type: typeof LIKE_CLOTHES_REQUEST;
-  payload: ITriggerLikeLoading;
+  payload: ILikeClothesResponseData;
 }
 export interface ILikeClothesSuccessAction {
   type: typeof LIKE_CLOTHES_SUCCESS;
@@ -157,10 +156,11 @@ export interface ISetTriggerReload {
 }
 
 //Set like loading
-export interface ISetLikeLoading {
-  type: typeof SET_LIKE_LOADING;
-  payload: ITriggerLikeLoading;
+export interface ISetLikeId {
+  type: typeof SET_LIKE_ID;
+  payload: string;
 }
+
 export type ClothesActionTypes =
   | IGetClothesRequestAction
   | IGetClothesSuccessAction
@@ -187,4 +187,4 @@ export type ClothesActionTypes =
   | IFilterClothesRequestAction
   | IFilterClothesSuccessAction
   | IFilterClothesFailureAction
-  | ISetLikeLoading;
+  | ISetLikeId;

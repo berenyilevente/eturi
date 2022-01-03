@@ -18,6 +18,7 @@ import {
   getClothes,
   likeClothesAction,
   searchClothesAction,
+  setLikeId,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
 import { AppState } from "../../redux/store";
@@ -68,7 +69,7 @@ const SearchScreen: FC = () => {
     dispatch(getClothes());
   }, [dispatch]);
 
-  const { clothes, isClothesLoading, likeLoading } = useSelector(
+  const { clothes, isClothesLoading, likeLoading, likeId } = useSelector(
     (state: AppState) => state.clothes
   );
 
@@ -81,6 +82,7 @@ const SearchScreen: FC = () => {
       navigate(pageURLS.SEARCH_CLOTHES);
     }
   };
+  const { auth } = useSelector((state: AppState) => state.auth);
 
   const resetFilters = () => {
     setCategoryContent(undefined);
@@ -220,31 +222,33 @@ const SearchScreen: FC = () => {
                         <Text textType="text-normal-dark">{item.brand}</Text>
                       }
                       heartIcon={
-                        likeLoading ? (
-                          <span
-                            className="spinner-border spinner-border-sm"
-                            role="status"
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <>
+                        <>
+                          {item.likes?.includes(auth?.result._id!) ? (
                             <Icon
                               iconType="heartIconFilled"
                               cursor
-                              onClick={() =>
-                                dispatch(likeClothesAction(item._id!))
+                              isLoading={
+                                item._id === likeId ? likeLoading : undefined
                               }
+                              onClick={() => {
+                                dispatch(likeClothesAction(item._id!));
+                                dispatch(setLikeId(item._id!));
+                              }}
                             />
-
+                          ) : (
                             <Icon
                               iconType="heartIcon"
                               cursor
+                              isLoading={
+                                item._id === likeId ? likeLoading : undefined
+                              }
                               onClick={() => {
                                 dispatch(likeClothesAction(item._id!));
+                                dispatch(setLikeId(item._id!));
                               }}
                             />
-                          </>
-                        )
+                          )}
+                        </>
                       }
                     />
                   </Card>

@@ -9,6 +9,8 @@ import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
 import { Text } from "../../components/Text/Text.view";
 import {
   getClothesById,
+  likeClothesAction,
+  setLikeId,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -55,9 +57,11 @@ const ShowCLothesScreen: FC = () => {
       ? state.clothes.showClothes.find((item) => item._id === currentId)
       : null
   );
+  const { likeLoading, isClothesLoading } = useSelector(
+    (state: AppState) => state.clothes
+  );
 
-  const { isClothesLoading } = useSelector((state: AppState) => state.clothes);
-
+  //ToDo: bug, when liking an item, the state doesn't change for some reason and no dom update is triggered
   useEffect(() => {
     dispatch(getClothesById(currentId));
   }, [dispatch, currentId]);
@@ -79,15 +83,27 @@ const ShowCLothesScreen: FC = () => {
             }
             brand={<Text textType="text-large-dark">{showClothes.brand}</Text>}
             likeIcon={
-              showClothes!.likes!.length ? (
+              showClothes && showClothes.likes?.includes(auth?.result._id!) ? (
                 <>
-                  <Icon iconType="heartIconFilled" />
-                  <div>{showClothes.likes?.length}</div>
+                  <Icon
+                    iconType="heartIconFilled"
+                    cursor
+                    isLoading={likeLoading}
+                    onClick={() => {
+                      dispatch(likeClothesAction(showClothes._id!));
+                    }}
+                  />
                 </>
               ) : (
                 <>
-                  <Icon iconType="heartIcon" />
-                  <div>{showClothes.likes?.length}</div>
+                  <Icon
+                    iconType="heartIcon"
+                    cursor
+                    isLoading={likeLoading}
+                    onClick={() => {
+                      dispatch(likeClothesAction(showClothes._id!));
+                    }}
+                  />
                 </>
               )
             }

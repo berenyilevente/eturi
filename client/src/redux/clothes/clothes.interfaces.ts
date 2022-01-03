@@ -7,7 +7,8 @@ export interface IClothesState {
   clothesUpdated: IUpdateClothesResponseData[];
   filteredClothes: IClothesResponseData[];
   triggerReload?: boolean;
-  likeLoading?: boolean | boolean[];
+  likeLoading?: boolean;
+  likeId?: string;
 }
 
 export interface IClothesResponseData {
@@ -26,6 +27,7 @@ export interface IClothesResponseData {
   isLiked?: boolean;
   createdAt?: Date;
   creator?: string;
+  likeLoading?: boolean;
 }
 [];
 
@@ -70,14 +72,11 @@ export interface ILikeClothesResponseData {
   likes?: string[];
   isLiked?: boolean;
   createdAt?: Date;
+  likeLoading?: boolean;
 }
 export interface IDeleteClothesResponseData {
   _id?: string;
 }
 export interface ITriggerReload {
   triggerReload: boolean;
-}
-export interface ITriggerLikeLoading {
-  _id?: string;
-  likeLoading: boolean;
 }

@@ -97,7 +97,6 @@ export const deleteClothes = async (req, res) => {
 export const likeClothes = async (req, res) => {
   const { id } = req.params;
 
-  console.log(id)
   if (!req.userId) return res.json({ message: "Not authenticated" });
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No clothes with that id");

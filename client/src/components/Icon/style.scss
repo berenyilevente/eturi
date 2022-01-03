@@ -27,6 +27,16 @@ $scope: components-icon;
   &-cursor {
     cursor: pointer;
   }
+  &-iconSpinnerClass {
+    border: 2px solid transparent;
+    border-top: 2px solid var(--black);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: 4px;
+    animation: spin 1.2s linear;
+    animation-iteration-count: infinite;
+  }
 
   &-colors {
     &-white {

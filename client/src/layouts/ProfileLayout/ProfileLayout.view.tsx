@@ -20,6 +20,8 @@ interface Props {
   editProfileButton?: ReactNode;
   noClothesText?: ReactNode;
   addClothesButton?: ReactNode;
+  likedClothesTitle?: ReactNode;
+  noResult?: ReactNode;
 }
 
 export const ProfileLayout: FC<Props> = ({
@@ -31,6 +33,8 @@ export const ProfileLayout: FC<Props> = ({
   editProfileButton,
   noClothesText,
   addClothesButton,
+  likedClothesTitle,
+  noResult,
 }) => (
   <div className={scope}>
     <div className={profileContentClass}>
@@ -39,9 +43,13 @@ export const ProfileLayout: FC<Props> = ({
       <div className={editButtonClass}>{editProfileButton}</div>
       <div className={lineClass}>{line}</div>
     </div>
-    <div className={clothesTitleClass}>{myClothesTitle}</div>{" "}
+    <div className={clothesTitleClass}>
+      <div>{myClothesTitle} </div>
+      <div>{likedClothesTitle}</div>
+    </div>
     <div>{noClothesText}</div>
     <div>{addClothesButton}</div>
     <div className={clothesClass}>{myClothesArea}</div>
+    <div>{noResult}</div>
   </div>
 );

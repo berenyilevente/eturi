@@ -9,6 +9,7 @@ const color = scope.and("colors");
 const padding = scope.and("padding");
 const border = scope.and("border");
 const cursorPointerClass = scope.and("cursor");
+const iconSpinnerClass = scope.and("iconSpinnerClass");
 
 type ColorTypes =
   | "white"
@@ -42,6 +43,7 @@ interface Props {
   backgroundColorStyle?: "darkBlue" | "green" | "transparent" | "dark";
   colorStyle?: ColorTypes;
   cursor?: boolean;
+  isLoading?: boolean;
 }
 
 export const Icon: FC<Props> = ({
@@ -52,6 +54,7 @@ export const Icon: FC<Props> = ({
   backgroundColorStyle,
   colorStyle,
   cursor,
+  isLoading,
   ...props
 }) => (
   <span
@@ -68,6 +71,6 @@ export const Icon: FC<Props> = ({
     onClick={onClick}
     {...props}
   >
-    {iconMap[iconType]}
+    {isLoading ? <div className={iconSpinnerClass} /> : iconMap[iconType]}
   </span>
 );

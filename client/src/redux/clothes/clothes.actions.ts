@@ -21,7 +21,7 @@ import {
   SEARCH_CLOTHES_FAILURE,
   SEARCH_CLOTHES_REQUEST,
   SEARCH_CLOTHES_SUCCESS,
-  SET_LIKE_LOADING,
+  SET_LIKE_ID,
   SET_TRIGGER_RELOAD,
   UPDATE_CLOTHES_FAILURE,
   UPDATE_CLOTHES_REQUEST,
@@ -31,7 +31,6 @@ import * as api from "../../api";
 import {
   IClothesResponseData,
   IFilterClothesResponse,
-  ITriggerLikeLoading,
   ITriggerReload,
 } from "./clothes.interfaces";
 
@@ -176,14 +175,13 @@ export const deleteClothesAction = (id: string) => async (
   }
 };
 
-export const likeClothesAction = (id: string, likeId?: string) => async (
-  dispatch: Dispatch
-) => {
+export const likeClothesAction = (id: string) => async (dispatch: Dispatch) => {
   dispatch({
     type: LIKE_CLOTHES_REQUEST,
   });
   try {
     const response = await api.likeClothes(id);
+
     dispatch({
       type: LIKE_CLOTHES_SUCCESS,
       payload: response.data,
@@ -200,6 +198,5 @@ export const setTriggerReload = (reload: ITriggerReload) => (
   dispatch: Dispatch
 ) => dispatch({ type: SET_TRIGGER_RELOAD, payload: reload });
 
-export const setLikeLoadingAction = (loadLike: ITriggerLikeLoading) => (
-  dispatch: Dispatch
-) => dispatch({ type: SET_LIKE_LOADING, payload: loadLike });
+export const setLikeId = (likeId: string) => (dispatch: Dispatch) =>
+  dispatch({ type: SET_LIKE_ID, payload: likeId });

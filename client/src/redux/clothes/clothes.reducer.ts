@@ -21,6 +21,7 @@ import {
   SEARCH_CLOTHES_FAILURE,
   SEARCH_CLOTHES_REQUEST,
   SEARCH_CLOTHES_SUCCESS,
+  SET_LIKE_ID,
   SET_TRIGGER_RELOAD,
   UPDATE_CLOTHES_FAILURE,
   UPDATE_CLOTHES_REQUEST,
@@ -38,6 +39,7 @@ const defaultClothesState: IClothesState = {
   filteredClothes: [],
   triggerReload: true,
   likeLoading: false,
+  likeId: "",
 };
 
 const clothesReducer = (
@@ -148,7 +150,7 @@ const clothesReducer = (
     case LIKE_CLOTHES_REQUEST:
       return {
         ...state,
-        likeLoading: false,
+        likeLoading: true,
         errorMessage: null,
       };
     case LIKE_CLOTHES_SUCCESS:
@@ -210,7 +212,11 @@ const clothesReducer = (
         ...state,
         triggerReload: action.payload.triggerReload,
       };
-
+    case SET_LIKE_ID:
+      return {
+        ...state,
+        likeId: action.payload,
+      };
     default:
       return state;
   }
