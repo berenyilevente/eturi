@@ -10,10 +10,10 @@ import { store } from "../redux/store";
 import axios from "axios";
 
 //fetch data for local development
-const API = axios.create({ baseURL: "http://localhost:5000" });
+//const API = axios.create({ baseURL: "http://localhost:5000" });
 
 //fetch data from deployed api
-//const API = axios.create({ baseURL: "https://eturi-project.herokuapp.com" });
+const API = axios.create({ baseURL: "https://eturi-project.herokuapp.com" });
 
 API.interceptors.request.use(
   (config) => {
