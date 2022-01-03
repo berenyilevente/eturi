@@ -3,9 +3,9 @@ import { Dispatch } from "redux";
 import * as api from "../../api";
 import { ILoginResult, IUserRegistrationData } from "./auth.interfaces";
 import {
-  AUTH_FAILURE,
-  AUTH_REQUEST,
-  AUTH_SUCCESS,
+  GOOGLE_AUTH_FAILURE,
+  GOOGLE_AUTH_REQUEST,
+  GOOGLE_AUTH_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -22,16 +22,16 @@ export const googleAuthAction = (data: { result: any; token: any }) => async (
   dispatch: Dispatch
 ) => {
   dispatch({
-    type: AUTH_REQUEST,
+    type: GOOGLE_AUTH_REQUEST,
   });
   try {
     dispatch({
-      type: AUTH_SUCCESS,
+      type: GOOGLE_AUTH_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: AUTH_FAILURE,
+      type: GOOGLE_AUTH_FAILURE,
       error,
     });
   }

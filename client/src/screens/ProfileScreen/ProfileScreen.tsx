@@ -32,18 +32,12 @@ const ProfileScreen: FC = () => {
   const noLikedClothes = t("profile.noLikedClothes");
   const searchNow = t("profile.searchNow");
 
-  const { auth, isUserLoggedIn } = useSelector((state: AppState) => state.auth);
-
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("profile") || "null")
+  const { auth, isUserLoggedIn, googleAuth } = useSelector(
+    (state: AppState) => state.auth
   );
 
   const [showLikedClothes, setShowLikedClothes] = useState(false);
   const [showMyClothes, setShowMyClothes] = useState(true);
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("profile") || "null"));
-  }, [setUser]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,11 +47,11 @@ const ProfileScreen: FC = () => {
   }, [dispatch]);
 
   const showProfileClothes = useSelector((state: AppState) =>
-    auth
+    auth || googleAuth
       ? state.clothes.clothes.filter(
           (item) =>
             item.creator === auth?.result?._id ||
-            item.creator === user?.result.googleId
+            item.creator === googleAuth?.result!.googleId
         )
       : null
   );
@@ -70,7 +64,7 @@ const ProfileScreen: FC = () => {
 
   const likedClothes = useSelector((state: AppState) =>
     state.clothes.clothes.filter((item) =>
-      item.likes?.includes(auth?.result._id!)
+      item.likes?.includes(auth?.result._id! || googleAuth?.result?.googleId!)
     )
   );
 
@@ -82,12 +76,15 @@ const ProfileScreen: FC = () => {
     (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
     [navigate]
   );
+
   return (
     <LoadingSpinner isLoading={isClothesLoading}>
       <ProfileLayout
         name={
           <>
-            <Text textType="text-large-dark">{auth?.result.name}</Text>
+            <Text textType="text-large-dark">
+              {auth?.result.name || googleAuth?.result?.name!}
+            </Text>
             <Text textType="text-small-dark">
               {
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem doloremque, vitae porro unde debitis voluptas? Provident non cumque ducimus deserunt et rem deleniti, maxime nam vitae, fugit sequi eos reiciendis"
@@ -100,8 +97,8 @@ const ProfileScreen: FC = () => {
         }
         profileImage={
           <CircleImage
-            imageSource={user?.result?.imageUrl}
-            text={auth?.result.name}
+            imageSource={googleAuth?.result?.imageUrl}
+            text={auth?.result.name || googleAuth?.result?.name!}
             size="large"
             textSize="text-large-white"
           />
@@ -169,7 +166,9 @@ const ProfileScreen: FC = () => {
                         }
                         heartIcon={
                           <>
-                            {likedClothesItem.likes?.includes(auth?.result._id!)
+                            {likedClothesItem.likes?.includes(
+                              auth?.result._id! || googleAuth?.result?.googleId!
+                            )
                               ? isUserLoggedIn && (
                                   <Icon
                                     iconType="heartIconFilled"

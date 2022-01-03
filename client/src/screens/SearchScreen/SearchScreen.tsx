@@ -28,6 +28,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import Icon from "../../components/Icon";
 import NoSearchResultLayout from "../../layouts/NoSearchResultLayout";
 import useForm from "../../hooks/useForm";
+import Badge from "../../components/Badge";
 
 const SearchScreen: FC = () => {
   const { t } = useTranslation();
@@ -61,7 +62,10 @@ const SearchScreen: FC = () => {
   const [colourContent, setColourContent] = useState<string>();
   const [priceFrom, setPriceFrom] = useState<string>();
   const [priceTo, setPriceTo] = useState<string>();
+
   const [showActiveFilters, setShowActiveFilters] = useState(false);
+
+  const [toggleFilter, setToggleFilter] = useState(false);
 
   const { searchClothesValue, handleChange } = useForm();
 
@@ -82,7 +86,7 @@ const SearchScreen: FC = () => {
       navigate(pageURLS.SEARCH_CLOTHES);
     }
   };
-  const { auth } = useSelector((state: AppState) => state.auth);
+  const { auth, googleAuth } = useSelector((state: AppState) => state.auth);
 
   const resetFilters = () => {
     setCategoryContent(undefined);
@@ -118,6 +122,11 @@ const SearchScreen: FC = () => {
     (id) => navigate(pageURLS.GET_CLOTHES_BY_ID + id),
     [navigate]
   );
+
+  useEffect(() => {
+    filterClothes();
+    setToggleFilter(false);
+  }, [toggleFilter]);
 
   const {
     category,
@@ -183,14 +192,78 @@ const SearchScreen: FC = () => {
         activeFilters={
           showActiveFilters && (
             <>
-              <div className="p-2">{categoryContent}</div>
-              <div className="p-2">{clothesTypeContent}</div>
-              <div className="p-2">{brandContent}</div>
-              <div className="p-2">{sizeContent}</div>
-              <div className="p-2">{conditionContent}</div>
-              <div className="p-2">{colourContent}</div>
-              <div className="p-2">{priceFrom}</div>
-              <div className="p-2">{priceTo}</div>
+              {categoryContent && (
+                <Badge
+                  content={categoryContent!}
+                  onClick={() => {
+                    setCategoryContent(undefined);
+                    setToggleFilter(true);
+                  }}
+                />
+              )}
+              {clothesTypeContent && (
+                <Badge
+                  content={clothesTypeContent!}
+                  onClick={() => {
+                    setClothesTypeContent(undefined);
+                    setToggleFilter(true);
+                  }}
+                />
+              )}
+              {brandContent && (
+                <Badge
+                  content={brandContent!}
+                  onClick={() => {
+                    setBrandContent(undefined);
+                    setToggleFilter(true);
+                  }}
+                />
+              )}
+              {sizeContent && (
+                <Badge
+                  content={sizeContent!}
+                  onClick={() => {
+                    setSizeContent(undefined);
+                    setToggleFilter(true);
+                  }}
+                />
+              )}
+              {conditionContent && (
+                <Badge
+                  content={conditionContent!}
+                  onClick={() => {
+                    setConditionContent(undefined);
+                    setToggleFilter(true);
+                  }}
+                />
+              )}
+              {colourContent && (
+                <Badge
+                  content={colourContent!}
+                  onClick={() => {
+                    setColourContent(undefined);
+                    setToggleFilter(true);
+                  }}
+                />
+              )}
+              {priceFrom && (
+                <Badge
+                  content={priceFrom!}
+                  onClick={() => {
+                    setPriceFrom(undefined);
+                    setToggleFilter(true);
+                  }}
+                />
+              )}
+              {priceTo && (
+                <Badge
+                  content={priceTo!}
+                  onClick={() => {
+                    setPriceTo(undefined);
+                    setToggleFilter(true);
+                  }}
+                />
+              )}
             </>
           )
         }
@@ -223,7 +296,9 @@ const SearchScreen: FC = () => {
                       }
                       heartIcon={
                         <>
-                          {item.likes?.includes(auth?.result._id!) ? (
+                          {item.likes?.includes(
+                            auth?.result._id! || googleAuth?.result?.googleId!
+                          ) ? (
                             <Icon
                               iconType="heartIconFilled"
                               cursor

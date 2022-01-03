@@ -1,14 +1,14 @@
 import { AxiosError } from "axios";
 import {
-  IAuthResponseData,
+  IGoogleAuthResponse,
   ILoginResponseData,
   IUserAuthState,
   IUserRegistrationData,
 } from "./auth.interfaces";
 
-export const AUTH_REQUEST = "AUTH_REQUEST";
-export const AUTH_SUCCESS = "AUTH_SUCCESS";
-export const AUTH_FAILURE = "AUTH_FAILURE";
+export const GOOGLE_AUTH_REQUEST = "GOOGLE_AUTH_REQUEST";
+export const GOOGLE_AUTH_SUCCESS = "GOOGLE_AUTH_SUCCESS";
+export const GOOGLE_AUTH_FAILURE = "GOOGLE_AUTH_FAILURE";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -26,14 +26,14 @@ export const USER_AUTH_STATE = "USER_AUTH_STATE";
 
 //google auth types
 export interface IAuthRequest {
-  type: typeof AUTH_REQUEST;
+  type: typeof GOOGLE_AUTH_REQUEST;
 }
 export interface IAuthSuccess {
-  type: typeof AUTH_SUCCESS;
-  payload: IAuthResponseData;
+  type: typeof GOOGLE_AUTH_SUCCESS;
+  payload: IGoogleAuthResponse;
 }
 export interface IAuthFailure {
-  type: typeof AUTH_FAILURE;
+  type: typeof GOOGLE_AUTH_FAILURE;
   error: AxiosError | Error;
 }
 

@@ -4,7 +4,13 @@ export interface IDefaultAuthState {
   isAuthLoading?: boolean;
   errorMessage: AxiosError | Error | null;
   auth?: IRegisterResponseData | null;
+  googleAuth?: IGoogleAuthResponse;
   isUserLoggedIn?: boolean;
+}
+
+export interface IGoogleAuthResponse {
+  result?: IAuthResponseData;
+  token?: string;
 }
 
 export interface IAuthResponseData {

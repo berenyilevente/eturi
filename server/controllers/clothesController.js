@@ -90,7 +90,6 @@ export const deleteClothes = async (req, res) => {
 
   await AddClothes.findByIdAndRemove(id);
 
-  console.log("DELETE");
   res.json({ message: "Clothes item deleted successfully" });
 };
 

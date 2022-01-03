@@ -1,6 +1,6 @@
 import { AppState } from "../../redux/store";
 import pageURLS from "../../resources/constants/pageURLS";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,7 +10,6 @@ import { Text } from "../../components/Text/Text.view";
 import {
   getClothesById,
   likeClothesAction,
-  setLikeId,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -26,15 +25,7 @@ const ShowCLothesScreen: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { auth } = useSelector((state: AppState) => state.auth);
-
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("profile")!)
-  );
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("profile")!));
-  }, [setUser]);
+  const { auth, googleAuth } = useSelector((state: AppState) => state.auth);
 
   const currentId = id!.slice(3);
   const clothesNameText = t("clothes.clothesName");
@@ -83,7 +74,10 @@ const ShowCLothesScreen: FC = () => {
             }
             brand={<Text textType="text-large-dark">{showClothes.brand}</Text>}
             likeIcon={
-              showClothes && showClothes.likes?.includes(auth?.result._id!) ? (
+              auth?.result._id === showClothes.creator ||
+              googleAuth?.result?.googleId ===
+                showClothes.creator ? null : showClothes &&
+                showClothes.likes?.includes(auth?.result._id!) ? (
                 <>
                   <Icon
                     iconType="heartIconFilled"
@@ -164,7 +158,7 @@ const ShowCLothesScreen: FC = () => {
             }
             buttons={
               <>
-                {user?.result?.googleId === showClothes.creator ||
+                {googleAuth?.result?.googleId === showClothes.creator ||
                 auth?.result?._id === showClothes?.creator ? (
                   <>
                     <Button

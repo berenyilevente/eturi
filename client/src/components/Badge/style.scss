@@ -1,0 +1,23 @@
+$scope: components-badge;
+.#{$scope} {
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  white-space: nowrap;
+  padding: 12px 14px;
+  margin: 4px;
+
+  &-colorClass {
+    background-color: var(--darkBlue);
+    opacity: 0.8;
+    color: var(--white) !important;
+  }
+
+  &-iconClass {
+    height: 18px !important;
+    width: 18px !important;
+    padding: 2px !important;
+  }
+}

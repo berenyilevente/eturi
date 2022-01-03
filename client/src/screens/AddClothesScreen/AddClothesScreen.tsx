@@ -18,7 +18,7 @@ import pageURLS from "../../resources/constants/pageURLS";
 import Link from "../../components/Link";
 import ModalCarousel from "../../components/ModalCarousel";
 import { useOutsideClickHandler } from "../../hooks/useOutsideClickHandler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addClothes,
   setTriggerReload,
@@ -28,11 +28,13 @@ import {
   useDropdownBaseData,
 } from "../../hooks/useDropdownBaseData";
 import useForm from "../../hooks/useForm";
+import { AppState } from "@/redux/store";
 
 const AddClothesScreen: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("profile")!);
+
+  const { auth, googleAuth } = useSelector((state: AppState) => state.auth);
 
   const titleText = t("clothes.title");
   const uploadPictureText = t("clothes.uploadPicture");
@@ -103,7 +105,7 @@ const AddClothesScreen: FC = () => {
           condition: conditionContent!,
           colour: colourContent!,
           price: addClothesValues.price!,
-          creator: user?.result?.name,
+          creator: auth?.result?._id || googleAuth?.result?.googleId,
         })
       ) &&
       goToHomeScreen();

@@ -1,8 +1,8 @@
 import {
   AuthActionTypes,
-  AUTH_FAILURE,
-  AUTH_REQUEST,
-  AUTH_SUCCESS,
+  GOOGLE_AUTH_FAILURE,
+  GOOGLE_AUTH_REQUEST,
+  GOOGLE_AUTH_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -27,22 +27,21 @@ const authReducer = (
   action: AuthActionTypes
 ): IDefaultAuthState => {
   switch (action.type) {
-    case AUTH_REQUEST:
+    case GOOGLE_AUTH_REQUEST:
       return {
         ...state,
         isAuthLoading: true,
         errorMessage: null,
       };
-    case AUTH_SUCCESS:
-      return (
-        localStorage.setItem("profile", JSON.stringify({ ...action.payload })),
-        {
-          isAuthLoading: false,
-          errorMessage: null,
-          isUserLoggedIn: true,
-        }
-      );
-    case AUTH_FAILURE:
+    case GOOGLE_AUTH_SUCCESS:
+      return {
+        ...state,
+        isAuthLoading: false,
+        errorMessage: null,
+        googleAuth: action.payload,
+        isUserLoggedIn: true,
+      };
+    case GOOGLE_AUTH_FAILURE:
       return {
         ...state,
         isAuthLoading: false,

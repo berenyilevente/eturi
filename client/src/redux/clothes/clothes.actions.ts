@@ -79,10 +79,8 @@ export const filterClothesAction = (
   dispatch({
     type: FILTER_CLOTHES_REQUEST,
   });
-  console.log(JSON.stringify(filterParameters));
   try {
     const res = await api.filterClothes(filterParameters);
-    console.log(res.data.data);
     dispatch({
       type: FILTER_CLOTHES_SUCCESS,
       payload: res.data.data,
