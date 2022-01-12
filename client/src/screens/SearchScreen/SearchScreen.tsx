@@ -185,7 +185,15 @@ const SearchScreen: FC = () => {
           </Button>
         }
         activeFiltersTitle={
-          showActiveFilters && (
+          showActiveFilters &&
+          (categoryContent ||
+            clothesTypeContent ||
+            brandContent ||
+            sizeContent ||
+            conditionContent ||
+            colourContent ||
+            priceFrom ||
+            priceTo) && (
             <Text textType="text-medium-dark">{activeFiltersText}</Text>
           )
         }
@@ -295,35 +303,38 @@ const SearchScreen: FC = () => {
                         <Text textType="text-normal-dark">{item.brand}</Text>
                       }
                       heartIcon={
-                        <>
-                          {item.likes?.includes(
-                            auth?.result._id! || googleAuth?.result?.googleId!
-                          ) ? (
-                            <Icon
-                              iconType="heartIconFilled"
-                              cursor
-                              isLoading={
-                                item._id === likeId ? likeLoading : undefined
-                              }
-                              onClick={() => {
-                                dispatch(likeClothesAction(item._id!));
-                                dispatch(setLikeId(item._id!));
-                              }}
-                            />
-                          ) : (
-                            <Icon
-                              iconType="heartIcon"
-                              cursor
-                              isLoading={
-                                item._id === likeId ? likeLoading : undefined
-                              }
-                              onClick={() => {
-                                dispatch(likeClothesAction(item._id!));
-                                dispatch(setLikeId(item._id!));
-                              }}
-                            />
-                          )}
-                        </>
+                        auth?.result._id === item.creator ||
+                        googleAuth?.result?.googleId === item.creator ? null : (
+                          <>
+                            {item.likes?.includes(
+                              auth?.result._id! || googleAuth?.result?.googleId!
+                            ) ? (
+                              <Icon
+                                iconType="heartIconFilled"
+                                cursor
+                                isLoading={
+                                  item._id === likeId ? likeLoading : undefined
+                                }
+                                onClick={() => {
+                                  dispatch(likeClothesAction(item._id!));
+                                  dispatch(setLikeId(item._id!));
+                                }}
+                              />
+                            ) : (
+                              <Icon
+                                iconType="heartIcon"
+                                cursor
+                                isLoading={
+                                  item._id === likeId ? likeLoading : undefined
+                                }
+                                onClick={() => {
+                                  dispatch(likeClothesAction(item._id!));
+                                  dispatch(setLikeId(item._id!));
+                                }}
+                              />
+                            )}
+                          </>
+                        )
                       }
                     />
                   </Card>
