@@ -13,6 +13,8 @@ import EditClothesScreen from "../EditClothesScreen/EditClothesScreen";
 import AuthScreen from "../AuthScreen/AuthScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import LoginScreen from "../LoginScreen/LoginScreen";
+import EmailRedirectScreen from "../UserVerificationScreen/EmailRedirectScreen";
+import UserVerificationScreen from "../UserVerificationScreen/UserVerificationScreen";
 import { useSelector } from "react-redux";
 import { AppState } from "@/redux/store";
 
@@ -34,6 +36,14 @@ const MainSiteContentScreen = () => {
             element={<Navigate to={pageURLS.CLOTHES} />}
           />
           <Route path={pageURLS.CLOTHES} element={<HomeContentScreen />} />
+          <Route
+            path={pageURLS.VERIFY_USER}
+            element={<UserVerificationScreen />}
+          />
+          <Route
+            path={pageURLS.EMAIL_REDIRECT}
+            element={<EmailRedirectScreen />}
+          />
         </Routes>
       }
       authContent={

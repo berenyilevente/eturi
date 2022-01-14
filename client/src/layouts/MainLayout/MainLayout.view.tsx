@@ -18,6 +18,7 @@ interface Props {
   authContent?: ReactNode;
   secondaryContent?: ReactNode;
   footer?: ReactNode;
+  emailVerification?: ReactNode;
 }
 
 export const MainLayout: FC<Props> = ({
@@ -27,9 +28,11 @@ export const MainLayout: FC<Props> = ({
   footer,
   secondaryContent,
   intro,
+  emailVerification,
 }) => (
   <div className={scope}>
     <div className={headerClass}>{header}</div>
+    <div className={primaryContentClass}>{emailVerification}</div>
     <div className={headerBackgroundClass}></div>
     <div className={introClass}>{intro}</div>
     <div className={primaryContentClass}>{primaryContent}</div>

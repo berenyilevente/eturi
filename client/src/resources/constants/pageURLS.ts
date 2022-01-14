@@ -9,6 +9,8 @@ const URLS = {
   LOGIN: "/login",
   CLOTHES: "/clothes",
   SEARCH_CLOTHES: "/clothes/search",
+  VERIFY_USER: "/confirm/:confirmationCode",
+  EMAIL_REDIRECT: "/confirm",
 };
 
 export default URLS;

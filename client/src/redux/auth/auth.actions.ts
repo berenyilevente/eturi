@@ -15,6 +15,9 @@ import {
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
+  VERIFY_USER_FAILURE,
+  VERIFY_USER_REQUEST,
+  VERIFY_USER_SUCCESS,
 } from "./auth.types";
 import { NavigateFunction } from "react-router-dom";
 
@@ -72,7 +75,7 @@ export const registerUserAction = (
       type: SIGNUP_SUCCESS,
       payload: res.data,
     });
-    navigate(pageURLS.HOME);
+    navigate(pageURLS.EMAIL_REDIRECT);
   } catch (error) {
     dispatch({
       type: SIGNUP_FAILURE,
@@ -93,6 +96,25 @@ export const logoutAction = () => async (dispatch: Dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGOUT_FAILURE,
+      error,
+    });
+  }
+};
+
+export const verifyUserAction = (confirmationCode?: string) => async (
+  dispatch: Dispatch
+) => {
+  dispatch({
+    type: VERIFY_USER_REQUEST,
+  });
+  try {
+    await api.verifyUser(confirmationCode!);
+    dispatch({
+      type: VERIFY_USER_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: VERIFY_USER_FAILURE,
       error,
     });
   }

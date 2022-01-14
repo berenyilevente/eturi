@@ -178,7 +178,14 @@
     "haveAnAccount": "Már van fiókod?",
     "signIn": "Jelentkezz be!",
     "dontHaveAnAccount": "Még nincs fiókod?",
-    "signUpHere": "Regisztálj itt!"
+    "signUpHere": "Regisztálj itt!",
+    "confirmEmailTitle": "Köszönjük, hogy regisztáltál!",
+    "confirmationText": "A regisztráció véglegesítéséhez kattints az emailben kiküldött linkre!",
+    "pleaseVerify": "Kérjük erősítsd meg az email címedet",
+    "loginCTA": "Jelentkezz be és add el ruháidat!",
+    "continueToLogin": "Email megerősítése",
+    "verificationSuccessful": "Köszöntünk az eturisok között!",
+    "redirect":"Hamarosan átirányítunk a bejelentkezéshez..."
   },
   "profile": {
     "title": "Gardróbom",
@@ -200,5 +207,12 @@
     "to": "Ig",
     "activeFilters": "Aktív szűrők",
     "noSearchResult": "Nincs a keresésnek megfelelő hírdetés"
+  },
+  "aboutScreen":{
+    "aboutTitle": "Így működik",
+    "register": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem, molestias assumenda neque placeat vel esse porro dolores, sunt eligendi iure eum ratione fuga impedit. Quidem tempore id aliquam porro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem, molestias assumenda neque placeat.",
+    "photos": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem, molestias assumenda neque placeat vel esse porro dolores, sunt eligendi iure eum ratione fuga impedit. Quidem tempore id aliquam porro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem, molestias assumenda neque placeat.",
+    "addClothes": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem, molestias assumenda neque placeat vel esse porro dolores, sunt eligendi iure eum ratione fuga impedit. Quidem tempore id aliquam porro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem, molestias assumenda neque placeat.",
+    "sellOrBuy": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem, molestias assumenda neque placeat vel esse porro dolores, sunt eligendi iure eum ratione fuga impedit. Quidem tempore id aliquam porro. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem, molestias assumenda neque placeat."
   }
 }

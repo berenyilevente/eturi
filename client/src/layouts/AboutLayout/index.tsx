@@ -1,0 +1,1 @@
+export { AboutLayout as default } from '../../layouts/AboutLayout/AboutLayout.view'

@@ -1,0 +1,8 @@
+$scope: components-illustrations;
+//just an example class, tbd
+.#{$scope} {
+  display: flex;
+  align-items: center;
+  width: 20rem;
+  height: 20rem;
+}

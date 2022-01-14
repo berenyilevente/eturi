@@ -25,7 +25,9 @@ const ShowCLothesScreen: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { auth, googleAuth } = useSelector((state: AppState) => state.auth);
+  const { auth, googleAuth, isUserLoggedIn } = useSelector(
+    (state: AppState) => state.auth
+  );
 
   const currentId = id!.slice(3);
   const clothesNameText = t("clothes.clothesName");
@@ -79,25 +81,29 @@ const ShowCLothesScreen: FC = () => {
                 showClothes.creator ? null : showClothes &&
                 showClothes.likes?.includes(auth?.result._id!) ? (
                 <>
-                  <Icon
-                    iconType="heartIconFilled"
-                    cursor
-                    isLoading={likeLoading}
-                    onClick={() => {
-                      dispatch(likeClothesAction(showClothes._id!));
-                    }}
-                  />
+                  {isUserLoggedIn && (
+                    <Icon
+                      iconType="heartIconFilled"
+                      cursor
+                      isLoading={likeLoading}
+                      onClick={() => {
+                        dispatch(likeClothesAction(showClothes._id!));
+                      }}
+                    />
+                  )}
                 </>
               ) : (
                 <>
-                  <Icon
-                    iconType="heartIcon"
-                    cursor
-                    isLoading={likeLoading}
-                    onClick={() => {
-                      dispatch(likeClothesAction(showClothes._id!));
-                    }}
-                  />
+                  {isUserLoggedIn && (
+                    <Icon
+                      iconType="heartIcon"
+                      cursor
+                      isLoading={likeLoading}
+                      onClick={() => {
+                        dispatch(likeClothesAction(showClothes._id!));
+                      }}
+                    />
+                  )}
                 </>
               )
             }

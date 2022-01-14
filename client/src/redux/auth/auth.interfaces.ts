@@ -6,6 +6,7 @@ export interface IDefaultAuthState {
   auth?: IRegisterResponseData | null;
   googleAuth?: IGoogleAuthResponse;
   isUserLoggedIn?: boolean;
+  verificationSuccess?: boolean;
 }
 
 export interface IGoogleAuthResponse {

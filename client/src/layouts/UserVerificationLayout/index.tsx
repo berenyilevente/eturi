@@ -1,0 +1,1 @@
+export { UserVerificationLayout as default } from '../../layouts/UserVerificationLayout/UserVerificationLayout.view'

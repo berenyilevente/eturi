@@ -1,0 +1,38 @@
+$scope: layouts-user-verification-layout;
+//just an example class, tbd
+.#{$scope} {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1.5fr));
+  gap: 0.5em;
+
+  &-textField {
+    grid-row: 1 / 2;
+    margin-top: 120px;
+    text-align: center;
+  }
+  &-buttonClass {
+    display: flex;
+    justify-content: center;
+  }
+  &-iconField {
+    margin-top: 88px;
+  }
+}
+
+@media (max-width: 700px) {
+  .#{$scope} {
+    &-textField {
+      grid-template-columns: 1fr;
+      margin: auto;
+      text-align: center;
+    }
+    &-buttonClass {
+      display: flex;
+      justify-content: center;
+    }
+    &-iconField {
+      margin-top: 88px;
+      justify-self: center;
+    }
+  }
+}

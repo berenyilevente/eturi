@@ -66,3 +66,6 @@ export const fetchClothesBySearch = (searchQuery: string) =>
 
 export const filterClothes = (filterParameters: IFilterClothesResponse) =>
   API.get(`/clothes/filter?filterQuery=${JSON.stringify(filterParameters)}`);
+
+export const verifyUser = (confirmationToken: string) =>
+  API.get("/user/confirm/" + confirmationToken);

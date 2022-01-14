@@ -22,6 +22,10 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
+export const VERIFY_USER_REQUEST = "VERIFY_USER_REQUEST";
+export const VERIFY_USER_SUCCESS = "VERIFY_USER_SUCCESS";
+export const VERIFY_USER_FAILURE = "VERIFY_USER_FAILURE";
+
 export const USER_AUTH_STATE = "USER_AUTH_STATE";
 
 //google auth types
@@ -76,6 +80,18 @@ export interface ISignUpFailure {
   error: AxiosError | Error;
 }
 
+//verify user types
+export interface IVerifyUserRequestAction {
+  type: typeof VERIFY_USER_REQUEST;
+}
+export interface IVerifyUserSuccessAction {
+  type: typeof VERIFY_USER_SUCCESS;
+}
+export interface IVerifyUserFailureAction {
+  type: typeof VERIFY_USER_FAILURE;
+  error: AxiosError | Error;
+}
+
 //current user state
 export interface IUserState {
   type: typeof USER_AUTH_STATE;
@@ -95,4 +111,7 @@ export type AuthActionTypes =
   | ISignUpRequest
   | ISignUpSuccess
   | ISignUpFailure
-  | IUserState;
+  | IUserState
+  | IVerifyUserRequestAction
+  | IVerifyUserSuccessAction
+  | IVerifyUserFailureAction;

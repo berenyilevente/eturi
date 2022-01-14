@@ -86,7 +86,9 @@ const SearchScreen: FC = () => {
       navigate(pageURLS.SEARCH_CLOTHES);
     }
   };
-  const { auth, googleAuth } = useSelector((state: AppState) => state.auth);
+  const { auth, googleAuth, isUserLoggedIn } = useSelector(
+    (state: AppState) => state.auth
+  );
 
   const resetFilters = () => {
     setCategoryContent(undefined);
@@ -308,31 +310,37 @@ const SearchScreen: FC = () => {
                           <>
                             {item.likes?.includes(
                               auth?.result._id! || googleAuth?.result?.googleId!
-                            ) ? (
-                              <Icon
-                                iconType="heartIconFilled"
-                                cursor
-                                isLoading={
-                                  item._id === likeId ? likeLoading : undefined
-                                }
-                                onClick={() => {
-                                  dispatch(likeClothesAction(item._id!));
-                                  dispatch(setLikeId(item._id!));
-                                }}
-                              />
-                            ) : (
-                              <Icon
-                                iconType="heartIcon"
-                                cursor
-                                isLoading={
-                                  item._id === likeId ? likeLoading : undefined
-                                }
-                                onClick={() => {
-                                  dispatch(likeClothesAction(item._id!));
-                                  dispatch(setLikeId(item._id!));
-                                }}
-                              />
-                            )}
+                            )
+                              ? isUserLoggedIn && (
+                                  <Icon
+                                    iconType="heartIconFilled"
+                                    cursor
+                                    isLoading={
+                                      item._id === likeId
+                                        ? likeLoading
+                                        : undefined
+                                    }
+                                    onClick={() => {
+                                      dispatch(likeClothesAction(item._id!));
+                                      dispatch(setLikeId(item._id!));
+                                    }}
+                                  />
+                                )
+                              : isUserLoggedIn && (
+                                  <Icon
+                                    iconType="heartIcon"
+                                    cursor
+                                    isLoading={
+                                      item._id === likeId
+                                        ? likeLoading
+                                        : undefined
+                                    }
+                                    onClick={() => {
+                                      dispatch(likeClothesAction(item._id!));
+                                      dispatch(setLikeId(item._id!));
+                                    }}
+                                  />
+                                )}
                           </>
                         )
                       }

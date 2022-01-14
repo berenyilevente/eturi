@@ -12,6 +12,9 @@ import {
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
+  VERIFY_USER_FAILURE,
+  VERIFY_USER_REQUEST,
+  VERIFY_USER_SUCCESS,
 } from "./auth.types";
 import { IDefaultAuthState } from "./auth.interfaces";
 
@@ -20,6 +23,7 @@ const defaultClothesState: IDefaultAuthState = {
   errorMessage: null,
   auth: undefined,
   isUserLoggedIn: false,
+  verificationSuccess: undefined,
 };
 
 const authReducer = (
@@ -101,6 +105,21 @@ const authReducer = (
       return {
         ...state,
         isAuthLoading: false,
+        errorMessage: action.error,
+      };
+    case VERIFY_USER_REQUEST:
+      return {
+        ...state,
+        errorMessage: null,
+      };
+    case VERIFY_USER_SUCCESS:
+      return {
+        ...state,
+        verificationSuccess: true,
+      };
+    case VERIFY_USER_FAILURE:
+      return {
+        ...state,
         errorMessage: action.error,
       };
 

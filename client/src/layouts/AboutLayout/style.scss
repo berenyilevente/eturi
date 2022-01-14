@@ -1,0 +1,49 @@
+$scope: layouts-about-layout;
+.#{$scope} {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5em;
+  &-textFields {
+    display: flex;
+    align-items: center;
+    width: 500px;
+  }
+
+  &-icons {
+    justify-self: center;
+  }
+
+  &-revItem1 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  &-revItem2 {
+    grid-column: 1;
+    grid-row: 4;
+  }
+}
+
+@media (max-width: 900px) {
+  .#{$scope} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2em;
+    &-textFields {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    &-icons {
+      justify-self: center;
+    }
+
+    &-revItem1 {
+      grid-column: auto;
+      grid-row: auto;
+    }
+    &-revItem2 {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+}

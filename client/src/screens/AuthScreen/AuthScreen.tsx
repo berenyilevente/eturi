@@ -51,7 +51,6 @@ const AuthScreen: FC = () => {
     async (res) => {
       const result = res?.profileObj;
       const token = res?.tokenId;
-
       try {
         dispatch(googleAuthAction({ result: result, token: token }));
         navigate(pageURLS.HOME);
