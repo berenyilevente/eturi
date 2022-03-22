@@ -10,7 +10,7 @@ import {
 } from "components";
 
 import { useTranslation } from "react-i18next";
-import { ReactNode, useCallback, useEffect } from "react";
+import { FC, ReactNode, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 
@@ -25,7 +25,7 @@ export interface INavigationMenuValues {
   onClick(): void;
 }
 
-const MainHeaderScreen = () => {
+const MainHeaderScreen: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();

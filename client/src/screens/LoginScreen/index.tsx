@@ -1,10 +1,9 @@
-import LoadingSpinner from "../../components/LoadingSpinner";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import LoginLayout from "../../layouts/LoginLayout";
-import { Icon, Text, Input, Button, Link } from "components";
+import { LoginLayout } from "layouts";
+import { Icon, Text, Input, Button, Link, LoadingSpinner } from "components";
 import { GoogleLogin } from "react-google-login";
 import { setTriggerReload } from "../../redux/clothes/clothes.actions";
 import { googleAuthAction, loginAction } from "../../redux/auth/auth.actions";

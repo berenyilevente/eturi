@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import MainSiteContentScreen from "../screens/MainSiteContentScreen/MainSiteContentScreen";
+import MainSiteContentScreen from "../screens/MainSiteContentScreen";
 
 const RootRouter = () => {
   return (

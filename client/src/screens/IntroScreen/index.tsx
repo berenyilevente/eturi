@@ -2,12 +2,12 @@ import { IntroCardLayout, IntroLayout } from "layouts";
 import { useTranslation } from "react-i18next";
 import { Button, Text, Link, Card } from "components";
 import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
 import pageURLS from "../../resources/constants/pageURLS";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
 
-const IntroScreen = () => {
+const IntroScreen: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 

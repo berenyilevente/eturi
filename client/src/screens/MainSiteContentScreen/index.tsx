@@ -1,24 +1,27 @@
-import MainLayout from "../../layouts/MainLayout";
-import MainHeaderScreen from "../MainHeaderScreen/MainHeaderScreen";
-import IntroScreen from "../IntroScreen/IntroScreen";
-import FooterScreen from "../FooterScreen/FooterScreen";
+import { MainLayout } from "layouts";
 import { Navigate, Route, Routes } from "react-router-dom";
-import AddClothesScreen from "../../screens/AddClothesScreen/AddClothesScreen";
-import SearchScreen from "../../screens/SearchScreen/SearchScreen";
-import AboutScreen from "../../screens/AboutScreen/AboutScreen";
-import HomeContentScreen from "../../screens/HomeContentScreen/HomeContentScreen";
-import ShowCLothesScreen from "../ShowClothesScreen/ShowClothesScreen";
 import pageURLS from "../../resources/constants/pageURLS";
-import EditClothesScreen from "../EditClothesScreen/EditClothesScreen";
-import AuthScreen from "../AuthScreen/AuthScreen";
-import ProfileScreen from "../ProfileScreen/ProfileScreen";
-import LoginScreen from "../LoginScreen/LoginScreen";
-import EmailRedirectScreen from "../UserVerificationScreen/EmailRedirectScreen";
-import UserVerificationScreen from "../UserVerificationScreen/UserVerificationScreen";
+import {
+  UserVerificationScreen,
+  AboutScreen,
+  HomeContentScreen,
+  ShowClothesScreen,
+  EditClothesScreen,
+  AuthScreen,
+  ProfileScreen,
+  LoginScreen,
+  EmailRedirectScreen,
+  SearchScreen,
+  AddClothesScreen,
+  FooterScreen,
+  IntroScreen,
+  MainHeaderScreen,
+} from "screens";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
+import { FC } from "react";
 
-const MainSiteContentScreen = () => {
+const MainSiteContentScreen: FC = () => {
   const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);
 
   return (
@@ -64,7 +67,7 @@ const MainSiteContentScreen = () => {
           <Route path={pageURLS.SEARCH_CLOTHES} element={<SearchScreen />} />
           <Route
             path={pageURLS.GET_CLOTHES_BY_ID}
-            element={<ShowCLothesScreen />}
+            element={<ShowClothesScreen />}
           />
           <Route path={pageURLS.EDIT_CLOTHES} element={<EditClothesScreen />} />
           <Route path={pageURLS.PROFILE} element={<ProfileScreen />} />
