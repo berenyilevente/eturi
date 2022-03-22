@@ -1,5 +1,4 @@
 import { FC, useCallback, useEffect, useState } from "react";
-import SearchLayout from "../../layouts/SearchLayout";
 import {
   Input,
   Button,
@@ -15,7 +14,6 @@ import {
 } from "components";
 import { useTranslation } from "react-i18next";
 import { useDropdownBaseData, useForm } from "hooks";
-import FilterClothesModalLayout from "../../layouts/FilterClothesModalLayout";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import pageURLS from "../../resources/constants/pageURLS";
@@ -28,8 +26,12 @@ import {
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
 import { AppState } from "../../redux/store";
-import ClothesListingLayout from "../../layouts/ClothesListingLayout";
-import NoSearchResultLayout from "../../layouts/NoSearchResultLayout";
+import {
+  ClothesListingLayout,
+  NoSearchResultLayout,
+  FilterClothesModalLayout,
+  SearchLayout,
+} from "layouts";
 
 const SearchScreen: FC = () => {
   const { t } = useTranslation();

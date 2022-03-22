@@ -12,11 +12,14 @@ import {
   ModalCarousel,
 } from "components";
 import { useTranslation } from "react-i18next";
-import AddClothesLayout from "../../layouts/AddClothes/AddClothesLayout";
-import { ClothesDetailsLayout } from "../../layouts/AddClothes/ClothesDetailsLayout/ClothesDetailsLayout.view";
-import { ClothesDescriptionLayout } from "../../layouts/AddClothes/ClothesDescriptionLayout/ClothesDescriptionLayout.view";
-import { ClothesPriceLayout } from "../../layouts/AddClothes/ClothesPriceLayout/ClothesPriceLayout.view";
-import { ClothesImageUploadLayout } from "../../layouts/AddClothes/ClothesImageUploadLayout/ClothesImageUploadLayout.view";
+import {
+  ClothesDetailsLayout,
+  ClothesDescriptionLayout,
+  ClothesImageUploadLayout,
+  ClothesPriceLayout,
+  AddClothesLayout,
+} from "layouts";
+
 import { useNavigate } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import { useOutsideClickHandler, useDropdownBaseData } from "hooks";
@@ -26,7 +29,7 @@ import {
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
 import { IDropdownValues } from "../../hooks/useDropdownBaseData";
-import useForm from "../../hooks/useForm";
+import { useForm } from "hooks";
 import { AppState } from "../../redux/store";
 
 const AddClothesScreen: FC = () => {

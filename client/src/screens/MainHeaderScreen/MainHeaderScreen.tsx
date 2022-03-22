@@ -1,4 +1,4 @@
-import { HeaderLayout } from "../../layouts/HeaderLayout/HeaderLayout.view";
+import { HeaderLayout } from "layouts";
 import {
   Link,
   SiteLogo,

@@ -7,19 +7,20 @@ import { AppState } from "../../redux/store";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import ProfileLayout from "../../layouts/ProfileLayout";
-import CircleImage from "../../components/CircleImage";
-import Text from "../../components/Text";
-import DividerLine from "../../components/DividerLine";
-import ClothesListingLayout from "../../layouts/ClothesListingLayout";
-import Card from "../../components/Card";
-import Button from "../../components/Button";
+import {
+  LoadingSpinner,
+  Text,
+  DividerLine,
+  Card,
+  Button,
+  CircleImage,
+  Icon,
+  Link,
+} from "components";
+import { ProfileLayout, ClothesListingLayout, NoClothesLayout } from "layouts";
+
 import { useNavigate } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
-import Icon from "../../components/Icon";
-import NoClothesLayout from "../../layouts/NoClothesLayout";
-import Link from "../../components/Link";
 
 const ProfileScreen: FC = () => {
   const { t } = useTranslation();

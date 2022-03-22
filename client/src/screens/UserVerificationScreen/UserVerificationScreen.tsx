@@ -1,12 +1,11 @@
 import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { UserVerificationLayout } from "../../layouts/UserVerificationLayout/UserVerificationLayout.view";
-import Text from "../../components/Text";
+import { UserVerificationLayout } from "layouts";
+import { Text, Illustrations } from "components";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { verifyUserAction } from "../../redux/auth/auth.actions";
 import pageURLS from "../../resources/constants/pageURLS";
-import Illustrations from "../../components/Illustrations";
 
 const UserVerificationScreen: FC = () => {
   const { t } = useTranslation();

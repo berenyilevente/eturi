@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { UserVerificationLayout } from "../../layouts/UserVerificationLayout/UserVerificationLayout.view";
-import Text from "../../components/Text";
-import Illustrations from "../../components/Illustrations";
+import { UserVerificationLayout } from "layouts";
+import { Text, Illustrations } from "components";
 
 const EmailRedirectScreen: FC = () => {
   const { t } = useTranslation();

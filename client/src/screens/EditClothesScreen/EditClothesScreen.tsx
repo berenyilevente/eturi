@@ -16,7 +16,7 @@ import {
   Modal,
   ImageUploader,
 } from "components";
-import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
+import { ShowClothesDetailsLayout } from "layouts";
 import {
   deleteClothesAction,
   getClothesById,

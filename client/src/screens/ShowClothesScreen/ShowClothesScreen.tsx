@@ -4,7 +4,7 @@ import { FC, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
+import { ShowClothesDetailsLayout } from "layouts";
 import {
   Text,
   LoadingSpinner,

@@ -1,7 +1,6 @@
 import { FC } from "react";
-import AboutLayout from "../../layouts/AboutLayout";
-import Text from "../../components/Text";
-import Illustrations from "../../components/Illustrations";
+import { AboutLayout } from "layouts";
+import { Text, Illustrations } from "components";
 import { useTranslation } from "react-i18next";
 
 const AboutScreen: FC = () => {

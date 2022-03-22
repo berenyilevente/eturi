@@ -1,12 +1,12 @@
 import "@/styles/index.scss";
 import { CreateTemplate, meta } from "storybook";
-import { FooterLayout as component } from "layouts";
+import { HeaderLayout as component } from "layouts";
 export default meta({
-  title: "Layouts/FooterLayout",
+  title: "Layouts/HeaderLayout",
   component,
 });
 
 const Template = CreateTemplate(component);
 
-export const FooterLayout = Template.bind({});
-FooterLayout.args = {};
+export const HeaderLayout = Template.bind({});
+HeaderLayout.args = {};

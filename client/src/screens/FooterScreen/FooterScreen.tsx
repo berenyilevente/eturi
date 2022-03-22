@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { FooterLayout } from "../../layouts/FooterLayout/FooterLayout.view";
+import { FooterLayout } from "layouts";
 import { Link, Icon, DividerLine } from "components";
 
 const FooterScreen: FC = () => {

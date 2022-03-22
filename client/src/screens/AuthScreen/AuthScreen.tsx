@@ -1,11 +1,8 @@
-import AuthLayout from "../../layouts/AuthLayout";
+import { AuthLayout } from "layouts";
 import { FC, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Icon from "../../components/Icon";
-import Text from "../../components/Text";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import Link from "../../components/Link";
+import { Icon, Text, Input, Button, Link, LoadingSpinner } from "components";
+
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,8 +12,7 @@ import {
 import { useNavigate } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
 import { AppState } from "../../redux/store";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import useForm from "../../hooks/useForm";
+import { useForm } from "hooks";
 import { validateAuthInfo } from "../../resources/functions/validateAuthInfo";
 import ErrorField from "../../components/ErrorField";
 export interface IErrorFieldValues {
