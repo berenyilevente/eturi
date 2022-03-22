@@ -1,15 +1,13 @@
-import { Text } from "../../components/Text/Text.view";
-import { Link } from "../../components/Link/Link.view";
 import Card from "../../components/Card";
 import IntroLayout from "../../layouts/IntroLayout";
 import IntroCardLayout from "../../layouts/IntroCardLayout";
 import { useTranslation } from "react-i18next";
-import { Button } from "../../components/Button/Button.view";
+import { Button, Text, Link } from "components";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import pageURLS from "../../resources/constants/pageURLS";
 import { useSelector } from "react-redux";
-import { AppState } from "@/redux/store";
+import { AppState } from "../../redux/store";
 
 const IntroScreen = () => {
   const { t } = useTranslation();

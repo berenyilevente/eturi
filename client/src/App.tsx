@@ -1,5 +1,5 @@
 import "./styles/index.scss";
-import "../src/i18next";
+import "./i18n";
 import { BrowserRouter as Router } from "react-router-dom";
 import RootRouter from "./navigation/RootRouter";
 import { store } from "./redux/store";

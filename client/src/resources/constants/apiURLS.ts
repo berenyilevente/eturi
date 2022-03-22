@@ -1,5 +1,5 @@
 const URLS = {
-  GET_CLOTHES: "",
+  GET_CLOTHES: "/clothes",
   ADD_CLOTHES: "",
   PATCH_CLOTHES: "",
 };

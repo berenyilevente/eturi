@@ -13,7 +13,7 @@ import { GoogleLogin } from "react-google-login";
 import { setTriggerReload } from "../../redux/clothes/clothes.actions";
 import { googleAuthAction, loginAction } from "../../redux/auth/auth.actions";
 import pageURLS from "../../resources/constants/pageURLS";
-import { AppState } from "@/redux/store";
+import { AppState } from "../../redux/store";
 import useForm from "../../hooks/useForm";
 import ErrorField from "../../components/ErrorField";
 

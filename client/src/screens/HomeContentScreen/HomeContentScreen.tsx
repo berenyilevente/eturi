@@ -10,13 +10,9 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { HomeContentLayout } from "../../layouts/HomeContentLayout/HomeContentLayout.view";
 import { ClothesListingLayout } from "../../layouts/ClothesListingLayout/ClothesListingLayout.view";
-import Card from "../../components/Card";
-import { Text } from "../../components/Text/Text.view";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import { Text, Card, Icon, Pagination, LoadingSpinner } from "components";
 import { useNavigate, useLocation } from "react-router-dom";
 import pageURLS from "../../resources/constants/pageURLS";
-import Icon from "../../components/Icon";
-import Pagination from "../../components/Pagination";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);

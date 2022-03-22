@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -25,7 +24,8 @@
     "noFallthroughCasesInSwitch": true,
     "noResolve": false,
     "removeComments": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": "src"
   },
   "include": [
     "src"

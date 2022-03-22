@@ -6,6 +6,7 @@ const scope = CreateScopeCSS("layouts-user-verification-layout");
 const textField = scope.and("textField");
 const iconField = scope.and("iconField");
 const buttonClass = scope.and("buttonClass");
+const iconAnimation = scope.and("iconAnimation");
 
 interface Props {
   title?: ReactNode;
@@ -27,7 +28,7 @@ export const UserVerificationLayout: FC<Props> = ({
       <div className={buttonClass}>{button}</div>
     </div>
     <div className={iconField}>
-      <div>{icon}</div>
+      <div className={iconAnimation}>{icon}</div>
     </div>
   </div>
 );

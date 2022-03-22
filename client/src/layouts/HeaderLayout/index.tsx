@@ -1,1 +1,1 @@
-export { HeaderLayout as default } from '@/layouts/HeaderLayout/HeaderLayout.view'
+export { HeaderLayout as default } from "../../layouts/HeaderLayout/HeaderLayout.view";

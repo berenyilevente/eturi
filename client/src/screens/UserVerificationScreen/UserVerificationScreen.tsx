@@ -2,7 +2,6 @@ import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { UserVerificationLayout } from "../../layouts/UserVerificationLayout/UserVerificationLayout.view";
 import Text from "../../components/Text";
-import Button from "../../components/Button";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { verifyUserAction } from "../../redux/auth/auth.actions";
@@ -16,8 +15,6 @@ const UserVerificationScreen: FC = () => {
   const verificationSuccessful = t("auth.verificationSuccessful");
   const redirect = t("auth.redirect");
   const { confirmationCode = "" } = useParams();
-
-  const redirectTimer = setTimeout(() => navigate(pageURLS.LOGIN), 5000);
 
   useEffect(() => {
     dispatch(verifyUserAction(confirmationCode));

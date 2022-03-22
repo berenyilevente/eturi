@@ -16,7 +16,7 @@ import LoginScreen from "../LoginScreen/LoginScreen";
 import EmailRedirectScreen from "../UserVerificationScreen/EmailRedirectScreen";
 import UserVerificationScreen from "../UserVerificationScreen/UserVerificationScreen";
 import { useSelector } from "react-redux";
-import { AppState } from "@/redux/store";
+import { AppState } from "../../redux/store";
 
 const MainSiteContentScreen = () => {
   const { isUserLoggedIn } = useSelector((state: AppState) => state.auth);

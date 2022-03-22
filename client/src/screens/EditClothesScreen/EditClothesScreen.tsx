@@ -4,28 +4,28 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Card from "../../components/Card";
+import {
+  Card,
+  Text,
+  Button,
+  LoadingSpinner,
+  DropdownMenu,
+  Input,
+  DividerLine,
+  TextArea,
+  Modal,
+  ImageUploader,
+} from "components";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
-import Text from "../../components/Text";
 import {
   deleteClothesAction,
   getClothesById,
   setTriggerReload,
   updateClothesAction,
 } from "../../redux/clothes/clothes.actions";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import Button from "../../components/Button";
-import DropdownMenu from "../../components/DropdownMenu";
-import {
-  IDropdownValues,
-  useDropdownBaseData,
-} from "../../hooks/useDropdownBaseData";
-import Input from "../../components/Input";
-import DividerLine from "../../components/DividerLine";
-import TextArea from "../../components/TextArea";
-import Modal from "../../components/Modal";
-import ImageUploader from "../../components/ImageUploader";
-import useForm from "../../hooks/useForm";
+
+import { IDropdownValues } from "../../hooks/useDropdownBaseData";
+import { useDropdownBaseData, useForm } from "hooks";
 
 const EditClothesScreen: FC = () => {
   const { t } = useTranslation();

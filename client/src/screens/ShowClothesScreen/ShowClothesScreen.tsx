@@ -4,18 +4,21 @@ import { FC, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Card from "../../components/Card";
 import ShowClothesDetailsLayout from "../../layouts/ShowClothesDetailsLayout";
-import { Text } from "../../components/Text/Text.view";
+import {
+  Text,
+  LoadingSpinner,
+  Button,
+  DividerLine,
+  Icon,
+  Card,
+} from "components";
 import {
   getClothesById,
   likeClothesAction,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import Button from "../../components/Button";
-import DividerLine from "../../components/DividerLine";
-import Icon from "../../components/Icon";
+
 import dayjs from "dayjs";
 
 const ShowCLothesScreen: FC = () => {

@@ -1,15 +1,19 @@
 import { HeaderLayout } from "../../layouts/HeaderLayout/HeaderLayout.view";
-import { SiteLogo } from "../../components/SiteLogo/SiteLogo.view";
-import { Link } from "../../components/Link/Link.view";
-import Icon from "../../components/Icon";
-import Card from "../../components/Card";
+import {
+  Link,
+  SiteLogo,
+  Icon,
+  Card,
+  Text,
+  Button,
+  NavigationMenu,
+} from "components";
+
 import { useTranslation } from "react-i18next";
 import { ReactNode, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
-import NavigationMenu from "../../components/NavigationMenu";
-import Button from "../../components/Button";
-import Text from "../../components/Text";
+
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../redux/auth/auth.actions";
 import { AppState } from "../../redux/store";

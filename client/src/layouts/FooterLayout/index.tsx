@@ -1,1 +1,1 @@
-export { FooterLayout as default } from '@/layouts/FooterLayout/FooterLayout.view'
+export { FooterLayout as default } from "../../layouts/FooterLayout/FooterLayout.view";

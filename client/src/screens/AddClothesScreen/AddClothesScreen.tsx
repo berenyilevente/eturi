@@ -1,34 +1,33 @@
 import { FC, useCallback, useState } from "react";
-import Card from "../../components/Card";
-import Text from "../../components/Text/";
+import {
+  Card,
+  Text,
+  Button,
+  Input,
+  TextArea,
+  ImageUploader,
+  DropdownMenu,
+  DividerLine,
+  Link,
+  ModalCarousel,
+} from "components";
 import { useTranslation } from "react-i18next";
 import AddClothesLayout from "../../layouts/AddClothes/AddClothesLayout";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
-import TextArea from "../../components/TextArea";
-import ImageUploader from "../../components/ImageUploader";
-import DropdownMenu from "../../components/DropdownMenu";
 import { ClothesDetailsLayout } from "../../layouts/AddClothes/ClothesDetailsLayout/ClothesDetailsLayout.view";
 import { ClothesDescriptionLayout } from "../../layouts/AddClothes/ClothesDescriptionLayout/ClothesDescriptionLayout.view";
 import { ClothesPriceLayout } from "../../layouts/AddClothes/ClothesPriceLayout/ClothesPriceLayout.view";
 import { ClothesImageUploadLayout } from "../../layouts/AddClothes/ClothesImageUploadLayout/ClothesImageUploadLayout.view";
-import DividerLine from "../../components/DividerLine";
 import { useNavigate } from "react-router";
 import pageURLS from "../../resources/constants/pageURLS";
-import Link from "../../components/Link";
-import ModalCarousel from "../../components/ModalCarousel";
-import { useOutsideClickHandler } from "../../hooks/useOutsideClickHandler";
+import { useOutsideClickHandler, useDropdownBaseData } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addClothes,
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
-import {
-  IDropdownValues,
-  useDropdownBaseData,
-} from "../../hooks/useDropdownBaseData";
+import { IDropdownValues } from "../../hooks/useDropdownBaseData";
 import useForm from "../../hooks/useForm";
-import { AppState } from "@/redux/store";
+import { AppState } from "../../redux/store";
 
 const AddClothesScreen: FC = () => {
   const { t } = useTranslation();

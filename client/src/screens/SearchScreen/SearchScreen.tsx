@@ -1,14 +1,20 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import SearchLayout from "../../layouts/SearchLayout";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import {
+  Input,
+  Button,
+  Text,
+  DividerLine,
+  Modal,
+  DropdownMenu,
+  Slider,
+  Icon,
+  Badge,
+  LoadingSpinner,
+  Card,
+} from "components";
 import { useTranslation } from "react-i18next";
-import DividerLine from "../../components/DividerLine";
-import Text from "../../components/Text";
-import DropdownMenu from "../../components/DropdownMenu";
-import Modal from "../../components/Modal";
-import { useDropdownBaseData } from "../../hooks/useDropdownBaseData";
-import Slider from "../../components/Slider";
+import { useDropdownBaseData, useForm } from "hooks";
 import FilterClothesModalLayout from "../../layouts/FilterClothesModalLayout";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,13 +28,8 @@ import {
   setTriggerReload,
 } from "../../redux/clothes/clothes.actions";
 import { AppState } from "../../redux/store";
-import Card from "../../components/Card";
 import ClothesListingLayout from "../../layouts/ClothesListingLayout";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import Icon from "../../components/Icon";
 import NoSearchResultLayout from "../../layouts/NoSearchResultLayout";
-import useForm from "../../hooks/useForm";
-import Badge from "../../components/Badge";
 
 const SearchScreen: FC = () => {
   const { t } = useTranslation();

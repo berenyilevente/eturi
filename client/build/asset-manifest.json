@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.c96801cc.chunk.css",
-    "main.js": "/static/js/main.1a02031a.chunk.js",
-    "main.js.map": "/static/js/main.1a02031a.chunk.js.map",
+    "main.css": "/static/css/main.6310d66a.chunk.css",
+    "main.js": "/static/js/main.7653780b.chunk.js",
+    "main.js.map": "/static/js/main.7653780b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.3f716b64.js",
     "runtime-main.js.map": "/static/js/runtime-main.3f716b64.js.map",
     "static/js/2.7ea2c301.chunk.js": "/static/js/2.7ea2c301.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.46c2f4be.chunk.js": "/static/js/3.46c2f4be.chunk.js",
     "static/js/3.46c2f4be.chunk.js.map": "/static/js/3.46c2f4be.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.c96801cc.chunk.css.map": "/static/css/main.c96801cc.chunk.css.map",
+    "static/css/main.6310d66a.chunk.css.map": "/static/css/main.6310d66a.chunk.css.map",
     "static/js/2.7ea2c301.chunk.js.LICENSE.txt": "/static/js/2.7ea2c301.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/static/media/Roboto-Regular.a8d6ac03.ttf",
     "static/media/style.scss": "/static/media/mainGardrobe.a97782f5.jpg",
@@ -23,7 +23,7 @@
   "entrypoints": [
     "static/js/runtime-main.3f716b64.js",
     "static/js/2.7ea2c301.chunk.js",
-    "static/css/main.c96801cc.chunk.css",
-    "static/js/main.1a02031a.chunk.js"
+    "static/css/main.6310d66a.chunk.css",
+    "static/js/main.7653780b.chunk.js"
   ]
 }

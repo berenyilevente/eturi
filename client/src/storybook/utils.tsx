@@ -1,5 +1,10 @@
 import { Meta, Story } from "@storybook/react";
-import { GetPropsType } from "@/types/GetPropType";
+
+import { PropsWithChildren } from "react";
+
+export type GetPropsType<C> = C extends (props: infer P) => any
+  ? P
+  : PropsWithChildren<Record<string, unknown>>;
 
 export function CreateTemplate<C extends (props: any) => any>(Component: C) {
   const Template: Story<GetPropsType<C>> = (args) => <Component {...args} />;
