@@ -1,2 +1,2 @@
 # eturi
-Used clothes marketplace
+Marketplace for selling used clothes online.
